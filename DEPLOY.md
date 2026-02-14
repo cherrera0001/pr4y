@@ -21,13 +21,19 @@
 - En el repo debe estar **`"ignoreCommand": "exit 1"`** en `vercel.json` (no `echo 'No ignore'`). **Exit 1** = sí hacer build; **exit 0** = no hacer build.
 - Haz **push** del commit que cambia `ignoreCommand` a `exit 1` y vuelve a desplegar.
 
-### Importante
+### Si el deploy está en verde pero la URL da 404 (NOT_FOUND)
 
-- El `buildCommand` actual es: `pnpm --filter apps/web build` y el `outputDirectory` es `apps/web/.next`.
-- **`apps/web` aún no tiene `package.json` ni código** (solo README y ejemplos). Cuando hagas push, Vercel intentará el build y fallará hasta que exista una app Next.js (o lo que quieras) en `apps/web`.
-- Opciones:
-  1. Crear la app web en `apps/web` (p. ej. Next.js) y desplegar en Vercel.
-  2. O no conectar este repo a Vercel hasta tener la web; o usar otro proyecto de Vercel que apunte solo a la carpeta/rama que corresponda.
+En monorepos, Vercel debe usar la carpeta de la app como **Root Directory** para que Next.js se sirva bien:
+
+1. En el proyecto de Vercel → **Settings** → **General**.
+2. **Root Directory**: pulsa **Edit**, marca **Include source files outside of the Root Directory**, y pon **`apps/web`**.
+3. **Build & Development Settings**:
+   - **Install Command**: `cd ../.. && pnpm install --no-frozen-lockfile`
+   - **Build Command**: `cd ../.. && pnpm --filter @pr4y/web build`
+   - **Output Directory**: (dejar vacío o `.next`; con Root Directory = apps/web, Next.js se detecta solo).
+4. Guarda y haz un **Redeploy** del último commit.
+
+Así la URL de producción o preview debería mostrar la página de PR4Y en lugar del 404.
 
 ---
 

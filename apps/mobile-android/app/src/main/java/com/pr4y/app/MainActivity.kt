@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val tokenStore = AuthTokenStore(applicationContext)
-        val api = RetrofitClient.create()
+        val api = RetrofitClient.create(applicationContext)
         val authRepository = AuthRepository(api, tokenStore)
         var loggedIn by mutableStateOf(tokenStore.getAccessToken() != null)
         var unlocked by mutableStateOf(false)

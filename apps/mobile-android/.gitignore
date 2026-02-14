@@ -1,0 +1,5 @@
+# Local SDK path (cada máquina tiene la suya)
+local.properties
+# Cache de Gradle
+.gradle/
+build/

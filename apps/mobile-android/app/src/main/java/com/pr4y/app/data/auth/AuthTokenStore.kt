@@ -5,7 +5,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
 /**
- * Almacena access token y refresh token de forma segura (EncryptedSharedPreferences).
+ * Almacena access token, refresh token y passphrase (para biometría) de forma segura.
  */
 class AuthTokenStore(context: Context) {
     private val masterKey = MasterKey.Builder(context)
@@ -29,6 +29,15 @@ class AuthTokenStore(context: Context) {
             .apply()
     }
 
+    // --- Soporte Biometría ---
+    fun savePassphrase(passphrase: String) {
+        prefs.edit().putString(KEY_PASSPHRASE, passphrase).apply()
+    }
+
+    fun getPassphrase(): String? = prefs.getString(KEY_PASSPHRASE, null)
+
+    fun isBiometricEnabled(): Boolean = prefs.contains(KEY_PASSPHRASE)
+
     fun clear() {
         prefs.edit().clear().apply()
     }
@@ -36,5 +45,6 @@ class AuthTokenStore(context: Context) {
     companion object {
         private const val KEY_ACCESS = "access_token"
         private const val KEY_REFRESH = "refresh_token"
+        private const val KEY_PASSPHRASE = "passphrase"
     }
 }

@@ -42,9 +42,19 @@ No hay forma de integrar una “suite Android” completa dentro de Cursor: el e
 
 ## Requisitos
 
-- Android Studio Ladybug (2024.2.1) o superior
+- Android Studio Ladybug (2024.2.1) o superior (o al menos el [Android SDK](https://developer.android.com/studio) instalado)
 - JDK 17
 - Android SDK 35
+
+### Si el build dice "SDK location not found"
+
+1. Instala **Android Studio** (trae el SDK) desde [developer.android.com/studio](https://developer.android.com/studio), o instala solo el [SDK command-line tools](https://developer.android.com/studio#command-tools).
+2. Abre Android Studio → **File** → **Settings** → **Appearance & Behavior** → **System Settings** → **Android SDK**. Copia la ruta que sale en **Android SDK Location**.
+3. En `apps/mobile-android` crea el archivo **`local.properties`** (o edita el que haya) con una sola línea:
+   ```properties
+   sdk.dir=C\:\\Users\\TU_USUARIO\\AppData\\Local\\Android\\Sdk
+   ```
+   Sustituye la ruta por la que copiaste (usa `\\` en cada `\` o usa `/` en su lugar).
 
 ## Build
 

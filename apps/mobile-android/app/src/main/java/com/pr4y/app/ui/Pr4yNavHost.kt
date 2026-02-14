@@ -1,40 +1,12 @@
 package com.pr4y.app.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.pr4y.app.data.auth.AuthRepository
-import com.pr4y.app.ui.screens.DetailScreen
-import com.pr4y.app.ui.screens.HomeScreen
-import com.pr4y.app.ui.screens.JournalScreen
-import com.pr4y.app.ui.screens.LoginScreen
-import com.pr4y.app.ui.screens.NewEditScreen
-import com.pr4y.app.ui.screens.SearchScreen
-import com.pr4y.app.ui.screens.SettingsScreen
-import com.pr4y.app.ui.screens.UnlockScreen
-
-object Routes {
-    const val LOGIN = "login"
-    const val UNLOCK = "unlock"
-    const val MAIN = "main"
-    const val HOME = "home"
-    const val NEW_EDIT = "new_edit"
-    const val NEW_EDIT_ID = "new_edit/{id}"
-    const val DETAIL = "detail/{id}"
-    const val JOURNAL = "journal"
-    const val SEARCH = "search"
-    const val SETTINGS = "settings"
-
-    fun detail(id: String) = "detail/$id"
-    fun newEdit(id: String?) = if (id != null) "new_edit/$id" else NEW_EDIT
-}
+import com.pr4y.app.ui.screens.*
 
 @Composable
 fun Pr4yNavHost(
@@ -68,9 +40,8 @@ fun Pr4yNavHost(
             )
         }
         composable(Routes.UNLOCK) {
-            val bearer = authRepository.getBearer() ?: ""
             UnlockScreen(
-                bearer = bearer,
+                authRepository = authRepository,
                 onUnlocked = {
                     onUnlocked()
                     navController.navigate(Routes.MAIN) {
@@ -107,6 +78,7 @@ private fun InnerNavHost(
         }
         composable(Routes.JOURNAL) { JournalScreen(navController = navController) }
         composable(Routes.SEARCH) { SearchScreen(navController = navController) }
+        composable(Routes.FOCUS_MODE) { FocusModeScreen(navController = navController) }
         composable(Routes.SETTINGS) {
             SettingsScreen(
                 navController = navController,

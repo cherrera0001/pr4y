@@ -13,8 +13,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -36,9 +39,11 @@ fun NewEditScreen(
     navController: NavController,
     requestId: String?,
 ) {
-    var title by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf("") }
-    var body by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf("") }
+    var title by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf("") }
+    var body by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf("") }
     val scope = rememberCoroutineScope()
+    val db = AppContainer.db
+
     LaunchedEffect(requestId) {
         if (requestId != null) {
             val req = withContext(Dispatchers.IO) { db.requestDao().getById(requestId) }
@@ -49,7 +54,6 @@ fun NewEditScreen(
         }
     }
     val snackbar = remember { SnackbarHostState() }
-    val db = AppContainer.db
 
     Scaffold(
         snackbarHost = { SnackbarHost(snackbar) },

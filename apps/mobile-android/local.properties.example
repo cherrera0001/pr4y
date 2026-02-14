@@ -1,0 +1,9 @@
+# Copia este archivo a local.properties y pon la ruta de tu Android SDK.
+# Cómo obtener la ruta:
+# 1. Abre Android Studio.
+# 2. File → Settings → Appearance & Behavior → System Settings → Android SDK.
+# 3. Arriba verás "Android SDK Location". Copia esa ruta.
+# 4. Pégala aquí escapando las barras invertidas, por ejemplo:
+#    sdk.dir=C\:\\Users\\TU_USUARIO\\AppData\\Local\\Android\\Sdk
+#    O con barras normales: sdk.dir=C:/Users/TU_USUARIO/AppData/Local/Android/Sdk
+sdk.dir=TU_RUTA_AL_SDK

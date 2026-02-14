@@ -59,6 +59,11 @@ class AuthRepository(
         tokenStore.setTokens(auth.accessToken, auth.refreshToken)
         return true
     }
+
+    // --- Soporte Biometría ---
+    fun savePassphrase(passphrase: String) = tokenStore.savePassphrase(passphrase)
+    fun getPassphrase(): String? = tokenStore.getPassphrase()
+    fun isBiometricEnabled(): Boolean = tokenStore.isBiometricEnabled()
 }
 
 class AuthError(val code: Int, override val message: String) : Exception(message)

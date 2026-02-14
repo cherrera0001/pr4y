@@ -1,34 +1,21 @@
 package com.pr4y.app.ui.screens
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.pr4y.app.data.auth.AuthRepository
@@ -45,10 +32,11 @@ fun HomeScreen(
     navController: NavController,
     authRepository: AuthRepository,
 ) {
+    val context = LocalContext.current
     val requests by AppContainer.db.requestDao().getAll().collectAsState(initial = emptyList())
     val outbox by AppContainer.db.outboxDao().getAllFlow().collectAsState(initial = emptyList())
     val snackbar = remember { SnackbarHostState() }
-    val syncRepository = remember { SyncRepository(authRepository) }
+    val syncRepository = remember { SyncRepository(authRepository, context) }
     val scope = androidx.compose.runtime.rememberCoroutineScope()
 
     Scaffold(
@@ -60,8 +48,20 @@ fun HomeScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { navController.navigate(Routes.NEW_EDIT) }) {
-                Icon(Icons.Default.Add, contentDescription = "Nuevo")
+            Column(horizontalAlignment = Alignment.End) {
+                if (requests.isNotEmpty()) {
+                    SmallFloatingActionButton(
+                        onClick = { navController.navigate(Routes.FOCUS_MODE) },
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    ) {
+                        Icon(Icons.Default.AutoAwesome, contentDescription = "Modo Enfoque")
+                    }
+                }
+                FloatingActionButton(onClick = { navController.navigate(Routes.NEW_EDIT) }) {
+                    Icon(Icons.Default.Add, contentDescription = "Nuevo")
+                }
             }
         },
     ) { padding ->
@@ -106,25 +106,23 @@ fun HomeScreen(
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .padding(8.dp),
+                    .padding(horizontal = 8.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                androidx.compose.material3.TextButton(
-                    onClick = { navController.navigate(Routes.JOURNAL) },
-                ) {
-                    Icon(Icons.Default.MenuBook, contentDescription = null)
-                    Text("Diario")
+                TextButton(onClick = { navController.navigate(Routes.JOURNAL) }) {
+                    Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(8.dp))
+                    Text("Diario", style = MaterialTheme.typography.labelLarge)
                 }
-                androidx.compose.material3.TextButton(
-                    onClick = { navController.navigate(Routes.SEARCH) },
-                ) {
-                    Icon(Icons.Default.Search, contentDescription = null)
-                    Text("Buscar")
+                TextButton(onClick = { navController.navigate(Routes.SEARCH) }) {
+                    Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(8.dp))
+                    Text("Buscar", style = MaterialTheme.typography.labelLarge)
                 }
             }
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(1.dp),
             ) {
                 items(
                     items = requests,
@@ -133,6 +131,11 @@ fun HomeScreen(
                     RequestItem(
                         request = req,
                         onClick = { navController.navigate(Routes.detail(req.id)) },
+                    )
+                    HorizontalDivider(
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                        thickness = 0.5.dp,
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
                     )
                 }
             }
@@ -145,24 +148,30 @@ private fun RequestItem(
     request: RequestEntity,
     onClick: () -> Unit,
 ) {
-    Row(
-        Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically,
+    Surface(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.surface
     ) {
-        Column(Modifier.weight(1f)) {
-            Text(
-                text = request.title.ifBlank { "Sin título" },
-                style = MaterialTheme.typography.titleSmall,
-            )
-            if (request.body?.isNotBlank() == true) {
+        Row(
+            Modifier
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(Modifier.weight(1f)) {
                 Text(
-                    text = request.body.take(80) + if (request.body.length > 80) "…" else "",
-                    style = MaterialTheme.typography.bodySmall,
-                    maxLines = 2,
+                    text = request.title.ifBlank { "Sin título" },
+                    style = MaterialTheme.typography.titleMedium,
                 )
+                if (request.body?.isNotBlank() == true) {
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text = request.body.take(80) + if (request.body.length > 80) "…" else "",
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 2,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
         }
     }

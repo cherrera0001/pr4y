@@ -16,6 +16,11 @@ Thumbs.db
 .env.*
 apps/api/.env
 apps/web/.env
+# IDE (Android Studio / IntelliJ)
+.idea/
+*.iml
+# Android heap dumps
+*.hprof
 # Ignore build outputs
 dist/
 build/
