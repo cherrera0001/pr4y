@@ -7,5 +7,3 @@ node_modules/
 dist/
 build/
 *.log
-prisma/dev.db
-prisma/dev.db-journal

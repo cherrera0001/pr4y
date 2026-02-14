@@ -11,14 +11,15 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "fastify": "^4.27.2",
     "@fastify/cors": "^11.2.0",
-    "@fastify/rate-limit": "^10.3.0",
     "@fastify/jwt": "^5.0.0",
+    "@fastify/rate-limit": "^10.3.0",
+    "dotenv": "^17.3.1",
+    "fastify": "^4.27.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "ts-node-dev": "^2.0.0",
-    "@types/node": "^20.11.30"
+    "@types/node": "^20.11.30",
+    "ts-node-dev": "^2.0.0"
   }
 }

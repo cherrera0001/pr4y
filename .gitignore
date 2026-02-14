@@ -1,0 +1,28 @@
+# Ignore node_modules and lock files
+node_modules/
+apps/api/node_modules/
+apps/web/node_modules/
+*.modules.yaml
+apps/api/.modules.yaml
+apps/web/.modules.yaml
+.pnpm/
+apps/api/.pnpm/
+apps/web/.pnpm/
+# Ignore OS files
+.DS_Store
+Thumbs.db
+# Ignore environment files
+.env
+.env.*
+apps/api/.env
+apps/web/.env
+# Ignore build outputs
+dist/
+build/
+# Ignore logs
+*.log
+apps/api/*.log
+apps/web/*.log
+# Ignore Prisma generated files
+apps/api/prisma/dev.db
+apps/api/prisma/dev.db-journal
