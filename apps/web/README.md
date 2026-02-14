@@ -6,4 +6,4 @@ Frontend web de PR4Y. Landing minimalista, política de privacidad y backoffice 
 
 - **Root Directory:** en Project Settings → Root Directory = `apps/web` (evita 404).
 - **Dominio canónico:** pr4y.cl. El middleware redirige `*.vercel.app` a pr4y.cl.
-- **Variables:** `NEXT_PUBLIC_API_URL` (por defecto `https://pr4yapi-production.up.railway.app/v1`), y opcionalmente `ADMIN_SECRET_KEY` para proteger `/admin`.
+- **Variables (sin valores por defecto en código):** `NEXT_PUBLIC_API_URL` (obligatoria), `NEXT_PUBLIC_GOOGLE_CLIENT_ID` (para Sign in with Google), `NEXT_PUBLIC_CANONICAL_HOST` (opcional, ej. pr4y.cl), `ADMIN_SECRET_KEY` (opcional, puerta /admin).

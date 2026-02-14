@@ -1,15 +1,20 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getApiBaseUrl, getCanonicalHost } from '@/lib/env';
 
 const ADMIN_COOKIE = 'pr4y_admin_token';
 const GATE_COOKIE = 'pr4y_admin_gate';
-const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://pr4yapi-production.up.railway.app/v1';
-const ADMIN_SECRET_KEY = process.env.ADMIN_SECRET_KEY;
-const CANONICAL_HOST = 'pr4y.cl';
+
+function getAdminSecretKey(): string {
+  const v = process.env.ADMIN_SECRET_KEY;
+  return typeof v === 'string' ? v.trim() : '';
+}
 
 async function validateAdminToken(token: string): Promise<boolean> {
+  const apiBase = getApiBaseUrl();
+  if (!apiBase) return false;
   try {
-    const res = await fetch(`${apiBase.replace(/\/$/, '')}/auth/me`, {
+    const res = await fetch(`${apiBase}/auth/me`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!res.ok) return false;
@@ -25,10 +30,11 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
   const { pathname } = url;
 
-  // Redirección canónica: *.vercel.app → pr4y.cl (evita 404 y unifica dominio)
+  // Redirección canónica: solo *.vercel.app → host canónico (NEXT_PUBLIC_CANONICAL_HOST). Opcional.
+  const canonicalHost = getCanonicalHost();
   const host = request.headers.get('host') || '';
-  if (host.endsWith('vercel.app')) {
-    const canonical = new URL(`https://${CANONICAL_HOST}${pathname}${url.search}`);
+  if (canonicalHost && host.endsWith('vercel.app')) {
+    const canonical = new URL(`https://${canonicalHost}${pathname}${url.search}`);
     return NextResponse.redirect(canonical, 308);
   }
 
@@ -37,12 +43,12 @@ export async function middleware(request: NextRequest) {
   }
 
   // Puerta de acceso: si está definido ADMIN_SECRET_KEY, exige cookie pr4y_admin_gate
-  if (ADMIN_SECRET_KEY) {
+  if (getAdminSecretKey()) {
     if (pathname === '/admin/gate') {
       return NextResponse.next();
     }
     const gateCookie = request.cookies.get(GATE_COOKIE)?.value;
-    if (gateCookie !== ADMIN_SECRET_KEY) {
+    if (gateCookie !== getAdminSecretKey()) {
       const gateUrl = new URL('/admin/gate', request.url);
       return NextResponse.redirect(gateUrl);
     }
@@ -60,9 +66,7 @@ export async function middleware(request: NextRequest) {
 
   const isAdmin = await validateAdminToken(token);
   if (!isAdmin) {
-    const login = new URL('/admin/login', request.url);
-    login.searchParams.set('error', 'forbidden');
-    const res = NextResponse.redirect(login);
+    const res = NextResponse.redirect(new URL('/', request.url));
     res.cookies.delete(ADMIN_COOKIE);
     return res;
   }

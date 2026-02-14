@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getApiBaseUrl } from '@/lib/env';
 
 const ADMIN_COOKIE = 'pr4y_admin_token';
-const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://pr4yapi-production.up.railway.app/v1';
 
 function isAdmin(role: string) {
   return role === 'admin' || role === 'super_admin';
@@ -15,7 +15,11 @@ export async function POST(request: NextRequest) {
     if (!token) {
       return NextResponse.json({ error: 'token required' }, { status: 400 });
     }
-    const me = await fetch(`${apiBase.replace(/\/$/, '')}/auth/me`, {
+    const apiBase = getApiBaseUrl();
+    if (!apiBase) {
+      return NextResponse.json({ error: 'api not configured' }, { status: 503 });
+    }
+    const me = await fetch(`${apiBase}/auth/me`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!me.ok) {
@@ -30,7 +34,7 @@ export async function POST(request: NextRequest) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 60 * 15, // 15 min, igual que access token
+      maxAge: 60 * 60 * 24, // 24 h — persistencia de sesión al refrescar
       path: '/',
     });
     return res;

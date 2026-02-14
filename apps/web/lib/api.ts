@@ -1,18 +1,11 @@
 /**
  * Cliente unificado para la API de PR4Y.
- * Base URL: https://pr4yapi-production.up.railway.app/v1 (o NEXT_PUBLIC_API_URL).
+ * Base URL solo desde NEXT_PUBLIC_API_URL (Vercel/Railway). Zero hardcoding.
  */
 
-const DEFAULT_API_URL = 'https://pr4yapi-production.up.railway.app/v1';
+import { getApiBaseUrl } from './env';
 
-const getBaseUrl = (): string => {
-  if (typeof window !== 'undefined') {
-    return (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '') || DEFAULT_API_URL;
-  }
-  return process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_URL;
-};
-
-export const apiBaseUrl = getBaseUrl();
+export const apiBaseUrl = getApiBaseUrl();
 
 export interface ApiError {
   error: { code: string; message: string; details?: unknown };
@@ -70,6 +63,7 @@ export interface AdminUserRow {
   id: string;
   email: string;
   role: string;
+  status: string;
   createdAt: string;
   lastLoginAt: string | null;
   hasDek: boolean;

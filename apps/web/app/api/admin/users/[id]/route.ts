@@ -3,7 +3,10 @@ import { getApiBaseUrl } from '@/lib/env';
 
 const ADMIN_COOKIE = 'pr4y_admin_token';
 
-export async function GET(request: NextRequest) {
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   const token = request.cookies.get(ADMIN_COOKIE)?.value;
   if (!token) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
@@ -12,10 +15,15 @@ export async function GET(request: NextRequest) {
   if (!apiBase) {
     return NextResponse.json({ error: 'api not configured' }, { status: 503 });
   }
-  const { searchParams } = new URL(request.url);
-  const days = searchParams.get('days') || '7';
-  const res = await fetch(`${apiBase}/admin/stats?days=${days}`, {
-    headers: { Authorization: `Bearer ${token}` },
+  const { id } = await params;
+  const body = await request.json().catch(() => ({}));
+  const res = await fetch(`${apiBase}/admin/users/${encodeURIComponent(id)}`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
