@@ -1,5 +1,6 @@
 {
-  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm --filter @pr4y/web build",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "buildCommand": "pnpm --filter @pr4y/web build",
   "outputDirectory": "apps/web/.next",
   "ignoreCommand": "exit 1"
 }
