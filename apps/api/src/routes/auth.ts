@@ -50,9 +50,10 @@ export default async function authRoutes(server: FastifyInstance) {
         properties: {
           id: { type: 'string' },
           email: { type: 'string' },
+          role: { type: 'string' },
           createdAt: { type: 'string' },
         },
-        required: ['id', 'email', 'createdAt'],
+        required: ['id', 'email', 'role', 'createdAt'],
         additionalProperties: false,
       },
     },
@@ -60,12 +61,18 @@ export default async function authRoutes(server: FastifyInstance) {
     additionalProperties: false,
   };
   const okSchema = { type: 'object', properties: { ok: { type: 'boolean', const: true } }, required: ['ok'], additionalProperties: false };
+  const meResponseSchema = {
+    type: 'object',
+    properties: { id: { type: 'string' }, email: { type: 'string' }, role: { type: 'string' } },
+    required: ['id', 'email', 'role'],
+    additionalProperties: false,
+  };
 
-  const signAccess = (payload: { sub: string; email: string }) =>
+  const signAccess = (payload: { sub: string; email: string; role?: string }) =>
     server.jwt.sign(payload, { expiresIn: authService.getAccessTokenTtl() });
 
   server.post(
-    '/v1/auth/register',
+    '/auth/register',
     { config: { rateLimit: { max: 5, timeWindow: '1 minute' } }, schema: { body: registerBodySchema, response: { 200: authResponseSchema } } },
     async (request: FastifyRequest<{ Body: { email: string; password: string } }>, reply: FastifyReply) => {
       const email = validateEmail(request.body?.email);
@@ -88,7 +95,7 @@ export default async function authRoutes(server: FastifyInstance) {
   );
 
   server.post(
-    '/v1/auth/login',
+    '/auth/login',
     { config: { rateLimit: { max: 10, timeWindow: '1 minute' } }, schema: { body: loginBodySchema, response: { 200: authResponseSchema } } },
     async (request: FastifyRequest<{ Body: { email: string; password: string } }>, reply: FastifyReply) => {
       const email = validateEmail(request.body?.email);
@@ -111,7 +118,7 @@ export default async function authRoutes(server: FastifyInstance) {
   );
 
   server.post(
-    '/v1/auth/refresh',
+    '/auth/refresh',
     { config: { rateLimit: { max: 20, timeWindow: '1 minute' } }, schema: { body: refreshBodySchema, response: { 200: authResponseSchema } } },
     async (request: FastifyRequest<{ Body: { refreshToken: string } }>, reply: FastifyReply) => {
       const refreshToken = typeof request.body?.refreshToken === 'string' && request.body.refreshToken.length > 0 ? request.body.refreshToken : null;
@@ -132,8 +139,21 @@ export default async function authRoutes(server: FastifyInstance) {
     }
   );
 
+  server.get(
+    '/auth/me',
+    {
+      config: { rateLimit: { max: 60, timeWindow: '1 minute' } },
+      preHandler: [server.authenticate],
+      schema: { response: { 200: meResponseSchema } },
+    },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const user = request.user as { sub: string; email: string; role?: string };
+      reply.code(200).send({ id: user.sub, email: user.email, role: user.role ?? 'user' });
+    }
+  );
+
   server.post(
-    '/v1/auth/logout',
+    '/auth/logout',
     { config: { rateLimit: { max: 20, timeWindow: '1 minute' } }, schema: { body: logoutBodySchema, response: { 200: okSchema } } },
     async (request: FastifyRequest<{ Body: { refreshToken: string } }>, reply: FastifyReply) => {
       const refreshToken = typeof request.body?.refreshToken === 'string' ? request.body.refreshToken : '';

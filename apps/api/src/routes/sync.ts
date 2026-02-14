@@ -100,7 +100,7 @@ const defaultRateLimit = { max: 300, timeWindow: '1 minute' as const };
 
 export default async function syncRoutes(server: FastifyInstance) {
   server.get(
-    '/v1/sync/pull',
+    '/sync/pull',
     {
       config: { rateLimit: defaultRateLimit },
       schema: { querystring: pullQuerySchema, response: { 200: pullResponseSchema } },
@@ -118,7 +118,7 @@ const limit = typeof rawLimit === 'number' ? rawLimit : typeof rawLimit === 'str
   );
 
   server.post(
-    '/v1/sync/push',
+    '/sync/push',
     {
       config: { rateLimit: defaultRateLimit },
       schema: { body: pushBodySchema, response: { 200: pushResponseSchema } },

@@ -64,7 +64,7 @@ const defaultRateLimit = { max: 300, timeWindow: '1 minute' as const };
 
 export default async function cryptoRoutes(server: FastifyInstance) {
   server.put(
-    '/v1/crypto/wrapped-dek',
+    '/crypto/wrapped-dek',
     {
       config: { rateLimit: defaultRateLimit },
       schema: { body: wrappedDekBodySchema, response: { 200: wrappedDekResponseSchema } },
@@ -86,7 +86,7 @@ export default async function cryptoRoutes(server: FastifyInstance) {
   );
 
   server.get(
-    '/v1/crypto/wrapped-dek',
+    '/crypto/wrapped-dek',
     {
       config: { rateLimit: defaultRateLimit },
       schema: { response: { 200: wrappedDekGetResponseSchema } },

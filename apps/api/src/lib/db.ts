@@ -5,7 +5,12 @@ import { Pool } from 'pg';
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
-/** URL de Postgres. En Railway el nombre de la variable debe ser exactamente DATABASE_URL. */
+/**
+ * URL de Postgres. Toma la variable de entorno DATABASE_URL (dinámica).
+ * En Railway: Variables → DATABASE_URL = ${{Postgres.DATABASE_URL}} para referenciar el servicio Postgres.
+ * La conexión real ocurre en el primer uso; el servidor hace un health check al arranque (prisma.$queryRaw)
+ * y debe reportar en log cualquier fallo de conexión (no excepciones silenciosas).
+ */
 function getConnectionString(): string | undefined {
   const raw =
     process.env.DATABASE_URL ??
