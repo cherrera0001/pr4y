@@ -15,15 +15,20 @@ import adminRoutes from './routes/admin';
 
 const BODY_LIMIT = 2 * 1024 * 1024; // 2MB global
 
-// Crear instancia
-const server: FastifyInstance = Fastify({ logger: true, bodyLimit: BODY_LIMIT });
+// Crear instancia. trustProxy: true necesario para Cloudflare (X-Forwarded-* correctos).
+const server: FastifyInstance = Fastify({
+  logger: true,
+  bodyLimit: BODY_LIMIT,
+  trustProxy: true,
+});
 
 // Cabeceras de seguridad (API JSON: CSP desactivada)
 server.register(helmet, { contentSecurityPolicy: false });
 
-// CORS: pr4y.cl en producción y orígenes locales (desarrollo + App Web)
+// CORS: pr4y.cl (con y sin www) y orígenes locales (desarrollo + App Web)
 const allowedOrigins = [
   'https://pr4y.cl',
+  'https://www.pr4y.cl',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
   'http://localhost:3001',
@@ -100,40 +105,37 @@ server.addHook('onRoute', (routeOptions: { url?: string; path?: string; method?:
   routesLog.push({ path, method });
 });
 
-// Prefijo /v1 de forma explícita: la URL final es prefijo + ruta (ej. /v1 + /health => /v1/health).
-// Cada módulo define solo la ruta relativa (ej. /health, /auth/register); no incluir /v1 en las rutas.
+// Prefijo global /v1: cada módulo se registra con prefix '/v1' (rutas finales: /v1/health, /v1/auth/register, etc.).
 server.register(healthRoutes, { prefix: '/v1' });
 server.register(authRoutes, { prefix: '/v1' });
 server.register(syncRoutes, { prefix: '/v1' });
 server.register(cryptoRoutes, { prefix: '/v1' });
 server.register(adminRoutes, { prefix: '/v1' });
 
-// Arranque: Railway inyecta PORT y DATABASE_URL. Escuchar en 0.0.0.0 es vital para Railway.
-const port = Number(process.env.PORT) || 3000;
+// Arranque: Railway espera escucha en puerto 8080. Binding 0.0.0.0 obligatorio para que el proxy enrute.
+const port = Number(process.env.PORT) || 8080;
 const start = async () => {
+  console.log(`[PR4Y] Arranque: PORT=${process.env.PORT ?? '(no set)'} → usando ${port}, host 0.0.0.0`);
   try {
     await prisma.$queryRaw`SELECT 1`;
     console.log('Conexión a la base de datos establecida (DATABASE_URL)');
   } catch (err) {
-    console.error('Error de conexión a la base de datos al arrancar:', err);
+    console.error('Error de conexión a la base de datos al arrancar (el servidor seguirá escuchando; /v1/health reportará database: error):', err);
     if (err instanceof Error) {
       console.error('Mensaje:', err.message);
-      if (err.stack) console.error('Stack:', err.stack);
     }
-    process.exit(1);
+    // No hacer process.exit(1): así Railway siempre tiene un proceso escuchando y deja de devolver "Application not found".
   }
   try {
     await server.ready();
-    console.log('=== Rutas registradas ===');
+    console.log('=== Rutas registradas (onRoute) ===');
     for (const r of routesLog) {
       console.log(`Mapped {${r.path}, ${r.method}}`);
     }
-    console.log('=== Fin rutas ===');
-    // Log inmediatamente antes de listen: estructura exacta expuesta (para consola Railway).
-    const routesTable = server.printRoutes();
-    console.log('--- printRoutes() ---\n' + (routesTable || '(vacío)') + '\n--- fin printRoutes ---');
-    await server.listen({ port, host: '0.0.0.0' });
-    console.log(`API running on port ${port}`);
+    console.log('=== Fin rutas (onRoute) ===');
+    console.log(server.printRoutes());
+    await server.listen({ port: Number(process.env.PORT) || 8080, host: '0.0.0.0' });
+    console.log(`API PR4Y activa en puerto ${port} y host 0.0.0.0`);
   } catch (err) {
     server.log.error(err);
     process.exit(1);

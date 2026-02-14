@@ -1,0 +1,76 @@
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+const ADMIN_COOKIE = 'pr4y_admin_token';
+const GATE_COOKIE = 'pr4y_admin_gate';
+const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://pr4yapi-production.up.railway.app/v1';
+const ADMIN_SECRET_KEY = process.env.ADMIN_SECRET_KEY;
+const CANONICAL_HOST = 'pr4y.cl';
+
+async function validateAdminToken(token: string): Promise<boolean> {
+  try {
+    const res = await fetch(`${apiBase.replace(/\/$/, '')}/auth/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) return false;
+    const body = await res.json();
+    const role = body?.role;
+    return role === 'admin' || role === 'super_admin';
+  } catch {
+    return false;
+  }
+}
+
+export async function middleware(request: NextRequest) {
+  const url = request.nextUrl;
+  const { pathname } = url;
+
+  // Redirección canónica: *.vercel.app → pr4y.cl (evita 404 y unifica dominio)
+  const host = request.headers.get('host') || '';
+  if (host.endsWith('vercel.app')) {
+    const canonical = new URL(`https://${CANONICAL_HOST}${pathname}${url.search}`);
+    return NextResponse.redirect(canonical, 308);
+  }
+
+  if (!pathname.startsWith('/admin')) {
+    return NextResponse.next();
+  }
+
+  // Puerta de acceso: si está definido ADMIN_SECRET_KEY, exige cookie pr4y_admin_gate
+  if (ADMIN_SECRET_KEY) {
+    if (pathname === '/admin/gate') {
+      return NextResponse.next();
+    }
+    const gateCookie = request.cookies.get(GATE_COOKIE)?.value;
+    if (gateCookie !== ADMIN_SECRET_KEY) {
+      const gateUrl = new URL('/admin/gate', request.url);
+      return NextResponse.redirect(gateUrl);
+    }
+  }
+
+  if (pathname === '/admin/login' || pathname === '/admin/gate') {
+    return NextResponse.next();
+  }
+
+  const token = request.cookies.get(ADMIN_COOKIE)?.value;
+  if (!token) {
+    const login = new URL('/admin/login', request.url);
+    return NextResponse.redirect(login);
+  }
+
+  const isAdmin = await validateAdminToken(token);
+  if (!isAdmin) {
+    const login = new URL('/admin/login', request.url);
+    login.searchParams.set('error', 'forbidden');
+    const res = NextResponse.redirect(login);
+    res.cookies.delete(ADMIN_COOKIE);
+    return res;
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  // Incluir todas las rutas para redirección canónica vercel.app → pr4y.cl
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+};
