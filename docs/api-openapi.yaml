@@ -1,0 +1,194 @@
+openapi: 3.0.3
+info:
+  title: PR4Y API
+  version: "1.0.0"
+servers:
+  - url: https://api.pr4y.tld/v1
+paths:
+  /health:
+    get:
+      summary: Healthcheck
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  version: { type: string }
+
+  /auth/magic-link/request:
+    post:
+      summary: Request magic link
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email: { type: string, format: email }
+      responses:
+        "200":
+          description: Generic OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: { type: boolean }
+
+  /auth/magic-link/consume:
+    post:
+      summary: Consume magic link token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token]
+              properties:
+                token: { type: string }
+      responses:
+        "200":
+          description: Auth OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken: { type: string }
+                  user:
+                    type: object
+                    properties:
+                      id: { type: string }
+                      email: { type: string }
+
+  /crypto/wrapped-dek:
+    get:
+      summary: Get wrapped DEK metadata
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Wrapped DEK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kdf:
+                    type: object
+                    properties:
+                      name: { type: string }
+                      params: { type: object }
+                      saltB64: { type: string }
+                  wrappedDekB64: { type: string }
+    put:
+      summary: Store wrapped DEK metadata
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [kdf, wrappedDekB64]
+              properties:
+                kdf: { type: object }
+                wrappedDekB64: { type: string }
+      responses:
+        "200":
+          description: OK
+
+  /sync/pull:
+    get:
+      summary: Pull encrypted records
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: cursor
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, default: 200, maximum: 500 }
+      responses:
+        "200":
+          description: Records
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nextCursor: { type: string }
+                  records:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/EncryptedRecord"
+
+  /sync/push:
+    post:
+      summary: Push encrypted records batch
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [records]
+              properties:
+                records:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/EncryptedRecordInput"
+      responses:
+        "200":
+          description: Push result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accepted:
+                    type: array
+                    items: { type: string }
+                  rejected:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        recordId: { type: string }
+                        reason: { type: string }
+                  serverTime: { type: string }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    EncryptedRecord:
+      type: object
+      properties:
+        recordId: { type: string }
+        type: { type: string, enum: [prayer_request, journal_entry, tombstone] }
+        version: { type: integer }
+        encryptedPayloadB64: { type: string }
+        clientUpdatedAt: { type: string }
+        serverUpdatedAt: { type: string }
+        deleted: { type: boolean }
+    EncryptedRecordInput:
+      type: object
+      required: [recordId, type, version, encryptedPayloadB64, clientUpdatedAt, deleted]
+      properties:
+        recordId: { type: string }
+        type: { type: string, enum: [prayer_request, journal_entry, tombstone] }
+        version: { type: integer }
+        encryptedPayloadB64: { type: string }
+        clientUpdatedAt: { type: string }
+        deleted: { type: boolean }
