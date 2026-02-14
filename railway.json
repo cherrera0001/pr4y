@@ -1,4 +1,4 @@
 {
-  "build": "pnpm install --no-frozen-lockfile && pnpm --filter apps/api build",
-  "start": "pnpm --filter apps/api start"
+  "build": { "command": "pnpm install --no-frozen-lockfile && pnpm --filter apps/api build" },
+  "start": { "command": "pnpm --filter apps/api start" }
 }
