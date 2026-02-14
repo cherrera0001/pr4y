@@ -44,17 +44,19 @@ model WrappedDek {
   @@map("wrapped_dek")
 }
 
+// Record: sync genérico (oraciones, diario, etc.). Conflictos por version, no por timestamp.
+// type = metadato no sensible (p. ej. "prayer_request", "journal_entry"); contenido en encryptedPayloadB64.
 model Record {
   id                  String   @id @default(uuid()) @map("record_id")
   userId              String   @map("user_id")
   user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  type                String
+  type                String   // metadato: tipo de registro; no cifrado
   version             Int
   encryptedPayloadB64 String   @map("encrypted_payload_b64")
   clientUpdatedAt     DateTime @map("client_updated_at")
   serverUpdatedAt     DateTime @updatedAt @map("server_updated_at")
   deleted             Boolean  @default(false)
   @@index([userId])
-  @@index([userId, clientUpdatedAt])
+  @@index([userId, clientUpdatedAt]) // Pull ordenado por clientUpdatedAt
   @@map("records")
 }

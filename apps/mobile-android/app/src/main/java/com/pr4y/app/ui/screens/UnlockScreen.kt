@@ -30,6 +30,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -46,6 +47,8 @@ import com.pr4y.app.data.remote.KdfDto
 import com.pr4y.app.data.remote.RetrofitClient
 import com.pr4y.app.data.remote.WrappedDekBody
 import com.pr4y.app.data.remote.WrappedDekResponse
+import com.pr4y.app.data.sync.SyncRepository
+import kotlinx.coroutines.launch
 
 @Composable
 fun UnlockScreen(
@@ -62,8 +65,9 @@ fun UnlockScreen(
     var rememberWithBiometrics by remember { mutableStateOf(false) }
     val snackbar = remember { SnackbarHostState() }
     val api = remember { RetrofitClient.create(context) }
+    val scope = rememberCoroutineScope()
+    val syncRepository = remember { SyncRepository(authRepository, context) }
 
-    // Biometric Check
     val biometricManager = remember { BiometricManager.from(context) }
     val canAuthenticate = biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS
 
@@ -84,8 +88,8 @@ fun UnlockScreen(
         )
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Desbloquear PR4Y")
-            .setSubtitle("Usa tu biometría para acceder")
-            .setNegativeButtonText("Cancelar")
+            .setSubtitle("Usa tu seguridad biométrica para entrar rápido")
+            .setNegativeButtonText("Usar clave")
             .build()
         biometricPrompt.authenticate(promptInfo)
     }
@@ -104,7 +108,7 @@ fun UnlockScreen(
         if (actionTrigger == 0) return@LaunchedEffect
         val hasWrapped = hasWrappedDekOnServer ?: return@LaunchedEffect
         if (passphrase.length < 6) {
-            snackbar.showSnackbar("Passphrase al menos 6 caracteres")
+            snackbar.showSnackbar("La clave debe tener al menos 6 caracteres")
             return@LaunchedEffect
         }
         loading = true
@@ -112,7 +116,7 @@ fun UnlockScreen(
             if (hasWrapped) {
                 val res = api.getWrappedDek(bearer)
                 if (!res.isSuccessful || res.body() == null) {
-                    snackbar.showSnackbar("Error al obtener DEK")
+                    snackbar.showSnackbar("No pudimos cargar tu clave. Revisa tu conexión.")
                     loading = false
                     return@LaunchedEffect
                 }
@@ -137,7 +141,7 @@ fun UnlockScreen(
                     ),
                 )
                 if (!putRes.isSuccessful) {
-                    snackbar.showSnackbar("Error al guardar DEK")
+                    snackbar.showSnackbar("No pudimos guardar tu clave de seguridad. Revisa tu conexión.")
                     loading = false
                     return@LaunchedEffect
                 }
@@ -146,9 +150,19 @@ fun UnlockScreen(
                     authRepository.savePassphrase(passphrase)
                 }
             }
+            
+            // Procesar borradores tras desbloqueo exitoso
+            val processed = syncRepository.processJournalDraft(context)
+            if (processed) {
+                scope.launch {
+                    snackbar.showSnackbar("Tus notas pendientes han sido protegidas y están listas para sincronizar.")
+                }
+            }
             onUnlocked()
+        } catch (e: android.security.keystore.KeyPermanentlyInvalidatedException) {
+            snackbar.showSnackbar("La seguridad de tu dispositivo ha cambiado. Introduce tu clave de privacidad manualmente para re-activar el acceso rápido.")
         } catch (e: Exception) {
-            snackbar.showSnackbar("Error: Passphrase incorrecta o red")
+            snackbar.showSnackbar("No pudimos entrar. Revisa tu clave de privacidad.")
         } finally {
             loading = false
         }
@@ -170,9 +184,17 @@ fun UnlockScreen(
                 null -> CircularProgressIndicator()
                 else -> {
                     Text(
-                        text = if (hasWrappedDekOnServer == true) "Desbloquear" else "Configurar Acceso",
+                        text = if (hasWrappedDekOnServer == true) "Desbloquear" else "Crea tu clave de privacidad",
                         style = MaterialTheme.typography.headlineSmall
                     )
+                    if (hasWrappedDekOnServer != true) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(
+                            text = "Esta clave protege tus datos con seguridad de grado bancario para que nadie más pueda leerlos.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                     Spacer(Modifier.height(32.dp))
                     
                     Row(
@@ -182,7 +204,7 @@ fun UnlockScreen(
                         OutlinedTextField(
                             value = passphrase,
                             onValueChange = { passphrase = it },
-                            label = { Text("Passphrase") },
+                            label = { Text("Clave de privacidad") },
                             singleLine = true,
                             visualTransformation = PasswordVisualTransformation(),
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -192,7 +214,7 @@ fun UnlockScreen(
                         if (hasWrappedDekOnServer == true && canAuthenticate && authRepository.isBiometricEnabled()) {
                             Spacer(Modifier.width(8.dp))
                             IconButton(onClick = { showBiometricPrompt() }) {
-                                Icon(Icons.Default.Fingerprint, contentDescription = "Biometría")
+                                Icon(Icons.Default.Fingerprint, contentDescription = "Usar huella o rostro")
                             }
                         }
                     }
@@ -206,7 +228,7 @@ fun UnlockScreen(
                                 checked = rememberWithBiometrics,
                                 onCheckedChange = { rememberWithBiometrics = it }
                             )
-                            Text("Usar biometría para entrar", style = MaterialTheme.typography.bodySmall)
+                            Text("Usar seguridad biométrica para entrar más rápido", style = MaterialTheme.typography.bodySmall)
                         }
                     }
 
@@ -219,7 +241,7 @@ fun UnlockScreen(
                             onClick = { actionTrigger++ },
                             modifier = Modifier.fillMaxWidth().height(56.dp)
                         ) {
-                            Text(if (hasWrappedDekOnServer == true) "Entrar" else "Configurar y Entrar")
+                            Text(if (hasWrappedDekOnServer == true) "Entrar" else "Crear clave y entrar")
                         }
                     }
                 }

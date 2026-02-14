@@ -71,16 +71,16 @@ export default async function authRoutes(server: FastifyInstance) {
       const email = validateEmail(request.body?.email);
       const password = validatePassword(request.body?.password);
       if (!email || !password) {
-        sendError(reply as any, 400, 'validation_error', 'Invalid email or password.', {});
+        sendError(reply, 400, 'validation_error', 'Invalid email or password.', {});
         return;
       }
       const result = await authService.register(email, password, signAccess);
       if (!result.ok) {
         if (result.conflict) {
-          sendError(reply as any, 409, 'conflict', 'Email already registered.', {});
+          sendError(reply, 409, 'conflict', 'Email already registered.', {});
           return;
         }
-        sendError(reply as any, 400, 'bad_request', 'Registration failed.', {});
+        sendError(reply, 400, 'bad_request', 'Registration failed.', {});
         return;
       }
       reply.code(200).send(result);
@@ -94,16 +94,16 @@ export default async function authRoutes(server: FastifyInstance) {
       const email = validateEmail(request.body?.email);
       const password = validatePassword(request.body?.password);
       if (!email || !password) {
-        sendError(reply as any, 400, 'validation_error', 'Invalid email or password.', {});
+        sendError(reply, 400, 'validation_error', 'Invalid email or password.', {});
         return;
       }
       const result = await authService.login(email, password, signAccess);
       if (!result.ok) {
         if (result.invalidCredentials) {
-          sendError(reply as any, 401, 'unauthorized', 'Invalid email or password.', {});
+          sendError(reply, 401, 'unauthorized', 'Invalid email or password.', {});
           return;
         }
-        sendError(reply as any, 400, 'bad_request', 'Login failed.', {});
+        sendError(reply, 400, 'bad_request', 'Login failed.', {});
         return;
       }
       reply.code(200).send(result);
@@ -116,16 +116,16 @@ export default async function authRoutes(server: FastifyInstance) {
     async (request: FastifyRequest<{ Body: { refreshToken: string } }>, reply: FastifyReply) => {
       const refreshToken = typeof request.body?.refreshToken === 'string' && request.body.refreshToken.length > 0 ? request.body.refreshToken : null;
       if (!refreshToken) {
-        sendError(reply as any, 400, 'validation_error', 'refreshToken is required.', {});
+        sendError(reply, 400, 'validation_error', 'refreshToken is required.', {});
         return;
       }
       const result = await authService.refresh(refreshToken, signAccess);
       if (!result.ok) {
         if (result.invalidToken) {
-          sendError(reply as any, 401, 'unauthorized', 'Invalid or expired refresh token.', {});
+          sendError(reply, 401, 'unauthorized', 'Invalid or expired refresh token.', {});
           return;
         }
-        sendError(reply as any, 400, 'bad_request', 'Refresh failed.', {});
+        sendError(reply, 400, 'bad_request', 'Refresh failed.', {});
         return;
       }
       reply.code(200).send(result);

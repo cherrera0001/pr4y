@@ -52,16 +52,32 @@ export interface PushRecordInput {
   deleted: boolean;
 }
 
+export interface RejectedItem {
+  recordId: string;
+  reason: string;
+  /** Present when reason === 'version conflict': server's current version and timestamp for client resolution */
+  serverVersion?: number;
+  serverUpdatedAt?: string;
+}
+
 export interface PushResult {
   accepted: string[];
-  rejected: Array<{ recordId: string; reason: string }>;
+  rejected: RejectedItem[];
   serverTime: string;
+}
+
+/** Log conflict for internal metrics (no PII). */
+function logConflict(recordId: string, reason: string, meta?: { serverVersion?: number }) {
+  const payload = { event: 'sync_push_conflict', recordId, reason, ...meta };
+  if (process.env.NODE_ENV !== 'test') {
+    console.info('[sync]', JSON.stringify(payload));
+  }
 }
 
 export async function push(userId: string, records: PushRecordInput[]): Promise<PushResult> {
   const serverTime = new Date().toISOString();
   const accepted: string[] = [];
-  const rejected: Array<{ recordId: string; reason: string }> = [];
+  const rejected: RejectedItem[] = [];
 
   for (const rec of records) {
     const clientUpdatedAt = new Date(rec.clientUpdatedAt);
@@ -76,7 +92,13 @@ export async function push(userId: string, records: PushRecordInput[]): Promise<
         continue;
       }
       if (rec.version <= existing.version) {
-        rejected.push({ recordId: rec.recordId, reason: 'version conflict' });
+        logConflict(rec.recordId, 'version conflict', { serverVersion: existing.version });
+        rejected.push({
+          recordId: rec.recordId,
+          reason: 'version conflict',
+          serverVersion: existing.version,
+          serverUpdatedAt: existing.serverUpdatedAt.toISOString(),
+        });
         continue;
       }
     }

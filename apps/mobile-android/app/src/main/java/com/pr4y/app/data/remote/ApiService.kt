@@ -51,7 +51,12 @@ data class PushResponse(
     val rejected: List<RejectedDto>,
     val serverTime: String,
 )
-data class RejectedDto(val recordId: String, val reason: String)
+data class RejectedDto(
+    val recordId: String,
+    val reason: String,
+    val serverVersion: Int? = null,
+    val serverUpdatedAt: String? = null,
+)
 
 interface ApiService {
     @GET("v1/health")

@@ -3,6 +3,7 @@ package com.pr4y.app.ui
 object Routes {
     const val LOGIN = "login"
     const val UNLOCK = "unlock"
+    const val WELCOME = "welcome"
     const val MAIN = "main"
     const val HOME = "home"
     const val NEW_EDIT = "new_edit"

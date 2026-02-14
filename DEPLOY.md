@@ -1,67 +1,107 @@
-# Deploy: Vercel + Railway
+# Deploy: Railway (API)
 
-## Resumen del proyecto
-
-- **Monorepo** (pnpm): `apps/api`, `apps/web` (placeholder), `apps/mobile` (futuro), `packages/*`.
-- **API** (`@pr4y/api`): Fastify, auth (magic link), sync (pull/push), crypto (wrapped DEK). Base de datos: Prisma + PostgreSQL.
-- **Web**: Solo README por ahora; Vercel está configurado para `apps/web` cuando exista.
-- **Mobile**: Previsto (Flutter/Kotlin), no en MVP.
+Guía para desplegar la API de PR4Y en **Railway** con PostgreSQL. Configuración pensada para coste cero dentro de los límites gratuitos.
 
 ---
 
-## 1. Vercel (frontend / apps/web)
+## Flujo de despliegue (resumen)
 
-### Qué se corrigió
-
-- **Problema**: El deploy se cancelaba porque el **Ignored Build Step** ejecutaba `echo 'No ignore'`, que sale con código **0**. En Vercel, **exit 0 = no hacer build**, por eso nunca llegaba a compilar.
-- **Cambio**: En `vercel.json` se dejó `"ignoreCommand": "exit 1"` para que **siempre** se ejecute el build (exit 1 = sí hacer build).
-
-### Si sigues viendo "The Deployment has been canceled... Ignored Build Step"
-
-- En el repo debe estar **`"ignoreCommand": "exit 1"`** en `vercel.json` (no `echo 'No ignore'`). **Exit 1** = sí hacer build; **exit 0** = no hacer build.
-- Haz **push** del commit que cambia `ignoreCommand` a `exit 1` y vuelve a desplegar.
-
-### Si el deploy está en verde pero la URL da 404 (NOT_FOUND)
-
-En monorepos, Vercel debe usar la carpeta de la app como **Root Directory** para que Next.js se sirva bien:
-
-1. En el proyecto de Vercel → **Settings** → **General**.
-2. **Root Directory**: pulsa **Edit**, marca **Include source files outside of the Root Directory**, y pon **`apps/web`**.
-3. **Build & Development Settings**:
-   - **Install Command**: `cd ../.. && pnpm install --no-frozen-lockfile`
-   - **Build Command**: `cd ../.. && pnpm --filter @pr4y/web build`
-   - **Output Directory**: (dejar vacío o `.next`; con Root Directory = apps/web, Next.js se detecta solo).
-4. Guarda y haz un **Redeploy** del último commit.
-
-Así la URL de producción o preview debería mostrar la página de PR4Y en lugar del 404.
+1. Conectar el repo de GitHub a un proyecto Railway.
+2. Crear un servicio para la API (root = raíz del monorepo).
+3. Añadir el add-on **PostgreSQL** al proyecto y asociar `DATABASE_URL` al servicio API.
+4. Configurar **todas** las variables de entorno (ver tabla más abajo).
+5. Definir **Build** y **Start** (y opcionalmente migraciones al arranque).
+6. Desplegar; comprobar `/v1/health`.
 
 ---
 
-## 2. Railway (API / @pr4y/api)
+## Resumen
 
-### Qué se corrigió
-
-- **Problema**: `tsc` se quedaba sin memoria (JavaScript heap out of memory) durante el build.
-- **Solución definitiva**: El build de la API ya **no usa `tsc`** para generar el bundle. Usa **esbuild** (`apps/api/scripts/build.mjs`), que consume muy poca memoria y genera `dist/server.js` en segundos.
-- **Comando de build**: `pnpm install --no-frozen-lockfile && pnpm --filter @pr4y/api build` (que ejecuta `prisma generate && node scripts/build.mjs`).
-- El **typecheck** con `tsc --noEmit` sigue disponible con `pnpm --filter @pr4y/api typecheck` (para CI local; no se ejecuta en el deploy).
-
-### Healthcheck
-
-- La API expone: `GET /v1/health` → `{ "status": "ok", "version": "1.0.0" }`.
-- En Railway puedes configurar el healthcheck con path `/v1/health` si lo ofrecen en la configuración del servicio.
-
-### Variables de entorno recomendadas en Railway
-
-- `DATABASE_URL` (PostgreSQL; si usas Prisma en producción).
-- `JWT_SECRET`.
-- `CORS_ORIGIN` (origen del frontend o de la app móvil).
-- La URL de la base la puedes definir también en `prisma.config.ts` / env según tu setup.
+- **Servicio**: `@pr4y/api` (Fastify + Prisma + PostgreSQL).
+- **Monorepo**: desde la raíz se ejecutan `pnpm --filter @pr4y/api` para build y start.
+- **Build**: usa esbuild (no `tsc`) para evitar problemas de memoria en Railway.
 
 ---
 
-## 3. App móvil (Android)
+## 1. Crear proyecto en Railway
 
-- Hoy solo está el README en `apps/mobile` (Flutter/Kotlin planeado).
-- La API ya tiene endpoints pensados para cliente (auth, sync, crypto); cuando tengas la app Android, solo hará falta apuntar `CORS_ORIGIN` o usar una capa API que no dependa de CORS para móvil.
-- Para una **sola app Android**, lo más simple es elegir una stack (p. ej. **Kotlin + Jetpack Compose** o **Flutter**) y crear `apps/mobile` con esa stack cuando arranques el MVP.
+1. Conecta el repositorio de GitHub a Railway.
+2. Crea un **nuevo servicio** para la API.
+3. **Root Directory** (si aplica): deja raíz del repo o indica que el build se ejecuta desde raíz (ver abajo).
+
+---
+
+## 2. Añadir PostgreSQL
+
+1. En el mismo proyecto Railway, añade el **plugin/add-on de PostgreSQL**.
+2. Railway te dará la variable **`DATABASE_URL`**. Conéctala al servicio de la API (en Railway suele hacerse automáticamente si están en el mismo proyecto).
+
+---
+
+## 3. Variables de entorno críticas
+
+Configura estas variables en el servicio de la API (Railway → servicio → Variables):
+
+| Variable | Obligatoria | Descripción |
+|----------|-------------|-------------|
+| `DATABASE_URL` | **Sí** | URL de PostgreSQL (suele inyectarse al añadir Postgres). Ejemplo: `postgresql://user:pass@host:port/railway` |
+| `JWT_SECRET` | **Sí** | Secreto para firmar JWT; mínimo 32 caracteres. Generar con: `openssl rand -base64 32` |
+| `CORS_ORIGIN` | No | Origen permitido para CORS (p. ej. URL de tu web o `*` para desarrollo). En producción conviene un valor concreto. |
+
+No subas `.env` al repo; todo debe configurarse en Railway.
+
+---
+
+## 4. Comandos de build y start
+
+En Railway, en la configuración del servicio:
+
+| Paso | Comando |
+|------|---------|
+| **Build** | `pnpm install --no-frozen-lockfile && pnpm --filter @pr4y/api build` |
+| **Start** | `pnpm --filter @pr4y/api start` |
+| **Root** | Raíz del monorepo (donde está `pnpm-workspace.yaml`). |
+
+El script `build` de `@pr4y/api` ejecuta `prisma generate` y `node scripts/build.mjs` (esbuild → `dist/server.js`).
+
+---
+
+## 5. Migraciones de Prisma
+
+Las migraciones crean/actualizan las tablas en PostgreSQL. **Deben ejecutarse al menos una vez** antes de que la API reciba tráfico.
+
+- **Opción A – Manual (recomendada para el primer deploy)**: En Railway, abre una consola one-off del servicio y ejecuta:
+  ```bash
+  pnpm --filter @pr4y/api db:migrate
+  ```
+  Equivale a `prisma migrate deploy` dentro de `apps/api` (aplica las migraciones existentes en `apps/api/prisma/migrations/`).
+
+- **Opción B – En el comando Start**: Si quieres que cada deploy aplique migraciones automáticamente, cambia el comando de start a:
+  ```bash
+  pnpm --filter @pr4y/api db:migrate && pnpm --filter @pr4y/api start
+  ```
+  Así, en cada despliegue se ejecuta `prisma migrate deploy` y luego `node dist/server.js`.
+
+- **Crear nuevas migraciones** (solo en desarrollo local): `pnpm --filter @pr4y/api db:migrate:dev` (genera archivos en `prisma/migrations/`). Esos archivos se suben al repo y se aplican en producción con `db:migrate`.
+
+---
+
+## 6. Healthcheck
+
+La API expone:
+
+- **GET** `/v1/health` → `{ "status": "ok", "version": "1.0.0" }`
+
+Configura en Railway el health check con path `/v1/health` si la plataforma lo permite.
+
+---
+
+## 7. Vercel (apps/web) – opcional
+
+Si en el futuro despliegas `apps/web` en Vercel:
+
+- **Root Directory**: `apps/web`.
+- **Install**: `cd ../.. && pnpm install --no-frozen-lockfile`
+- **Build**: `cd ../.. && pnpm --filter @pr4y/web build`
+
+El README principal y este DEPLOY.md se centran en Railway para la API; la web queda como referencia cuando exista.

@@ -1,11 +1,14 @@
 package com.pr4y.app.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.pr4y.app.data.auth.AuthRepository
+import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.ui.screens.*
 
 @Composable
@@ -18,9 +21,13 @@ fun Pr4yNavHost(
     unlocked: Boolean,
     onUnlocked: () -> Unit,
 ) {
+    val context = LocalContext.current
+    val tokenStore = remember { AuthTokenStore(context) }
+    
     val startDestination = when {
         !loggedIn -> Routes.LOGIN
         !unlocked -> Routes.UNLOCK
+        !tokenStore.hasSeenWelcome() -> Routes.WELCOME
         else -> Routes.MAIN
     }
 
@@ -44,10 +51,21 @@ fun Pr4yNavHost(
                 authRepository = authRepository,
                 onUnlocked = {
                     onUnlocked()
-                    navController.navigate(Routes.MAIN) {
+                    val nextRoute = if (!tokenStore.hasSeenWelcome()) Routes.WELCOME else Routes.MAIN
+                    navController.navigate(nextRoute) {
                         popUpTo(Routes.UNLOCK) { inclusive = true }
                     }
                 },
+            )
+        }
+        composable(Routes.WELCOME) {
+            WelcomeScreen(
+                onStartClick = {
+                    tokenStore.setHasSeenWelcome(true)
+                    navController.navigate(Routes.MAIN) {
+                        popUpTo(Routes.WELCOME) { inclusive = true }
+                    }
+                }
             )
         }
         composable(Routes.MAIN) {
@@ -77,6 +95,11 @@ private fun InnerNavHost(
             DetailScreen(navController = navController, id = id)
         }
         composable(Routes.JOURNAL) { JournalScreen(navController = navController) }
+        composable(Routes.NEW_JOURNAL) { NewJournalScreen(navController = navController) }
+        composable(Routes.JOURNAL_ENTRY) { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id") ?: ""
+            JournalEntryScreen(navController = navController, id = id)
+        }
         composable(Routes.SEARCH) { SearchScreen(navController = navController) }
         composable(Routes.FOCUS_MODE) { FocusModeScreen(navController = navController) }
         composable(Routes.SETTINGS) {

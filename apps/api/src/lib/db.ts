@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 
@@ -18,7 +18,8 @@ function getConnectionString(): string | undefined {
 
 function createPrisma(): PrismaClient {
   const connectionString = getConnectionString();
-  const logOptions = process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'];
+  const logOptions: Prisma.LogLevel[] =
+    process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'];
 
   // Prisma 7 con engine "client" exige adapter o accelerateUrl; sin URL no podemos crear el cliente.
   if (!connectionString) {

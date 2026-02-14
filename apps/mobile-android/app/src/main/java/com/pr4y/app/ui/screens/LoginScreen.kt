@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import com.pr4y.app.data.auth.AuthError
 import com.pr4y.app.data.auth.AuthRepository
 
 @Composable
@@ -53,12 +52,8 @@ fun LoginScreen(
         loading = false
         result.fold(
             onSuccess = { onSuccess() },
-            onFailure = { e ->
-                val msg = when (e) {
-                    is AuthError -> "Error ${e.code}"
-                    else -> e.message ?: "Error"
-                }
-                snackbar.showSnackbar(msg)
+            onFailure = {
+                snackbar.showSnackbar("No pudimos entrar. Revisa tu conexión o tus datos.")
             },
         )
     }

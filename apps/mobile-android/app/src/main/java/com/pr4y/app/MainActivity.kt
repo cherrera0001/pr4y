@@ -16,15 +16,22 @@ import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.data.remote.RetrofitClient
 import com.pr4y.app.ui.Pr4yNavHost
 import com.pr4y.app.ui.theme.Pr4yTheme
+import com.pr4y.app.work.SyncScheduler
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val tokenStore = AuthTokenStore(applicationContext)
+        DekManager.init(applicationContext)
         val api = RetrofitClient.create(applicationContext)
         val authRepository = AuthRepository(api, tokenStore)
         var loggedIn by mutableStateOf(tokenStore.getAccessToken() != null)
-        var unlocked by mutableStateOf(false)
+        if (tokenStore.getAccessToken() != null) {
+            SyncScheduler.schedulePeriodic(applicationContext)
+        }
+        var unlocked by mutableStateOf(
+            loggedIn && DekManager.tryRecoverDekSilently()
+        )
 
         setContent {
             Pr4yTheme {

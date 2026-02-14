@@ -38,6 +38,12 @@ class AuthTokenStore(context: Context) {
 
     fun isBiometricEnabled(): Boolean = prefs.contains(KEY_PASSPHRASE)
 
+    // --- Estado de Bienvenida ---
+    fun hasSeenWelcome(): Boolean = prefs.getBoolean(KEY_HAS_SEEN_WELCOME, false)
+    fun setHasSeenWelcome(seen: Boolean) {
+        prefs.edit().putBoolean(KEY_HAS_SEEN_WELCOME, seen).apply()
+    }
+
     fun clear() {
         prefs.edit().clear().apply()
     }
@@ -46,5 +52,6 @@ class AuthTokenStore(context: Context) {
         private const val KEY_ACCESS = "access_token"
         private const val KEY_REFRESH = "refresh_token"
         private const val KEY_PASSPHRASE = "passphrase"
+        private const val KEY_HAS_SEEN_WELCOME = "has_seen_welcome"
     }
 }

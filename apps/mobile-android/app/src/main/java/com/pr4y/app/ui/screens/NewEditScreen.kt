@@ -48,8 +48,21 @@ fun NewEditScreen(
         if (requestId != null) {
             val req = withContext(Dispatchers.IO) { db.requestDao().getById(requestId) }
             req?.let {
-                title = it.title
-                body = it.body ?: ""
+                val dek = DekManager.getDek()
+                if (it.encryptedPayloadB64 != null && dek != null) {
+                    try {
+                        val plain = LocalCrypto.decrypt(it.encryptedPayloadB64, dek)
+                        val json = JSONObject(String(plain))
+                        title = json.optString("title", "")
+                        body = json.optString("body", "")
+                    } catch (e: Exception) {
+                        title = it.title
+                        body = it.body ?: ""
+                    }
+                } else {
+                    title = it.title
+                    body = it.body ?: ""
+                }
             }
         }
     }
@@ -92,34 +105,40 @@ fun NewEditScreen(
                         val id = requestId ?: UUID.randomUUID().toString()
                         val now = System.currentTimeMillis()
                         val dek = DekManager.getDek()
+                        
+                        if (dek == null) {
+                            snackbar.showSnackbar("Desbloquea la app para guardar con cifrado.")
+                            return@launch
+                        }
+
                         withContext(Dispatchers.IO) {
+                            val payload = JSONObject().apply {
+                                put("title", title)
+                                put("body", body)
+                            }.toString().toByteArray(Charsets.UTF_8)
+                            val encrypted = LocalCrypto.encrypt(payload, dek)
+
                             db.requestDao().insert(
                                 RequestEntity(
                                     id = id,
-                                    title = title,
-                                    body = body,
+                                    title = "", // E2EE: no guardar plano
+                                    body = "",  // E2EE: no guardar plano
                                     createdAt = now,
                                     updatedAt = now,
                                     synced = false,
+                                    encryptedPayloadB64 = encrypted
                                 ),
                             )
-                            if (dek != null) {
-                                val payload = JSONObject().apply {
-                                    put("title", title)
-                                    put("body", body)
-                                }.toString().toByteArray(Charsets.UTF_8)
-                                val encrypted = LocalCrypto.encrypt(payload, dek)
-                                db.outboxDao().insert(
-                                    OutboxEntity(
-                                        recordId = id,
-                                        type = SyncRepository.TYPE_PRAYER_REQUEST,
-                                        version = 1,
-                                        encryptedPayloadB64 = encrypted,
-                                        clientUpdatedAt = now,
-                                        createdAt = now,
-                                    ),
-                                )
-                            }
+                            db.outboxDao().insert(
+                                OutboxEntity(
+                                    recordId = id,
+                                    type = SyncRepository.TYPE_PRAYER_REQUEST,
+                                    version = 1,
+                                    encryptedPayloadB64 = encrypted,
+                                    clientUpdatedAt = now,
+                                    createdAt = now,
+                                ),
+                            )
                         }
                         navController.navigateUp()
                     }

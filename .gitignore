@@ -1,4 +1,4 @@
-# Ignore node_modules and lock files
+# Dependencies
 node_modules/
 apps/api/node_modules/
 apps/web/node_modules/
@@ -8,26 +8,40 @@ apps/web/.modules.yaml
 .pnpm/
 apps/api/.pnpm/
 apps/web/.pnpm/
-# Ignore OS files
+
+# OS
 .DS_Store
 Thumbs.db
-# Ignore environment files
+
+# Secretos y env (evitar fugas en repo)
 .env
 .env.*
+!.env.example
 apps/api/.env
 apps/web/.env
-# IDE (Android Studio / IntelliJ)
+*.keystore
+*.jks
+
+# IDE (Android Studio / IntelliJ / VSCode)
 .idea/
 *.iml
-# Android heap dumps
+.vscode/settings.json
+
+# Android
 *.hprof
-# Ignore build outputs
+.gradle/
+apps/mobile-android/build/
+apps/mobile-android/.gradle/
+
+# Build outputs
 dist/
 build/
-# Ignore logs
+
+# Logs
 *.log
 apps/api/*.log
 apps/web/*.log
-# Ignore Prisma generated files
+
+# Prisma
 apps/api/prisma/dev.db
 apps/api/prisma/dev.db-journal

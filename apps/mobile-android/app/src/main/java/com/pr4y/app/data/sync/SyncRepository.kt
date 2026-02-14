@@ -4,7 +4,9 @@ import android.content.Context
 import com.pr4y.app.crypto.DekManager
 import com.pr4y.app.crypto.LocalCrypto
 import com.pr4y.app.data.auth.AuthRepository
+import com.pr4y.app.data.local.JournalDraftStore
 import com.pr4y.app.data.local.entity.JournalEntity
+import com.pr4y.app.data.local.entity.OutboxEntity
 import com.pr4y.app.data.local.entity.RequestEntity
 import com.pr4y.app.data.local.entity.SyncStateEntity
 import com.pr4y.app.data.remote.PushBody
@@ -17,6 +19,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.time.Instant
+import java.util.UUID
 
 class SyncRepository(
     private val authRepository: AuthRepository,
@@ -31,12 +34,17 @@ class SyncRepository(
 
     suspend fun sync(): SyncResult = withContext(Dispatchers.IO) {
         val bearer = authRepository.getBearer() ?: return@withContext SyncResult.Error("No autenticado")
-        val dek = DekManager.getDek() ?: return@withContext SyncResult.Error("DEK no disponible")
+        val dek = DekManager.getDek() ?: return@withContext SyncResult.Error("Llave de privacidad no disponible")
 
         try {
+            // 0. Pull-before-push
+            pull(bearer, dek)
+
             // 1. Push outbox
-            val outbox = outboxDao.getAll()
-            if (outbox.isNotEmpty()) {
+            var outbox = outboxDao.getAll()
+            var pushRound = 0
+            val maxPushRounds = 2
+            while (outbox.isNotEmpty() && pushRound < maxPushRounds) {
                 val records = outbox.map { o ->
                     PushRecordDto(
                         recordId = o.recordId,
@@ -48,65 +56,153 @@ class SyncRepository(
                     )
                 }
                 val pushRes = api.push(bearer, PushBody(records))
-                if (pushRes.isSuccessful) {
-                    pushRes.body()?.accepted?.forEach { recordId ->
-                        outboxDao.deleteByRecordId(recordId)
+                if (!pushRes.isSuccessful) break
+                val pushBody = pushRes.body() ?: break
+                pushBody.accepted.forEach { recordId ->
+                    outboxDao.deleteByRecordId(recordId)
+                }
+                
+                val rejected = pushBody.rejected
+                for (r in rejected) {
+                    if (r.reason == "version conflict" && r.serverVersion != null) {
+                        val updated = outbox.find { it.recordId == r.recordId } ?: continue
+                        outboxDao.insert(
+                            OutboxEntity(
+                                recordId = updated.recordId,
+                                type = updated.type,
+                                version = r.serverVersion + 1,
+                                encryptedPayloadB64 = updated.encryptedPayloadB64,
+                                clientUpdatedAt = updated.clientUpdatedAt,
+                                createdAt = updated.createdAt,
+                            )
+                        )
                     }
                 }
+                outbox = outboxDao.getAll()
+                pushRound++
             }
 
-            // 2. Pull
-            var cursor: String? = syncStateDao.get(SYNC_CURSOR_KEY)?.value
+            // 2. Pull final
+            pull(bearer, dek)
 
-            do {
-                val pullRes = api.pull(bearer, cursor, 100)
-                if (!pullRes.isSuccessful) break
-                val body = pullRes.body() ?: break
-                
-                if (body.records.isNotEmpty()) {
-                    db.runInTransaction {
-                        runBlocking {
-                            for (rec in body.records) {
-                                processRemoteRecord(rec, dek)
-                            }
+            persistLastSyncStatus("ok", null)
+            SyncResult.Success
+        } catch (e: Exception) {
+            persistLastSyncStatus("error", System.currentTimeMillis())
+            SyncResult.Error(e.message ?: "Error de red o seguridad")
+        }
+    }
+
+    private suspend fun pull(bearer: String, dek: javax.crypto.SecretKey) {
+        var cursor: String? = syncStateDao.get(SYNC_CURSOR_KEY)?.value
+        do {
+            val pullRes = api.pull(bearer, cursor, 100)
+            if (!pullRes.isSuccessful) break
+            val body = pullRes.body() ?: break
+            if (body.records.isNotEmpty()) {
+                db.runInTransaction {
+                    runBlocking {
+                        for (rec in body.records) {
+                            processRemoteRecord(rec, dek)
                         }
                     }
                 }
+            }
+            cursor = if (body.nextCursor.isEmpty()) null else body.nextCursor
+            if (!cursor.isNullOrEmpty()) {
+                syncStateDao.insert(
+                    SyncStateEntity(
+                        key = SYNC_CURSOR_KEY,
+                        value = cursor,
+                        updatedAt = System.currentTimeMillis(),
+                    ),
+                )
+            }
+        } while (!cursor.isNullOrEmpty())
+    }
 
-                cursor = if (body.nextCursor.isEmpty()) null else body.nextCursor
-                if (!cursor.isNullOrEmpty()) {
-                    syncStateDao.insert(
-                        SyncStateEntity(
-                            key = SYNC_CURSOR_KEY,
-                            value = cursor,
-                            updatedAt = System.currentTimeMillis(),
+    /**
+     * Procesa borradores del diario guardados sin conexión/llave.
+     * @return true si se procesó un borrador con éxito.
+     */
+    suspend fun processJournalDraft(context: Context): Boolean = withContext(Dispatchers.IO) {
+        val draft = JournalDraftStore.getDraft(context) ?: return@withContext false
+        val dek = DekManager.getDek() ?: return@withContext false
+        
+        try {
+            val now = System.currentTimeMillis()
+            val id = UUID.randomUUID().toString()
+            val payload = JSONObject().apply {
+                put("content", draft)
+                put("createdAt", now)
+                put("updatedAt", now)
+            }.toString().toByteArray(Charsets.UTF_8)
+            val encrypted = LocalCrypto.encrypt(payload, dek)
+
+            db.runInTransaction {
+                runBlocking {
+                    journalDao.insert(
+                        JournalEntity(
+                            id = id,
+                            content = "",
+                            createdAt = now,
+                            updatedAt = now,
+                            synced = false,
+                            encryptedPayloadB64 = encrypted,
                         ),
                     )
+                    outboxDao.insert(
+                        OutboxEntity(
+                            recordId = id,
+                            type = TYPE_JOURNAL_ENTRY,
+                            version = 1,
+                            encryptedPayloadB64 = encrypted,
+                            clientUpdatedAt = now,
+                            createdAt = now,
+                        ),
+                    )
+                    JournalDraftStore.clearDraft(context)
                 }
-            } while (!cursor.isNullOrEmpty())
-
-            SyncResult.Success
+            }
+            true
         } catch (e: Exception) {
-            SyncResult.Error(e.message ?: "Error de red o descifrado")
+            e.printStackTrace()
+            false
         }
+    }
+
+    private suspend fun persistLastSyncStatus(status: String, errorAt: Long?) {
+        val now = System.currentTimeMillis()
+        syncStateDao.insert(SyncStateEntity(KEY_LAST_SYNC_STATUS, status, now))
+        syncStateDao.insert(SyncStateEntity(KEY_LAST_SYNC_AT, now.toString(), now))
+        if (errorAt != null) {
+            syncStateDao.insert(SyncStateEntity(KEY_LAST_SYNC_ERROR_AT, errorAt.toString(), now))
+        }
+    }
+
+    suspend fun getLastSyncStatus(): LastSyncStatus? = withContext(Dispatchers.IO) {
+        val status = syncStateDao.get(KEY_LAST_SYNC_STATUS)?.value ?: return@withContext null
+        val errorAtStr = syncStateDao.get(KEY_LAST_SYNC_ERROR_AT)?.value
+        val errorAt = errorAtStr?.toLongOrNull()
+        LastSyncStatus(status == "ok", errorAt)
     }
 
     private suspend fun processRemoteRecord(rec: SyncRecordDto, dek: javax.crypto.SecretKey) {
         if (rec.deleted) {
             when (rec.type) {
                 TYPE_PRAYER_REQUEST -> requestDao.deleteById(rec.recordId)
-                // En un futuro, añadir deleteById para journal
+                TYPE_JOURNAL_ENTRY -> journalDao.deleteById(rec.recordId)
             }
             return
         }
 
-        try {
-            val plain = LocalCrypto.decrypt(rec.encryptedPayloadB64, dek)
-            val json = JSONObject(String(plain))
-            val updatedAt = Instant.parse(rec.serverUpdatedAt).toEpochMilli()
+        val updatedAt = Instant.parse(rec.serverUpdatedAt).toEpochMilli()
 
-            when (rec.type) {
-                TYPE_PRAYER_REQUEST -> {
+        when (rec.type) {
+            TYPE_PRAYER_REQUEST -> {
+                try {
+                    val plain = LocalCrypto.decrypt(rec.encryptedPayloadB64, dek)
+                    val json = JSONObject(String(plain))
                     requestDao.insert(
                         RequestEntity(
                             id = rec.recordId,
@@ -117,21 +213,22 @@ class SyncRepository(
                             synced = true,
                         ),
                     )
-                }
-                TYPE_JOURNAL_ENTRY -> {
-                    journalDao.insert(
-                        JournalEntity(
-                            id = rec.recordId,
-                            content = json.optString("content", ""),
-                            createdAt = updatedAt,
-                            updatedAt = updatedAt,
-                            synced = true,
-                        ),
-                    )
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+            TYPE_JOURNAL_ENTRY -> {
+                journalDao.insert(
+                    JournalEntity(
+                        id = rec.recordId,
+                        content = "",
+                        createdAt = updatedAt,
+                        updatedAt = updatedAt,
+                        synced = true,
+                        encryptedPayloadB64 = rec.encryptedPayloadB64,
+                    ),
+                )
+            }
         }
     }
 
@@ -139,6 +236,9 @@ class SyncRepository(
         const val TYPE_PRAYER_REQUEST = "prayer_request"
         const val TYPE_JOURNAL_ENTRY = "journal_entry"
         private const val SYNC_CURSOR_KEY = "sync_cursor"
+        const val KEY_LAST_SYNC_STATUS = "last_sync_status"
+        const val KEY_LAST_SYNC_AT = "last_sync_at"
+        const val KEY_LAST_SYNC_ERROR_AT = "last_sync_error_at"
     }
 }
 
@@ -146,3 +246,5 @@ sealed class SyncResult {
     object Success : SyncResult()
     data class Error(val message: String) : SyncResult()
 }
+
+data class LastSyncStatus(val lastOk: Boolean, val lastErrorAt: Long?)

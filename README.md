@@ -1,130 +1,124 @@
 # PR4Y
 
-PR4Y es un cuaderno personal de oración: pedidos + notas + seguimiento + recordatorios suaves.  
-Es **personal** y **privado**, con enfoque **mobile-first** (web usable en móvil) y backend para **sincronización opcional**. El contenido se cifra del lado cliente (E2EE): el servidor almacena blobs cifrados, no puede leerlos.
+**Cuaderno personal de oración**: pedidos, notas, seguimiento y recordatorios suaves.  
+**E2EE · Offline-first · Privacy-focused.**
 
-## Stack
-- **Android**: Kotlin + Jetpack Compose (app principal MVP)
-- **API**: Node.js + Fastify + TypeScript (Railway)
-- **DB**: PostgreSQL (Railway) + Prisma
-- **Web**: Next.js (opcional; landing/PWA)
-- `docs/`: arquitectura y contrato API
-
-## Repo
-- `apps/api`: Fastify – auth (email+password, JWT+refresh), crypto (wrapped DEK), sync (pull/push)
-- `apps/mobile-android`: Android Kotlin + Compose – offline-first, Room, crypto, sync
-- `apps/web`: placeholder (landing/PWA cuando se necesite)
-- `packages/*`: shared (cuando se añadan)
-- `docs/`: api.md, api-openapi.yaml
-
-## Principios
-- Offline-first: la web funciona sin conexión (IndexedDB).
-- Privacidad: E2EE. El backend nunca guarda contenido en claro.
-- Simplicidad: sin funciones sociales.
-
-## Setup local
-
-### Requisitos
-- Node.js LTS
-- pnpm
-- PostgreSQL local (opcional; recomendado para correr API completo)
-
-### Variables de entorno API
-
-Copia `apps/api/.env.example` a `apps/api/.env` y rellena:
-
-- `DATABASE_URL=postgresql://user:password@localhost:5432/pr4y`
-- `JWT_SECRET=` (mínimo 32 caracteres; en prod usar valor seguro)
-- `CORS_ORIGIN=http://localhost:3000` (opcional)
-
-### Instalar dependencias
-
-```bash
-pnpm install
-```
+El contenido se cifra en el dispositivo (cifrado de extremo a extremo). El servidor almacena solo blobs cifrados y **nunca** puede leer tus oraciones ni notas.
 
 ---
 
-## 1) Levantar API local con Postgres
+## Value proposition
 
-**Opción A – Postgres en tu máquina**
+- **E2EE**: Todo el contenido se cifra en el cliente. El backend no tiene las claves ni puede descifrar.
+- **Offline-first**: La app funciona sin conexión; la sincronización es opcional cuando vuelves a tener red.
+- **Privacy-focused**: Sin redes sociales, sin tracking. Zero-knowledge: el servidor no conoce el contenido.
 
-- Crea una base de datos: `createdb pr4y` (o desde tu cliente).
-- En `apps/api/.env` pon `DATABASE_URL=postgresql://user:password@localhost:5432/pr4y`.
+---
 
-**Opción B – Postgres con Docker**
+## Stack técnico
+
+| Capa        | Tecnología                    |
+|------------|-------------------------------|
+| **Android**| Kotlin, Jetpack Compose       |
+| **API**    | Node.js, Fastify, TypeScript  |
+| **DB**     | PostgreSQL, Prisma            |
+| **Deploy** | Railway (API + Postgres)      |
+| **Web**    | Next.js (placeholder / PWA)   |
+
+- **apps/api**: Auth (email+password, JWT+refresh), crypto (wrapped DEK), sync (pull/push).
+- **apps/mobile-android**: Offline-first, Room, cifrado en dispositivo, sync con la API.
+- **docs/**: Arquitectura, contrato API, seguridad. Ver [docs/README.md](docs/README.md) como índice.
+
+---
+
+## Guía de inicio rápido
+
+### Requisitos
+
+- Node.js LTS, **pnpm**, PostgreSQL (local o Docker).
+
+### 1. Clonar e instalar
+
+```bash
+git clone <repo>
+cd pr4y
+pnpm install
+```
+
+### 2. Configurar el backend
+
+Copia `apps/api/.env.example` a `apps/api/.env` y define:
+
+| Variable       | Descripción |
+|----------------|-------------|
+| `DATABASE_URL` | `postgresql://user:password@localhost:5432/pr4y` |
+| `JWT_SECRET`   | Mínimo 32 caracteres; en producción usar valor seguro |
+| `CORS_ORIGIN`  | Opcional; p. ej. `http://localhost:3000` |
+
+### 3. Base de datos (Postgres)
+
+**Opción A – Local**
+
+```bash
+createdb pr4y
+# En .env: DATABASE_URL=postgresql://user:password@localhost:5432/pr4y
+```
+
+**Opción B – Docker**
 
 ```bash
 docker run -d --name pr4y-postgres -e POSTGRES_USER=pr4y -e POSTGRES_PASSWORD=pr4y -e POSTGRES_DB=pr4y -p 5432:5432 postgres:16-alpine
+# En .env: DATABASE_URL=postgresql://pr4y:pr4y@localhost:5432/pr4y
 ```
 
-Luego en `apps/api/.env`:  
-`DATABASE_URL=postgresql://pr4y:pr4y@localhost:5432/pr4y`
-
-**Arrancar la API**
+### 4. Migraciones y API
 
 ```bash
 pnpm --filter @pr4y/api db:migrate
 pnpm --filter @pr4y/api dev
 ```
 
-La API queda en `http://localhost:4000`. Health: `GET http://localhost:4000/v1/health`.
+API en **http://localhost:4000**. Health: `GET http://localhost:4000/v1/health`.
+
+### 5. App Android
+
+- Abre `apps/mobile-android` en Android Studio, sincroniza Gradle.
+- Crea un AVD (API 26+) y ejecuta la app (Run o `./gradlew installDebug`).
+- Por defecto la app apunta la API a `http://10.0.2.2:4000` (emulador → localhost).
 
 ---
 
-## 2) Correr migraciones
+## Security disclosure (Zero-Knowledge)
 
-Desde la raíz del repo:
+PR4Y está diseñado para que el servidor **no pueda** acceder al contenido de tus oraciones ni notas:
+
+- Las claves de cifrado se derivan de una passphrase que **solo conoces tú** y no se envían al servidor.
+- El backend guarda y sincroniza **solo datos cifrados** (blobs).
+- No hay recuperación de contraseña que permita al servidor descifrar tu contenido.
+
+Para detalles de amenazas y controles, ver [docs/security/](docs/security/).
+
+---
+
+## Deploy
+
+Pasos exactos para Railway (API + Postgres) y variables de entorno críticas: **[DEPLOY.md](DEPLOY.md)**.
+
+---
+
+## Antes de cada push (pre-flight)
+
+Ejecuta el script de pre-vuelo para evitar subir código de prueba o retrasos artificiales:
 
 ```bash
-pnpm --filter @pr4y/api db:migrate
+./scripts/pre-flight-check.sh
 ```
 
-Para desarrollo con migraciones nuevas (crear migración):
-
-```bash
-pnpm --filter @pr4y/api db:migrate:dev
-```
+En Windows (Git Bash o WSL): `bash scripts/pre-flight-check.sh`.
 
 ---
 
-## 3) Ejecutar app Android en emulador
+## Documentación detallada
 
-- Android Studio: abre la carpeta `apps/mobile-android`, sincroniza Gradle.
-- Si no tienes Gradle wrapper: `gradle wrapper` (o usa el de Android Studio).
-- Crea un AVD (API 26+) e inicia el emulador.
-- Run > Run 'app', o desde terminal:
-
-```bash
-cd apps/mobile-android
-./gradlew installDebug
-```
-
-La app por defecto apunta la API a `http://10.0.2.2:4000` (emulador → localhost).
-
----
-
-## 4) Flujo: registrar usuario, crear pedido offline, sincronizar
-
-1. **API y DB**: Postgres corriendo, `DATABASE_URL` y `JWT_SECRET` en `apps/api/.env`, migraciones aplicadas (`pnpm --filter @pr4y/api db:migrate`), API en marcha (`pnpm --filter @pr4y/api dev`).
-2. **Android**: Instala la app en el emulador. [PENDIENTE] Añadir pantalla de login/registro en la app que llame a `POST /v1/auth/register` y guarde tokens en `AuthTokenStore`.
-3. **Registrar usuario**: Desde la app (cuando exista la UI de auth) o con curl:
-
-   ```bash
-   curl -X POST http://localhost:4000/v1/auth/register -H "Content-Type: application/json" -d "{\"email\":\"test@example.com\",\"password\":\"password123\"}"
-   ```
-
-4. **Crear pedido offline**: En la app, pantalla "Nuevo pedido" (NewEditScreen); al guardar, [PENDIENTE] persistir en Room y encolar en outbox (cifrado) para sync.
-5. **Sincronizar**: [PENDIENTE] En Settings > "Sincronizar ahora", ejecutar push (outbox) → pull → aplicar cambios (last-write-wins).
-
----
-
-## Deploy a Railway
-
-- Conecta el repo a Railway y configura el servicio para la API (root o `apps/api`).
-- Variables en Railway: `DATABASE_URL` (Postgres añadido en Railway), `JWT_SECRET`, `CORS_ORIGIN` (opcional).
-- Build: `pnpm install --no-frozen-lockfile && pnpm --filter @pr4y/api build`
-- Start: `pnpm --filter @pr4y/api start`
-- Migraciones: en el mismo servicio o en un job: `pnpm --filter @pr4y/api db:migrate`
-
-Ver también `DEPLOY.md` y `docs/api.md`.
+- **Contribuir** (flujo E2EE, estándares, cómo no romper el cifrado): **[CONTRIBUTING.md](CONTRIBUTING.md)**.
+- Índice de arquitectura, API, seguridad y producto: **[docs/README.md](docs/README.md)**.

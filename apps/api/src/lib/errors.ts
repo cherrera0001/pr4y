@@ -1,3 +1,5 @@
+import type { FastifyReply } from 'fastify';
+
 export type ErrorCode =
   | 'bad_request'
   | 'unauthorized'
@@ -16,12 +18,12 @@ export interface ApiErrorBody {
 }
 
 export function sendError(
-  reply: { code: (n: number) => { send: (body: ApiErrorBody) => void } },
+  reply: FastifyReply,
   status: number,
   code: ErrorCode,
   message: string,
   details?: Record<string, unknown>
-) {
+): void {
   reply.code(status).send({
     error: { code, message, details: details ?? {} },
   });
