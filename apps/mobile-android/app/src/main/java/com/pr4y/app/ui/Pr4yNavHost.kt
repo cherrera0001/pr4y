@@ -95,7 +95,7 @@ private fun InnerNavHost(
         navController = navController,
         startDestination = Routes.HOME,
     ) {
-        composable(Routes.HOME) { HomeScreen(navController = navController) }
+        composable(Routes.HOME) { HomeScreen(navController = navController, authRepository = authRepository) }
         composable(Routes.NEW_EDIT) { NewEditScreen(navController = navController, requestId = null) }
         composable(Routes.NEW_EDIT_ID) { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id")

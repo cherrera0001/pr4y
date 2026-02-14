@@ -1,6 +1,5 @@
-
-import * as dotenv from 'dotenv';
-dotenv.config();
+// Cargar env lo primero (antes de cualquier import que use process.env)
+import 'dotenv/config';
 
 import Fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import cors from '@fastify/cors';
@@ -47,11 +46,12 @@ authRoutes(server);
 syncRoutes(server);
 cryptoRoutes(server);
 
-// Arranque
+// Arranque (Railway inyecta PORT, p. ej. 8080)
+const port = Number(process.env.PORT) || 4000;
 const start = async () => {
   try {
-    await server.listen({ port: 4000, host: '0.0.0.0' });
-    console.log('API running on http://localhost:4000');
+    await server.listen({ port, host: '0.0.0.0' });
+    console.log(`API running on port ${port}`);
   } catch (err) {
     server.log.error(err);
     process.exit(1);

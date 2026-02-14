@@ -12,6 +12,9 @@ interface JournalDao {
     @Query("SELECT * FROM journal ORDER BY updatedAt DESC")
     fun getAll(): Flow<List<JournalEntity>>
 
+    @Query("SELECT * FROM journal WHERE id = :id")
+    suspend fun getById(id: String): JournalEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(entity: JournalEntity)
 }

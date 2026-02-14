@@ -20,4 +20,7 @@ interface RequestDao {
 
     @Query("DELETE FROM requests WHERE id = :id")
     suspend fun deleteById(id: String)
+
+    @Query("SELECT * FROM requests WHERE title LIKE '%' || :q || '%' OR body LIKE '%' || :q || '%' ORDER BY updatedAt DESC")
+    fun search(q: String): Flow<List<RequestEntity>>
 }

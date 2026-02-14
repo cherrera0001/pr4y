@@ -9,10 +9,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -21,20 +26,33 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.pr4y.app.data.auth.AuthRepository
 import com.pr4y.app.data.local.entity.RequestEntity
+import com.pr4y.app.data.sync.SyncRepository
+import com.pr4y.app.data.sync.SyncResult
 import com.pr4y.app.di.AppContainer
 import com.pr4y.app.ui.Routes
 import com.pr4y.app.ui.components.Pr4yTopAppBar
+import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    navController: NavController,
+    authRepository: AuthRepository,
+) {
     val requests by AppContainer.db.requestDao().getAll().collectAsState(initial = emptyList())
+    val outbox by AppContainer.db.outboxDao().getAllFlow().collectAsState(initial = emptyList())
+    val snackbar = remember { SnackbarHostState() }
+    val syncRepository = remember { SyncRepository(authRepository) }
+    val scope = androidx.compose.runtime.rememberCoroutineScope()
 
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbar) },
         topBar = {
             Pr4yTopAppBar(
                 title = "Pedidos",
@@ -52,6 +70,39 @@ fun HomeScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(padding),
         ) {
+            if (outbox.isNotEmpty()) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                ) {
+                    Row(
+                        Modifier.padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        Text(
+                            text = "${outbox.size} cambio(s) sin sincronizar",
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                        Button(
+                            onClick = {
+                                scope.launch {
+                                    when (val r = syncRepository.sync()) {
+                                        is SyncResult.Success ->
+                                            snackbar.showSnackbar("Sincronizado correctamente")
+                                        is SyncResult.Error ->
+                                            snackbar.showSnackbar("Error: ${r.message}")
+                                    }
+                                }
+                            },
+                        ) {
+                            Text("Sincronizar")
+                        }
+                    }
+                }
+            }
             Row(
                 Modifier
                     .fillMaxWidth()
