@@ -1,34 +1,17 @@
-// Extender FastifyInstance para incluir authenticate
-declare module 'fastify' {
-  interface FastifyInstance {
-    authenticate: any;
-  }
-}
 
-// Middleware de autenticación JWT
-server.decorate('authenticate', async function (request, reply) {
-  try {
-    await request.jwtVerify();
-  } catch (err) {
-    reply.code(401).send({ error: { code: 'unauthorized', message: 'Invalid token', details: {} } });
-  }
-});
-// Rutas de sync
-import syncRoutes from './routes/sync';
-syncRoutes(server);
-// Rutas de crypto
-import cryptoRoutes from './routes/crypto';
-cryptoRoutes(server);
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-import Fastify from 'fastify';
+import Fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import jwt from '@fastify/jwt';
-import * as dotenv from 'dotenv';
+import authRoutes from './routes/auth';
+import syncRoutes from './routes/sync';
+import cryptoRoutes from './routes/crypto';
 
-dotenv.config();
-
-const server = Fastify({ logger: true });
+// Crear instancia
+const server: FastifyInstance = Fastify({ logger: true });
 
 // CORS solo a Vercel origin (ajustar en prod)
 server.register(cors, {
@@ -47,14 +30,24 @@ server.register(jwt, {
   secret: process.env.JWT_SECRET || 'changeme',
 });
 
+// Decorador de autenticación
+server.decorate('authenticate', async function (request: FastifyRequest, reply: FastifyReply) {
+  try {
+    await request.jwtVerify();
+  } catch (err) {
+    reply.code(401).send({ error: { code: 'unauthorized', message: 'Invalid token', details: {} } });
+  }
+});
+
 // Health endpoint
 server.get('/v1/health', async () => ({ status: 'ok', version: '1.0.0' }));
 
-
-// Rutas de autenticación
-import authRoutes from './routes/auth';
+// Rutas
 authRoutes(server);
+syncRoutes(server);
+cryptoRoutes(server);
 
+// Arranque
 const start = async () => {
   try {
     await server.listen({ port: 4000, host: '0.0.0.0' });
