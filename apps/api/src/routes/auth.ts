@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import * as authService from '../services/auth';
-import { sendError } from '../lib/errors';
+import { sendError, safeDetailsFromError } from '../lib/errors';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PASSWORD_MIN = 8;
@@ -19,8 +19,6 @@ function validatePassword(password: unknown): string | null {
 }
 
 export default async function authRoutes(server: FastifyInstance) {
-  const rateLimitAuth = { config: { rateLimit: { max: 10, timeWindow: '1 minute' } } };
-
   const registerBodySchema = {
     type: 'object',
     properties: {
@@ -38,6 +36,12 @@ export default async function authRoutes(server: FastifyInstance) {
     additionalProperties: false,
   };
   const logoutBodySchema = refreshBodySchema;
+  const googleBodySchema = {
+    type: 'object',
+    properties: { idToken: { type: 'string' } },
+    required: ['idToken'],
+    additionalProperties: false,
+  };
 
   const authResponseSchema = {
     type: 'object',
@@ -71,6 +75,7 @@ export default async function authRoutes(server: FastifyInstance) {
   const signAccess = (payload: { sub: string; email: string; role?: string }) =>
     server.jwt.sign(payload, { expiresIn: authService.getAccessTokenTtl() });
 
+  // Registro y login con email/contraseña (para app móvil y admin super_usuario)
   server.post(
     '/auth/register',
     { config: { rateLimit: { max: 5, timeWindow: '1 minute' } }, schema: { body: registerBodySchema, response: { 200: authResponseSchema } } },
@@ -118,6 +123,49 @@ export default async function authRoutes(server: FastifyInstance) {
   );
 
   server.post(
+    '/auth/google',
+    { config: { rateLimit: { max: 20, timeWindow: '1 minute' } }, schema: { body: googleBodySchema, response: { 200: authResponseSchema } } },
+    async (request: FastifyRequest<{ Body: { idToken: string } }>, reply: FastifyReply) => {
+      const idToken = typeof request.body?.idToken === 'string' && request.body.idToken.length > 0 ? request.body.idToken : null;
+      if (!idToken) {
+        sendError(reply, 400, 'validation_error', 'idToken is required.', {});
+        return;
+      }
+      try {
+        const result = await authService.loginWithGoogle(idToken, signAccess);
+        if (!result.ok) {
+          if (result.invalidToken) {
+            // Log para Railway/DevSecOps: ver si Google rechazó el token (audience, expirado, etc.)
+            request.log.warn(
+              { verifyError: result.verifyError },
+              'Google id_token verification failed (invalid, expired, or wrong audience). Check GOOGLE_WEB_CLIENT_ID and app serverClientId.'
+            );
+            sendError(reply, 401, 'unauthorized', 'Invalid or expired Google token.', {});
+            return;
+          }
+          if (result.userBanned) {
+            sendError(reply, 403, 'forbidden', 'Account is disabled.', {});
+            return;
+          }
+          sendError(reply, 400, 'bad_request', 'Google sign-in failed.', {});
+          return;
+        }
+        reply.code(200).send(result);
+      } catch (err) {
+        const prismaCode = err && typeof err === 'object' && 'code' in err ? (err as { code: string }).code : undefined;
+        request.log.error({ err, prismaCode }, 'auth/google failed');
+        const details = safeDetailsFromError(err);
+        const isSchemaError = details && typeof details === 'object' && 'hint' in details;
+        if (isSchemaError) {
+          sendError(reply, 503, 'service_unavailable', 'Database schema not ready. Run migrations (npx prisma migrate deploy).', details);
+        } else {
+          sendError(reply, 500, 'internal_error', 'Google sign-in failed. Please try again or contact support.', details);
+        }
+      }
+    }
+  );
+
+  server.post(
     '/auth/refresh',
     { config: { rateLimit: { max: 20, timeWindow: '1 minute' } }, schema: { body: refreshBodySchema, response: { 200: authResponseSchema } } },
     async (request: FastifyRequest<{ Body: { refreshToken: string } }>, reply: FastifyReply) => {
@@ -126,16 +174,23 @@ export default async function authRoutes(server: FastifyInstance) {
         sendError(reply, 400, 'validation_error', 'refreshToken is required.', {});
         return;
       }
-      const result = await authService.refresh(refreshToken, signAccess);
-      if (!result.ok) {
-        if (result.invalidToken) {
-          sendError(reply, 401, 'unauthorized', 'Invalid or expired refresh token.', {});
+      try {
+        const result = await authService.refresh(refreshToken, signAccess);
+        if (!result.ok) {
+          if (result.invalidToken) {
+            sendError(reply, 401, 'unauthorized', 'Invalid or expired refresh token.', {});
+            return;
+          }
+          sendError(reply, 400, 'bad_request', 'Refresh failed.', {});
           return;
         }
-        sendError(reply, 400, 'bad_request', 'Refresh failed.', {});
-        return;
+        reply.code(200).send(result);
+      } catch (err) {
+        const prismaCode = err && typeof err === 'object' && 'code' in err ? (err as { code: string }).code : undefined;
+        request.log.error({ err, prismaCode }, 'auth/refresh failed');
+        const details = safeDetailsFromError(err);
+        sendError(reply, 500, 'internal_error', 'Refresh failed. Please try again.', details);
       }
-      reply.code(200).send(result);
     }
   );
 
@@ -157,8 +212,14 @@ export default async function authRoutes(server: FastifyInstance) {
     { config: { rateLimit: { max: 20, timeWindow: '1 minute' } }, schema: { body: logoutBodySchema, response: { 200: okSchema } } },
     async (request: FastifyRequest<{ Body: { refreshToken: string } }>, reply: FastifyReply) => {
       const refreshToken = typeof request.body?.refreshToken === 'string' ? request.body.refreshToken : '';
-      await authService.logout(refreshToken);
-      reply.code(200).send({ ok: true });
+      try {
+        await authService.logout(refreshToken);
+        reply.code(200).send({ ok: true });
+      } catch (err) {
+        request.log.error({ err }, 'auth/logout failed');
+        const details = safeDetailsFromError(err);
+        sendError(reply, 500, 'internal_error', 'Logout failed. Please try again.', details);
+      }
     }
   );
 }

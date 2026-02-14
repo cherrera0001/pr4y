@@ -7,6 +7,7 @@ import helmet from '@fastify/helmet';
 import rateLimit from '@fastify/rate-limit';
 import jwt from '@fastify/jwt';
 import { prisma } from './lib/db';
+import { safeDetailsFromError } from './lib/errors';
 import authRoutes from './routes/auth';
 import syncRoutes from './routes/sync';
 import cryptoRoutes from './routes/crypto';
@@ -25,19 +26,18 @@ const server: FastifyInstance = Fastify({
 // Cabeceras de seguridad (API JSON: CSP desactivada)
 server.register(helmet, { contentSecurityPolicy: false });
 
-// CORS: pr4y.cl (con y sin www) y orígenes locales (desarrollo + App Web)
-const allowedOrigins = [
-  'https://pr4y.cl',
-  'https://www.pr4y.cl',
-  'http://localhost:3000',
-  'http://127.0.0.1:3000',
-  'http://localhost:3001',
-  'http://127.0.0.1:3001',
-];
+// CORS: orígenes permitidos solo desde env (comma-separated). Ej: CORS_ORIGINS=https://pr4y.cl,http://localhost:3000
+function getAllowedOrigins(): string[] {
+  const raw = process.env.CORS_ORIGINS;
+  if (typeof raw !== 'string' || !raw.trim()) return [];
+  return raw.split(',').map((s) => s.trim()).filter(Boolean);
+}
+const allowedOrigins = getAllowedOrigins();
 server.register(cors, {
   origin: (origin: string | undefined, cb: (err: Error | null, allow: boolean) => void) => {
-    if (!origin) return cb(null, true); // p. ej. Postman o app móvil sin Origin
-    if (allowedOrigins.includes(origin)) return cb(null, true);
+    // Sin Origin: Postman, curl, app Android (OkHttp/Retrofit) → permitido. No hace falta añadir com.pr4y.app.dev (es package, no origen).
+    if (!origin) return cb(null, true);
+    if (allowedOrigins.length > 0 && allowedOrigins.includes(origin)) return cb(null, true);
     cb(null, false); // rechazar sin enviar error al cliente
   },
   credentials: true,
@@ -50,10 +50,20 @@ server.register(rateLimit, {
   timeWindow: '1 minute',
 });
 
-// JWT (para endpoints protegidos)
-server.register(jwt, {
-  secret: process.env.JWT_SECRET || 'changeme',
-});
+// JWT: obligatorio desde env; sin valor por defecto en producción
+const jwtSecret = process.env.JWT_SECRET;
+if (!jwtSecret || jwtSecret.trim() === '') {
+  throw new Error('JWT_SECRET is required. Set it in .env or in Railway variables.');
+}
+server.register(jwt, { secret: jwtSecret });
+
+// Google OAuth: validación de id_token SOLO con GOOGLE_WEB_CLIENT_ID. No usar GOOGLE_ANDROID_CLIENT_ID aquí.
+const googleWebClientId = process.env.GOOGLE_WEB_CLIENT_ID?.trim();
+if (!googleWebClientId) {
+  throw new Error(
+    'GOOGLE_WEB_CLIENT_ID is required for Google OAuth. Set in .env or Railway variables. Do not use GOOGLE_ANDROID_CLIENT_ID for token validation.'
+  );
+}
 
 // Decorador de autenticación
 server.decorate('authenticate', async function (request: FastifyRequest, reply: FastifyReply) {
@@ -73,7 +83,7 @@ server.decorate('requireAdmin', async function (request: FastifyRequest, reply: 
   }
 });
 
-// Error handler global: no filtrar stack ni mensajes de Prisma al cliente
+// Error handler global: no exponer stack ni mensajes internos al cliente; solo logger Fastify
 server.setErrorHandler((error: Error & { validation?: unknown }, request, reply) => {
   if (error.validation) {
     return reply.code(400).send({
@@ -84,12 +94,14 @@ server.setErrorHandler((error: Error & { validation?: unknown }, request, reply)
       },
     });
   }
-  server.log.error(error);
+  const prismaCode = error && typeof error === 'object' && 'code' in error ? (error as { code: string }).code : undefined;
+  request.log.error({ err: error, prismaCode }, 'Unhandled error');
+  const details = safeDetailsFromError(error);
   return reply.code(500).send({
     error: {
       code: 'internal_error',
       message: 'An unexpected error occurred.',
-      details: {},
+      details,
     },
   });
 });
@@ -118,13 +130,28 @@ const start = async () => {
   console.log(`[PR4Y] Arranque: PORT=${process.env.PORT ?? '(no set)'} → usando ${port}, host 0.0.0.0`);
   try {
     await prisma.$queryRaw`SELECT 1`;
-    console.log('Conexión a la base de datos establecida (DATABASE_URL)');
+    console.log('[PR4Y] Conexión establecida vía red privada interna');
+
+    // Log de base de datos actual (confirmar que Prisma apunta a la DB correcta en Railway)
+    const dbRows = await prisma.$queryRaw<Array<{ current_database: string }>>`SELECT current_database()`;
+    const dbName = dbRows[0]?.current_database ?? '(desconocida)';
+    console.log('[PR4Y] current_database:', dbName);
+
+    // Lista de tablas en el schema public (confirmación tras migración)
+    const tableRows = await prisma.$queryRaw<Array<{ tablename: string }>>`
+      SELECT tablename FROM pg_tables WHERE schemaname = 'public' ORDER BY tablename
+    `;
+    const tableList = tableRows.map((r) => r.tablename).join(', ') || '(ninguna)';
+    console.log('[PR4Y] Tablas en public:', tableList);
+
+    // Verificación post-migración: conteo vía information_schema (visible en logs de Railway)
+    const countRows = await prisma.$queryRaw<Array<{ count: string }>>`
+      SELECT count(*)::text AS count FROM information_schema.tables WHERE table_schema = 'public'
+    `;
+    const publicTableCount = countRows[0]?.count ?? '0';
+    console.log('[PR4Y] Verificación post-migración: public tables count =', publicTableCount);
   } catch (err) {
-    console.error('Error de conexión a la base de datos al arrancar (el servidor seguirá escuchando; /v1/health reportará database: error):', err);
-    if (err instanceof Error) {
-      console.error('Mensaje:', err.message);
-    }
-    // No hacer process.exit(1): así Railway siempre tiene un proceso escuchando y deja de devolver "Application not found".
+    server.log.error({ err }, 'DB connection failed at startup; server will still listen and /v1/health will report database: error');
   }
   try {
     await server.ready();
