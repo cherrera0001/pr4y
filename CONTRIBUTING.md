@@ -48,6 +48,18 @@ Si implementas una nueva pantalla o tipo de dato, sigue el mismo patrón: cifrar
 
 ---
 
+## Dependencias y lockfile (pnpm)
+
+Este monorepo usa **pnpm workspaces** con `pnpm-lock.yaml` en la raíz. Si modificas cualquier `package.json` (raíz o en `apps/*` / `packages/*`), **debes** ejecutar desde la **raíz del repo**:
+
+```bash
+pnpm install
+```
+
+y hacer commit de `pnpm-lock.yaml` junto con los cambios en `package.json`. Si no, el CI y el deploy (p. ej. Vercel) fallarán con `ERR_PNPM_OUTDATED_LOCKFILE` al usar `--frozen-lockfile`. La versión de pnpm está fijada en el campo `packageManager` del `package.json` raíz (pnpm@8.x).
+
+---
+
 ## Antes de subir código
 
 1. Ejecutar localmente: `pnpm run typecheck`, `pnpm run lint`, y en Android `./gradlew lint`.

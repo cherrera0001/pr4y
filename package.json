@@ -2,11 +2,8 @@
   "name": "pr4y-monorepo",
   "private": true,
   "version": "0.1.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "scripts/*"
-  ],
+  "packageManager": "pnpm@8.15.0",
+  "workspaces": ["apps/*", "packages/*", "scripts/*"],
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "typecheck": "tsc --noEmit",
@@ -14,6 +11,7 @@
     "build": "echo 'No build yet' && exit 0",
     "api:lint": "pnpm --filter @pr4y/api lint",
     "api:typecheck": "pnpm --filter @pr4y/api typecheck",
+    "db:deploy:prod": "cd apps/api && npx prisma migrate deploy",
     "mobile:buildDebug": "cd apps/mobile-android && gradlew.bat assembleDebug",
     "mobile:installDebug": "cd apps/mobile-android && gradlew.bat installDebug",
     "mobile:apk": "cd apps/mobile-android && gradlew.bat assembleDebug"

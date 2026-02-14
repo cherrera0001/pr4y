@@ -45,6 +45,8 @@ cd pr4y
 pnpm install
 ```
 
+(Si más adelante cambias algún `package.json`, ejecuta siempre `pnpm install` desde la **raíz** y commitea `pnpm-lock.yaml` para evitar desincronización en CI/Vercel.)
+
 ### 2. Configurar el backend
 
 Copia `apps/api/.env.example` a `apps/api/.env` y define:

@@ -10,7 +10,8 @@
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit",
     "db:migrate": "prisma migrate deploy",
-    "db:migrate:dev": "prisma migrate dev"
+    "db:migrate:dev": "prisma migrate dev",
+    "create-test-user": "node scripts/create-test-user.mjs"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.0",
@@ -22,6 +23,7 @@
     "argon2": "^0.44.0",
     "dotenv": "^17.3.1",
     "fastify": "^5.7.4",
+    "google-auth-library": "^10.5.0",
     "pg": "^8.18.0",
     "zod": "^3.22.4",
     "zod-to-json-schema": "^3.25.1"
