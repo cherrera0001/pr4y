@@ -1,37 +1,144 @@
-import { FastifyInstance } from 'fastify';
-import { z } from 'zod';
-import fromZodSchema from 'zod-to-json-schema';
+import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
+import * as authService from '../services/auth';
+import { sendError } from '../lib/errors';
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PASSWORD_MIN = 8;
+const PASSWORD_MAX = 256;
+
+function validateEmail(email: unknown): string | null {
+  if (typeof email !== 'string') return null;
+  const trimmed = email.trim().toLowerCase();
+  return trimmed.length > 0 && emailRegex.test(trimmed) ? trimmed : null;
+}
+
+function validatePassword(password: unknown): string | null {
+  if (typeof password !== 'string') return null;
+  if (password.length < PASSWORD_MIN || password.length > PASSWORD_MAX) return null;
+  return password;
+}
 
 export default async function authRoutes(server: FastifyInstance) {
-  // Solicitar magic link (dummy, SMTP pendiente)
-  const requestBodySchema = z.object({ email: z.string().email() }).strict();
-  const requestResponseSchema = z.object({ ok: z.boolean() });
-  server.post('/v1/auth/magic-link/request', {
-    schema: {
-      body: fromZodSchema(requestBodySchema).schema,
-      response: { 200: fromZodSchema(requestResponseSchema).schema },
-    },
-  }, async (request, reply) => {
-    // [PENDIENTE] Enviar email real
-    return { ok: true };
-  });
+  const rateLimitAuth = { config: { rateLimit: { max: 10, timeWindow: '1 minute' } } };
 
-  // Consumir magic link (dummy, sin validación real)
-  const consumeBodySchema = z.object({ token: z.string() }).strict();
-  const consumeResponseSchema = z.object({
-    accessToken: z.string(),
-    user: z.object({ id: z.string(), email: z.string().email(), createdAt: z.string() })
-  });
-  server.post('/v1/auth/magic-link/consume', {
-    schema: {
-      body: fromZodSchema(consumeBodySchema).schema,
-      response: { 200: fromZodSchema(consumeResponseSchema).schema },
+  const registerBodySchema = {
+    type: 'object',
+    properties: {
+      email: { type: 'string', format: 'email' },
+      password: { type: 'string', minLength: PASSWORD_MIN, maxLength: PASSWORD_MAX },
     },
-  }, async (request, reply) => {
-    // [PENDIENTE] Validar token y buscar usuario
-    return {
-      accessToken: 'dummy.jwt.token',
-      user: { id: 'uuid', email: 'user@example.com', createdAt: new Date().toISOString() }
-    };
-  });
+    required: ['email', 'password'],
+    additionalProperties: false,
+  };
+  const loginBodySchema = registerBodySchema;
+  const refreshBodySchema = {
+    type: 'object',
+    properties: { refreshToken: { type: 'string' } },
+    required: ['refreshToken'],
+    additionalProperties: false,
+  };
+  const logoutBodySchema = refreshBodySchema;
+
+  const authResponseSchema = {
+    type: 'object',
+    properties: {
+      accessToken: { type: 'string' },
+      refreshToken: { type: 'string' },
+      expiresIn: { type: 'number' },
+      user: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          email: { type: 'string' },
+          createdAt: { type: 'string' },
+        },
+        required: ['id', 'email', 'createdAt'],
+        additionalProperties: false,
+      },
+    },
+    required: ['accessToken', 'refreshToken', 'expiresIn', 'user'],
+    additionalProperties: false,
+  };
+  const okSchema = { type: 'object', properties: { ok: { type: 'boolean', const: true } }, required: ['ok'], additionalProperties: false };
+
+  const signAccess = (payload: { sub: string; email: string }) =>
+    server.jwt.sign(payload, { expiresIn: authService.getAccessTokenTtl() });
+
+  server.post(
+    '/v1/auth/register',
+    { config: { rateLimit: { max: 5, timeWindow: '1 minute' } }, schema: { body: registerBodySchema, response: { 200: authResponseSchema } } },
+    async (request: FastifyRequest<{ Body: { email: string; password: string } }>, reply: FastifyReply) => {
+      const email = validateEmail(request.body?.email);
+      const password = validatePassword(request.body?.password);
+      if (!email || !password) {
+        sendError(reply as any, 400, 'validation_error', 'Invalid email or password.', {});
+        return;
+      }
+      const result = await authService.register(email, password, signAccess);
+      if (!result.ok) {
+        if (result.conflict) {
+          sendError(reply as any, 409, 'conflict', 'Email already registered.', {});
+          return;
+        }
+        sendError(reply as any, 400, 'bad_request', 'Registration failed.', {});
+        return;
+      }
+      reply.code(200).send(result);
+    }
+  );
+
+  server.post(
+    '/v1/auth/login',
+    { config: { rateLimit: { max: 10, timeWindow: '1 minute' } }, schema: { body: loginBodySchema, response: { 200: authResponseSchema } } },
+    async (request: FastifyRequest<{ Body: { email: string; password: string } }>, reply: FastifyReply) => {
+      const email = validateEmail(request.body?.email);
+      const password = validatePassword(request.body?.password);
+      if (!email || !password) {
+        sendError(reply as any, 400, 'validation_error', 'Invalid email or password.', {});
+        return;
+      }
+      const result = await authService.login(email, password, signAccess);
+      if (!result.ok) {
+        if (result.invalidCredentials) {
+          sendError(reply as any, 401, 'unauthorized', 'Invalid email or password.', {});
+          return;
+        }
+        sendError(reply as any, 400, 'bad_request', 'Login failed.', {});
+        return;
+      }
+      reply.code(200).send(result);
+    }
+  );
+
+  server.post(
+    '/v1/auth/refresh',
+    { config: { rateLimit: { max: 20, timeWindow: '1 minute' } }, schema: { body: refreshBodySchema, response: { 200: authResponseSchema } } },
+    async (request: FastifyRequest<{ Body: { refreshToken: string } }>, reply: FastifyReply) => {
+      const refreshToken = typeof request.body?.refreshToken === 'string' && request.body.refreshToken.length > 0 ? request.body.refreshToken : null;
+      if (!refreshToken) {
+        sendError(reply as any, 400, 'validation_error', 'refreshToken is required.', {});
+        return;
+      }
+      const result = await authService.refresh(refreshToken, signAccess);
+      if (!result.ok) {
+        if (result.invalidToken) {
+          sendError(reply as any, 401, 'unauthorized', 'Invalid or expired refresh token.', {});
+          return;
+        }
+        sendError(reply as any, 400, 'bad_request', 'Refresh failed.', {});
+        return;
+      }
+      reply.code(200).send(result);
+    }
+  );
+
+  server.post(
+    '/v1/auth/logout',
+    { config: { rateLimit: { max: 20, timeWindow: '1 minute' } }, schema: { body: logoutBodySchema, response: { 200: okSchema } } },
+    async (request: FastifyRequest<{ Body: { refreshToken: string } }>, reply: FastifyReply) => {
+      const refreshToken = typeof request.body?.refreshToken === 'string' ? request.body.refreshToken : '';
+      await authService.logout(refreshToken);
+      reply.code(200).send({ ok: true });
+    }
+  );
 }

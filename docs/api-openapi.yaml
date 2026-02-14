@@ -3,7 +3,8 @@ info:
   title: PR4Y API
   version: "1.0.0"
 servers:
-  - url: https://api.pr4y.tld/v1
+  - url: http://localhost:4000/v1
+  - url: https://your-api.railway.app/v1
 paths:
   /health:
     get:
@@ -19,58 +20,103 @@ paths:
                   status: { type: string }
                   version: { type: string }
 
-  /auth/magic-link/request:
+  /auth/register:
     post:
-      summary: Request magic link
+      summary: Register with email and password
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required: [email]
+              required: [email, password]
               properties:
                 email: { type: string, format: email }
+                password: { type: string, minLength: 8, maxLength: 256 }
       responses:
         "200":
-          description: Generic OK
+          description: Registered; returns tokens and user
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  ok: { type: boolean }
+                $ref: "#/components/schemas/AuthResponse"
+        "409":
+          description: Email already registered
+        "400":
+          description: Validation error
 
-  /auth/magic-link/consume:
+  /auth/login:
     post:
-      summary: Consume magic link token
+      summary: Login with email and password
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required: [token]
+              required: [email, password]
               properties:
-                token: { type: string }
+                email: { type: string, format: email }
+                password: { type: string }
       responses:
         "200":
-          description: Auth OK
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+        "400":
+          description: Validation error
+
+  /auth/refresh:
+    post:
+      summary: Refresh access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken: { type: string }
+      responses:
+        "200":
+          description: New tokens
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid or expired refresh token
+
+  /auth/logout:
+    post:
+      summary: Logout (revoke refresh token)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken: { type: string }
+      responses:
+        "200":
+          description: OK
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  accessToken: { type: string }
-                  user:
-                    type: object
-                    properties:
-                      id: { type: string }
-                      email: { type: string }
+                  ok: { type: boolean, enum: [true] }
 
   /crypto/wrapped-dek:
     get:
-      summary: Get wrapped DEK metadata
+      summary: Get wrapped DEK
       security: [{ bearerAuth: [] }]
       responses:
         "200":
@@ -79,6 +125,7 @@ paths:
             application/json:
               schema:
                 type: object
+                required: [kdf, wrappedDekB64]
                 properties:
                   kdf:
                     type: object
@@ -87,8 +134,10 @@ paths:
                       params: { type: object }
                       saltB64: { type: string }
                   wrappedDekB64: { type: string }
+        "404":
+          description: Wrapped DEK not found
     put:
-      summary: Store wrapped DEK metadata
+      summary: Store wrapped DEK
       security: [{ bearerAuth: [] }]
       requestBody:
         required: true
@@ -98,11 +147,23 @@ paths:
               type: object
               required: [kdf, wrappedDekB64]
               properties:
-                kdf: { type: object }
+                kdf:
+                  type: object
+                  required: [name, params, saltB64]
+                  properties:
+                    name: { type: string }
+                    params: { type: object }
+                    saltB64: { type: string }
                 wrappedDekB64: { type: string }
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: { type: boolean }
 
   /sync/pull:
     get:
@@ -114,7 +175,7 @@ paths:
           schema: { type: string }
         - in: query
           name: limit
-          schema: { type: integer, default: 200, maximum: 500 }
+          schema: { type: integer, default: 100, maximum: 500 }
       responses:
         "200":
           description: Records
@@ -143,6 +204,7 @@ paths:
               properties:
                 records:
                   type: array
+                  maxItems: 100
                   items:
                     $ref: "#/components/schemas/EncryptedRecordInput"
       responses:
@@ -172,11 +234,23 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
+    AuthResponse:
+      type: object
+      properties:
+        accessToken: { type: string }
+        refreshToken: { type: string }
+        expiresIn: { type: integer }
+        user:
+          type: object
+          properties:
+            id: { type: string }
+            email: { type: string }
+            createdAt: { type: string }
     EncryptedRecord:
       type: object
       properties:
         recordId: { type: string }
-        type: { type: string, enum: [prayer_request, journal_entry, tombstone] }
+        type: { type: string }
         version: { type: integer }
         encryptedPayloadB64: { type: string }
         clientUpdatedAt: { type: string }
@@ -187,7 +261,7 @@ components:
       required: [recordId, type, version, encryptedPayloadB64, clientUpdatedAt, deleted]
       properties:
         recordId: { type: string }
-        type: { type: string, enum: [prayer_request, journal_entry, tombstone] }
+        type: { type: string }
         version: { type: integer }
         encryptedPayloadB64: { type: string }
         clientUpdatedAt: { type: string }

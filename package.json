@@ -11,7 +11,10 @@
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "typecheck": "tsc --noEmit",
     "test": "echo 'No tests yet' && exit 0",
-    "build": "echo 'No build yet' && exit 0"
+    "build": "echo 'No build yet' && exit 0",
+    "api:lint": "pnpm --filter @pr4y/api lint",
+    "api:typecheck": "pnpm --filter @pr4y/api typecheck",
+    "mobile:buildDebug": "cd apps/mobile-android && ./gradlew assembleDebug"
   },
   "devDependencies": {
     "eslint": "^8.56.0",

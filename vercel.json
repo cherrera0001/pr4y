@@ -1,5 +1,5 @@
 {
   "buildCommand": "pnpm install --no-frozen-lockfile && pnpm --filter apps/web build",
   "outputDirectory": "apps/web/.next",
-  "ignoreCommand": "echo 'No ignore'"
+  "ignoreCommand": "exit 1"
 }

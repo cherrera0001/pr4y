@@ -7,47 +7,54 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  // url eliminado: ahora se configura en prisma.config.ts
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  createdAt DateTime @default(now())
-  sessions  Session[]
-  wrappedDek WrappedDek?
-  records   Record[]
+  id           String        @id @default(uuid())
+  email        String        @unique
+  passwordHash String        @map("password_hash")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  refreshTokens RefreshToken[]
+  wrappedDek   WrappedDek?
+  records      Record[]
+  @@map("users")
 }
 
-model Session {
-  id        String   @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  createdAt DateTime @default(now())
-  expiresAt DateTime
-  device    String?
+model RefreshToken {
+  id        String    @id @default(uuid())
+  userId    String    @map("user_id")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  revokedAt DateTime? @map("revoked_at")
+  @@index([userId])
+  @@index([tokenHash])
+  @@map("refresh_tokens")
 }
 
 model WrappedDek {
-  id        String   @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String   @unique
-  kdfName   String
-  kdfParams Json
-  saltB64   String
-  wrappedDekB64 String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(uuid())
+  userId        String   @unique @map("user_id")
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kdfName       String   @map("kdf_name")
+  kdfParams     Json     @map("kdf_params_json")
+  saltB64       String   @map("salt_b64")
+  wrappedDekB64 String   @map("wrapped_dek_b64")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  @@map("wrapped_dek")
 }
 
 model Record {
-  id        String   @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  type      String
-  version   Int
-  encryptedPayloadB64 String
-  clientUpdatedAt DateTime
-  serverUpdatedAt DateTime @updatedAt
-  deleted   Boolean @default(false)
+  id                  String   @id @default(uuid()) @map("record_id")
+  userId              String   @map("user_id")
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type                String
+  version             Int
+  encryptedPayloadB64 String   @map("encrypted_payload_b64")
+  clientUpdatedAt     DateTime @map("client_updated_at")
+  serverUpdatedAt     DateTime @updatedAt @map("server_updated_at")
+  deleted             Boolean  @default(false)
+  @@index([userId])
+  @@index([userId, clientUpdatedAt])
+  @@map("records")
 }

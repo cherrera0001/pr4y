@@ -1,4 +1,4 @@
 {
-  "build": { "command": "pnpm install --no-frozen-lockfile && pnpm --filter apps/api build" },
+  "build": { "command": "pnpm install --no-frozen-lockfile && pnpm --filter @pr4y/api build" },
   "start": { "command": "pnpm --filter apps/api start" }
 }
