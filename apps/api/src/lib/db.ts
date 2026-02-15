@@ -6,18 +6,13 @@ import { Pool } from 'pg';
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
 /**
- * URL de Postgres. Toma la variable de entorno DATABASE_URL (dinámica).
- * En Railway: Variables → DATABASE_URL = ${{Postgres.DATABASE_URL}} para referenciar el servicio Postgres.
- * La conexión real ocurre en el primer uso; el servidor hace un health check al arranque (prisma.$queryRaw)
- * y debe reportar en log cualquier fallo de conexión (no excepciones silenciosas).
+ * URL de Postgres. Solo se usa DATABASE_URL para evitar conexiones por endpoint público.
+ * En Railway: Variables del servicio API → DATABASE_URL = ${{Postgres.DATABASE_URL}}
+ * (referencia al servicio Postgres; Railway resuelve la URL por red privada interna, sin egress).
+ * No usar DATABASE_PUBLIC_URL ni RAILWAY_TCP_PROXY_DOMAIN: generan egress y latencia.
  */
 function getConnectionString(): string | undefined {
-  const raw =
-    process.env.DATABASE_URL ??
-    process.env.POSTGRES_PRIVATE_URL ??
-    process.env.DATABASE_PUBLIC_URL ??
-    process.env.POSTGRES_URL ??
-    process.env.DIRECT_URL;
+  const raw = process.env.DATABASE_URL;
   return typeof raw === 'string' && raw.trim().length > 0 ? raw.trim() : undefined;
 }
 
@@ -30,7 +25,7 @@ function createPrisma(): PrismaClient {
   if (!connectionString) {
     if (process.env.NODE_ENV === 'production') {
       throw new Error(
-        'PR4Y: Falta DATABASE_URL. En Railway → servicio @pr4y/api → Variables: crea una variable de nombre exacto "DATABASE_URL" y pega la URL de Postgres (o usa referencia al servicio Postgres).'
+        'PR4Y: Falta DATABASE_URL. En Railway → servicio API → Variables: DATABASE_URL = ${{Postgres.DATABASE_URL}} (red privada). No uses DATABASE_PUBLIC_URL.'
       );
     }
     throw new Error(

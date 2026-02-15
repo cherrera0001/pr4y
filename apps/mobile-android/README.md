@@ -56,6 +56,26 @@ No hay forma de integrar una “suite Android” completa dentro de Cursor: el e
    ```
    Sustituye la ruta por la que copiaste (usa `\\` en cada `\` o usa `/` en su lugar).
 
+### Google Sign-In ("No credentials available")
+
+Para que **Continuar con Google** funcione (Credential Manager) necesitas:
+
+1. **En `local.properties`** (mismo archivo que `sdk.dir`), añade la línea con el **Web Client ID** del proyecto de Google Cloud (el mismo que usa el backend y la web):
+   ```properties
+   GOOGLE_WEB_CLIENT_ID=TU_CLIENT_ID_WEB.apps.googleusercontent.com
+   ```
+   Sin esta variable la app mostrará un mensaje pidiendo configurarla.
+
+2. **En Google Cloud Console** (APIs & Services → Credentials):
+   - Crea o usa un **OAuth 2.0 Client ID** de tipo **Android**.
+   - **Package name**: `com.pr4y.app.dev` (flavor dev) y/o `com.pr4y.app` (prod).
+   - **SHA-1**: el de tu keystore de debug (o release). Para debug:  
+     `keytool -list -v -keystore %USERPROFILE%\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android`  
+     (Windows; en Mac/Linux usa `~/.android/debug.keystore`).
+   - El **Web Client ID** (tipo Web application) es el que pones en `GOOGLE_WEB_CLIENT_ID` y en el backend; el cliente Android debe estar en el mismo proyecto para que el sistema ofrezca credenciales.
+
+Si ves **NoCredentialException: No credentials available**: suele ser (a) `GOOGLE_WEB_CLIENT_ID` vacío o incorrecto, (b) la app Android no registrada con package + SHA-1 correctos, o (c) ninguna cuenta de Google en el dispositivo. Añade una cuenta en Ajustes y vuelve a intentar.
+
 ## Build
 
 El repo ya incluye el wrapper de Gradle (`gradlew`, `gradlew.bat`, `gradle/wrapper/gradle-wrapper.jar`). Desde la terminal:

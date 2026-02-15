@@ -1,6 +1,7 @@
 package com.pr4y.app.crypto
 
 import android.util.Base64
+import com.pr4y.app.util.Pr4yLog
 import java.security.SecureRandom
 import javax.crypto.Cipher
 import javax.crypto.SecretKey
@@ -16,6 +17,7 @@ object LocalCrypto {
     private const val GCM_IV_LENGTH = 12
 
     fun encrypt(plainBytes: ByteArray, key: SecretKey): String {
+        Pr4yLog.d("Cifrando contenido (E2EE)...")
         val iv = ByteArray(GCM_IV_LENGTH).also { SecureRandom().nextBytes(it) }
         val cipher = Cipher.getInstance("AES/GCM/NoPadding")
         cipher.init(Cipher.ENCRYPT_MODE, key, GCMParameterSpec(GCM_TAG_LENGTH, iv))
@@ -25,6 +27,7 @@ object LocalCrypto {
     }
 
     fun decrypt(encryptedB64: String, key: SecretKey): ByteArray {
+        Pr4yLog.d("Descifrando contenido (E2EE)...")
         val combined = Base64.decode(encryptedB64, Base64.NO_WRAP)
         val iv = combined.copyOfRange(0, GCM_IV_LENGTH)
         val cipherText = combined.copyOfRange(GCM_IV_LENGTH, combined.size)

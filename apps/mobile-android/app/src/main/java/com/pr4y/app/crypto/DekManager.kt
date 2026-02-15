@@ -16,12 +16,15 @@ import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.PBEKeySpec
 import javax.crypto.spec.SecretKeySpec
 import android.content.SharedPreferences
+import androidx.core.content.edit
+import com.pr4y.app.util.Pr4yLog
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 /**
  * Gestiona la DEK con anclaje al hardware (Android Keystore).
  * - Master Key: AES-256 en TEE/StrongBox (KeyGenParameterSpec), solo PURPOSE_ENCRYPT | PURPOSE_DECRYPT.
  * - DEK en memoria; persistida cifrada con la Master Key en EncryptedSharedPreferences.
- * - KEK derivada de passphrase (PBKDF2) para wrap/unwrap con el servidor.
  */
 object DekManager {
     private const val GCM_TAG_LENGTH = 128
@@ -39,15 +42,12 @@ object DekManager {
 
     private var dekPrefs: SharedPreferences? = null
 
-    /**
-     * Debe llamarse al arranque de la app (p. ej. MainActivity.onCreate) con applicationContext.
-     * Crea la Master Key en Android Keystore (si no existe) y el almacén cifrado para la DEK.
-     */
     @Synchronized
     fun init(context: Context) {
         if (dekPrefs != null) return
         val app = context.applicationContext
         try {
+            Pr4yLog.crypto("Inicializando almacén de llaves de hardware...")
             ensureMasterKeyExists()
             val masterKey = MasterKey.Builder(app)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
@@ -59,16 +59,17 @@ object DekManager {
                 EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
             )
+            Pr4yLog.crypto("Almacén cifrado listo.")
         } catch (e: Exception) {
-            e.printStackTrace()
-            // Si hay un error crítico al inicializar el almacén cifrado,
-            // podríamos necesitar limpiar para permitir un nuevo login.
+            Pr4yLog.e("Error crítico al inicializar Keystore", e)
         }
     }
 
     private fun ensureMasterKeyExists() {
         val keyStore = KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
         if (keyStore.containsAlias(KEYSTORE_ALIAS)) return
+        
+        Pr4yLog.crypto("Generando Master Key en TEE...")
         val spec = KeyGenParameterSpec.Builder(
             KEYSTORE_ALIAS,
             KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT,
@@ -105,9 +106,12 @@ object DekManager {
             cipher.init(Cipher.ENCRYPT_MODE, master, GCMParameterSpec(GCM_TAG_LENGTH, iv))
             val cipherText = cipher.doFinal(dekBytes)
             val combined = iv + cipherText
-            prefs.edit().putString(PREFS_KEY_WRAPPED_DEK, Base64.encodeToString(combined, Base64.NO_WRAP)).apply()
+            prefs.edit { 
+                putString(PREFS_KEY_WRAPPED_DEK, Base64.encodeToString(combined, Base64.NO_WRAP))
+            }
+            Pr4yLog.crypto("Llave de privacidad persistida en hardware.")
         } catch (e: Exception) {
-            e.printStackTrace()
+            Pr4yLog.e("Error al persistir DEK", e)
         }
     }
 
@@ -117,32 +121,40 @@ object DekManager {
         val prefs = dekPrefs ?: return false
         val wrappedB64 = prefs.getString(PREFS_KEY_WRAPPED_DEK, null) ?: return false
         val master = getMasterKey() ?: return false
+        
         return try {
+            Pr4yLog.crypto("Intentando recuperación silenciosa de la llave...")
             val combined = Base64.decode(wrappedB64, Base64.NO_WRAP)
             if (combined.size < GCM_IV_LENGTH) return false
             val iv = combined.copyOfRange(0, GCM_IV_LENGTH)
             val cipherText = combined.copyOfRange(GCM_IV_LENGTH, combined.size)
+            
             val cipher = Cipher.getInstance("AES/GCM/NoPadding")
             cipher.init(Cipher.DECRYPT_MODE, master, GCMParameterSpec(GCM_TAG_LENGTH, iv))
             val dekBytes = cipher.doFinal(cipherText)
             dek = SecretKeySpec(dekBytes, "AES")
+            
+            Pr4yLog.crypto("Llave recuperada con éxito desde Keystore.")
             true
-        } catch (e: KeyPermanentlyInvalidatedException) {
-            // Caso: El usuario cambió huella/PIN. La Master Key es inválida.
+        } catch (_: KeyPermanentlyInvalidatedException) {
+            Pr4yLog.w("La Master Key ha sido invalidada (cambio de biometría).")
             clearDek()
             false
         } catch (e: Exception) {
-            e.printStackTrace()
+            if (e.message?.contains("-28") == true) {
+                Pr4yLog.e("Keystore saturado (Error -28). El hardware de seguridad está ocupado.")
+            }
+            Pr4yLog.e("Fallo en recuperación silenciosa", e)
             false
         }
     }
 
     fun clearDek() {
         dek = null
-        dekPrefs?.edit()?.remove(PREFS_KEY_WRAPPED_DEK)?.apply()
-        // Opcional: Borrar Master Key si queremos forzar regeneración total
-        // val keyStore = KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
-        // keyStore.deleteEntry(KEYSTORE_ALIAS)
+        dekPrefs?.edit { 
+            remove(PREFS_KEY_WRAPPED_DEK)
+        }
+        Pr4yLog.crypto("Memoria criptográfica limpia.")
     }
 
     fun generateDek(): SecretKey = LocalCrypto.generateKey()

@@ -1,14 +1,11 @@
 package com.pr4y.app.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.pr4y.app.data.auth.AuthRepository
-import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.ui.screens.*
 
 @Composable
@@ -20,14 +17,13 @@ fun Pr4yNavHost(
     onLogout: () -> Unit,
     unlocked: Boolean,
     onUnlocked: () -> Unit,
+    hasSeenWelcome: Boolean,
+    onSetHasSeenWelcome: () -> Unit,
 ) {
-    val context = LocalContext.current
-    val tokenStore = remember { AuthTokenStore(context) }
-    
     val startDestination = when {
         !loggedIn -> Routes.LOGIN
         !unlocked -> Routes.UNLOCK
-        !tokenStore.hasSeenWelcome() -> Routes.WELCOME
+        !hasSeenWelcome -> Routes.WELCOME
         else -> Routes.MAIN
     }
 
@@ -51,7 +47,7 @@ fun Pr4yNavHost(
                 authRepository = authRepository,
                 onUnlocked = {
                     onUnlocked()
-                    val nextRoute = if (!tokenStore.hasSeenWelcome()) Routes.WELCOME else Routes.MAIN
+                    val nextRoute = if (!hasSeenWelcome) Routes.WELCOME else Routes.MAIN
                     navController.navigate(nextRoute) {
                         popUpTo(Routes.UNLOCK) { inclusive = true }
                     }
@@ -61,7 +57,7 @@ fun Pr4yNavHost(
         composable(Routes.WELCOME) {
             WelcomeScreen(
                 onStartClick = {
-                    tokenStore.setHasSeenWelcome(true)
+                    onSetHasSeenWelcome()
                     navController.navigate(Routes.MAIN) {
                         popUpTo(Routes.WELCOME) { inclusive = true }
                     }

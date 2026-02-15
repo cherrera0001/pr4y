@@ -12,12 +12,46 @@ datasource db {
 model User {
   id           String        @id @default(uuid())
   email        String        @unique
-  passwordHash String        @map("password_hash")
+  passwordHash String?       @map("password_hash") // null para usuarios OAuth (Google)
+  googleId     String?       @unique @map("google_id")
+  role         String        @default("user") // "user" | "admin" | "super_admin"
+  status       String        @default("active") // "active" | "banned"
+  lastLoginAt  DateTime?     @map("last_login_at")
   createdAt    DateTime      @default(now()) @map("created_at")
   refreshTokens RefreshToken[]
   wrappedDek   WrappedDek?
   records      Record[]
+  usageLogs    UsageLog[]
   @@map("users")
+}
+
+// Contenido global publicado por admin (oraciones, avisos, etc.) que la app muestra a los usuarios.
+model GlobalContent {
+  id        String   @id @default(uuid())
+  type      String   // p. ej. "prayer", "announcement"
+  title     String
+  body      String   @db.Text
+  published Boolean @default(false)
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  @@index([type, published])
+  @@map("global_content")
+}
+
+// Metadatos de uso: cuándo y cuánto sincroniza cada usuario (bytes), sin contenido. E2EE respetado.
+model UsageLog {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  day         DateTime @db.Date
+  bytesPushed BigInt   @default(0) @map("bytes_pushed")
+  bytesPulled BigInt   @default(0) @map("bytes_pulled")
+  pushCount   Int      @default(0) @map("push_count")
+  pullCount   Int      @default(0) @map("pull_count")
+  @@unique([userId, day])
+  @@index([day])
+  @@map("usage_logs")
 }
 
 model RefreshToken {

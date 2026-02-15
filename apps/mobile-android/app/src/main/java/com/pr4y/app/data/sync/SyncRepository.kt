@@ -14,6 +14,7 @@ import com.pr4y.app.data.remote.PushRecordDto
 import com.pr4y.app.data.remote.RetrofitClient
 import com.pr4y.app.data.remote.SyncRecordDto
 import com.pr4y.app.di.AppContainer
+import com.pr4y.app.util.Pr4yLog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -33,11 +34,13 @@ class SyncRepository(
     private val syncStateDao = db.syncStateDao()
 
     suspend fun sync(): SyncResult = withContext(Dispatchers.IO) {
+        Pr4yLog.i("Iniciando proceso de sincronización...")
         val bearer = authRepository.getBearer() ?: return@withContext SyncResult.Error("No autenticado")
         val dek = DekManager.getDek() ?: return@withContext SyncResult.Error("Llave de privacidad no disponible")
 
         try {
             // 0. Pull-before-push
+            Pr4yLog.d("Sync: Ejecutando Pull inicial...")
             pull(bearer, dek)
 
             // 1. Push outbox
@@ -45,6 +48,7 @@ class SyncRepository(
             var pushRound = 0
             val maxPushRounds = 2
             while (outbox.isNotEmpty() && pushRound < maxPushRounds) {
+                Pr4yLog.d("Sync: Ejecutando Push (Ronda ${pushRound + 1}). Elementos en outbox: ${outbox.size}")
                 val records = outbox.map { o ->
                     PushRecordDto(
                         recordId = o.recordId,
@@ -56,8 +60,14 @@ class SyncRepository(
                     )
                 }
                 val pushRes = api.push(bearer, PushBody(records))
-                if (!pushRes.isSuccessful) break
+                if (!pushRes.isSuccessful) {
+                    Pr4yLog.e("Sync: Push fallido con código ${pushRes.code()}")
+                    break
+                }
                 val pushBody = pushRes.body() ?: break
+                
+                Pr4yLog.i("Sync: Push exitoso. Aceptados: ${pushBody.accepted.size}, Rechazados: ${pushBody.rejected.size}")
+                
                 pushBody.accepted.forEach { recordId ->
                     outboxDao.deleteByRecordId(recordId)
                 }
@@ -65,6 +75,7 @@ class SyncRepository(
                 val rejected = pushBody.rejected
                 for (r in rejected) {
                     if (r.reason == "version conflict" && r.serverVersion != null) {
+                        Pr4yLog.w("Sync: Conflicto de versión en ${r.recordId}. Actualizando a serverVersion + 1 (${r.serverVersion + 1})")
                         val updated = outbox.find { it.recordId == r.recordId } ?: continue
                         outboxDao.insert(
                             OutboxEntity(
@@ -76,6 +87,8 @@ class SyncRepository(
                                 createdAt = updated.createdAt,
                             )
                         )
+                    } else {
+                        Pr4yLog.e("Sync: Registro ${r.recordId} rechazado por: ${r.reason}")
                     }
                 }
                 outbox = outboxDao.getAll()
@@ -83,11 +96,14 @@ class SyncRepository(
             }
 
             // 2. Pull final
+            Pr4yLog.d("Sync: Ejecutando Pull final...")
             pull(bearer, dek)
 
             persistLastSyncStatus("ok", null)
+            Pr4yLog.i("Sync: Sincronización finalizada correctamente.")
             SyncResult.Success
         } catch (e: Exception) {
+            Pr4yLog.e("Sync: Error crítico durante la sincronización", e)
             persistLastSyncStatus("error", System.currentTimeMillis())
             SyncResult.Error(e.message ?: "Error de red o seguridad")
         }
@@ -97,9 +113,13 @@ class SyncRepository(
         var cursor: String? = syncStateDao.get(SYNC_CURSOR_KEY)?.value
         do {
             val pullRes = api.pull(bearer, cursor, 100)
-            if (!pullRes.isSuccessful) break
+            if (!pullRes.isSuccessful) {
+                Pr4yLog.e("Sync: Pull fallido con código ${pullRes.code()}")
+                break
+            }
             val body = pullRes.body() ?: break
             if (body.records.isNotEmpty()) {
+                Pr4yLog.i("Sync: Pull recibió ${body.records.size} registros nuevos.")
                 db.runInTransaction {
                     runBlocking {
                         for (rec in body.records) {
@@ -129,6 +149,7 @@ class SyncRepository(
         val draft = JournalDraftStore.getDraft(context) ?: return@withContext false
         val dek = DekManager.getDek() ?: return@withContext false
         
+        Pr4yLog.i("Sync: Procesando borrador de diario pendiente...")
         try {
             val now = System.currentTimeMillis()
             val id = UUID.randomUUID().toString()
@@ -164,9 +185,10 @@ class SyncRepository(
                     JournalDraftStore.clearDraft(context)
                 }
             }
+            Pr4yLog.i("Sync: Borrador procesado y protegido con éxito.")
             true
         } catch (e: Exception) {
-            e.printStackTrace()
+            Pr4yLog.e("Sync: Error al procesar borrador", e)
             false
         }
     }
@@ -214,7 +236,7 @@ class SyncRepository(
                         ),
                     )
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    Pr4yLog.e("Sync: Error al descifrar registro remoto ${rec.recordId}", e)
                 }
             }
             TYPE_JOURNAL_ENTRY -> {

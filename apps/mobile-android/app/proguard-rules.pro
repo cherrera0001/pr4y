@@ -26,3 +26,7 @@
 
 # 6. Compose y Material3
 -keep class androidx.compose.** { *; }
+
+# 7. Reglas para Google Tink y EncryptedSharedPreferences
+-keep class com.google.crypto.tink.** { *; }
+-dontwarn com.google.crypto.tink.**

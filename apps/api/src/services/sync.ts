@@ -1,4 +1,5 @@
 import { prisma } from '../lib/db';
+import { recordSyncUsage } from './usage';
 
 const DEFAULT_LIMIT = 100;
 const MAX_LIMIT = 500;
@@ -40,6 +41,8 @@ export async function pull(userId: string, cursor: string | undefined, limit: nu
     deleted: r.deleted,
   }));
   const nextCursor = list.length > 0 ? list[list.length - 1].recordId : '';
+  const bytesPulled = list.reduce((sum, r) => sum + Buffer.byteLength(r.encryptedPayloadB64, 'utf8'), 0);
+  recordSyncUsage(userId, 'pull', bytesPulled, list.length).catch(() => {});
   return { nextCursor: hasMore ? nextCursor : '', records: list };
 }
 
@@ -127,6 +130,11 @@ export async function push(userId: string, records: PushRecordInput[]): Promise<
       rejected.push({ recordId: rec.recordId, reason: 'database error' });
     }
   }
+
+  const bytesPushed = input
+    .filter((_, i) => accepted.includes(input[i].recordId))
+    .reduce((sum, r) => sum + Buffer.byteLength(r.encryptedPayloadB64, 'utf8'), 0);
+  recordSyncUsage(userId, 'push', bytesPushed, accepted.length).catch(() => {});
 
   return { accepted, rejected, serverTime };
 }

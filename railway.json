@@ -1,4 +1,4 @@
 {
   "build": { "command": "pnpm install --no-frozen-lockfile && pnpm --filter @pr4y/api build" },
-  "start": { "command": "pnpm --filter @pr4y/api start" }
+  "start": { "command": "cd apps/api && npx prisma migrate deploy && node dist/server.js" }
 }

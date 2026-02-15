@@ -10,6 +10,7 @@ import retrofit2.http.Query
 
 data class RegisterBody(val email: String, val password: String)
 data class LoginBody(val email: String, val password: String)
+data class GoogleLoginBody(val idToken: String)
 data class RefreshBody(val refreshToken: String)
 data class AuthResponse(
     val accessToken: String,
@@ -59,38 +60,41 @@ data class RejectedDto(
 )
 
 interface ApiService {
-    @GET("v1/health")
+    @GET("health")
     suspend fun health(): Response<Map<String, String>>
 
-    @POST("v1/auth/register")
+    @POST("auth/register")
     suspend fun register(@Body body: RegisterBody): Response<AuthResponse>
 
-    @POST("v1/auth/login")
+    @POST("auth/login")
     suspend fun login(@Body body: LoginBody): Response<AuthResponse>
 
-    @POST("v1/auth/refresh")
+    @POST("auth/google")
+    suspend fun googleLogin(@Body body: GoogleLoginBody): Response<AuthResponse>
+
+    @POST("auth/refresh")
     suspend fun refresh(@Body body: RefreshBody): Response<AuthResponse>
 
-    @POST("v1/auth/logout")
+    @POST("auth/logout")
     suspend fun logout(@Body body: RefreshBody): Response<Map<String, Boolean>>
 
-    @GET("v1/crypto/wrapped-dek")
+    @GET("crypto/wrapped-dek")
     suspend fun getWrappedDek(@Header("Authorization") bearer: String): Response<WrappedDekResponse>
 
-    @PUT("v1/crypto/wrapped-dek")
+    @PUT("crypto/wrapped-dek")
     suspend fun putWrappedDek(
         @Header("Authorization") bearer: String,
         @Body body: WrappedDekBody,
     ): Response<Map<String, Boolean>>
 
-    @GET("v1/sync/pull")
+    @GET("sync/pull")
     suspend fun pull(
         @Header("Authorization") bearer: String,
         @Query("cursor") cursor: String?,
         @Query("limit") limit: Int?,
     ): Response<PullResponse>
 
-    @POST("v1/sync/push")
+    @POST("sync/push")
     suspend fun push(
         @Header("Authorization") bearer: String,
         @Body body: PushBody,

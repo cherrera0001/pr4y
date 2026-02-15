@@ -1,2 +1,3 @@
-    ./gradlew signingReport
-    
+#!/bin/bash
+cd ../../..
+./gradlew signingReport
