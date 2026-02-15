@@ -1,56 +1,120 @@
 package com.pr4y.app
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pr4y.app.crypto.DekManager
 import com.pr4y.app.data.auth.AuthRepository
 import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.data.remote.RetrofitClient
 import com.pr4y.app.ui.Pr4yNavHost
+import com.pr4y.app.ui.screens.ShimmerLoading
 import com.pr4y.app.ui.theme.Pr4yTheme
+import com.pr4y.app.util.Pr4yLog
 import com.pr4y.app.work.SyncScheduler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+class MainViewModel : ViewModel() {
+    var isReady by mutableStateOf(false)
+    var isUnlocked by mutableStateOf(false)
+    var loggedIn by mutableStateOf(false)
+    var authRepository by mutableStateOf<AuthRepository?>(null)
+    var hasSeenWelcome by mutableStateOf(false)
+
+    private var tokenStore: AuthTokenStore? = null
+
+    fun initBunker(context: android.content.Context) {
+        viewModelScope.launch(Dispatchers.IO) {
+            Pr4yLog.i("--- Iniciando Búnker PR4Y (Async) ---")
+            
+            // 1. Inicialización de hardware (Lento)
+            DekManager.init(context)
+            
+            val store = AuthTokenStore(context)
+            tokenStore = store
+            loggedIn = store.getAccessToken() != null
+            
+            if (loggedIn) {
+                isUnlocked = DekManager.tryRecoverDekSilently()
+                SyncScheduler.schedulePeriodic(context)
+            }
+            
+            // 2. API y AuthRepository en IO para no bloquear el main thread al mostrar la UI
+            val api = RetrofitClient.create(context, store)
+            authRepository = AuthRepository(api, store)
+            hasSeenWelcome = store.hasSeenWelcome()
+            
+            // 3. Limpieza de cache solo una vez por versión (evita lag; auditoría MIUI)
+            try {
+                val prefs = context.getSharedPreferences("pr4y_cache", android.content.Context.MODE_PRIVATE)
+                val lastClearedVersion = prefs.getString("last_cleared_version", "")
+                val currentVersion = BuildConfig.VERSION_NAME
+                if (lastClearedVersion != currentVersion) {
+                    context.cacheDir.deleteRecursively()
+                    prefs.edit().putString("last_cleared_version", currentVersion).apply()
+                }
+            } catch (_: Exception) {}
+
+            isReady = true
+            // #region agent log
+            Log.i("PR4Y_DEBUG", "initBunker done|isReady=true|hypothesisId=H5")
+            // #endregion
+        }
+    }
+
+    fun setHasSeenWelcome() {
+        tokenStore?.setHasSeenWelcome(true)
+        hasSeenWelcome = true
+    }
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val tokenStore = AuthTokenStore(applicationContext)
-        DekManager.init(applicationContext)
-        val api = RetrofitClient.create(applicationContext)
-        val authRepository = AuthRepository(api, tokenStore)
-        var loggedIn by mutableStateOf(tokenStore.getAccessToken() != null)
-        if (tokenStore.getAccessToken() != null) {
-            SyncScheduler.schedulePeriodic(applicationContext)
-        }
-        var unlocked by mutableStateOf(
-            loggedIn && DekManager.tryRecoverDekSilently()
-        )
-
+        // #region agent log
+        Log.i("PR4Y_DEBUG", "MainActivity.onCreate start|pkg=$packageName|hypothesisId=H5")
+        // #endregion
         setContent {
+            val vm: MainViewModel = viewModel()
+            
+            LaunchedEffect(Unit) {
+                delay(100) // Dejar dibujar el primer frame antes de tocar TEE/Keystore (auditoría MIUI)
+                vm.initBunker(applicationContext)
+            }
+
             Pr4yTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    Pr4yNavHost(
-                        authRepository = authRepository,
-                        loggedIn = loggedIn,
-                        onLoginSuccess = { loggedIn = true },
-                        onLogout = {
-                            DekManager.clearDek()
-                            loggedIn = false
-                            unlocked = false
-                        },
-                        unlocked = unlocked,
-                        onUnlocked = { unlocked = true },
-                    )
+                    when {
+                        !vm.isReady || vm.authRepository == null -> ShimmerLoading()
+                        else -> Pr4yNavHost(
+                            authRepository = vm.authRepository!!,
+                            loggedIn = vm.loggedIn,
+                            onLoginSuccess = { vm.loggedIn = true },
+                            onLogout = {
+                                DekManager.clearDek()
+                                vm.loggedIn = false
+                                vm.isUnlocked = false
+                            },
+                            unlocked = vm.isUnlocked,
+                            onUnlocked = { vm.isUnlocked = true },
+                            hasSeenWelcome = vm.hasSeenWelcome,
+                            onSetHasSeenWelcome = { vm.setHasSeenWelcome() },
+                        )
+                    }
                 }
             }
         }
