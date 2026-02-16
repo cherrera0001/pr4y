@@ -1,0 +1,540 @@
+﻿--------- beginning of main
+02-16 11:15:32.342 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:32.347 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+--------- beginning of system
+02-16 11:15:32.354 E/ExtM    ( 2645): can_flush_idle_pages:18610 flush_number_adjust: 12000
+02-16 11:15:32.406 E/vold    (28833): maxCpuFreq=2400000
+02-16 11:15:32.406 E/vold    (28833): maxCpuFreq=2400000
+02-16 11:15:32.745 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:32.746 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:32.845 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:32.846 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:32.848 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:32.850 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:32.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:32.942 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:32.943 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:32.944 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:33.042 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:33.043 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:33.049 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 11:15:33.143 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:33.627 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:33.628 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 11:15:33.628 E/HyperSentinel( 2645): -> audit event by proc 28649 "com.android.htmlviewer:remote": running threads amount, 0 -> 18
+02-16 11:15:34.145 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:34.150 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:34.246 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:34.247 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:34.250 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:34.277 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:34.277 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 11:15:34.277 E/HyperSentinel( 2645): -> audit event by proc 28765 "com.xiaomi.finddevice": running threads amount, 0 -> 28
+02-16 11:15:34.344 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:34.362 E/PreStartUtils( 4043): preLaunchProcess success infoPackage: com.pr4y.app.dev
+02-16 11:15:34.400 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.miui.home params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 11:15:34.402 E/Launcher.application( 4043): setClickAppWaitForCallback = true
+02-16 11:15:34.402 E/Launcher.application( 4043): setClickAppWaitForCallback = true
+02-16 11:15:34.403 E/Launcher( 4043): superStartActivity   type=13
+02-16 11:15:34.412 E/WindowManager( 2645): setClientVisible ActivityRecord{600c606 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity true
+02-16 11:15:34.416 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 11:15:34.416 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4225 hinttype=1 prio=3, clientpid=2645 packagename=com.pr4y.app.dev params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 11:15:34.417 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 11:15:34.417 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 11:15:34.417 E/ANDR-PERF-JNI( 2645): com_qualcomm_qtiperformance_native_perf_io_prefetch_start
+02-16 11:15:34.422 E/Zygote  (22823): process_name_ptr:22823 com.pr4y.app.dev
+02-16 11:15:34.422 E/Zygote  (22823): SetMemoryProtected process_name_ptr:22823 com.pr4y.app.dev
+02-16 11:15:34.423 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 11:15:34.427 E/ANDR-IOP( 1444): io prefetch is disabled
+02-16 11:15:34.430 E/WindowManager( 2645): setClientVisible ActivityRecord{600c606 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t105} true
+02-16 11:15:34.457 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 11:15:34.463 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:34.464 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 11:15:34.464 E/HyperSentinel( 2645): -> audit event by proc 22823 "usap64": RSS increasement, peak 8604kb -> 17880kb
+02-16 11:15:34.464 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:34.465 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 11:15:34.465 E/HyperSentinel( 2645): -> audit event by proc 22823 "usap64": RSS increasement, peak 17880kb -> 76716kb
+02-16 11:15:34.473 E/WindowManager( 2645): setClientVisible ActivityRecord{600c606 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t105} true
+02-16 11:15:34.475 E/ActivityManagerWrapper( 4043): get all recent tasks force including 105
+02-16 11:15:34.488 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 0
+02-16 11:15:34.489 E/onWindowDecorRectChanged( 4422): start size:1
+02-16 11:15:34.490 E/onWindowDecorRectChanged( 4422): windowDecorRect: Rect(535, 10 - 684, 128)
+02-16 11:15:34.491 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 11:15:34.491 E/ActivityManagerWrapper( 4043):  mainTaskId=105   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 11:15:34.491 E/ActivityManagerWrapper( 4043):  mainTaskId=104   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.VIEW flag=411041792 cmp=ComponentInfo{com.miui.securitycenter/com.miui.permcenter.install.AdbInstallActivity} }
+02-16 11:15:34.497 E/WindowTransitionCompat( 4043): startAnimation isFastLaunch = false
+02-16 11:15:34.498 E/WindowTransitionCompat( 4043): printLeash::index = 0, root = Surface(name=Transition Root #797: Task=105#10785)/@0x8591e04
+02-16 11:15:34.498 E/WindowTransitionCompat( 4043): 0, check isClosingType type = 1, mode = 1
+02-16 11:15:34.498 E/WindowTransitionCompat( 4043): 1, check isClosingType type = 2, mode = 4
+02-16 11:15:34.506 E/WindowAnimParamsProvider( 4043): getWindowTargetBounds    bounds=Rect(0, 0 - 1220, 2712)
+02-16 11:15:34.507 E/ClipAnimationHelper( 4043): updateSourceStack  mSourceInsets=Rect(0, 0 - 0, 0), mSourceStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 11:15:34.507 E/ClipAnimationHelper( 4043): updateHomeStack  mSourceInsets=Rect(0, 0 - 0, 0), mHomeStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 11:15:34.507 E/ClipAnimationHelper( 4043): updateTargetRect  mSourceRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mTargetRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mSourceWindowClipInsets=RectF(0.0, 0.0, 0.0, 0.0)   mHomeStackBounds=Rect(0, 0 - 1220, 2712)   targetRect=Rect(0, 0 - 1220, 2712)
+02-16 11:15:34.514 E/MultiSpringDynamicAnimationbfa9660( 4043): ERROR Not Found Bundle scaleY
+02-16 11:15:34.514 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 11:15:34.527 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 11:15:34.527 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 11:15:34.531 E/ANDR-PERF-RESOURCEQS( 1460): Failed to apply optimization [11, 8]
+02-16 11:15:34.544 E/ActivityManagerWrapper( 4043): get all recent tasks force including 105
+02-16 11:15:34.555 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 11:15:34.555 E/ActivityManagerWrapper( 4043):  mainTaskId=105   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 11:15:34.555 E/ActivityManagerWrapper( 4043):  mainTaskId=104   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.VIEW flag=411041792 cmp=ComponentInfo{com.miui.securitycenter/com.miui.permcenter.install.AdbInstallActivity} }
+02-16 11:15:34.611 E/Zygote  (28861): process_name_ptr:28861 com.xiaomi.glgm
+02-16 11:15:34.611 E/Zygote  (28861): SetMemoryProtected process_name_ptr:28861 com.xiaomi.glgm
+02-16 11:15:34.640 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:34.878 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:34.878 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 11:15:34.878 E/HyperSentinel( 2645): -> audit event by proc 22823 "usap64": running threads amount, 0 -> 12
+02-16 11:15:34.880 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 11:15:34.921 E/JobScheduler( 2645): ResourceBudgetManagerInternal is null
+02-16 11:15:34.928 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:34.928 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 11:15:34.928 E/HyperSentinel( 2645): -> audit event by proc 22823 "usap64": RSS increasement, peak 76716kb -> 115920kb
+02-16 11:15:34.940 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:34.977 E/Zygote  (28902): process_name_ptr:28902 com.whatsapp
+02-16 11:15:34.978 E/Zygote  (28902): SetMemoryProtected process_name_ptr:28902 com.whatsapp
+02-16 11:15:35.088 E/AppVersionCheckHelper(28861): PassportLog@A2^6C[Y2hlY2tBcHBWZXJzaW9uPj4+Y2FjaGVBcHBWZXJzaW9uPTIwMjYwMTI2MDEgIGN1ckFwcFZlcnNpb249MjAyNjAxMjYwMQ==]
+02-16 11:15:35.089 E/XiaomiAccountManager(28861): PassportLog@A2^6C[c2V0dXAgdHJ1ZQ==]
+02-16 11:15:35.113 E/XiaomiAccountManager(28861): PassportLog@A2^6C[Y2FsbGVyIHNpZ25hdHVyZSA9IEFwcFNpZ25hdHVyZUhhc2h7c2hhMT0nN0I2REM3MDc5QzM0NzM5Q0U4MTE1OTcxOUZCNUVCNjFEMkEwMzIyNScsIG1kNT0nNzAxNDc4QTFFM0I0QjdFMzk3OEVBNjk0Njk0MTBGMTMnfQ==]
+02-16 11:15:35.113 E/XiaomiAccountManager(28861): PassportLog@A2^6C[c3lzIGFjY291bnQgc2lnbmF0dXJlID0gQXBwU2lnbmF0dXJlSGFzaHtzaGExPSc3QjZEQzcwNzlDMzQ3MzlDRTgxMTU5NzE5RkI1RUI2MUQyQTAzMjI1JywgbWQ1PSc3MDE0NzhBMUUzQjRCN0UzOTc4RUE2OTQ2OTQxMEYxMyd9]
+02-16 11:15:35.117 E/XiaomiAccountManager(28861): PassportLog@A2^6C[aGFzIHN5c3RlbSBhY2NvdW50IGFwcCBhbmQgY3VycmVudCBjb20ueGlhb21pLmdsZ20gaGFzIHNhbWUgc2lnbmF0dXJl]
+02-16 11:15:35.123 E/AccountLoginUploader(28861): PassportLog@A2^6C[cmV0cnlMb2NhbFVwbG9hZD4+PmtleVNldD1bXQ==]
+02-16 11:15:35.146 E/SecureDataManager(28861): PassportLog@A2^6C[Z2V0IGtleSBudWxsPyBmYWxzZQ==]
+02-16 11:15:35.146 E/SecureDataManager(28861): PassportLog@A2^6C[aW5pdEV4aXN0aW5nS2V5I2luaXQgZXhpc3Rpbmcga2V5IGNvc3QgMTQgbXM=]
+02-16 11:15:35.146 E/SecureDataManager(28861): PassportLog@A2^6C[YWxyZWFkeSBnZW5lcmF0ZSBrZXk=]
+02-16 11:15:35.231 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:35.231 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 11:15:35.231 E/HyperSentinel( 2645): -> audit event by proc 22823 "usap64": RSS increasement, peak 115920kb -> 173928kb
+02-16 11:15:35.232 E/MiuiSentinelMemoryManager( 2645): getRSSinfo: usap64#22823
+02-16 11:15:35.235 E/ExtM    ( 2645): can_flush_idle_pages:18595 flush_number_adjust: 12000
+02-16 11:15:35.240 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:35.281 E/WindowTransitionCompat( 4043): com.android.systemui.shared.recents.system.WindowTransitionCompat@a512493 finishTransition toHome = false
+02-16 11:15:35.290 E/WindowManager( 2645): setClientVisible ActivityRecord{659c16e u0 com.miui.home/.launcher.Launcher t2} false
+02-16 11:15:35.291 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 11:15:35.292 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 11:15:35.292 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 11:15:35.307 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 11:15:35.307 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 11:15:35.314 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 11:15:35.314 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 11:15:35.314 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 11:15:35.317 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 11:15:35.317 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 11:15:35.326 E/ActivityManagerWrapper( 4043): get all recent tasks force including 105
+02-16 11:15:35.330 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 11:15:35.330 E/ActivityManagerWrapper( 4043):  mainTaskId=105   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 11:15:35.330 E/ActivityManagerWrapper( 4043):  mainTaskId=104   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.VIEW flag=411041792 cmp=ComponentInfo{com.miui.securitycenter/com.miui.permcenter.install.AdbInstallActivity} }
+02-16 11:15:35.330 E/vold    (28949): maxCpuFreq=2400000
+02-16 11:15:35.331 E/vold    (28949): maxCpuFreq=2400000
+02-16 11:15:35.522 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 11:15:35.525 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 11:15:35.525 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 11:15:35.543 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:35.572 I/PR4Y_DEBUG(22823): Pr4yApp.onCreate|pkg=com.pr4y.app.dev|pid=22823|uid=10315|userId=0|hypothesisId=H1,H5
+02-16 11:15:35.581 E/JobScheduler( 2645): ResourceBudgetManagerInternal is null
+02-16 11:15:35.598 E/BluetoothAdapterService( 5593): getActiveDevices: LeAudioService is null
+02-16 11:15:35.633 I/PR4Y_DEBUG(22823): MainActivity.onCreate start|pkg=com.pr4y.app.dev|hypothesisId=H5
+02-16 11:15:35.717 E/msys    (28902): E[N WCIHTTPImplNetworkSession]WCIHTTPTaskImplCreateRegular(556)=>[I] http/task/regular/create/start
+02-16 11:15:35.717 E/msys    (28902): E[N WCIHTTPImplNetworkSession]WCIHTTPTaskImplCreateRegular(591)=>[I] http/task/regular/create/execute
+02-16 11:15:35.719 E/msys    (28902): E[N WCIHTTPImplNetworkSession]WCIHTTPTaskImplCreateRegular(614)=>[I] http/task/regular/create/success
+02-16 11:15:35.720 E/FramePredict(22823): registerContentObserver fail
+02-16 11:15:35.751 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:35.751 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 11:15:35.751 E/HyperSentinel( 2645): -> audit event by proc 22823 "usap64": running threads amount, 12 -> 23
+02-16 11:15:35.782 E/com.whatsapp(28902): hiddenapi: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setUseSessionTickets(Z)V (runtime_flags=CorePlatformApi, domain=core-platform, api=max-target-q,core-platform-api) from LX/Dsg; (domain=app, TargetSdkVersion=35) using reflection: denied
+02-16 11:15:35.783 E/com.whatsapp(28902): hiddenapi: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setUseSessionTickets(Z)V (runtime_flags=0, domain=core-platform, api=max-target-q) from LX/Dsg; (domain=app, TargetSdkVersion=35) using reflection: denied
+02-16 11:15:35.840 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:36.019 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:36.019 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 11:15:36.019 E/HyperSentinel( 2645): -> audit event by proc 22823 "usap64": RSS increasement, peak 173928kb -> 261492kb
+02-16 11:15:36.019 E/MiuiSentinelMemoryManager( 2645): getRSSinfo: usap64#22823
+02-16 11:15:36.021 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.021 E/msys    (28902): E[ADNSUCTIMH WAJMNSRuntime]WAJContextInitMNSRuntime(427)=>[LogLevel:I] Secondary DNS resolver enabled
+02-16 11:15:36.026 E/msys    (28902): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:36.030 E/msys    (28902): E[ADNSUCTIMH WAJMNSDNSResolver]_MNSDNSResolutionSuccess(35)=>[LogLevel:I] DNS Resolution Successful with 1 IPs, Persistent Cache Hit: 1, secondary resolver used: 0
+02-16 11:15:36.031 E/msys    (28902): E[ADNSUCTIMH WAJMNSDNSResolver]_MNSDNSResolutionSuccess(55)=>[LogLevel:I] Resolved IP Address: 57.144.247.33
+02-16 11:15:36.065 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 11:15:36.073 E/msys    (28902): E[N mns]_OnSystemDNSSuccessCallback(340)=>Cache refresh succeeded with system DNS resolver. IP count: 1
+02-16 11:15:36.078 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 11:15:36.088 E/msys    (28902): E[N WCIHTTPImplNetworkSession]WCIHTTPTaskImplCreateRegular(556)=>[I] http/task/regular/create/start
+02-16 11:15:36.088 E/msys    (28902): E[N WCIHTTPImplNetworkSession]WCIHTTPTaskImplCreateRegular(591)=>[I] http/task/regular/create/execute
+02-16 11:15:36.089 E/msys    (28902): E[N WCIHTTPImplNetworkSession]WCIHTTPTaskImplCreateRegular(614)=>[I] http/task/regular/create/success
+02-16 11:15:36.094 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.098 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.114 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.120 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.130 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.138 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.140 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:36.142 I/PR4Y_APP(22823): --- Iniciando B├║nker PR4Y (Async) ---
+02-16 11:15:36.145 I/PR4Y_CRYPTO(22823): Inicializando almac├⌐n de llaves de hardware...
+02-16 11:15:36.148 I/PR4Y_CRYPTO(22823): Generando Master Key en TEE...
+02-16 11:15:36.150 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.150 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.150 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.151 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.156 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.163 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.166 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 11:15:36.173 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.177 E/QC-time-services(  867): Receive Passed == base = 13, unit = 1, operation = 2, result = 0
+02-16 11:15:36.177 E/QC-time-services( 1210): Daemon: Time-services: Waiting to acceptconnection
+02-16 11:15:36.180 E/QC-time-services( 1210): Daemon: Time-services: Waiting to acceptconnection
+02-16 11:15:36.180 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.182 E/ActivityManagerWrapper( 4043): get all recent tasks force including 105
+02-16 11:15:36.184 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 11:15:36.184 E/ActivityManagerWrapper( 4043):  mainTaskId=105   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 11:15:36.190 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.195 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.204 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.212 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.216 E/QC-time-services(  867): Receive Passed == base = 13, unit = 1, operation = 2, result = 0
+02-16 11:15:36.217 E/QC-time-services( 1210): Daemon: Time-services: Waiting to acceptconnection
+02-16 11:15:36.218 E/QC-time-services( 1210): Daemon: Time-services: Waiting to acceptconnection
+02-16 11:15:36.221 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.229 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.240 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.245 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.257 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.264 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.274 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.284 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.293 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.302 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.311 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.319 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.329 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.338 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.348 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.357 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.365 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.372 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.380 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.388 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.388 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.388 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.390 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.398 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.407 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.410 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.411 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.411 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.414 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.423 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.431 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.435 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.435 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.435 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.438 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.440 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:36.448 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.451 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.452 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.452 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.454 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.466 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.472 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.481 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.489 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.495 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.496 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.496 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.496 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.503 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.512 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.512 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.512 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.512 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.516 E/JobScheduler( 2645): ResourceBudgetManagerInternal is null
+02-16 11:15:36.520 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.528 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.532 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.532 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.532 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.536 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.544 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.547 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.547 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.547 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.552 I/PR4Y_CRYPTO(22823): Almac├⌐n cifrado listo.
+02-16 11:15:36.553 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.561 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.572 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.581 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.581 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.581 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.581 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.587 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.591 E/RoleControllerServiceImpl( 2645): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION, user: 0
+02-16 11:15:36.595 E/RegisteredServicesCache( 7440): Skipping application component ComponentInfo{com.cl.srcei.iddigital/com.idemia.android.iso18013.engagement.nfc.HceTagService}: it must request the permission android.permission.NFC
+02-16 11:15:36.597 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.602 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.602 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.602 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.607 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.608 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 11:15:36.609 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 11:15:36.609 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 11:15:36.609 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-16 11:15:36.615 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.623 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.624 E/SmsApplication( 4394): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
+02-16 11:15:36.626 E/AidRoutingManager( 7440): Size of routing table970
+02-16 11:15:36.629 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.629 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.629 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.630 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.638 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.648 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.648 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.648 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.648 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.650 E/RoleControllerServiceImpl( 2645): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.devicelockcontroller, role: android.app.role.SYSTEM_FINANCED_DEVICE_CONTROLLER, user: 0
+02-16 11:15:36.656 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.661 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.669 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.670 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.671 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.671 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.678 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.684 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.684 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.684 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.687 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.694 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.699 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.699 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.699 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.702 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.711 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.712 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:36.712 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:36.712 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:36.720 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.729 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.737 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.740 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:36.744 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.754 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.762 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.763 I/PR4Y_DEBUG(22823): initBunker done|isReady=true|hypothesisId=H5
+02-16 11:15:36.843 I/PR4Y_APP(22823): LoginScreen Cargada - Versi├│n App: 1.2.4
+02-16 11:15:36.843 I/PR4Y_APP(22823): Login: BuildConfig cargado | GOOGLE_WEB_CLIENT_ID=72 chars | GOOGLE_ANDROID_CLIENT_ID=72 chars
+02-16 11:15:36.843 I/PR4Y_APP(22823): Login: usando serverClientId desde BuildConfig (WEB)
+02-16 11:15:36.854 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.949 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:36.959 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.005 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.006 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.018 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.019 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.027 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.036 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.044 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.052 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.061 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.069 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.078 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.086 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.094 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.103 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.110 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.119 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.128 E/LB      (22823): fail to open node: No such file or directory
+02-16 11:15:37.140 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:37.441 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:37.474 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:37.481 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:37.483 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:37.489 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:37.553 E/ExtM    ( 2645): can_flush_idle_pages:18594 flush_number_adjust: 12000
+02-16 11:15:37.606 E/vold    (29060): maxCpuFreq=2400000
+02-16 11:15:37.607 E/vold    (29060): maxCpuFreq=2400000
+02-16 11:15:37.841 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:38.040 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:38.208 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:38.214 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:38.218 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 11:15:38.241 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:38.313 I/PR4Y_APP(22823): Login: iniciando Credential Manager | serverClientId length=72
+02-16 11:15:38.313 I/PR4Y_APP(22823): Hypothesis Check: Using ID type=WEB
+02-16 11:15:38.323 E/JobScheduler( 2645): ResourceBudgetManagerInternal is null
+02-16 11:15:38.324 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:38.324 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 11:15:38.324 E/HyperSentinel( 2645): -> audit event by proc 28902 "com.whatsapp": running threads amount, 0 -> 93
+02-16 11:15:38.330 E/JobScheduler( 2645): ResourceBudgetManagerInternal is null
+02-16 11:15:38.341 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:38.417 E/msys    (28902): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:38.417 E/msys    (28902): E[ADNSUCTIMH WAJMNSDNSResolver]_MNSDNSResolutionSuccess(35)=>[LogLevel:I] DNS Resolution Successful with 4 IPs, Persistent Cache Hit: 1, secondary resolver used: 0
+02-16 11:15:38.417 E/msys    (28902): E[ADNSUCTIMH WAJMNSDNSResolver]_MNSDNSResolutionSuccess(55)=>[LogLevel:I] Resolved IP Address: 162.159.200.123
+02-16 11:15:38.418 E/msys    (28902): E[ADNSUCTIMH WAJMNSDNSResolver]_MNSDNSResolutionSuccess(55)=>[LogLevel:I] Resolved IP Address: 170.155.148.1
+02-16 11:15:38.418 E/msys    (28902): E[ADNSUCTIMH WAJMNSDNSResolver]_MNSDNSResolutionSuccess(55)=>[LogLevel:I] Resolved IP Address: 162.159.200.1
+02-16 11:15:38.418 E/msys    (28902): E[ADNSUCTIMH WAJMNSDNSResolver]_MNSDNSResolutionSuccess(55)=>[LogLevel:I] Resolved IP Address: 168.96.251.195
+02-16 11:15:38.460 E/msys    (28902): E[N mns]_OnSystemDNSSuccessCallback(340)=>Cache refresh succeeded with system DNS resolver. IP count: 2
+02-16 11:15:38.520 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:38.526 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:38.575 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:38.575 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:38.575 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:38.595 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:38.595 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:38.595 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:38.618 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:38.618 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:38.618 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:38.641 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:38.661 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:38.661 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:38.661 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): Google Auth: NoCredentialException | msg=No credentials available | cause=null
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): androidx.credentials.exceptions.NoCredentialException: No credentials available
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at androidx.credentials.CredentialProviderFrameworkImpl.convertToJetpackGetException$credentials_release(CredentialProviderFrameworkImpl.kt:308)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at androidx.credentials.CredentialProviderFrameworkImpl$onGetCredential$outcome$2.onError(CredentialProviderFrameworkImpl.kt:172)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at androidx.credentials.CredentialProviderFrameworkImpl$onGetCredential$outcome$2.onError(CredentialProviderFrameworkImpl.kt:160)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at android.credentials.CredentialManager$GetCredentialTransport.lambda$onError$2(CredentialManager.java:820)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at android.credentials.CredentialManager$GetCredentialTransport.$r8$lambda$_rg2Q59c21DJrPoh5aAnwNR78wQ(Unknown Source:0)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at android.credentials.CredentialManager$GetCredentialTransport$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at androidx.biometric.auth.Class2BiometricAuthExtensionsKt$$ExternalSyntheticLambda0.execute(D8$$SyntheticClass:0)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at android.credentials.CredentialManager$GetCredentialTransport.onError(CredentialManager.java:819)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at android.credentials.IGetCredentialCallback$Stub.onTransact(IGetCredentialCallback.java:121)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at android.os.Binder.execTransactInternal(Binder.java:1512)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): 	at android.os.Binder.execTransact(Binder.java:1451)
+02-16 11:15:38.677 E/PR4Y_ERROR(22823): MIUI Debug: NoCredentialException | serverClientId has valid suffix (.apps.googleusercontent.com)=true | length=72
+02-16 11:15:38.886 E/ShortcutService( 2645): Invalid icon type in shortcut 143975927312593@lid. Bitmaps are not allowed in long-lived shortcuts. Use Resource icons, or Uri-based icons instead.
+02-16 11:15:38.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:39.078 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 11:15:39.151 E/ShortcutService( 2645): Invalid icon type in shortcut 143975927312593@lid. Bitmaps are not allowed in long-lived shortcuts. Use Resource icons, or Uri-based icons instead.
+02-16 11:15:39.242 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:39.447 E/ActivityThread( 4043): Failed to find provider info for com.miui.personalassistant.servicedeliver.system.provider
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): isSupportServiceDelivery
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): java.lang.IllegalArgumentException: Unknown authority com.miui.personalassistant.servicedeliver.system.provider
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at android.content.ContentResolver.call(ContentResolver.java:2466)
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at android.content.ContentResolver.call(ContentResolver.java:2449)
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryUtils.isSupportServiceDelivery(ServiceDeliveryUtils.kt:28)
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper.lambda$tryReplaceToServiceDelivery$1(ServiceDeliveryReplaceHelper.java:67)
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper.$r8$lambda$WUWmthv-UjITX40FJ8ag1YKl6O8(Unknown Source:0)
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper$$ExternalSyntheticLambda1.run(Unknown Source:2)
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:520)
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.FutureTask.run(FutureTask.java:317)
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1154)
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:652)
+02-16 11:15:39.448 E/ServiceDeliveryCompat( 4043): 	at java.lang.Thread.run(Thread.java:1563)
+02-16 11:15:39.532 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:39.541 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:39.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:39.844 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:40.141 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:40.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:40.571 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:40.571 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 11:15:40.572 E/HyperSentinel( 2645): -> audit event by proc 28861 "com.xiaomi.glgm": running threads amount, 0 -> 31
+02-16 11:15:40.743 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:41.023 E/om.pr4y.app.dev(22823): FrameInsert open fail: No such file or directory
+02-16 11:15:41.042 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:41.341 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:41.741 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:41.946 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 11:15:41.948 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 11:15:41.948 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 11:15:41.948 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-16 11:15:42.042 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:42.097 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 11:15:42.342 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:42.641 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:42.844 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=48763677915869 data 5.000000
+02-16 11:15:42.882 E/SLM-HAL-SladSocketClient( 1491): connect failed:-1, socket:32, error:No such file or directory
+02-16 11:15:42.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:43.241 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:43.541 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:43.843 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:43.887 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=48764721059619 data 0.000000
+02-16 11:15:43.943 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:44.468 E/vendor.xiaomi.hardware.micharge@1.0-service( 1507): Failed to open node /sys/class/qcom-battery/reverse_chg_mode
+02-16 11:15:44.691 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:44.698 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:44.698 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:44.700 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:44.807 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=48765640717588 data 1.000000
+02-16 11:15:44.945 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:45.015 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 11:15:45.119 I/PR4Y_APP(22823): Login: iniciando Credential Manager | serverClientId length=72
+02-16 11:15:45.119 I/PR4Y_APP(22823): Hypothesis Check: Using ID type=WEB
+02-16 11:15:45.120 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 11:15:45.180 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 11:15:45.180 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 11:15:45.180 E/HyperSentinel( 2645): -> audit event by proc 28685 "com.android.settings": RSS increasement, peak 0kb -> 181928kb
+02-16 11:15:45.241 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:45.300 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:45.300 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:45.300 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:45.319 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:45.319 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:45.319 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): Google Auth: NoCredentialException | msg=No credentials available | cause=null
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): androidx.credentials.exceptions.NoCredentialException: No credentials available
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at androidx.credentials.CredentialProviderFrameworkImpl.convertToJetpackGetException$credentials_release(CredentialProviderFrameworkImpl.kt:308)
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at androidx.credentials.CredentialProviderFrameworkImpl$onGetCredential$outcome$2.onError(CredentialProviderFrameworkImpl.kt:172)
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at androidx.credentials.CredentialProviderFrameworkImpl$onGetCredential$outcome$2.onError(CredentialProviderFrameworkImpl.kt:160)
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at android.credentials.CredentialManager$GetCredentialTransport.lambda$onError$2(CredentialManager.java:820)
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at android.credentials.CredentialManager$GetCredentialTransport.$r8$lambda$_rg2Q59c21DJrPoh5aAnwNR78wQ(Unknown Source:0)
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at android.credentials.CredentialManager$GetCredentialTransport$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at androidx.biometric.auth.Class2BiometricAuthExtensionsKt$$ExternalSyntheticLambda0.execute(D8$$SyntheticClass:0)
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at android.credentials.CredentialManager$GetCredentialTransport.onError(CredentialManager.java:819)
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at android.credentials.IGetCredentialCallback$Stub.onTransact(IGetCredentialCallback.java:121)
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at android.os.Binder.execTransactInternal(Binder.java:1512)
+02-16 11:15:45.322 E/PR4Y_ERROR(22823): 	at android.os.Binder.execTransact(Binder.java:1451)
+02-16 11:15:45.323 E/PR4Y_ERROR(22823): MIUI Debug: NoCredentialException | serverClientId has valid suffix (.apps.googleusercontent.com)=true | length=72
+02-16 11:15:45.336 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:45.336 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:45.336 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:45.354 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 11:15:45.354 E/KeyMasterHalDevice(  866): abort_operation
+02-16 11:15:45.354 E/KeyMasterHalDevice(  866): ret: -28
+02-16 11:15:45.355 E/QcRilRequest( 4309): [2499] < OEM_HOOK_RAW error: org.codeaurora.telephony.utils.CommandException: GENERIC_FAILURE
+02-16 11:15:45.364 E/QcRilRequest( 4309): [2500] < OEM_HOOK_RAW error: org.codeaurora.telephony.utils.CommandException: GENERIC_FAILURE
+02-16 11:15:45.543 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:45.664 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:45.677 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:45.808 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=48766642105244 data 0.000000
+02-16 11:15:45.843 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:46.143 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:46.258 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:46.271 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:46.443 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:46.743 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:46.924 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:46.935 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:47.042 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:47.342 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:47.642 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:47.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:48.147 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 11:15:48.242 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:48.368 E/QcRilRequest( 4309): [2501] < OEM_HOOK_RAW error: org.codeaurora.telephony.utils.CommandException: GENERIC_FAILURE
+02-16 11:15:48.379 E/QcRilRequest( 4309): [2502] < OEM_HOOK_RAW error: org.codeaurora.telephony.utils.CommandException: GENERIC_FAILURE
+02-16 11:15:48.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:48.842 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:49.143 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:49.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:49.741 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:49.813 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=48770647639775 data 5.000000
+02-16 11:15:50.042 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:50.443 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:50.642 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:50.817 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=48771649648838 data 0.000000
+02-16 11:15:51.172 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 11:15:51.636 E/RescueSpaceMonitor(  923): [DeleteDirectoryFiles] Can't open the dir /data/miuilog/stability/nativecrash/coredump/ (No such file or directory)
+02-16 11:15:51.636 E/RescueSpaceMonitor(  923): Unable to open directory /mnt/rescue/dumpstateTemporary/: No such file or directory
+02-16 11:15:51.636 E/RescueSpaceMonitor(  923): Unable to open directory /mnt/rescue/misight/: No such file or directory
+02-16 11:15:51.642 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 11:15:51.717 E/RescueSpaceMonitor(  923): Write /mnt/rescue//mqsas/rescue_info.log failed! No space left on device
+02-16 11:15:51.718 E/RescueSpaceMonitor(  923): Level 3: Wirte rescue partition file info to /mqsas/rescue_info.log failed!
+02-16 11:15:51.817 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=48772650400921 data 5.000000
+02-16 11:15:51.905 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:51.917 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:51.917 E/msys    (21675): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 11:15:51.920 E/msys    (21675): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 11:15:51.956 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 11:15:51.957 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 11:15:51.957 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 11:15:51.958 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche

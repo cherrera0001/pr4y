@@ -5,11 +5,9 @@
 #    Ejemplo: sdk.dir=C\:\\Users\\TU_USUARIO\\AppData\\Local\\Android\\Sdk
 sdk.dir=TU_RUTA_AL_SDK
 #
-# 2) Google Sign-In: hay 2 Client IDs distintos (no confundir).
+# 2) Google Sign-In (app Android): la app usa SOLO el cliente ANDROID (no el Web).
+#    Google Cloud > Credentials > OAuth 2.0 > tipo "Android" (package com.pr4y.app.dev + SHA-1).
+#    Si no lo pones aquí, la app intentará obtenerlo desde GET /v1/config (backend debe tener GOOGLE_ANDROID_CLIENT_ID en Railway).
+GOOGLE_ANDROID_CLIENT_ID=TU_ANDROID_CLIENT_ID.apps.googleusercontent.com
 #
-#    1) Cliente WEB (obligatorio): para la version web y el backend. En Android se usa como serverClientId.
-#       Mismo valor que en Railway/Vercel. Google Cloud > Credentials > OAuth 2.0 > tipo "Web application".
-GOOGLE_WEB_CLIENT_ID=TU_WEB_CLIENT_ID.apps.googleusercontent.com
-#
-#    2) Cliente ANDROID: solo para la app Android. Google Cloud > Credentials > OAuth 2.0 > tipo "Android" (package + SHA-1).
-# GOOGLE_ANDROID_CLIENT_ID=TU_ANDROID_CLIENT_ID.apps.googleusercontent.com
+# (GOOGLE_WEB_CLIENT_ID es solo para la versión web en Vercel; la app Android no lo usa.)

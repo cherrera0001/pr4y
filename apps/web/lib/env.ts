@@ -9,7 +9,7 @@ export function getApiBaseUrl(): string {
   return (typeof url === 'string' ? url.trim() : '').replace(/\/$/, '') || '';
 }
 
-/** Client ID de Google OAuth Web para el frontend (mismo valor que GOOGLE_WEB_CLIENT_ID del backend). */
+/** Cliente Web: solo para la versión web (Sign in with Google en /admin). No usar el de Android aquí. */
 export function getGoogleWebClientId(): string {
   const id = process.env.NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID;
   return typeof id === 'string' ? id.trim() : '';

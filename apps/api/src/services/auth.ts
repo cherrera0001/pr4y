@@ -4,14 +4,14 @@ import { OAuth2Client } from 'google-auth-library';
 import { prisma } from '../lib/db';
 
 /**
- * OAuth2 / OIDC: el backend SOLO valida id_tokens cuyo audience sea el Web Client ID.
- * GOOGLE_ANDROID_CLIENT_ID (Railway) no se usa aquí: la app Android debe enviar tokens
- * obtenidos con serverClientId = GOOGLE_WEB_CLIENT_ID para que el audience sea el Web.
- * Aceptar tokens con audience Android en el servidor rompería la arquitectura SaaS.
+ * OAuth2 / OIDC: el backend acepta id_tokens con audience Web (desde la web) o Android (desde la app).
+ * - Web: consume GOOGLE_WEB_CLIENT_ID (NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID en Vercel).
+ * - Android: consume GOOGLE_ANDROID_CLIENT_ID (la app usa ese como serverClientId).
  */
-function getValidationAudienceWebClientId(): string {
-  const id = process.env.GOOGLE_WEB_CLIENT_ID;
-  return typeof id === 'string' ? id.trim() : '';
+function getValidationAudiences(): string[] {
+  const web = process.env.GOOGLE_WEB_CLIENT_ID?.trim();
+  const android = process.env.GOOGLE_ANDROID_CLIENT_ID?.trim();
+  return [web, android].filter((id): id is string => typeof id === 'string' && id.length > 0);
 }
 
 const ACCESS_TOKEN_TTL = '15m';
@@ -67,15 +67,14 @@ export async function loginWithGoogle(
   | { ok: true; accessToken: string; refreshToken: string; expiresIn: number; user: { id: string; email: string; role: string; createdAt: string } }
   | { ok: false; invalidToken?: boolean; userBanned?: boolean; verifyError?: string }
 > {
-  const validationAudience = getValidationAudienceWebClientId();
-  if (!validationAudience) {
-    return { ok: false as const, invalidToken: true, verifyError: 'GOOGLE_WEB_CLIENT_ID not set' };
+  const audiences = getValidationAudiences();
+  if (audiences.length === 0) {
+    return { ok: false as const, invalidToken: true, verifyError: 'GOOGLE_WEB_CLIENT_ID or GOOGLE_ANDROID_CLIENT_ID not set' };
   }
   const client = new OAuth2Client();
   let payload: { email?: string; email_verified?: boolean; sub?: string };
   try {
-    // Un único audience: GOOGLE_WEB_CLIENT_ID. No pasar GOOGLE_ANDROID_CLIENT_ID.
-    const ticket = await client.verifyIdToken({ idToken, audience: validationAudience });
+    const ticket = await client.verifyIdToken({ idToken, audience: audiences });
     payload = ticket.getPayload() ?? {};
   } catch (err) {
     const verifyError = err instanceof Error ? err.message : String(err);

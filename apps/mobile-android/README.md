@@ -58,41 +58,32 @@ No hay forma de integrar una “suite Android” completa dentro de Cursor: el e
 
 ### Google Sign-In ("No credentials available") y "Error: ID de Google no configurado"
 
-La app **no lee** variables de entorno de Vercel ni Railway en tiempo de ejecución. Los Client IDs se inyectan en **tiempo de compilación** desde `local.properties`. Si falta el **cliente Web**, verás **"Error: ID de Google no configurado"**.
+**Consumo separado:** la app Android usa **primero el cliente Android** (package + SHA-1, sin secret); si no está definido, usa el cliente Web como fallback. La web (SaaS) usa solo el cliente Web. El backend (Railway) acepta tokens con audience Web o Android.
 
-**Importante: hay 2 Client IDs distintos y no hay que confundirlos:**
+| Cliente | Variable (Android) | Uso |
+|---------|--------------------|-----|
+| **Android** | `GOOGLE_ANDROID_CLIENT_ID` en `local.properties` o desde API `/v1/config` | App Android: `serverClientId` preferido para "Continuar con Google". |
+| **Web** | `GOOGLE_WEB_CLIENT_ID` (opcional en app) | Fallback en app si falta Android; versión web (Vercel) y backend. |
 
-| Uso | Tipo en Google Cloud | Dónde se usa |
-|-----|----------------------|--------------|
-| **1. Cliente Web** | OAuth 2.0 → "Web application" | Versión web, backend (Railway/Vercel) y en la app Android como `serverClientId` para obtener el token. |
-| **2. Cliente Android** | OAuth 2.0 → "Android" | Solo para la app Android (package name + SHA-1); Google exige este cliente para permitir "Continuar con Google" en el dispositivo. |
+Los valores de `local.properties` deberían coincidir con los de Railway para que la app no dependa de `/v1/config` en tiempo de ejecución. Si no hay ningún Client ID en build, la app intenta obtenerlos desde GET `/v1/config`.
 
-**Cómo resolverlo:**
+**Cómo configurar la app Android:**
 
-1. **Cliente Web** (obligatorio para que desaparezca el error):
-   - Es el **mismo** que usa tu backend en Railway/Vercel. Cópialo desde las variables del backend o desde Google Cloud → Credentials → "Web application".
-   - En `local.properties` ponlo en `GOOGLE_WEB_CLIENT_ID=...` (sin comillas).
-
-2. **Cliente Android** (necesario para que el sistema ofrezca la cuenta en el móvil):
-   - En **Google Cloud Console** → Credentials → crea un OAuth 2.0 Client ID de tipo **Android** (no Web).
+1. **Cliente Android** (recomendado para login en la app):
+   - En **Google Cloud Console** → Credentials → OAuth 2.0 Client ID de tipo **Android** (no pide secret; sí package + SHA-1).
    - **Package name**: `com.pr4y.app.dev` (flavor dev) y/o `com.pr4y.app` (prod).
    - **SHA-1**: `keytool -list -v -keystore %USERPROFILE%\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android` (Windows).
-   - Ese Client ID de tipo Android puedes ponerlo en `GOOGLE_ANDROID_CLIENT_ID=` en `local.properties` si quieres (la app lo tiene en BuildConfig); el sistema identifica la app por package + SHA-1.
+   - En `local.properties`: `GOOGLE_ANDROID_CLIENT_ID=...` (el mismo valor que en Railway). Opcional: `GOOGLE_WEB_CLIENT_ID` para fallback o para que la app funcione si solo tienes Web configurado.
 
-3. **Ejemplo en `local.properties`** (en `apps/mobile-android`):
+2. **Ejemplo `local.properties`** (mismos valores que en Railway):
    ```properties
-   GOOGLE_WEB_CLIENT_ID=123456789-xxx.apps.googleusercontent.com
    GOOGLE_ANDROID_CLIENT_ID=123456789-yyy.apps.googleusercontent.com
-   ```
-   Sin comillas. El valor de Web es el de tu backend; el de Android es el que creas como tipo "Android".
-
-4. **Vuelve a compilar e instalar** (Gradle solo lee `local.properties` al construir):
-   ```bash
-   cd apps/mobile-android
-   .\gradlew.bat :app:installDevDebug --no-daemon
+   GOOGLE_WEB_CLIENT_ID=123456789-zzz.apps.googleusercontent.com
    ```
 
-Si ves **NoCredentialException: No credentials available**: suele ser (a) `GOOGLE_WEB_CLIENT_ID` vacío o incorrecto, (b) la app Android no registrada con package + SHA-1 correctos, o (c) ninguna cuenta de Google en el dispositivo. Añade una cuenta en Ajustes y vuelve a intentar.
+3. **Vuelve a compilar e instalar** si cambiaste `local.properties`.
+
+Si ves **NoCredentialException**: (a) `GOOGLE_ANDROID_CLIENT_ID` vacío o incorrecto, (b) app no registrada con package + SHA-1 en Google Cloud, o (c) ninguna cuenta de Google en el dispositivo.
 
 ### Depurar login con Google (logcat)
 
@@ -125,11 +116,13 @@ cd apps/mobile-android
 
 ## Ejecutar en emulador
 
-1. Crea un AVD (Android Virtual Device) con API 26+.
-2. Inicia el emulador.
-3. Run > Run 'app' en Android Studio, o: `./gradlew installDebug`.
+1. Crea un AVD (Android Virtual Device) con API 26+ (por ejemplo **Pixel_7**).
+2. **Desconecta el móvil por USB** si no quieres instalar en él (así solo queda el emulador como destino).
+3. Inicia el emulador: **Android Studio → Device Manager → elige el AVD (p. ej. Pixel_7) → Run**. Espera a que muestre la pantalla de inicio.
+4. En terminal desde `apps/mobile-android`: `.\gradlew.bat installDevDebug` (Windows) o `./gradlew installDevDebug` (Mac/Linux). La app se instalará en el emulador.
+5. Opcional: Run > Run 'app' en Android Studio eligiendo el emulador.
 
-La app usa por defecto `http://10.0.2.2:4000/` como API (emulador → localhost).
+La app usa por defecto `http://10.0.2.2:4000/` como API (emulador → localhost del PC).
 
 ## Ejecutar en dispositivo físico (modo desarrollador)
 

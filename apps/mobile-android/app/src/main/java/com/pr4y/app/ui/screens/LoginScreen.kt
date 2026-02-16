@@ -32,6 +32,10 @@ import com.pr4y.app.data.auth.AuthRepository
 import com.pr4y.app.util.Pr4yLog
 import androidx.credentials.exceptions.NoCredentialException
 import kotlinx.coroutines.launch
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
 
 @Composable
 fun LoginScreen(
@@ -45,12 +49,43 @@ fun LoginScreen(
     var loading by remember { mutableStateOf(false) }
     
     val credentialManager = remember { CredentialManager.create(context) }
-    val serverClientId = remember { BuildConfig.GOOGLE_WEB_CLIENT_ID }
+    // GetGoogleIdOption: OBLIGATORIO usar GOOGLE_WEB_CLIENT_ID (backend) primero, aunque la app sea Android.
+    val webId = BuildConfig.GOOGLE_WEB_CLIENT_ID
+    val androidId = BuildConfig.GOOGLE_ANDROID_CLIENT_ID
+    val rawInitial = webId.ifBlank { androidId }
+    // Resiliencia: si BuildConfig está vacío, fallback temporal para descartar problemas de inyección en build.
+    val fallbackForEmptyBuild = "FALLBACK_BUILDCONFIG_EMPTY"
+    val initialId = rawInitial.ifBlank { fallbackForEmptyBuild }
+    var serverClientId by remember { mutableStateOf(initialId) }
+    var configLoading by remember { mutableStateOf(rawInitial.isBlank()) }
 
-    // Traza de versión para depuración
     LaunchedEffect(Unit) {
         Pr4yLog.i("LoginScreen Cargada - Versión App: 1.2.4")
-        Pr4yLog.d("Configured Server Client ID: ${serverClientId.take(10)}...")
+        Pr4yLog.i("Login: BuildConfig cargado | GOOGLE_WEB_CLIENT_ID=${webId.length} chars | GOOGLE_ANDROID_CLIENT_ID=${androidId.length} chars")
+        if (rawInitial.isNotBlank()) {
+            Pr4yLog.i("Login: usando serverClientId desde BuildConfig (${if (webId.isNotBlank()) "WEB" else "ANDROID"})")
+        } else {
+            Pr4yLog.i("Login: Resiliencia: IDs vacíos en BuildConfig; usando fallback temporal para pruebas (descartar inyección)")
+            Pr4yLog.i("Login: intentando obtener desde API /v1/config")
+            authRepository.getPublicConfig()
+                .onSuccess { config ->
+                    serverClientId = when {
+                        config.googleWebClientId.isNotBlank() -> config.googleWebClientId.also {
+                            Pr4yLog.i("Login: googleWebClientId obtenido desde API (prioridad WEB)")
+                        }
+                        config.googleAndroidClientId.isNotBlank() -> config.googleAndroidClientId.also {
+                            Pr4yLog.i("Login: googleAndroidClientId como fallback desde API")
+                        }
+                        else -> fallbackForEmptyBuild.also {
+                            Pr4yLog.i("Login: API sin IDs; manteniendo fallback temporal")
+                        }
+                    }
+                }
+                .onFailure { e ->
+                    Pr4yLog.e("Login: fallo al obtener config desde API", e)
+                }
+            configLoading = false
+        }
     }
 
     var visible by remember { mutableStateOf(false) }
@@ -127,15 +162,76 @@ fun LoginScreen(
 
                     Spacer(Modifier.height(64.dp))
 
+                    if (configLoading) {
+                        Text(
+                            text = "Obteniendo configuración…",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.Gray,
+                        )
+                    } else if (serverClientId.isBlank()) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Text(
+                                text = "No se pudo obtener la configuración. Comprueba tu conexión.",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = Color.Gray,
+                                textAlign = TextAlign.Center,
+                            )
+                            Button(
+                                onClick = {
+                                    configLoading = true
+                                    scope.launch {
+                                        authRepository.getPublicConfig()
+                                            .onSuccess { config ->
+                                                serverClientId = when {
+                                                    config.googleWebClientId.isNotBlank() -> config.googleWebClientId
+                                                    config.googleAndroidClientId.isNotBlank() -> config.googleAndroidClientId
+                                                    else -> fallbackForEmptyBuild
+                                                }
+                                                if (serverClientId.isNotBlank()) {
+                                                    Pr4yLog.i("Login: config obtenida al reintentar")
+                                                }
+                                            }
+                                            .onFailure { Pr4yLog.e("Login: reintento fallido", it) }
+                                        configLoading = false
+                                    }
+                                },
+                                colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray, contentColor = Color.White),
+                                shape = RoundedCornerShape(20.dp),
+                            ) {
+                                Text("Reintentar")
+                            }
+                            if (Build.MANUFACTURER.equals("Xiaomi", ignoreCase = true) || Build.MANUFACTURER.equals("Redmi", ignoreCase = true)) {
+                                Text(
+                                    text = "En Xiaomi/MIUI: Ajustes > Apps > PR4Y > Ahorro de batería > Sin restricciones",
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = Color.Gray,
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.padding(horizontal = 16.dp)
+                                )
+                                TextButton(
+                                    onClick = {
+                                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                            data = Uri.parse("package:${context.packageName}")
+                                        }
+                                        context.startActivity(intent)
+                                    }
+                                ) {
+                                    Text("Abrir ajustes de la app", color = Color.LightGray)
+                                }
+                            }
+                        }
+                    } else {
                     Button(
                         onClick = {
                             if (serverClientId.isBlank()) {
-                                scope.launch { snackbar.showSnackbar("Error: ID de Google no configurado.") }
+                                scope.launch { snackbar.showSnackbar("Comprueba tu conexión y pulsa Reintentar.") }
                                 return@Button
                             }
                             scope.launch {
                                 loading = true
                                 try {
+                                    Pr4yLog.i("Login: iniciando Credential Manager | serverClientId length=${serverClientId.length}")
+                                    Pr4yLog.i("Hypothesis Check: Using ID type=${if (serverClientId == BuildConfig.GOOGLE_WEB_CLIENT_ID) "WEB" else "ANDROID"}")
                                     val googleIdOption = GetGoogleIdOption.Builder()
                                         .setFilterByAuthorizedAccounts(false)
                                         .setServerClientId(serverClientId)
@@ -150,7 +246,13 @@ fun LoginScreen(
                                     handleSignIn(result, authRepository, onSuccess, snackbar)
                                 } catch (e: NoCredentialException) {
                                     Pr4yLog.e("Google Auth: NoCredentialException | msg=${e.message} | cause=${e.cause}", e)
-                                    snackbar.showSnackbar("No se encontró ninguna cuenta de Google activa.")
+                                    val hasValidSuffix = serverClientId.endsWith(".apps.googleusercontent.com")
+                                    Pr4yLog.e("MIUI Debug: NoCredentialException | serverClientId has valid suffix (.apps.googleusercontent.com)=$hasValidSuffix | length=${serverClientId.length}")
+                                    val hint = if (Build.MANUFACTURER.equals("Xiaomi", ignoreCase = true) || Build.MANUFACTURER.equals("Redmi", ignoreCase = true))
+                                        " Ajustes > Cuentas > añade Google; y en Apps > PR4Y > Batería: Sin restricciones."
+                                    else
+                                        " Añade una cuenta Google en Ajustes o inténtalo de nuevo."
+                                    snackbar.showSnackbar("No hay credenciales de Google disponibles.$hint")
                                 } catch (e: GetCredentialException) {
                                     Pr4yLog.e("Google Auth: GetCredentialException | type=${e.type} | msg=${e.message} | cause=${e.cause}", e)
                                     snackbar.showSnackbar("Error al conectar con Google.")
@@ -175,6 +277,7 @@ fun LoginScreen(
                             "Continuar con Google",
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
+                    }
                     }
 
                     Spacer(Modifier.height(32.dp))

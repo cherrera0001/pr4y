@@ -59,9 +59,18 @@ data class RejectedDto(
     val serverUpdatedAt: String? = null,
 )
 
+/** Configuración pública desde el backend. La app Android usa solo googleAndroidClientId para login. La web usa googleWebClientId. */
+data class PublicConfigResponse(
+    val googleWebClientId: String,
+    val googleAndroidClientId: String = "",
+)
+
 interface ApiService {
     @GET("health")
     suspend fun health(): Response<Map<String, String>>
+
+    @GET("config")
+    suspend fun getPublicConfig(): Response<PublicConfigResponse>
 
     @POST("auth/register")
     suspend fun register(@Body body: RegisterBody): Response<AuthResponse>

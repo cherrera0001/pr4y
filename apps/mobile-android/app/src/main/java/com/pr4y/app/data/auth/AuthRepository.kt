@@ -3,6 +3,7 @@ package com.pr4y.app.data.auth
 import com.pr4y.app.data.remote.ApiService
 import com.pr4y.app.data.remote.AuthResponse
 import com.pr4y.app.data.remote.GoogleLoginBody
+import com.pr4y.app.data.remote.PublicConfigResponse
 import com.pr4y.app.data.remote.RefreshBody
 import com.pr4y.app.util.Pr4yLog
 import retrofit2.Response
@@ -12,6 +13,28 @@ class AuthRepository(
     private val tokenStore: AuthTokenStore,
 ) {
     fun hasToken(): Boolean = tokenStore.getAccessToken() != null
+
+    /** Obtiene la config pública desde el backend. La app Android usa solo googleAndroidClientId para login. */
+    suspend fun getPublicConfig(): Result<PublicConfigResponse> {
+        return runCatching {
+            val res = api.getPublicConfig()
+            if (!res.isSuccessful) {
+                Pr4yLog.e("getPublicConfig falló: ${res.code()} ${res.errorBody()?.string()}")
+                throw Exception("Config API ${res.code()}")
+            }
+            val body = res.body() ?: throw Exception("Config body null")
+            val useAndroid = body.googleAndroidClientId.isNotBlank()
+            val useWeb = body.googleWebClientId.isNotBlank()
+            if (useAndroid) {
+                Pr4yLog.i("getPublicConfig: googleAndroidClientId (cliente Android) desde API para login")
+            } else if (useWeb) {
+                Pr4yLog.w("getPublicConfig: googleAndroidClientId vacío; usando googleWebClientId como fallback (backend acepta ambos)")
+            } else {
+                Pr4yLog.w("getPublicConfig: ambos client IDs vacíos en Railway")
+            }
+            body
+        }
+    }
 
     suspend fun register(email: String, password: String): Result<AuthResponse> {
         Pr4yLog.i("Iniciando registro para: $email")

@@ -12,6 +12,7 @@ import authRoutes from './routes/auth';
 import syncRoutes from './routes/sync';
 import cryptoRoutes from './routes/crypto';
 import healthRoutes from './routes/health';
+import configRoutes from './routes/config';
 import adminRoutes from './routes/admin';
 
 const BODY_LIMIT = 2 * 1024 * 1024; // 2MB global
@@ -57,11 +58,12 @@ if (!jwtSecret || jwtSecret.trim() === '') {
 }
 server.register(jwt, { secret: jwtSecret });
 
-// Google OAuth: validación de id_token SOLO con GOOGLE_WEB_CLIENT_ID. No usar GOOGLE_ANDROID_CLIENT_ID aquí.
-const googleWebClientId = process.env.GOOGLE_WEB_CLIENT_ID?.trim();
-if (!googleWebClientId) {
+// Google OAuth: al menos uno de los dos Client IDs (Web o Android) para validar tokens.
+const hasWeb = Boolean(process.env.GOOGLE_WEB_CLIENT_ID?.trim());
+const hasAndroid = Boolean(process.env.GOOGLE_ANDROID_CLIENT_ID?.trim());
+if (!hasWeb && !hasAndroid) {
   throw new Error(
-    'GOOGLE_WEB_CLIENT_ID is required for Google OAuth. Set in .env or Railway variables. Do not use GOOGLE_ANDROID_CLIENT_ID for token validation.'
+    'Al menos uno de GOOGLE_WEB_CLIENT_ID o GOOGLE_ANDROID_CLIENT_ID es necesario para Google OAuth. Web para la versión web, Android para la app.'
   );
 }
 
@@ -119,6 +121,7 @@ server.addHook('onRoute', (routeOptions: { url?: string; path?: string; method?:
 
 // Prefijo global /v1: cada módulo se registra con prefix '/v1' (rutas finales: /v1/health, /v1/auth/register, etc.).
 server.register(healthRoutes, { prefix: '/v1' });
+server.register(configRoutes, { prefix: '/v1' });
 server.register(authRoutes, { prefix: '/v1' });
 server.register(syncRoutes, { prefix: '/v1' });
 server.register(cryptoRoutes, { prefix: '/v1' });

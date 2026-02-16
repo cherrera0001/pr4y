@@ -9,6 +9,7 @@ Backend API de PR4Y (Fastify + TypeScript)
 
 ## Endpoints principales
 - GET /v1/health — healthcheck
+- GET /v1/config — configuración pública: devuelve **los dos** Client IDs (`googleWebClientId`, `googleAndroidClientId`) desde las variables de Railway. La app Android prefiere `googleAndroidClientId` como serverClientId; si no está en BuildConfig ni en esta respuesta, puede usar `googleWebClientId` como fallback. Sin autenticación.
 - **POST /v1/auth/google** — login/registro con Google OAuth. Body: `{ "idToken": "..." }`. Devuelve `accessToken`, `refreshToken`, `user`. Si el usuario no existe, se crea con rol `user`.
 - POST /v1/auth/refresh — renovar access token con refresh token
 - GET /v1/auth/me — perfil del usuario (requiere JWT)
@@ -30,14 +31,15 @@ Backend API de PR4Y (Fastify + TypeScript)
 
 ## Google OAuth y CORS (solo desde env)
 
-**Diferenciación OAuth2:** En Railway pueden existir `GOOGLE_WEB_CLIENT_ID` y `GOOGLE_ANDROID_CLIENT_ID`. La API **solo** usa `GOOGLE_WEB_CLIENT_ID` (y opcionalmente `GOOGLE_WEB_CLIENT_SECRET`) para validar tokens. El backend **nunca** debe aceptar `id_token` cuyo audience sea el Android Client ID; `verifyIdToken` exige audience = `GOOGLE_WEB_CLIENT_ID`. La app Android debe obtener el token con `serverClientId` = Web Client ID para que el audience sea el correcto.
+**Consumo separado OAuth2:** Hay dos Client IDs. Cada cliente usa el suyo y el backend acepta ambos.
 
-- **GOOGLE_WEB_CLIENT_ID**: obligatorio al arranque; único audience aceptado en `/v1/auth/google`.
+- **GOOGLE_WEB_CLIENT_ID**: para la **versión web**. La web (Vercel) usa `NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID` con este valor. Tokens con audience = Web se aceptan en `/v1/auth/google`.
+- **GOOGLE_ANDROID_CLIENT_ID**: para la **app Android**. La app usa este valor como `serverClientId` en login. Tokens con audience = Android se aceptan en `/v1/auth/google`.
+- Al menos uno de los dos debe estar definido en Railway. Si solo tienes web, define Web; si solo app Android, define Android; si tienes ambos, define ambos.
 - **GOOGLE_WEB_CLIENT_SECRET**: opcional (flujos server-side); no se usa en verifyIdToken.
-- **GOOGLE_ANDROID_CLIENT_ID**: no lo lee la API; solo lo usa la app Android (package + SHA-1 en Google Cloud).
 - **CORS_ORIGINS**: orígenes permitidos separados por comas (solo URLs, p. ej. `https://pr4y.cl`, `http://localhost:3000`). Las peticiones **sin** cabecera `Origin` (p. ej. app Android con OkHttp/Retrofit) se aceptan siempre; no hace falta añadir el package name (`com.pr4y.app.dev`) aquí — CORS aplica a orígenes web, no a identificadores de app.
 - **Migración en Railway:** ejecutar `npx prisma migrate deploy` para crear tablas.
 
 ## Logs en Railway (Google OAuth)
 
-Si la app Android (incl. variante `com.pr4y.app.dev`) envía un `id_token` rechazado por Google, en los logs de Railway aparecerá: `Google id_token verification failed` con el campo `verifyError` (p. ej. wrong audience, token expired). Revisar que en Google Cloud Console el **Web Client ID** coincida con `GOOGLE_WEB_CLIENT_ID` y que la app Android use ese mismo ID como `serverClientId` al obtener el token.
+Si un `id_token` es rechazado, en los logs de Railway aparecerá `Google id_token verification failed` con `verifyError`. Revisar: la web debe usar el cliente Web; la app Android debe usar el cliente Android (`GOOGLE_ANDROID_CLIENT_ID`) como `serverClientId` y el backend debe tener ese mismo valor en Railway para aceptar el audience Android.
