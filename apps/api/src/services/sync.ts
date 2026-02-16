@@ -12,6 +12,7 @@ export interface SyncRecord {
   clientUpdatedAt: string;
   serverUpdatedAt: string;
   deleted: boolean;
+  status: string;
 }
 
 export async function pull(userId: string, cursor: string | undefined, limit: number): Promise<{ nextCursor: string; records: SyncRecord[] }> {
@@ -39,6 +40,7 @@ export async function pull(userId: string, cursor: string | undefined, limit: nu
     clientUpdatedAt: r.clientUpdatedAt.toISOString(),
     serverUpdatedAt: r.serverUpdatedAt.toISOString(),
     deleted: r.deleted,
+    status: r.status,
   }));
   const nextCursor = list.length > 0 ? list[list.length - 1].recordId : '';
   const bytesPulled = list.reduce((sum, r) => sum + Buffer.byteLength(r.encryptedPayloadB64, 'utf8'), 0);
@@ -131,8 +133,8 @@ export async function push(userId: string, records: PushRecordInput[]): Promise<
     }
   }
 
-  const bytesPushed = input
-    .filter((_, i) => accepted.includes(input[i].recordId))
+  const bytesPushed = records
+    .filter((r) => accepted.includes(r.recordId))
     .reduce((sum, r) => sum + Buffer.byteLength(r.encryptedPayloadB64, 'utf8'), 0);
   recordSyncUsage(userId, 'push', bytesPushed, accepted.length).catch(() => {});
 

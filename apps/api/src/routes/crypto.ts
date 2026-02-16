@@ -6,6 +6,16 @@ const MAX_WRAPPED_DEK_B64 = 4096;   // 4KB
 const MAX_SALT_B64 = 256;           // 256 bytes
 const B64_PATTERN = '^[A-Za-z0-9+/]*={0,2}$';
 
+/** Parámetros KDF aceptados: deben coincidir exactamente con Android (DekManager) para que la frase de recuperación funcione. */
+const KDF_NAME = 'pbkdf2';
+const KDF_ITERATIONS = 120_000;
+
+function validateKdf(name: string, params: Record<string, unknown>): boolean {
+  if (name?.toLowerCase() !== KDF_NAME) return false;
+  const iterations = params?.iterations;
+  return typeof iterations === 'number' && iterations === KDF_ITERATIONS;
+}
+
 const wrappedDekBodySchema = {
   type: 'object',
   properties: {
@@ -75,6 +85,16 @@ export default async function cryptoRoutes(server: FastifyInstance) {
       const body = request.body as { kdf?: { name?: string; params?: Record<string, unknown>; saltB64?: string }; wrappedDekB64?: string };
       if (!body?.kdf?.name || typeof body.kdf.saltB64 !== 'string' || typeof body.wrappedDekB64 !== 'string') {
         sendError(reply, 400, 'validation_error', 'Invalid body.', {});
+        return;
+      }
+      if (!validateKdf(body.kdf.name, body.kdf.params ?? {})) {
+        sendError(
+          reply,
+          400,
+          'validation_error',
+          `KDF must be "${KDF_NAME}" with params.iterations === ${KDF_ITERATIONS} (must match Android DekManager for recovery).`,
+          {}
+        );
         return;
       }
       await cryptoService.putWrappedDek(userId, {

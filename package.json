@@ -8,10 +8,11 @@
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "typecheck": "tsc --noEmit",
     "test": "echo 'No tests yet' && exit 0",
-    "build": "echo 'No build yet' && exit 0",
+    "build": "npm run build --prefix apps/api",
     "api:lint": "pnpm --filter @pr4y/api lint",
     "api:typecheck": "pnpm --filter @pr4y/api typecheck",
-    "db:deploy:prod": "cd apps/api && npx prisma migrate deploy",
+    "db:migrate": "npm run db:migrate --prefix apps/api",
+    "db:deploy:prod": "npm run db:migrate --prefix apps/api",
     "mobile:buildDebug": "cd apps/mobile-android && gradlew.bat assembleDebug",
     "mobile:installDebug": "cd apps/mobile-android && gradlew.bat installDebug",
     "mobile:apk": "cd apps/mobile-android && gradlew.bat assembleDebug"

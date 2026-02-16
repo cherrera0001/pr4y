@@ -81,16 +81,45 @@ model WrappedDek {
 // Record: sync genérico (oraciones, diario, etc.). Conflictos por version, no por timestamp.
 // type = metadato no sensible (p. ej. "prayer_request", "journal_entry"); contenido en encryptedPayloadB64.
 model Record {
-  id                  String   @id @default(uuid()) @map("record_id")
-  userId              String   @map("user_id")
-  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  type                String   // metadato: tipo de registro; no cifrado
+  id                  String    @id @default(uuid()) @map("record_id")
+  userId              String    @map("user_id")
+  user                User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type                String    // metadato: tipo de registro; no cifrado
   version             Int
-  encryptedPayloadB64 String   @map("encrypted_payload_b64")
-  clientUpdatedAt     DateTime @map("client_updated_at")
-  serverUpdatedAt     DateTime @updatedAt @map("server_updated_at")
-  deleted             Boolean  @default(false)
+  encryptedPayloadB64 String    @map("encrypted_payload_b64")
+  clientUpdatedAt     DateTime  @map("client_updated_at")
+  serverUpdatedAt     DateTime  @updatedAt @map("server_updated_at")
+  deleted             Boolean   @default(false)
+  status              String    @default("PENDING") // PENDING | IN_PROCESS | ANSWERED
+  reminders           Reminder[]
+  answers             Answer[]
   @@index([userId])
   @@index([userId, clientUpdatedAt]) // Pull ordenado por clientUpdatedAt
+  @@index([userId, status])
   @@map("records")
+}
+
+// Recordatorios por pedido de oración: múltiples horarios por record.
+model Reminder {
+  id         String   @id @default(uuid())
+  recordId   String   @map("record_id")
+  record     Record   @relation(fields: [recordId], references: [id], onDelete: Cascade)
+  time       String   // "HH:mm" ej. "09:00", "21:30"
+  daysOfWeek Json     @map("days_of_week") // [0..6] 0=domingo
+  isEnabled  Boolean  @default(true) @map("is_enabled")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  @@index([recordId])
+  @@map("reminders")
+}
+
+// Testimonios: cuándo y cómo respondió Dios a un pedido (record con status ANSWERED).
+model Answer {
+  id         String   @id @default(uuid())
+  recordId   String   @map("record_id")
+  record     Record   @relation(fields: [recordId], references: [id], onDelete: Cascade)
+  answeredAt DateTime @default(now()) @map("answered_at")
+  testimony  String?  @db.Text // notas/testimonio sanitizado
+  @@index([recordId])
+  @@map("answers")
 }

@@ -25,8 +25,9 @@ const pullRecordSchema = {
     clientUpdatedAt: { type: 'string' },
     serverUpdatedAt: { type: 'string' },
     deleted: { type: 'boolean' },
+    status: { type: 'string', enum: ['PENDING', 'IN_PROCESS', 'ANSWERED'] },
   },
-  required: ['recordId', 'type', 'version', 'encryptedPayloadB64', 'clientUpdatedAt', 'serverUpdatedAt', 'deleted'],
+  required: ['recordId', 'type', 'version', 'encryptedPayloadB64', 'clientUpdatedAt', 'serverUpdatedAt', 'deleted', 'status'],
   additionalProperties: false,
 };
 

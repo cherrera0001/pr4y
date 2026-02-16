@@ -11,13 +11,19 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 
-// onSurfaceVariant ≥ 4.5:1 sobre #121212 para modo oración (accesibilidad en poca luz)
+// Colores Identidad PR4Y
+val MidnightBlue = Color(0xFF0A0A0A)
+val SurfaceDark = Color(0xFF1E1E1E)
+val ElectricCyan = Color(0xFF0EA5E9)
+
 private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFF7986CB),
+    primary = ElectricCyan,
     secondary = Color(0xFF81C784),
-    background = Color(0xFF121212),
-    surface = Color(0xFF1E1E1E),
+    background = MidnightBlue,
+    surface = SurfaceDark,
     onSurfaceVariant = Color(0xFFB3B3B3),
+    onBackground = Color.White,
+    onSurface = Color.White
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -27,7 +33,6 @@ private val LightColorScheme = lightColorScheme(
     surface = Color.White,
 )
 
-/** Tipografía con cuerpo de lectura cómoda para oración en poca luz: 16sp, lineHeight ≥24sp (accesibilidad). */
 private val Pr4yTypography = Typography(
     bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
@@ -43,7 +48,7 @@ private val Pr4yTypography = Typography(
 
 @Composable
 fun Pr4yTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = true, // Forzamos modo oscuro por defecto para el concepto de búnker
     content: @Composable () -> Unit,
 ) {
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
