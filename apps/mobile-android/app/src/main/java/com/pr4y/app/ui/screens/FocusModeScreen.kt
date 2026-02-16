@@ -3,6 +3,8 @@ package com.pr4y.app.ui.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.CheckCircle
@@ -15,14 +17,40 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.pr4y.app.di.AppContainer
+import com.pr4y.app.crypto.DekManager
+import com.pr4y.app.crypto.LocalCrypto
 import com.pr4y.app.data.local.entity.RequestEntity
+import com.pr4y.app.di.AppContainer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FocusModeScreen(navController: NavController) {
-    val requests by AppContainer.db.requestDao().getAll().collectAsState(initial = emptyList())
-    
+    val entities by AppContainer.db.requestDao().getAll().collectAsState(initial = emptyList())
+    var requests by remember { mutableStateOf<List<RequestEntity>>(emptyList()) }
+
+    LaunchedEffect(entities) {
+        requests = withContext(Dispatchers.Default) {
+            val dek = DekManager.getDek()
+            entities.map { entity ->
+                if (entity.encryptedPayloadB64 != null && dek != null) {
+                    try {
+                        val plain = LocalCrypto.decrypt(entity.encryptedPayloadB64, dek)
+                        val json = JSONObject(String(plain))
+                        entity.copy(
+                            title = json.optString("title", ""),
+                            body = json.optString("body", "")
+                        )
+                    } catch (e: Exception) { entity }
+                } else {
+                    entity
+                }
+            }
+        }
+    }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -39,12 +67,36 @@ fun FocusModeScreen(navController: NavController) {
         }
     ) { padding ->
         if (requests.isEmpty()) {
-            Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-                Text("No hay pedidos para orar hoy.", style = MaterialTheme.typography.bodyLarge)
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.padding(32.dp)
+                ) {
+                    Text(
+                        "No hay pedidos para orar.",
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        "Añade pedidos desde Inicio y vuelve aquí para tu momento de oración.",
+                        style = MaterialTheme.typography.bodySmall,
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
         } else {
-            val pagerState = rememberPagerState(pageCount = { requests.size })
-            
+            val pagerState = rememberPagerState(
+                initialPage = 0,
+                pageCount = { requests.size }
+            )
+
             Column(
                 Modifier
                     .fillMaxSize()
@@ -54,9 +106,10 @@ fun FocusModeScreen(navController: NavController) {
                     state = pagerState,
                     modifier = Modifier.weight(1f),
                     contentPadding = PaddingValues(horizontal = 32.dp),
-                    pageSpacing = 16.dp
+                    pageSpacing = 16.dp,
+                    key = { requests.getOrNull(it)?.id ?: it }
                 ) { page ->
-                    val request = requests[page]
+                    val request = requests.getOrNull(page) ?: return@HorizontalPager
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -70,7 +123,8 @@ fun FocusModeScreen(navController: NavController) {
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(32.dp),
+                                .padding(32.dp)
+                                .verticalScroll(rememberScrollState()),
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
@@ -82,7 +136,7 @@ fun FocusModeScreen(navController: NavController) {
                             )
                             Spacer(Modifier.height(24.dp))
                             Text(
-                                text = request.title,
+                                text = request.title.ifBlank { "Sin título" },
                                 style = MaterialTheme.typography.headlineMedium,
                                 textAlign = TextAlign.Center,
                                 lineHeight = 36.sp
@@ -100,7 +154,7 @@ fun FocusModeScreen(navController: NavController) {
                         }
                     }
                 }
-                
+
                 LinearProgressIndicator(
                     progress = { (pagerState.currentPage + 1).toFloat() / requests.size },
                     modifier = Modifier.fillMaxWidth().height(4.dp),
@@ -109,14 +163,24 @@ fun FocusModeScreen(navController: NavController) {
                 )
                 
                 Box(
-                    Modifier.fillMaxWidth().padding(24.dp),
+                    Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 16.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        "Pedido ${pagerState.currentPage + 1} de ${requests.size}",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            "Pedido ${pagerState.currentPage + 1} de ${requests.size}",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        if (requests.size > 1) {
+                            Spacer(Modifier.height(4.dp))
+                            Text(
+                                "Desliza para el siguiente",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                            )
+                        }
+                    }
                 }
             }
         }

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "prisma generate && node scripts/build.mjs",
-    "start": "node dist/server.js",
+    "start": "prisma migrate deploy && node dist/server.js",
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit",
     "db:migrate": "prisma migrate deploy",

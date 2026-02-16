@@ -116,6 +116,7 @@ class AuthRepository(
     // --- Soporte Biometría ---
     fun savePassphrase(passphrase: String) = tokenStore.savePassphrase(passphrase)
     fun getPassphrase(): String? = tokenStore.getPassphrase()
+    fun clearPassphrase() = tokenStore.clearPassphrase()
     fun isBiometricEnabled(): Boolean = tokenStore.isBiometricEnabled()
 }
 

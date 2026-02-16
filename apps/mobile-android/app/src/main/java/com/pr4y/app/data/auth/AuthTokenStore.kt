@@ -36,6 +36,10 @@ class AuthTokenStore(context: Context) {
 
     fun getPassphrase(): String? = prefs.getString(KEY_PASSPHRASE, null)
 
+    fun clearPassphrase() {
+        prefs.edit().remove(KEY_PASSPHRASE).apply()
+    }
+
     fun isBiometricEnabled(): Boolean = prefs.contains(KEY_PASSPHRASE)
 
     // --- Estado de Bienvenida ---
@@ -44,8 +48,13 @@ class AuthTokenStore(context: Context) {
         prefs.edit().putBoolean(KEY_HAS_SEEN_WELCOME, seen).apply()
     }
 
+    /** Borra sesión (tokens y passphrase). Mantiene hasSeenWelcome para no repetir Welcome al volver a entrar. */
     fun clear() {
-        prefs.edit().clear().apply()
+        prefs.edit()
+            .remove(KEY_ACCESS)
+            .remove(KEY_REFRESH)
+            .remove(KEY_PASSPHRASE)
+            .apply()
     }
 
     companion object {

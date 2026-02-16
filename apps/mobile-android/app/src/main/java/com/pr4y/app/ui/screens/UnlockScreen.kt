@@ -24,7 +24,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -48,6 +50,7 @@ import com.pr4y.app.data.remote.RetrofitClient
 import com.pr4y.app.data.remote.WrappedDekBody
 import com.pr4y.app.data.remote.WrappedDekResponse
 import com.pr4y.app.data.sync.SyncRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -63,6 +66,10 @@ fun UnlockScreen(
     var actionTrigger by remember { mutableStateOf(0) }
     var hasWrappedDekOnServer by remember { mutableStateOf<Boolean?>(null) }
     var rememberWithBiometrics by remember { mutableStateOf(false) }
+    var biometricAutoShown by remember { mutableStateOf(false) }
+    var showPassphraseField by remember { mutableStateOf(false) }
+    var forgotPhraseStartFresh by remember { mutableStateOf(false) }
+    var showForgotPhraseConfirm by remember { mutableStateOf(false) }
     val snackbar = remember { SnackbarHostState() }
     val api = remember { RetrofitClient.create(context) }
     val scope = rememberCoroutineScope()
@@ -84,11 +91,14 @@ fun UnlockScreen(
                         actionTrigger++
                     }
                 }
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) showPassphraseField = true
+                }
             }
         )
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Desbloquear PR4Y")
-            .setSubtitle("Usa tu seguridad biométrica para entrar rápido")
+            .setSubtitle("Usa tu huella o rostro para entrar")
             .setNegativeButtonText("Usar clave")
             .build()
         biometricPrompt.authenticate(promptInfo)
@@ -98,8 +108,10 @@ fun UnlockScreen(
         if (hasWrappedDekOnServer != null) return@LaunchedEffect
         val res = api.getWrappedDek(bearer)
         hasWrappedDekOnServer = res.isSuccessful && res.body() != null
-        
-        if (hasWrappedDekOnServer == true && authRepository.isBiometricEnabled() && canAuthenticate) {
+
+        if (hasWrappedDekOnServer == true && authRepository.isBiometricEnabled() && canAuthenticate && !biometricAutoShown) {
+            biometricAutoShown = true
+            delay(400) // Dejar que se pinte la pantalla antes del diálogo
             showBiometricPrompt()
         }
     }
@@ -113,7 +125,7 @@ fun UnlockScreen(
         }
         loading = true
         try {
-            if (hasWrapped) {
+            if (hasWrapped && !forgotPhraseStartFresh) {
                 val res = api.getWrappedDek(bearer)
                 if (!res.isSuccessful || res.body() == null) {
                     snackbar.showSnackbar("No pudimos cargar tu clave. Revisa tu conexión.")
@@ -129,6 +141,7 @@ fun UnlockScreen(
                     authRepository.savePassphrase(passphrase)
                 }
             } else {
+                // Primera vez o "olvidé mi frase": crear nueva DEK y subir al servidor
                 val saltB64 = DekManager.generateSaltB64()
                 val dek = DekManager.generateDek()
                 val kek = DekManager.deriveKek(passphrase.toCharArray(), saltB64)
@@ -183,69 +196,163 @@ fun UnlockScreen(
             when (hasWrappedDekOnServer) {
                 null -> CircularProgressIndicator()
                 else -> {
+                    val biometricPreferred = hasWrappedDekOnServer == true && canAuthenticate && authRepository.isBiometricEnabled()
+                    val useBiometricFlow = biometricPreferred && !showPassphraseField
+
                     Text(
-                        text = if (hasWrappedDekOnServer == true) "Desbloquear" else "Crea tu clave de privacidad",
+                        text = when {
+                            forgotPhraseStartFresh -> "Nueva frase de recuperación"
+                            hasWrappedDekOnServer == true -> "Desbloquear"
+                            else -> "Protege tus datos"
+                        },
                         style = MaterialTheme.typography.headlineSmall
                     )
-                    if (hasWrappedDekOnServer != true) {
+                    if (useBiometricFlow) {
                         Spacer(Modifier.height(8.dp))
                         Text(
-                            text = "Esta clave protege tus datos con seguridad de grado bancario para que nadie más pueda leerlos.",
+                            text = "Toca el botón para usar tu huella o rostro.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    } else if (forgotPhraseStartFresh) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(
+                            text = "Crea una nueva frase. Los datos protegidos con la anterior no se podrán leer.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    } else if (hasWrappedDekOnServer == true && canAuthenticate && authRepository.isBiometricEnabled()) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(
+                            text = "Escribe tu clave de privacidad si no puedes usar la huella.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    if (hasWrappedDekOnServer != true && !forgotPhraseStartFresh) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(
+                            text = "Crea una frase de recuperación (solo la necesitas una vez y para otro dispositivo). Aquí podrás usar solo la huella después.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                     Spacer(Modifier.height(32.dp))
-                    
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        OutlinedTextField(
-                            value = passphrase,
-                            onValueChange = { passphrase = it },
-                            label = { Text("Clave de privacidad") },
-                            singleLine = true,
-                            visualTransformation = PasswordVisualTransformation(),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                            modifier = Modifier.weight(1f),
-                            enabled = !loading,
-                        )
-                        if (hasWrappedDekOnServer == true && canAuthenticate && authRepository.isBiometricEnabled()) {
-                            Spacer(Modifier.width(8.dp))
-                            IconButton(onClick = { showBiometricPrompt() }) {
-                                Icon(Icons.Default.Fingerprint, contentDescription = "Usar huella o rostro")
-                            }
-                        }
-                    }
 
-                    if (!authRepository.isBiometricEnabled() && canAuthenticate) {
-                        Row(
-                            Modifier.fillMaxWidth().padding(top = 8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Checkbox(
-                                checked = rememberWithBiometrics,
-                                onCheckedChange = { rememberWithBiometrics = it }
-                            )
-                            Text("Usar seguridad biométrica para entrar más rápido", style = MaterialTheme.typography.bodySmall)
-                        }
-                    }
-
-                    Spacer(Modifier.height(32.dp))
-                    
-                    if (loading) {
-                        CircularProgressIndicator()
-                    } else {
+                    if (useBiometricFlow) {
                         Button(
-                            onClick = { actionTrigger++ },
+                            onClick = { showBiometricPrompt() },
                             modifier = Modifier.fillMaxWidth().height(56.dp)
                         ) {
-                            Text(if (hasWrappedDekOnServer == true) "Entrar" else "Crear clave y entrar")
+                            Icon(Icons.Default.Fingerprint, contentDescription = null, Modifier.size(24.dp))
+                            Spacer(Modifier.width(12.dp))
+                            Text("Desbloquear con huella")
+                        }
+                        Spacer(Modifier.height(16.dp))
+                        TextButton(onClick = { showPassphraseField = true }) {
+                            Text("¿No puedes usar huella? Usar clave de privacidad")
+                        }
+                    } else {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            OutlinedTextField(
+                                value = passphrase,
+                                onValueChange = { passphrase = it },
+                                label = {
+                                    Text(
+                                        when {
+                                            forgotPhraseStartFresh -> "Nueva frase de recuperación (mín. 6 caracteres)"
+                                            hasWrappedDekOnServer == true -> "Clave de privacidad"
+                                            else -> "Frase de recuperación (mín. 6 caracteres)"
+                                        }
+                                    )
+                                },
+                                singleLine = true,
+                                visualTransformation = PasswordVisualTransformation(),
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                                modifier = Modifier.weight(1f),
+                                enabled = !loading,
+                            )
+                            if (biometricPreferred) {
+                                Spacer(Modifier.width(8.dp))
+                                IconButton(onClick = { showBiometricPrompt() }) {
+                                    Icon(Icons.Default.Fingerprint, contentDescription = "Usar huella o rostro")
+                                }
+                            }
+                        }
+
+                        if (!authRepository.isBiometricEnabled() && canAuthenticate) {
+                            Row(
+                                Modifier.fillMaxWidth().padding(top = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Checkbox(
+                                    checked = rememberWithBiometrics,
+                                    onCheckedChange = { rememberWithBiometrics = it }
+                                )
+                                Text("Usar seguridad biométrica para entrar más rápido", style = MaterialTheme.typography.bodySmall)
+                            }
+                        }
+
+                        if (hasWrappedDekOnServer == true && !forgotPhraseStartFresh) {
+                            Spacer(Modifier.height(8.dp))
+                            TextButton(onClick = { showForgotPhraseConfirm = true }) {
+                                Text("¿Olvidaste tu frase? Empezar de cero con una nueva")
+                            }
+                        }
+
+                        Spacer(Modifier.height(32.dp))
+
+                        if (loading) {
+                            CircularProgressIndicator()
+                        } else {
+                            Button(
+                                onClick = { actionTrigger++ },
+                                modifier = Modifier.fillMaxWidth().height(56.dp)
+                            ) {
+                                Text(
+                                    when {
+                                        forgotPhraseStartFresh -> "Crear nueva frase y entrar"
+                                        hasWrappedDekOnServer == true -> "Entrar"
+                                        else -> "Continuar"
+                                    }
+                                )
+                            }
                         }
                     }
                 }
             }
         }
+    }
+
+    if (showForgotPhraseConfirm) {
+        AlertDialog(
+            onDismissRequest = { showForgotPhraseConfirm = false },
+            title = { Text("¿Empezar de cero?") },
+            text = {
+                Text(
+                    "No podemos recuperar la frase anterior. Si creas una nueva frase, podrás entrar de nuevo y usar la huella en este dispositivo, pero los datos que tenías protegidos con la frase antigua no se podrán leer."
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showForgotPhraseConfirm = false
+                        forgotPhraseStartFresh = true
+                        showPassphraseField = true
+                        authRepository.clearPassphrase()
+                    }
+                ) {
+                    Text("Sí, empezar de cero")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showForgotPhraseConfirm = false }) {
+                    Text("Cancelar")
+                }
+            },
+        )
     }
 }

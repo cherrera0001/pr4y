@@ -27,7 +27,7 @@ android {
         minSdk = 26
         targetSdk = 35
         versionCode = 1
-        versionName = "1.2.5"
+        versionName = "0.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // Manifest: usado por AndroidManifest.xml meta-data (MIUI / estabilización dev)
@@ -99,6 +99,18 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     compilerOptions {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
+}
+
+// APK para compartir: después de ./gradlew assembleDevDebug, ejecuta ./gradlew copyPr4yApk
+// El APK quedará en apps/mobile-android/dist/pr4y-0.0.1.apk
+val distDir = file("${rootProject.projectDir}/dist")
+tasks.register<Copy>("copyPr4yApk") {
+    description = "Copia el APK a dist/pr4y-<version>.apk para compartir"
+    group = "distribution"
+    from(file("build/outputs/apk/dev/debug/app-dev-debug.apk"))
+    into(distDir)
+    rename { _ -> "pr4y-${android.defaultConfig.versionName}.apk" }
+    onlyIf { file("build/outputs/apk/dev/debug/app-dev-debug.apk").exists() }
 }
 
 dependencies {

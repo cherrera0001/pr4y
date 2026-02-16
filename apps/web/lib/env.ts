@@ -3,9 +3,10 @@
  * Zero hardcoding: sin URLs ni IDs en código. Configurar en .env y en Vercel/Railway.
  */
 
-/** Base URL de la API (ej. Railway). Obligatoria en producción. */
+/** Base URL de la API (ej. Railway). Obligatoria en producción. Acepta NEXT_PUBLIC_API_URL o NEXT_PUBLIC_API_BASE_URL (Vercel). */
 export function getApiBaseUrl(): string {
-  const url = process.env.NEXT_PUBLIC_API_URL;
+  const url =
+    process.env.NEXT_PUBLIC_API_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? '';
   return (typeof url === 'string' ? url.trim() : '').replace(/\/$/, '') || '';
 }
 

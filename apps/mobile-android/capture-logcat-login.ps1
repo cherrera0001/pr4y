@@ -1,9 +1,15 @@
-# Captura logcat para depurar el fallo de "Continuar con Google".
-# Uso:
+# Captura logcat para depurar login y reentrada en la app.
+# Uso (login con Google):
 #   1. Conecta el móvil por USB y abre la app en la pantalla de login.
 #   2. Ejecuta: .\capture-logcat-login.ps1
 #   3. Cuando diga "Reproduce ahora...", pulsa "Continuar con Google" en el móvil.
 #   4. Tras 20 segundos se guarda el log y se detiene.
+#
+# Uso (no puedo volver a entrar / reabrir app):
+#   1. Cierra la app por completo (quitar de recientes).
+#   2. Ejecuta: .\capture-logcat-login.ps1
+#   3. Cuando diga "Reproduce ahora...", abre la app y haz lo que falla (entrar con Google o desbloquear con passphrase).
+#   4. Tras 20 s se guarda el log. Revisa: Login status, Llave recuperada, PR4Y_ERROR, HTTP 401/503.
 #
 # Salida: apps/mobile-android/logcat-login-YYYYMMDD-HHmmss.txt
 
@@ -16,7 +22,7 @@ Write-Host "=== Logcat: login con Google ===" -ForegroundColor Cyan
 & $adb devices
 Write-Host ""
 & $adb logcat -c 2>$null
-Write-Host "Reproduce ahora: pulsa 'Continuar con Google' en el dispositivo. Capturando 20 s..." -ForegroundColor Yellow
+Write-Host "Reproduce ahora (login o reabrir app y entrar). Capturando 20 s..." -ForegroundColor Yellow
 
 $filter = "PR4Y_APP:V", "PR4Y_ERROR:V", "PR4Y_NETWORK:V", "PR4Y_CRYPTO:V", "PR4Y_DEBUG:V", "*:E"
 $job = Start-Job -ScriptBlock {

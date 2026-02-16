@@ -1,6 +1,6 @@
 /**
  * Cliente unificado para la API de PR4Y.
- * Base URL solo desde NEXT_PUBLIC_API_URL (Vercel/Railway). Zero hardcoding.
+ * Base URL desde NEXT_PUBLIC_API_URL o NEXT_PUBLIC_API_BASE_URL (Vercel). Zero hardcoding.
  */
 
 import { getApiBaseUrl } from './env';

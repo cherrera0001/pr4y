@@ -25,17 +25,19 @@ En **Settings → Environment Variables** del proyecto hay que definir **al meno
 
 | Variable | Valor | Uso |
 |----------|--------|-----|
-| `NEXT_PUBLIC_API_URL` | `https://pr4yapi-production.up.railway.app/v1` | URL base de la API (Railway). **Obligatoria.** Sin ella la web no puede llamar al backend. |
+| `NEXT_PUBLIC_API_URL` **o** `NEXT_PUBLIC_API_BASE_URL` | `https://pr4yapi-production.up.railway.app/v1` | URL base de la API (Railway). **Obligatoria** (basta con una de las dos). Sin ella la web no puede llamar al backend. |
 | `NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID` | Mismo que en el backend (Railway): `xxxxx.apps.googleusercontent.com` | Cliente OAuth **Web** de Google. **Obligatoria** para "Sign in with Google" en `/admin/login`. Sin ella aparece el mensaje de configuración y no se muestra el botón. |
 | `NEXT_PUBLIC_CANONICAL_HOST` | (opcional) `pr4y.cl` | Redirección de `*.vercel.app` al dominio canónico. |
 | `ADMIN_SECRET_KEY` | (opcional) Tu secreto para la puerta `/admin/gate` | Si no se define, el panel admin solo exige JWT de admin. |
 
-**Checklist:** Si la versión web falla o en login sale *"Falta configuración: define NEXT_PUBLIC_API_URL y NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID en Vercel"*:
+**Checklist:** Si la versión web falla o en login sale *"Falta configuración en Vercel"*:
 
 1. Vercel → proyecto → **Settings** → **Environment Variables**.
-2. Añade `NEXT_PUBLIC_API_URL` = `https://pr4yapi-production.up.railway.app/v1` (o la URL de tu API en Railway, con `/v1` al final).
-3. Añade `NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID` = el **cliente Web** de Google (el mismo que usa el backend en Railway). En Google Cloud Console es el OAuth 2.0 Client ID de tipo **Web application**.
-4. **Redeploy** el proyecto para que las variables se inyecten en el build.
+2. **URL de la API:** Añade **`NEXT_PUBLIC_API_URL`** = `https://pr4yapi-production.up.railway.app/v1` (o la URL de tu API en Railway, con `/v1` al final).  
+   - Si ya tienes `NEXT_PUBLIC_API_BASE_URL`, puedes usar el mismo valor para `NEXT_PUBLIC_API_URL`; el código acepta cualquiera de las dos, pero si el mensaje persiste tras un redeploy, añadir `NEXT_PUBLIC_API_URL` lo resuelve.
+3. **Google:** Añade `NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID` = el **cliente Web** de Google (el mismo que usa el backend en Railway). En Google Cloud Console es el OAuth 2.0 Client ID de tipo **Web application**.
+4. Marca las variables para **Production** (y Preview si usas previews).
+5. **Redeploy**: Deployments → menú (⋯) del último deployment → **Redeploy** (o haz push de un commit). Las variables se inyectan en el build; sin redeploy no se aplican.
 
 ## Después del deploy
 

@@ -130,7 +130,7 @@ function AdminLoginForm() {
             <div className="space-y-2 rounded-md border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
               <p className="font-medium">Falta configuración en Vercel</p>
               <ul className="list-inside list-disc space-y-1 text-left">
-                {missingApi && <li>NEXT_PUBLIC_API_URL (URL de la API, ej. Railway)</li>}
+                {missingApi && <li>NEXT_PUBLIC_API_URL o NEXT_PUBLIC_API_BASE_URL (URL de la API, ej. Railway)</li>}
                 {missingClientId && <li>NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID (cliente OAuth Web de Google)</li>}
               </ul>
               <p className="pt-1 text-muted-foreground">

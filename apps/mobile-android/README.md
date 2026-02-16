@@ -13,11 +13,17 @@ Sí puedes **generar el APK e instalar en tu teléfono desde la terminal de Curs
 1. **Requisitos en tu PC**: Android SDK instalado (p. ej. con Android Studio) y `ANDROID_HOME` en el PATH (o que `adb` esté en el PATH).
 2. **Teléfono**: modo desarrollador y depuración USB activada, conectado por USB.
 3. **En la terminal de Cursor** (desde la raíz del repo):
-   - **Solo crear el APK** (queda en `apps/mobile-android/app/build/outputs/apk/debug/`):
+   - **Solo crear el APK** (queda en `app/build/outputs/apk/dev/debug/app-dev-debug.apk`):
      ```bash
-     pnpm run mobile:apk
+     cd apps/mobile-android
+     .\gradlew.bat :app:assembleDevDebug
      ```
-     o entrando en la carpeta: `cd apps/mobile-android` y luego `.\gradlew.bat assembleDebug` (Windows) / `./gradlew assembleDebug` (Mac/Linux).
+   - **APK para compartir (nombre pr4y + versión)**  
+     Tras compilar, genera una copia con nombre `pr4y-0.0.1.apk` en la carpeta `dist/`:
+     ```bash
+     .\gradlew.bat :app:copyPr4yApk
+     ```
+     El archivo queda en **`apps/mobile-android/dist/pr4y-0.0.1.apk`**. Puedes compartir ese APK; la versión se toma de `versionName` en `app/build.gradle.kts`.
    - **Instalar en el dispositivo conectado** (móvil o emulador):
      ```bash
      pnpm run mobile:installDebug
@@ -134,12 +140,29 @@ Sí puedes instalar y probar la app en tu teléfono, sin emulador:
 4. Comprueba que el dispositivo se ve: `adb devices` (necesitas el SDK o Android Studio en el PATH).
 5. **Instalar la app**: en Android Studio Run > Run 'app' y elige tu dispositivo, o en terminal desde `apps/mobile-android`: `.\gradlew.bat installDebug` (Windows) / `./gradlew installDebug` (Mac/Linux).
 
-La app se instalará como build de depuración. Para que llegue a tu API en el PC, el teléfono y el PC deben estar en la misma red Wi‑Fi y en la app (o en el build) tendrías que apuntar la URL base a la IP de tu PC (por ejemplo `http://192.168.1.X:4000`); en emulador `10.0.2.2` es el localhost del PC.
+La app se instalará como build de depuración.
+
+### Xiaomi: "No puede iniciar el proceso" / Instalar vía USB
+
+En Xiaomi (MIUI) la instalación desde Android Studio suele bloquearse aunque la depuración USB esté activada. Si ves que no puede iniciar el proceso o falla la instalación:
+
+1. **Activar "Instalar vía USB"** en el móvil: Ajustes → Opciones de desarrollador → **Instalar vía USB** (activar).
+2. En Android Studio, usa la configuración de ejecución **app.devDebug** (sabor dev + debug) y pulsa **Run** (Shift+F10).
+3. Cuando en el Xiaomi aparezca el aviso **"Instalar vía USB"**, acéptalo (y opcionalmente "Permitir siempre desde este equipo").
+
+Con eso la instalación y el lanzamiento desde Android Studio deberían funcionar. Para que llegue a tu API en el PC, el teléfono y el PC deben estar en la misma red Wi‑Fi y en la app (o en el build) tendrías que apuntar la URL base a la IP de tu PC (por ejemplo `http://192.168.1.X:4000`); en emulador `10.0.2.2` es el localhost del PC.
+
+## Sesión y desbloqueo (cómo funciona realmente)
+
+- **Sesión (identidad)** = tokens de Google en `EncryptedSharedPreferences`. El usuario **no se crea cada vez**: se identifica una vez con Google y el backend lo reconoce. La app solo comprueba si hay token.
+- **Desbloqueo (DEK)** = tener en memoria la clave con la que se cifran tus datos. La DEK se guarda en el **dispositivo** (envuelta con KeyStore). Si el dispositivo puede recuperarla en silencio (`tryRecoverDekSilently()`), **no se muestra la pantalla Unlock**: vas directo a Home.
+- **Cuándo sí ves Unlock**: solo cuando el dispositivo no tiene la DEK (primera vez en el dispositivo, reinstalación o fallo temporal del KeyStore). Ahí necesitas la **frase de recuperación** una vez: para crear/enviar la DEK al servidor o para traerla desde el servidor. Después puedes activar **solo huella** en este dispositivo; la frase queda para recuperar en otro dispositivo si hace falta.
+- **Resumen**: Login Google → identidad lista. Acceso = huella (o frase solo la primera vez / recuperación). No se “crea al usuario” en cada apertura; es eficiente y usable.
 
 ## Flujo de la app
 
-1. **Login/Registro**: email + contraseña (mín. 8 caracteres). Tras éxito → pantalla de passphrase.
-2. **Passphrase**: primera vez se crea passphrase y se sube la DEK envuelta al servidor; siguientes veces se introduce passphrase para desbloquear.
+1. **Login**: “Continuar con Google”. Tras éxito → si el dispositivo ya tiene la DEK en KeyStore, vas directo a Home (sin Unlock).
+2. **Unlock** (solo si hace falta): primera vez → crear frase de recuperación y subir DEK; siguientes veces en este dispositivo → desbloquear con **huella** (o frase si no puedes usar huella). La frase no se pide en cada uso.
 3. **Home**: lista de pedidos de oración (Room). Botones Diario / Buscar. FAB para nuevo pedido.
 4. **Nuevo/Editar pedido**: título + cuerpo. Al guardar se persiste en Room y se añade al outbox cifrado (AES-GCM con DEK) para sync.
 5. **Detalle**: ver pedido y botón Editar.
