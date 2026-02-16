@@ -1,0 +1,467 @@
+﻿--------- beginning of main
+02-16 03:55:20.726 E/Parcel  ( 1606): Reading a NULL string not supported here.
+02-16 03:55:20.737 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 491f went down
+02-16 03:55:20.737 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4920 went down
+02-16 03:55:20.737 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4921 went down
+02-16 03:55:20.738 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4922 went down
+02-16 03:55:20.744 E/Scheduler( 1606): trackPendingFrame: Too many pending frames
+02-16 03:55:20.749 E/sensors-hal( 1397): handle_sns_client_event:45, size_buffer = 8
+02-16 03:55:20.750 E/sensors-hal( 1397): handle_sns_client_event:55, nonui_event: ts=22341574898705, event0=0.000000, event1=52.981121, event2=-1.000000
+02-16 03:55:20.750 E/sensors-hal( 1397): handle_sns_client_event:45, size_buffer = 8
+02-16 03:55:20.750 E/sensors-hal( 1397): handle_sns_client_event:55, nonui_event: ts=22341575713549, event0=0.000000, event1=0.000000, event2=0.000000
+02-16 03:55:20.752 E/Scheduler( 1606): trackPendingFrame: Invalid present fence
+02-16 03:55:20.752 E/Scheduler( 1606): trackPendingFrame: Invalid present fence
+02-16 03:55:20.752 E/Scheduler( 1606): trackPendingFrame: Invalid present fence
+02-16 03:55:20.752 E/Scheduler( 1606): trackPendingFrame: Invalid present fence
+02-16 03:55:20.754 E/MI-SF   ( 1606): sendMessageSync sendMessageSync stateIndex:3 value:2 done
+02-16 03:55:20.755 E/MI-SF   ( 1606): setKernelCountInfo, ioctl fail
+02-16 03:55:20.755 E/SDM     ( 1440): StcQdcmImpl::SetProperty():163 Invalid prop 16, function 0x18K
+02-16 03:55:20.755 E/SDM     ( 1440): StcManager::SetProperty():433 Invalid ops: 16
+02-16 03:55:20.755 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4924 went down
+02-16 03:55:20.759 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4925 went down
+02-16 03:55:20.759 E/AnimationHelper( 4422): com.android.keyguard.clock.animation.AnimationHelper@3a58371 doAnimationToNotification hasNotification: true, fromKeyguard: true, mHasNotification: true, mToAod: false
+02-16 03:55:20.759 E/AnimationHelper( 4422): com.android.keyguard.clock.animation.AnimationHelper@3a58371 doAnimationToNotification hasNotification: true, fromKeyguard: true, mHasNotification: true, mToAod: false
+02-16 03:55:20.760 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4926 went down
+02-16 03:55:20.761 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4927 went down
+02-16 03:55:20.762 E/sensors-hal( 1397): handle_sns_client_event:45, size_buffer = 8
+02-16 03:55:20.762 E/sensors-hal( 1397): handle_sns_client_event:55, nonui_event: ts=22341596967195, event0=0.000000, event1=52.981121, event2=-1.000000
+02-16 03:55:20.763 E/sensors-hal( 1397): handle_sns_client_event:65, oem_pocket_event: ts=22341596991934, event0=5.000000, event1=52.981121, event2=-1.000000
+02-16 03:55:20.763 E/sensors-hal( 1397): handle_sns_client_event:65, oem_pocket_event: ts=22341598062768, event0=5.000000, event1=0.000000, event2=0.000000
+02-16 03:55:20.776 E/NfcService( 7440): mReceiver action : android.intent.action.SCREEN_ON
+02-16 03:55:20.778 E/LB      ( 4110): fail to open file: Permission denied
+02-16 03:55:20.779 E/LB      ( 4110): fail to open node: No such file or directory
+02-16 03:55:20.789 E/BluetoothUtils( 5593): isDeepDozeMode? false
+02-16 03:55:20.789 E/sensors-hal( 1397): handle_sns_client_event:45, size_buffer = 8
+02-16 03:55:20.789 E/sensors-hal( 1397): handle_sns_client_event:55, nonui_event: ts=22341598045841, event0=0.000000, event1=0.000000, event2=0.000000
+02-16 03:55:20.792 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4928 went down
+02-16 03:55:20.802 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4929 went down
+02-16 03:55:20.802 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 492a went down
+02-16 03:55:20.808 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 492b went down
+02-16 03:55:20.809 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 492c went down
+02-16 03:55:20.816 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 492e went down
+02-16 03:55:20.818 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 492f went down
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): failed to read /sys/class/net/wlan0/mtu
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): java.nio.file.AccessDeniedException: /sys/class/net/wlan0/mtu
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:220)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at java.nio.file.Files.newByteChannel(Files.java:371)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at java.nio.file.Files.newByteChannel(Files.java:422)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:420)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at java.nio.file.Files.newInputStream(Files.java:156)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at java.nio.file.Files.newBufferedReader(Files.java:2844)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at com.android.networkstack.com.android.net.module.util.ProcfsParsingUtils.readFile(ProcfsParsingUtils.java:75)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at com.android.networkstack.com.android.net.module.util.ProcfsParsingUtils.getInterfaceMtu(ProcfsParsingUtils.java:350)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at com.android.networkstack.android.net.apf.ApfFilter$Dependencies.getInterfaceMtu(ApfFilter.java:823)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at com.android.networkstack.android.net.apf.ApfFilter.installNewProgram(ApfFilter.java:4004)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at com.android.networkstack.android.net.apf.ApfFilter.setMulticastFilter(ApfFilter.java:4290)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at com.android.networkstack.android.net.ip.IpClient$RunningState.processMessage(IpClient.java:3902)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at com.android.networkstack.com.android.internal.util.StateMachine$SmHandler.processMsg(StateMachine.java:1007)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at com.android.networkstack.com.android.internal.util.StateMachine$SmHandler.handleMessage(StateMachine.java:820)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at android.os.Handler.dispatchMessage(Handler.java:107)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at android.os.Looper.loopOnce(Looper.java:249)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at android.os.Looper.loop(Looper.java:337)
+02-16 03:55:20.820 E/ProcfsParsingUtils( 4237): 	at android.os.HandlerThread.run(HandlerThread.java:85)
+02-16 03:55:20.822 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4930 went down
+02-16 03:55:20.822 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4931 went down
+02-16 03:55:20.842 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 03:55:20.842 E/HyperSentinel( 2645): Event_OpenFileFDSize
+02-16 03:55:20.842 E/HyperSentinel( 2645): -> audit event by proc 4422 "com.android.systemui": Fd increasement, peak, 738 -> 813
+02-16 03:55:20.877 E/AnimationHelper( 4422): updateTime mToAod:false mHasNotification: true, mClockType: classic
+02-16 03:55:20.879 E/DPMJ    ( 4260): |SERVICE| sendScreenState state  trueand int value 1
+02-16 03:55:20.972 E/Scheduler( 1606): trackPendingFrame: Invalid present fence
+02-16 03:55:20.981 E/LockScreenMagazinePreView( 4422): getFullScreenLayout()  mRemoteFullScreenView:null
+02-16 03:55:20.981 E/LockScreenMagazinePreView( 4422): getFullScreenLayout()  mRemoteFullScreenView:null
+--------- beginning of system
+02-16 03:55:20.990 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 03:55:20.990 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} true
+02-16 03:55:20.995 E/ClockBaseAnimation( 4422): com.android.keyguard.clock.animation.classic.ClassicClockAnimation@9514f89 doAnimationToAod toAod: false, hasNotification: true
+02-16 03:55:21.050 E/libnav  ( 1440): ABA activated SVI
+02-16 03:55:21.069 E/MiStcImpl( 1440): Lut data does not initialized, can not set lut
+02-16 03:55:21.073 E/MiStcImpl( 1440): Lut data does not initialized, can not set lut
+02-16 03:55:21.083 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 03:55:21.083 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 03:55:21.083 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 03:55:21.083 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-16 03:55:21.219 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 48e2 went down
+02-16 03:55:21.230 E/sensors-hal( 1397): flush:236, invalid flush request, active=0, oneshot=0
+02-16 03:55:21.232 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4933 went down
+02-16 03:55:21.234 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4934 went down
+02-16 03:55:21.235 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4935 went down
+02-16 03:55:21.237 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4936 went down
+02-16 03:55:21.245 E/adTracker( 4422): Value ranker_group of type java.lang.String cannot be converted to JSONObject
+02-16 03:55:21.341 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:21.389 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:21.396 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:21.396 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:21.398 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:21.471 E/MiStcImpl( 1440): Seting Display 0 dither en 1 strength 4
+02-16 03:55:21.502 E/fpc_tac ( 2210): fpc_tee_capture_image_internal: UIReady diff_time: 21
+02-16 03:55:21.528 E/ANDR-PERF-RESOURCEQS( 1460): Failed to apply optimization [11, 8]
+02-16 03:55:21.528 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 03:55:21.528 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 03:55:21.544 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 03:55:21.641 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:21.647 E/AnimationHelper( 4422): com.android.keyguard.clock.animation.AnimationHelper@3a58371 doAnimationToNotification hasNotification: true, fromKeyguard: true, mHasNotification: true, mToAod: false
+02-16 03:55:21.647 E/AnimationHelper( 4422): com.android.keyguard.clock.animation.AnimationHelper@3a58371 doAnimationToNotification hasNotification: true, fromKeyguard: true, mHasNotification: true, mToAod: false
+02-16 03:55:21.650 E/KeyguardViewMediator( 4422): mHideAnimationFinishedRunnable#run, mHideAnimationRunning=true, mHideAnimationRun=true
+02-16 03:55:21.657 E/WindowManager( 2645): setClientVisible ActivityRecord{86b87dc u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t59} true
+02-16 03:55:21.657 E/VibratorManagerServiceImpl( 2645): vibrationThreadSetParameters
+02-16 03:55:21.659 E/AnimationHelper( 4422): com.android.keyguard.clock.animation.AnimationHelper@3a58371 doAnimationToNotification hasNotification: true, fromKeyguard: true, mHasNotification: true, mToAod: false
+02-16 03:55:21.659 E/AnimationHelper( 4422): com.android.keyguard.clock.animation.AnimationHelper@3a58371 doAnimationToNotification hasNotification: true, fromKeyguard: true, mHasNotification: true, mToAod: false
+02-16 03:55:21.696 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} true
+02-16 03:55:21.696 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} true
+02-16 03:55:21.696 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} true
+02-16 03:55:21.697 E/WindowManager( 2645): setClientVisible ActivityRecord{86b87dc u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t59} true
+02-16 03:55:21.704 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 0
+02-16 03:55:21.704 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 0
+02-16 03:55:21.712 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 03:55:21.746 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 03:55:21.746 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 03:55:21.767 E/ActivityManagerWrapper( 4043): get all recent tasks force including 59
+02-16 03:55:21.781 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:21.791 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:21.793 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 03:55:21.793 E/KeyMasterHalDevice(  866): abort_operation
+02-16 03:55:21.793 E/KeyMasterHalDevice(  866): ret: -28
+02-16 03:55:21.809 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 03:55:21.809 E/ActivityManagerWrapper( 4043):  mainTaskId=59   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 03:55:21.809 E/ActivityManagerWrapper( 4043):  mainTaskId=55   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.android.settings/com.android.settings.MainSettings} }
+02-16 03:55:21.812 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 03:55:21.812 E/KeyMasterHalDevice(  866): abort_operation
+02-16 03:55:21.812 E/KeyMasterHalDevice(  866): ret: -28
+02-16 03:55:21.816 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:21.825 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:21.877 E/fpc_tac ( 2210): fpc_misc_read_illumination_level_property, no property value set, using the default value
+02-16 03:55:21.896 E/fpc_hal ( 2210): do_authenticate exit
+02-16 03:55:21.917 E/ExtM    ( 2645): can_flush_idle_pages:17346 flush_number_adjust: 17346
+02-16 03:55:21.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:21.974 E/vold    (20565): maxCpuFreq=2400000
+02-16 03:55:21.975 E/vold    (20565): maxCpuFreq=2400000
+02-16 03:55:22.239 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:22.271 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 03:55:22.272 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 03:55:22.285 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 03:55:22.289 E/backgroundBlur( 4422): setMiViewBlurMode disable com.android.systemui.statusbar.notification.row.NotificationBackgroundView
+02-16 03:55:22.289 E/backgroundBlur( 4422): setMiViewBlurMode disable com.android.systemui.statusbar.notification.row.NotificationBackgroundView
+02-16 03:55:22.289 E/backgroundBlur( 4422): setMiViewBlurMode disable com.android.systemui.statusbar.notification.row.NotificationBackgroundView
+02-16 03:55:22.289 E/backgroundBlur( 4422): setMiViewBlurMode disable com.android.systemui.statusbar.notification.row.NotificationBackgroundView
+02-16 03:55:22.289 E/backgroundBlur( 4422): setMiViewBlurMode disable com.android.systemui.statusbar.notification.row.NotificationBackgroundView
+02-16 03:55:22.290 E/backgroundBlur( 4422): setMiViewBlurMode disable com.android.systemui.statusbar.notification.row.NotificationBackgroundView
+02-16 03:55:22.293 E/FromLockscreenTransitionInteractor( 4422): Ignoring startTransition: This interactor asked to transition from LOCKSCREEN -> GONE, but we last transitioned to GONE, not LOCKSCREEN. This should never happen - check currentTransitionInfoInternal or use filterRelevantKeyguardState before starting transitions.
+02-16 03:55:22.305 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 03:55:22.308 E/StackScroller( 4422): updateSidePadding: viewWidth is zero
+02-16 03:55:22.313 E/NfcService( 7440): mReceiver action : android.intent.action.USER_PRESENT
+02-16 03:55:22.314 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:22.322 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:22.322 E/EasyTetherCoreManager( 5474): LyraBroadcastReceiver action android.intent.action.USER_PRESENT
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): startScan error
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): java.lang.NoSuchMethodException: android.net.wifi.IWifiManager$Stub$Proxy.startScan [class java.lang.String]
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at java.lang.Class.getMethod(Class.java:2934)
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at java.lang.Class.getDeclaredMethod(Class.java:2913)
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at sf.e.d(Unknown Source:4)
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at com.miui.appmanager.AppManageUtils.E0(Unknown Source:88)
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at f3.b$a.a(Unknown Source:29)
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at f3.b$a.doInBackground(Unknown Source:2)
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at android.os.AsyncTask$3.call(AsyncTask.java:394)
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at java.util.concurrent.FutureTask.run(FutureTask.java:317)
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1154)
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:652)
+02-16 03:55:22.330 E/com.miui.appmanager.AppManageUtils( 9084): 	at java.lang.Thread.run(Thread.java:1563)
+02-16 03:55:22.338 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:22.346 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:22.364 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:22.372 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:22.381 E/FrameEvents( 4422): addRelease: Did not find frame.
+02-16 03:55:22.434 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:22.448 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:22.540 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:22.704 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 03:55:22.704 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 03:55:22.704 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 03:55:22.737 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:22.749 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:22.758 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:22.800 E/StackScroller( 4422): updateSidePadding: viewWidth is zero
+02-16 03:55:22.844 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:22.896 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 03:55:22.896 E/KeyMasterHalDevice(  866): abort_operation
+02-16 03:55:22.896 E/KeyMasterHalDevice(  866): ret: -28
+02-16 03:55:22.913 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 03:55:22.913 E/KeyMasterHalDevice(  866): abort_operation
+02-16 03:55:22.913 E/KeyMasterHalDevice(  866): ret: -28
+02-16 03:55:22.932 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 03:55:22.932 E/KeyMasterHalDevice(  866): abort_operation
+02-16 03:55:22.932 E/KeyMasterHalDevice(  866): ret: -28
+02-16 03:55:22.935 E/keystore2(  947): system/security/keystore2/src/error.rs:171 - system/security/keystore2/src/security_level.rs:317
+02-16 03:55:22.935 E/keystore2(  947): 
+02-16 03:55:22.935 E/keystore2(  947): Caused by:
+02-16 03:55:22.935 E/keystore2(  947):     0: system/security/keystore2/src/enforcements.rs:623: matching auth token is expired.
+02-16 03:55:22.935 E/keystore2(  947):     1: Error::Km(r#KEY_USER_NOT_AUTHENTICATED)
+02-16 03:55:23.141 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:23.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:23.844 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:23.977 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 03:55:24.012 E/sensors-hal( 1397): handle_sns_client_event:52, sar_algo_event: ts=22344846763289, event=4.000000
+02-16 03:55:24.031 E/PowerKeeper.Thermal( 9694): ProcessInfo java.lang.NumberFormatException: For input string: "CPU usage from 690029ms to 387415ms ago (2026-02-16 03"
+02-16 03:55:24.151 E/ExtM    ( 2645): can_flush_idle_pages:17346 flush_number_adjust: 17346
+02-16 03:55:24.200 E/PhoneAdapter( 4394): get ntnphones failed, exception: java.lang.IllegalStateException: Default phones haven't been made yet!
+02-16 03:55:24.214 E/sensors-hal( 1397): handle_sns_client_event:52, sar_algo_event: ts=22345048534122, event=4.000000
+02-16 03:55:24.217 E/vold    (20600): maxCpuFreq=2400000
+02-16 03:55:24.217 E/vold    (20600): maxCpuFreq=2400000
+02-16 03:55:24.243 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:24.312 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4938 went down
+02-16 03:55:24.313 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4939 went down
+02-16 03:55:24.315 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 493a went down
+02-16 03:55:24.316 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 493b went down
+02-16 03:55:24.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:24.742 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): Unable to invoke no-args constructor for class com.xiaomi.market.ui.floatminicard.MiniCardActiveConfig$a. Registering an InstanceCreator with Gson for this type may fix this problem.
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): java.lang.RuntimeException: Unable to invoke no-args constructor for class com.xiaomi.market.ui.floatminicard.MiniCardActiveConfig$a. Registering an InstanceCreator with Gson for this type may fix this problem.
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.google.gson.internal.b$e.a(SourceFile:37)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at z3.h$b.b(SourceFile:16)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at z3.h$a.a(SourceFile:3)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at z3.h$b.b(SourceFile:48)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.google.gson.d.g(SourceFile:21)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.google.gson.d.h(SourceFile:5)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.google.gson.d.j(SourceFile:10)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.xiaomi.market.util.r0.a(SourceFile:11)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.xiaomi.market.util.r0.b(SourceFile:9)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.xiaomi.market.model.cloudconfig.CloudConfig.getConfigOrSync(SourceFile:62)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.xiaomi.market.model.cloudconfig.CloudConfig.getMiniCardActiveConfig(SourceFile:5)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at p6.b.j(SourceFile:11)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.xiaomi.market.util.ScreenReceiver$a.handleMessage(SourceFile:23)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at android.os.Handler.dispatchMessage(Handler.java:107)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at android.os.Looper.loopOnce(Looper.java:249)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at android.os.Looper.loop(Looper.java:337)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at android.os.HandlerThread.run(HandlerThread.java:85)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): Caused by: java.lang.reflect.InvocationTargetException
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at java.lang.reflect.Method.invoke(Native Method)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.google.gson.internal.j$a.c(SourceFile:12)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at com.google.gson.internal.b$e.a(SourceFile:5)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	... 16 more
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): Caused by: java.lang.InstantiationException: Can't instantiate abstract class com.xiaomi.market.ui.floatminicard.MiniCardActiveConfig$a
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	at sun.misc.Unsafe.allocateInstance(Native Method)
+02-16 03:55:24.814 E/SystemUpdate-JSONParser(16358): 	... 19 more
+02-16 03:55:24.815 E/SystemUpdate-ExceptionUtils(16358): DLoadSuccessFloatDisplay instance is null
+02-16 03:55:24.824 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 493c went down
+02-16 03:55:24.826 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 493d went down
+02-16 03:55:24.827 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 493e went down
+02-16 03:55:24.828 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 493f went down
+02-16 03:55:25.045 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:25.342 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:25.415 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4941 went down
+02-16 03:55:25.417 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4942 went down
+02-16 03:55:25.418 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4943 went down
+02-16 03:55:25.421 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4944 went down
+02-16 03:55:25.614 E/sensors-hal( 1397): handle_sns_client_event:52, sar_algo_event: ts=22346448235997, event=4.000000
+02-16 03:55:25.622 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:25.641 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:25.781 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 03:55:25.781 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 03:55:25.781 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 03:55:25.782 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-16 03:55:25.924 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4945 went down
+02-16 03:55:25.927 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4946 went down
+02-16 03:55:25.928 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4947 went down
+02-16 03:55:25.931 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4948 went down
+02-16 03:55:25.950 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:26.148 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:26.244 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:26.541 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:26.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:26.744 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:26.841 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:26.920 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:26.932 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=22347765685059 data 0.000000
+02-16 03:55:26.934 E/BluetoothUtils( 5593): isDeepDozeMode? false
+02-16 03:55:27.004 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 03:55:27.142 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:27.390 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:27.443 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:27.541 E/imsd    ( 2131): ImsDsiNetCtrlWrapper.cpp | 209 | | 2621 |ImsDsiNetCtrlWrapper : dsiNetCtrlCB - received event[19] for dsi_hndl[3a02523d]
+02-16 03:55:27.542 E/imsd    ( 2131): ImsDsiNetCtrlClient.cpp | 204 | | 2621 |ImsDsiNetCtrlClient : imsEventHandler sending to 891118d8
+02-16 03:55:27.542 E/imsd    ( 2131): ImsMain.cpp | 729 | | 2223 |ImsMain: handleEvent Switched to Ims Main thread [ImsDsiEvent]
+02-16 03:55:27.542 E/imsd    ( 2131): ImsMain.cpp | 811 | | 2223 |ImsMain:Handle Event sName[ImsDsiEvent] eventType[4]
+02-16 03:55:27.542 E/imsd    ( 2131): ImsCommonDef.h | 452 | | 2223 |Current [0x7cef4c0], Appid[0]
+02-16 03:55:27.543 E/imsd    ( 2131): ImsCommonDef.h | 453 | | 2223 |Other [0xc910ad70], Appid[21]
+02-16 03:55:27.543 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 287 | | 2223 |ImsPdnFactoryImpl: isPdnExisting 1
+02-16 03:55:27.543 E/imsd    ( 2131): PdnInfoImpl.cpp | 140 | | 2223 |PdnInfoImpl: getPdnType 1 
+02-16 03:55:27.543 E/imsd    ( 2131): ImsMain.cpp | 828 | | 2223 |ImsMain: handleEvent from DSI Module for IMS PDN
+02-16 03:55:27.543 E/imsd    ( 2131): PdnInfoImpl.cpp | 589 | | 2223 |PdnInfoImpl:handleEvent sName[ImsDsiEvent]
+02-16 03:55:27.543 E/imsd    ( 2131): PdnInfoImpl.cpp | 633 | | 2223 |PdnInfoImpl: handleDsiEvents event Id 19 
+02-16 03:55:27.543 E/imsd    ( 2131): PdnInfoImpl.cpp | 774 | | 2223 |PdnInfoImpl: handleDsiEvents MTU change event received for dsi_hndl[3a02523d]
+02-16 03:55:27.543 E/imsd    ( 2131): ImsDsiNetCtrlClient.cpp | 130 | | 2223 |ImsDsiNetCtrlClient : requestNetworkService  dsi_hndl[3a02523d]
+02-16 03:55:27.543 E/imsd    ( 2131): ImsDsiNetCtrlClient.cpp | 189 | | 2223 |ImsDsiNetCtrlClient :getMtuSize called
+02-16 03:55:27.547 E/imsd    ( 2131): ImsDsiNetCtrlWrapper.cpp | 186 | | 2223 |getMtuSize: failed to get mtuSize
+02-16 03:55:27.589 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4906 went down
+02-16 03:55:27.593 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 48fa went down
+02-16 03:55:27.594 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 48fe went down
+02-16 03:55:27.594 E/imsd    ( 2131): ImsDsiNetCtrlWrapper.cpp | 209 | | 2621 |ImsDsiNetCtrlWrapper : dsiNetCtrlCB - received event[2] for dsi_hndl[3a02523d]
+02-16 03:55:27.594 E/imsd    ( 2131): ImsDsiNetCtrlClient.cpp | 204 | | 2621 |ImsDsiNetCtrlClient : imsEventHandler sending to 891118d8
+02-16 03:55:27.594 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4902 went down
+02-16 03:55:27.594 E/imsd    ( 2131): ImsMain.cpp | 729 | | 2223 |ImsMain: handleEvent Switched to Ims Main thread [ImsDsiEvent]
+02-16 03:55:27.594 E/imsd    ( 2131): ImsMain.cpp | 811 | | 2223 |ImsMain:Handle Event sName[ImsDsiEvent] eventType[4]
+02-16 03:55:27.594 E/imsd    ( 2131): ImsCommonDef.h | 452 | | 2223 |Current [0x7cef4c0], Appid[0]
+02-16 03:55:27.594 E/imsd    ( 2131): ImsCommonDef.h | 453 | | 2223 |Other [0xc910ad70], Appid[21]
+02-16 03:55:27.594 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 287 | | 2223 |ImsPdnFactoryImpl: isPdnExisting 1
+02-16 03:55:27.594 E/imsd    ( 2131): PdnInfoImpl.cpp | 140 | | 2223 |PdnInfoImpl: getPdnType 1 
+02-16 03:55:27.594 E/imsd    ( 2131): ImsMain.cpp | 828 | | 2223 |ImsMain: handleEvent from DSI Module for IMS PDN
+02-16 03:55:27.594 E/imsd    ( 2131): PdnInfoImpl.cpp | 589 | | 2223 |PdnInfoImpl:handleEvent sName[ImsDsiEvent]
+02-16 03:55:27.594 E/imsd    ( 2131): PdnInfoImpl.cpp | 633 | | 2223 |PdnInfoImpl: handleDsiEvents event Id 2 
+02-16 03:55:27.594 E/imsd    ( 2131): ImsDsiNetCtrlClient.cpp | 130 | | 2223 |ImsDsiNetCtrlClient : requestNetworkService  dsi_hndl[3a02523d]
+02-16 03:55:27.594 E/imsd    ( 2131): ImsDsiNetCtrlClient.cpp | 177 | | 2223 |ImsDsiNetCtrlClient :getCallEndReason called
+02-16 03:55:27.594 E/imsd    ( 2131): ImsDsiNetCtrlWrapper.cpp | 136 | | 2223 |ImsDsiNetCtrlWrapper: getCallEndReason for dsi_handle[3a02523d]
+02-16 03:55:27.594 E/imsd    ( 2131): PdnInfoImpl.cpp | 689 | | 2223 |PdnInfoImpl: handleDsiEvents PDN Disconnected: Couldn't be retried, reason code 1041 
+02-16 03:55:27.594 E/imsd    ( 2131): PdnStateMachine.h | 78 | | 2223 |stateEnum is 6
+02-16 03:55:27.595 E/imsd    ( 2131): PdnInfoImpl.cpp | 409 | | 2223 |PdnInfoImpl: Current State: 2, Previous state: 5 
+02-16 03:55:27.595 E/imsd    ( 2131): PdnStateMachine.h | 64 | | 2223 |stateEnum is 2
+02-16 03:55:27.595 E/imsd    ( 2131): PdnStateMachine.h | 64 | | 2223 |stateEnum is 5
+02-16 03:55:27.595 E/imsd    ( 2131): PdnInfoImpl.cpp | 853 | | 2223 |PdnInfoImpl: notifyEvents in event = 1, size[2]
+02-16 03:55:27.595 E/imsd    ( 2131): PdnInfoImpl.cpp | 868 | | 2223 |PdnInfoImpl: notifyEvents, Qmi client id 1, Ip client id 0, client map size 2, Listener d910c6c8
+02-16 03:55:27.595 E/imsd    ( 2131): ImsQmiDcmServiceImpl.cpp | 1455 | | 2223 |IMS DCM Service : onServiceStatusChange called
+02-16 03:55:27.595 E/imsd    ( 2131): ImsQmiDcmServiceImpl.cpp | 1460 | | 2223 |IMS DCM Service : onServiceStatusChange PDP_CONNECTED/PDP_DISCONNECTED/PDP_HANDLE_UNAVAILABLE received [1]
+02-16 03:55:27.595 E/imsd    ( 2131): ImsQmiDcmServiceImpl.cpp | 1471 | | 2223 |onServiceStatusChange: pdpData.pdpInfo.eInstID [2], cookie valid 1, pdpData.clientInfo.cookie 100
+02-16 03:55:27.595 E/imsd    ( 2131): ImsQmiDcmServiceImpl.cpp | 1474 | | 2223 |onServiceStatusChange: pdpData.pdpInfo.iAppId [21], pdpData.pdpInfo.ipAddressValid [1],pdpData.pdpInfo.eFamilyType 1
+02-16 03:55:27.595 E/imsd    ( 2131): ImsQmiDcmServiceImpl.cpp | 1495 | | 2223 |onServiceStatusChange: PdpStatus [3]
+02-16 03:55:27.595 E/imsd    ( 2131): ImsQmiDcmServiceImpl.cpp | 1519 | | 2223 |onServiceStatusChange: pdpData.pdpInfo.iAppId [21], ind.pdp_error.error 13, ind.pdp_error.result 0
+02-16 03:55:27.595 E/imsd    ( 2131): ImsQmiDcmServiceImpl.cpp | 1521 | | 2223 |QMI Client_handle: 0x1
+02-16 03:55:27.595 E/imsd    ( 2131): ImsQmiDcmServiceImpl.cpp | 1533 | | 2223 |IMS DCM Service: QMI_IMS_DCM_PDP_ACTIVATE_IND_V01 qmi_csi_send_ind success err 0
+02-16 03:55:27.595 E/imsd    ( 2131): ImsQmiDcmServiceImpl.cpp | 1544 | | 2223 |IMS DCM Service: Self Post to ImsMain for PDP Clean up
+02-16 03:55:27.596 E/imsd    ( 2131): PdnInfoImpl.cpp | 868 | | 2223 |PdnInfoImpl: notifyEvents, Qmi client id 0, Ip client id 21, client map size 2, Listener 1910bba0
+02-16 03:55:27.596 E/imsd    ( 2131): ImsIpcReqHandler.cpp | 590 | | 2223 |onServiceStatusChange: received event[1], AppId[21]
+02-16 03:55:27.596 E/imsd    ( 2131): ImsIpcReqHandler.cpp | 659 | | 2223 |onServiceStatusChange: IMS PDN disconnected AppId[21]
+02-16 03:55:27.596 E/imsd    ( 2131): PdnInfoImpl.cpp | 693 | | 2223 |PdnInfoImpl: after notify events, going to destroy
+02-16 03:55:27.596 E/imsd    ( 2131): ImsDsiNetCtrlClient.cpp | 95 | | 2223 |ImsDsiNetCtrlClient :destroyHandle called
+02-16 03:55:27.596 E/imsd    ( 2131): ImsDsiNetCtrlWrapper.cpp | 239 | | 2223 |1 size
+02-16 03:55:27.596 E/imsd    ( 2131): ImsPdnInfo.cpp | 338 | | 2223 |ImsPdnInfo: CNE Stop service request initiated 
+02-16 03:55:27.596 E/imsd    ( 2131): ImsCneNetworkReqClient.cpp | 204 | | 2223 |ImsCneNetworkReqClient : stopService called
+02-16 03:55:27.596 E/imsd    ( 2131): PdnStateMachine.h | 78 | | 2223 |stateEnum is 7
+02-16 03:55:27.596 E/imsd    ( 2131): ImsMain.cpp | 729 | | 2223 |ImsMain: handleEvent Switched to Ims Main thread [ReleasePdpEvent]
+02-16 03:55:27.596 E/imsd    ( 2131): ImsMain.cpp | 956 | | 2223 |ImsMain : Release PDP Event to clean up
+02-16 03:55:27.596 E/imsd    ( 2131): ImsMain.cpp | 1061 | | 2223 |ImsMain: handlePdpReleaseReq: Clean up
+02-16 03:55:27.596 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 170 | | 2223 |ImsPdnFactoryImpl::releasePdn called Pdp Id = 21 client = d910c6c8, PdnInfoMap size = 2
+02-16 03:55:27.596 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 180 | | 2223 |ImsPdnFactoryImpl::releasePdn iterating over Pdp Id = 21 pdn refcount 0
+02-16 03:55:27.596 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 183 | | 2223 |ImsPdnFactoryImpl : AppId matched, pdn refcount 0
+02-16 03:55:27.596 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 226 | | 2223 |ImsPdnFactoryImpl:Pdn ref count 0
+02-16 03:55:27.596 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 230 | | 2223 |ImsPdnFactoryImpl: waitingfortimer true, 2 
+02-16 03:55:27.596 E/imsd    ( 2131): PdnInfoImpl.cpp | 836 | | 2223 |PdnInfoImpl: Clearing the Client map 
+02-16 03:55:27.596 E/imsd    ( 2131): ImsPdnInfo.cpp | 67 | | 2223 |ImsPdnInfo destructor called 910f530
+02-16 03:55:27.596 E/imsd    ( 2131): ImsCneNetworkReqClient.cpp | 163 | | 2223 |ImsCneNetworkReqClient : destroyHandle
+02-16 03:55:27.596 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 492 | | 2223 |ImsPdnFactoryImpl: Removed new Pdn Id 21, PdnIdMap size = 1
+02-16 03:55:27.596 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 251 | | 2223 |ImsPdnFactoryImpl: erasing pdninfomap entry
+02-16 03:55:27.596 E/imsd    ( 2131): ImsMain.cpp | 1072 | | 2223 |ImsMain: handlePdpDeActivateReq pdpActivateReqs size: 0
+02-16 03:55:27.596 E/imsd    ( 2131): ImsMain.cpp | 729 | | 2223 |ImsMain: handleEvent Switched to Ims Main thread [ReleasePdpEvent]
+02-16 03:55:27.596 E/imsd    ( 2131): ImsMain.cpp | 956 | | 2223 |ImsMain : Release PDP Event to clean up
+02-16 03:55:27.596 E/imsd    ( 2131): ImsMain.cpp | 1061 | | 2223 |ImsMain: handlePdpReleaseReq: Clean up
+02-16 03:55:27.596 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 170 | | 2223 |ImsPdnFactoryImpl::releasePdn called Pdp Id = 21 client = 1910bba0, PdnInfoMap size = 1
+02-16 03:55:27.601 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 180 | | 2223 |ImsPdnFactoryImpl::releasePdn iterating over Pdp Id = 20 pdn refcount 2
+02-16 03:55:27.601 E/imsd    ( 2131): ImsPdnFactoryImpl.cpp | 258 | | 2223 |ImsPdnFactoryImpl : Appid did not match
+02-16 03:55:27.742 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:27.811 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:27.964 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:28.043 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:28.192 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:28.341 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:28.375 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:28.608 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:28.613 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:28.620 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:28.620 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:28.622 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:28.642 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:28.794 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:28.942 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:28.972 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.013 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.018 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.022 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.025 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.029 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.032 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.036 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.040 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.045 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.048 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.053 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.056 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.060 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.065 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.069 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.073 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.077 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.195 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.243 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:29.317 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:29.328 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:29.402 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.541 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:29.606 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.776 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.814 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:29.825 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:29.842 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.842 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:29.847 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.849 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.854 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.857 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.862 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.865 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.873 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.877 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.881 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:29.976 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:30.028 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 03:55:30.141 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:30.191 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:30.380 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 03:55:30.443 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:30.743 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:31.043 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:31.346 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:31.644 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:31.813 E/sensors-hal( 1397): handle_sns_client_event:52, sar_algo_event: ts=22352647298393, event=4.000000
+02-16 03:55:31.945 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:32.208 E/QcRilRequest( 4309): [1985] < OEM_HOOK_RAW error: org.codeaurora.telephony.utils.CommandException: GENERIC_FAILURE
+02-16 03:55:32.245 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:32.412 E/QcRilRequest( 4309): [1986] < OEM_HOOK_RAW error: org.codeaurora.telephony.utils.CommandException: GENERIC_FAILURE
+02-16 03:55:32.545 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:32.653 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 4940 went down
+02-16 03:55:32.844 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:32.941 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=22353775458132 data 0.000000
+02-16 03:55:33.053 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 03:55:33.124 E/msys    ( 7149): E[N MQTT]onConnectError(562)=>Connect Error: folly::AsyncSocketException: AsyncSocketException: connect failed, type = Socket not open, errno = 110 (Connection timed out)
+02-16 03:55:33.143 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:33.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:33.742 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:34.043 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:34.343 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:34.742 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:35.045 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:35.224 E/QcRilRequest( 4309): [1988] < OEM_HOOK_RAW error: org.codeaurora.telephony.utils.CommandException: GENERIC_FAILURE
+02-16 03:55:35.294 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:35.303 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:35.344 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:35.642 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:35.828 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:35.839 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:35.839 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:35.843 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:35.942 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:35.944 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=22356778650632 data 5.000000
+02-16 03:55:36.079 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 03:55:36.242 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:36.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:36.788 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:36.799 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:36.826 E/msys    ( 7149): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 03:55:36.838 E/msys    ( 7149): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 03:55:36.841 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:37.142 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:37.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:37.743 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:38.043 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:38.341 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:38.643 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:38.942 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 03:55:39.105 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 03:55:39.244 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
