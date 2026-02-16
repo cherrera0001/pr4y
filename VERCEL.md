@@ -21,12 +21,21 @@ Así Vercel toma `apps/web` como raíz del proyecto, detecta Next.js, compila de
 
 ## Variables de entorno (Vercel)
 
-En **Settings → Environment Variables** del proyecto:
+En **Settings → Environment Variables** del proyecto hay que definir **al menos estas dos** para que la web y el login admin funcionen:
 
 | Variable | Valor | Uso |
 |----------|--------|-----|
-| `NEXT_PUBLIC_API_URL` | `https://pr4yapi-production.up.railway.app/v1` | API del SaaS (Railway). El frontend ya tiene este valor por defecto en código; conviene fijarlo aquí para producción. |
+| `NEXT_PUBLIC_API_URL` | `https://pr4yapi-production.up.railway.app/v1` | URL base de la API (Railway). **Obligatoria.** Sin ella la web no puede llamar al backend. |
+| `NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID` | Mismo que en el backend (Railway): `xxxxx.apps.googleusercontent.com` | Cliente OAuth **Web** de Google. **Obligatoria** para "Sign in with Google" en `/admin/login`. Sin ella aparece el mensaje de configuración y no se muestra el botón. |
+| `NEXT_PUBLIC_CANONICAL_HOST` | (opcional) `pr4y.cl` | Redirección de `*.vercel.app` al dominio canónico. |
 | `ADMIN_SECRET_KEY` | (opcional) Tu secreto para la puerta `/admin/gate` | Si no se define, el panel admin solo exige JWT de admin. |
+
+**Checklist:** Si la versión web falla o en login sale *"Falta configuración: define NEXT_PUBLIC_API_URL y NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID en Vercel"*:
+
+1. Vercel → proyecto → **Settings** → **Environment Variables**.
+2. Añade `NEXT_PUBLIC_API_URL` = `https://pr4yapi-production.up.railway.app/v1` (o la URL de tu API en Railway, con `/v1` al final).
+3. Añade `NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID` = el **cliente Web** de Google (el mismo que usa el backend en Railway). En Google Cloud Console es el OAuth 2.0 Client ID de tipo **Web application**.
+4. **Redeploy** el proyecto para que las variables se inyecten en el build.
 
 ## Después del deploy
 
