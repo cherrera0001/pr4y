@@ -28,6 +28,7 @@ import com.pr4y.app.data.local.entity.RequestEntity
 import com.pr4y.app.data.sync.SyncRepository
 import com.pr4y.app.di.AppContainer
 import com.pr4y.app.ui.components.Pr4yTopAppBar
+import com.pr4y.app.util.InputSanitizer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -113,8 +114,8 @@ fun NewEditScreen(
 
                         withContext(Dispatchers.IO) {
                             val payload = JSONObject().apply {
-                                put("title", title)
-                                put("body", body)
+                                put("title", InputSanitizer.sanitizeTitle(title))
+                                put("body", InputSanitizer.sanitizeBody(body))
                             }.toString().toByteArray(Charsets.UTF_8)
                             val encrypted = LocalCrypto.encrypt(payload, dek)
 

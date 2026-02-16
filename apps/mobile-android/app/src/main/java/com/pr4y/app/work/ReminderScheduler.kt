@@ -15,6 +15,7 @@ object ReminderScheduler {
 
     private const val WORK_NAME = "pr4y_daily_reminder"
 
+    // TODO: Permitir horario configurable (ej. 7:00, 21:00), múltiples recordatorios y/o elegir 1/2/todos los pedidos.
     fun scheduleDaily(context: Context) {
         createNotificationChannelIfNeeded(context)
         val request = PeriodicWorkRequestBuilder<ReminderWorker>(24, TimeUnit.HOURS)

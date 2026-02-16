@@ -2,6 +2,8 @@
 
 Este archivo define cómo deben trabajar agentes (Cursor/LLM) y humanos en el repo PR4Y.
 
+**Requerimientos detallados y rol (backend = foco, front = conecta):** Ver **docs/PROMPT-PR4Y-MEGA.md**. Ahí se listan las funciones como requerimientos (1 función = 1 requerimiento), incluidos recordatorios editables (horario, 1/2/todos, múltiples). Cualquier feature nueva debe respetar: primero backend/API, luego front.
+
 ## 0) Prioridades
 1) Privacidad y seguridad del contenido (E2EE).
 2) Simplicidad de UX (cuaderno).

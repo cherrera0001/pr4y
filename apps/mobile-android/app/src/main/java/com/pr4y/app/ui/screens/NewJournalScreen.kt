@@ -109,7 +109,7 @@ fun NewJournalScreen(navController: NavController) {
                         runBlocking {
                             val encrypted = withContext(Dispatchers.Default) {
                                 val payload = JSONObject().apply {
-                                    put("content", trimmed)
+                                    put("content", com.pr4y.app.util.InputSanitizer.sanitizeBody(trimmed))
                                     put("createdAt", now)
                                     put("updatedAt", now)
                                 }.toString().toByteArray(Charsets.UTF_8)

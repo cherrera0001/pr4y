@@ -30,8 +30,9 @@ class AuthTokenStore(context: Context) {
     }
 
     // --- Soporte Biometría ---
+    /** Guarda la frase de forma síncrona (commit) para que esté disponible antes de navegar. */
     fun savePassphrase(passphrase: String) {
-        prefs.edit().putString(KEY_PASSPHRASE, passphrase).apply()
+        prefs.edit().putString(KEY_PASSPHRASE, passphrase).commit()
     }
 
     fun getPassphrase(): String? = prefs.getString(KEY_PASSPHRASE, null)

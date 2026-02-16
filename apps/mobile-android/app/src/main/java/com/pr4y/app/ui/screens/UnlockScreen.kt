@@ -109,6 +109,9 @@ fun UnlockScreen(
         val res = api.getWrappedDek(bearer)
         hasWrappedDekOnServer = res.isSuccessful && res.body() != null
 
+        if (hasWrappedDekOnServer == false && canAuthenticate) {
+            rememberWithBiometrics = true
+        }
         if (hasWrappedDekOnServer == true && authRepository.isBiometricEnabled() && canAuthenticate && !biometricAutoShown) {
             biometricAutoShown = true
             delay(400) // Dejar que se pinte la pantalla antes del diálogo
@@ -141,7 +144,8 @@ fun UnlockScreen(
                     authRepository.savePassphrase(passphrase)
                 }
             } else {
-                // Primera vez o "olvidé mi frase": crear nueva DEK y subir al servidor
+                // Primera vez o "olvidé mi frase": crear nueva DEK y subir al servidor.
+                // Guardar frase si marcó biometría para no depender de recordarla después.
                 val saltB64 = DekManager.generateSaltB64()
                 val dek = DekManager.generateDek()
                 val kek = DekManager.deriveKek(passphrase.toCharArray(), saltB64)
@@ -174,8 +178,10 @@ fun UnlockScreen(
             onUnlocked()
         } catch (e: android.security.keystore.KeyPermanentlyInvalidatedException) {
             snackbar.showSnackbar("La seguridad de tu dispositivo ha cambiado. Introduce tu clave de privacidad manualmente para re-activar el acceso rápido.")
+        } catch (e: javax.crypto.AEADBadTagException) {
+            snackbar.showSnackbar("La frase no coincide. Comprueba que sea la misma que usaste al crear la clave.")
         } catch (e: Exception) {
-            snackbar.showSnackbar("No pudimos entrar. Revisa tu clave de privacidad.")
+            snackbar.showSnackbar("No pudimos entrar. Revisa tu clave de privacidad o la conexión.")
         } finally {
             loading = false
         }
@@ -225,6 +231,13 @@ fun UnlockScreen(
                         Spacer(Modifier.height(8.dp))
                         Text(
                             text = "Escribe tu clave de privacidad si no puedes usar la huella.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    } else if (hasWrappedDekOnServer == true && canAuthenticate && !authRepository.isBiometricEnabled()) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(
+                            text = "Si antes usabas huella y ya no aparece, la seguridad del dispositivo puede haberla reseteado. Usa tu frase de recuperación.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
