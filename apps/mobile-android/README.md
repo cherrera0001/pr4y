@@ -56,25 +56,62 @@ No hay forma de integrar una “suite Android” completa dentro de Cursor: el e
    ```
    Sustituye la ruta por la que copiaste (usa `\\` en cada `\` o usa `/` en su lugar).
 
-### Google Sign-In ("No credentials available")
+### Google Sign-In ("No credentials available") y "Error: ID de Google no configurado"
 
-Para que **Continuar con Google** funcione (Credential Manager) necesitas:
+La app **no lee** variables de entorno de Vercel ni Railway en tiempo de ejecución. Los Client IDs se inyectan en **tiempo de compilación** desde `local.properties`. Si falta el **cliente Web**, verás **"Error: ID de Google no configurado"**.
 
-1. **En `local.properties`** (mismo archivo que `sdk.dir`), añade la línea con el **Web Client ID** del proyecto de Google Cloud (el mismo que usa el backend y la web):
-   ```properties
-   GOOGLE_WEB_CLIENT_ID=TU_CLIENT_ID_WEB.apps.googleusercontent.com
-   ```
-   Sin esta variable la app mostrará un mensaje pidiendo configurarla.
+**Importante: hay 2 Client IDs distintos y no hay que confundirlos:**
 
-2. **En Google Cloud Console** (APIs & Services → Credentials):
-   - Crea o usa un **OAuth 2.0 Client ID** de tipo **Android**.
+| Uso | Tipo en Google Cloud | Dónde se usa |
+|-----|----------------------|--------------|
+| **1. Cliente Web** | OAuth 2.0 → "Web application" | Versión web, backend (Railway/Vercel) y en la app Android como `serverClientId` para obtener el token. |
+| **2. Cliente Android** | OAuth 2.0 → "Android" | Solo para la app Android (package name + SHA-1); Google exige este cliente para permitir "Continuar con Google" en el dispositivo. |
+
+**Cómo resolverlo:**
+
+1. **Cliente Web** (obligatorio para que desaparezca el error):
+   - Es el **mismo** que usa tu backend en Railway/Vercel. Cópialo desde las variables del backend o desde Google Cloud → Credentials → "Web application".
+   - En `local.properties` ponlo en `GOOGLE_WEB_CLIENT_ID=...` (sin comillas).
+
+2. **Cliente Android** (necesario para que el sistema ofrezca la cuenta en el móvil):
+   - En **Google Cloud Console** → Credentials → crea un OAuth 2.0 Client ID de tipo **Android** (no Web).
    - **Package name**: `com.pr4y.app.dev` (flavor dev) y/o `com.pr4y.app` (prod).
-   - **SHA-1**: el de tu keystore de debug (o release). Para debug:  
-     `keytool -list -v -keystore %USERPROFILE%\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android`  
-     (Windows; en Mac/Linux usa `~/.android/debug.keystore`).
-   - El **Web Client ID** (tipo Web application) es el que pones en `GOOGLE_WEB_CLIENT_ID` y en el backend; el cliente Android debe estar en el mismo proyecto para que el sistema ofrezca credenciales.
+   - **SHA-1**: `keytool -list -v -keystore %USERPROFILE%\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android` (Windows).
+   - Ese Client ID de tipo Android puedes ponerlo en `GOOGLE_ANDROID_CLIENT_ID=` en `local.properties` si quieres (la app lo tiene en BuildConfig); el sistema identifica la app por package + SHA-1.
+
+3. **Ejemplo en `local.properties`** (en `apps/mobile-android`):
+   ```properties
+   GOOGLE_WEB_CLIENT_ID=123456789-xxx.apps.googleusercontent.com
+   GOOGLE_ANDROID_CLIENT_ID=123456789-yyy.apps.googleusercontent.com
+   ```
+   Sin comillas. El valor de Web es el de tu backend; el de Android es el que creas como tipo "Android".
+
+4. **Vuelve a compilar e instalar** (Gradle solo lee `local.properties` al construir):
+   ```bash
+   cd apps/mobile-android
+   .\gradlew.bat :app:installDevDebug --no-daemon
+   ```
 
 Si ves **NoCredentialException: No credentials available**: suele ser (a) `GOOGLE_WEB_CLIENT_ID` vacío o incorrecto, (b) la app Android no registrada con package + SHA-1 correctos, o (c) ninguna cuenta de Google en el dispositivo. Añade una cuenta en Ajustes y vuelve a intentar.
+
+### Depurar login con Google (logcat)
+
+Para ver en detalle qué falla al pulsar "Continuar con Google":
+
+1. **Desde PowerShell** en `apps/mobile-android`:
+   ```powershell
+   .\capture-logcat-login.ps1
+   ```
+   Cuando pida "Reproduce ahora", pulsa el botón en el móvil. Tras 20 s se guarda un log en `logcat-login-YYYYMMDD-HHmmss.txt`.
+
+2. **Manual**: limpia y captura logcat tú mismo, luego reproduce el fallo:
+   ```bash
+   adb logcat -c
+   adb logcat -v time PR4Y_APP:V PR4Y_ERROR:V PR4Y_NETWORK:V *:E
+   ```
+   Pulsa "Continuar con Google"; cuando veas el error, detén con Ctrl+C. Busca líneas con `PR4Y_ERROR`, `GetCredentialException`, `Google Auth` o el mensaje/causa de la excepción.
+
+3. La app ya registra en logcat el **tipo de excepción**, **mensaje** y **causa** en cada fallo (por ejemplo `NoCredentialException`, `GetCredentialException` con `type` y `msg`). Revisar ese bloque suele bastar para saber si es configuración (Client ID, SHA-1), cuenta de Google o servidor.
 
 ## Build
 

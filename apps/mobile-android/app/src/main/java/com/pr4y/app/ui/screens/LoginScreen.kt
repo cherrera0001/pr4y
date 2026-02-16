@@ -149,13 +149,13 @@ fun LoginScreen(
                                     val result = credentialManager.getCredential(context, request)
                                     handleSignIn(result, authRepository, onSuccess, snackbar)
                                 } catch (e: NoCredentialException) {
-                                    Pr4yLog.e("Google Auth: No hay cuentas disponibles", e)
+                                    Pr4yLog.e("Google Auth: NoCredentialException | msg=${e.message} | cause=${e.cause}", e)
                                     snackbar.showSnackbar("No se encontró ninguna cuenta de Google activa.")
                                 } catch (e: GetCredentialException) {
-                                    Pr4yLog.e("Google Auth: Error de conexión", e)
+                                    Pr4yLog.e("Google Auth: GetCredentialException | type=${e.type} | msg=${e.message} | cause=${e.cause}", e)
                                     snackbar.showSnackbar("Error al conectar con Google.")
                                 } catch (e: Exception) {
-                                    Pr4yLog.e("Fallo inesperado en Login", e)
+                                    Pr4yLog.e("Login inesperado: ${e.javaClass.simpleName} | msg=${e.message} | cause=${e.cause}", e)
                                     snackbar.showSnackbar("Ocurrió un fallo inesperado al entrar.")
                                 } finally {
                                     loading = false

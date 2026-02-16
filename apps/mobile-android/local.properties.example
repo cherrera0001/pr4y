@@ -1,9 +1,15 @@
-# Copia este archivo a local.properties y pon la ruta de tu Android SDK.
-# Cómo obtener la ruta:
-# 1. Abre Android Studio.
-# 2. File → Settings → Appearance & Behavior → System Settings → Android SDK.
-# 3. Arriba verás "Android SDK Location". Copia esa ruta.
-# 4. Pégala aquí escapando las barras invertidas, por ejemplo:
-#    sdk.dir=C\:\\Users\\TU_USUARIO\\AppData\\Local\\Android\\Sdk
-#    O con barras normales: sdk.dir=C:/Users/TU_USUARIO/AppData/Local/Android/Sdk
+# Copia este archivo a local.properties y rellena los valores.
+#
+# 1) SDK (obligatorio)
+#    Android Studio → File → Settings → Android SDK → "Android SDK Location"
+#    Ejemplo: sdk.dir=C\:\\Users\\TU_USUARIO\\AppData\\Local\\Android\\Sdk
 sdk.dir=TU_RUTA_AL_SDK
+#
+# 2) Google Sign-In: hay 2 Client IDs distintos (no confundir).
+#
+#    1) Cliente WEB (obligatorio): para la version web y el backend. En Android se usa como serverClientId.
+#       Mismo valor que en Railway/Vercel. Google Cloud > Credentials > OAuth 2.0 > tipo "Web application".
+GOOGLE_WEB_CLIENT_ID=TU_WEB_CLIENT_ID.apps.googleusercontent.com
+#
+#    2) Cliente ANDROID: solo para la app Android. Google Cloud > Credentials > OAuth 2.0 > tipo "Android" (package + SHA-1).
+# GOOGLE_ANDROID_CLIENT_ID=TU_ANDROID_CLIENT_ID.apps.googleusercontent.com
