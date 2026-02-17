@@ -1,4 +1,6 @@
 # PR4Y
+<img width="2000" height="2000" alt="Pr4y-logo" src="https://github.com/user-attachments/assets/4b5ad4fd-17a2-491e-8323-1843b565d9ac" />
+
 
 **Cuaderno personal de oración**: pedidos, notas, seguimiento y recordatorios suaves.  
 **E2EE · Offline-first · Privacy-focused.**
