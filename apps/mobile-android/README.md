@@ -110,6 +110,8 @@ Para ver en detalle qué falla al pulsar "Continuar con Google":
 
 3. La app ya registra en logcat el **tipo de excepción**, **mensaje** y **causa** en cada fallo (por ejemplo `NoCredentialException`, `GetCredentialException` con `type` y `msg`). Revisar ese bloque suele bastar para saber si es configuración (Client ID, SHA-1), cuenta de Google o servidor.
 
+4. **Si en el log solo ves `NoCredentialException` y antes un `HTTP SUCCESS 200` en `/v1/config`**: la API está bien. El fallo es que el dispositivo no devolvió ninguna cuenta (usuario canceló el selector o **no hay cuenta de Google** en el dispositivo). Solución: Ajustes → Cuentas → Añadir cuenta de Google, luego volver a abrir la app y "Continuar con Google". En Xiaomi/MIUI, revisa también que la app tenga permiso para acceder a cuentas si aplica.
+
 ## Build
 
 El repo ya incluye el wrapper de Gradle (`gradlew`, `gradlew.bat`, `gradle/wrapper/gradle-wrapper.jar`). Desde la terminal:
