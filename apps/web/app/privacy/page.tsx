@@ -11,8 +11,8 @@ export default function PrivacyPage() {
       <article className="mx-auto max-w-3xl prose prose-slate dark:prose-invert">
         <h1>Política de Privacidad</h1>
         <p className="lead">
-          Última actualización: febrero de 2025. Esta política aplica al sitio web pr4y.cl y a la
-          aplicación móvil PR4Y (Android).
+          Última actualización: febrero de 2026. Esta política aplica al sitio web pr4y.cl y a la
+          aplicación móvil PR4Y (Android) publicada en Google Play.
         </p>
 
         <h2>1. Responsable del tratamiento</h2>
@@ -25,19 +25,25 @@ export default function PrivacyPage() {
         <h2>2. Datos que recogemos</h2>
         <ul>
           <li>
-            <strong>Cuenta:</strong> dirección de correo electrónico y contraseña (almacenada de
-            forma segura, hasheada). Solo usamos el email para identificarte y permitir el acceso al
-            servicio.
+            <strong>Cuenta e identificación:</strong> si te registras con correo y contraseña,
+            almacenamos tu email y una contraseña hasheada de forma segura. Si inicias sesión con
+            Google, recibimos únicamente tu dirección de correo y un identificador de Google para
+            autenticarte; no almacenamos ni tenemos acceso a tu contraseña de Google.
           </li>
           <li>
             <strong>Contenido de oraciones y diario:</strong> se cifra en tu dispositivo (E2EE) antes
             de enviarse a nuestros servidores. Nosotros no tenemos la clave para descifrarlo; no
-            podemos leer ni acceder al contenido de tus oraciones.
+            podemos leer ni acceder al contenido de tus oraciones ni de tu diario espiritual.
           </li>
           <li>
             <strong>Metadatos de uso:</strong> para el correcto funcionamiento del servicio
             (sincronización) podemos registrar datos técnicos no sensibles, como la fecha de
             última sincronización o el volumen de datos sincronizados, sin acceso al contenido.
+          </li>
+          <li>
+            <strong>Dispositivo:</strong> la app puede usar identificadores técnicos necesarios para
+            el inicio de sesión y la sincronización segura. No vendemos ni compartimos estos datos
+            con fines publicitarios.
           </li>
         </ul>
 
@@ -56,14 +62,30 @@ export default function PrivacyPage() {
           descifrar ese contenido en ningún momento.
         </p>
 
-        <h2>5. Conservación y eliminación</h2>
+        <h2>5. Compartición y terceros</h2>
+        <p>
+          No vendemos ni alquilamos tus datos personales. Utilizamos proveedores de infraestructura
+          (hosting) para operar el servicio; estos procesan datos bajo contrato y solo para prestar
+          el servicio. Si inicias sesión con Google, Google procesa tu autenticación según su propia
+          política de privacidad. El contenido de tus oraciones y diario permanece cifrado y no es
+          accesible para nosotros ni para terceros.
+        </p>
+
+        <h2>6. Menores</h2>
+        <p>
+          PR4Y no está dirigida a menores de 13 años. No recopilamos conscientemente datos de
+          menores de esa edad. Si tienes conocimiento de que un menor ha facilitado datos a través
+          del servicio, puedes contactarnos para solicitar su eliminación.
+        </p>
+
+        <h2>7. Conservación y eliminación</h2>
         <p>
           Conservamos los datos de tu cuenta y los metadatos necesarios mientras mantengas la cuenta
           activa. Puedes solicitar la eliminación de tu cuenta y de los datos asociados; en ese caso
           procederemos a borrarlos en un plazo razonable, salvo retención legal.
         </p>
 
-        <h2>6. Derechos</h2>
+        <h2>8. Derechos</h2>
         <p>
           Puedes ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento,
           portabilidad y oposición respecto de los datos que tratamos, dirigiendo una solicitud a
@@ -71,7 +93,7 @@ export default function PrivacyPage() {
           derecho a reclamar ante la autoridad de protección de datos competente.
         </p>
 
-        <h2>7. Cambios</h2>
+        <h2>9. Cambios</h2>
         <p>
           Podemos actualizar esta política de privacidad. La versión vigente estará publicada en esta
           página con la fecha de última actualización. El uso continuado del servicio tras cambios

@@ -1,5 +1,8 @@
 # Local SDK path (cada máquina tiene la suya)
 local.properties
+# Keystores (nunca subir al repo)
+*.jks
+keystore*
 # Cache de Gradle
 .gradle/
 build/
