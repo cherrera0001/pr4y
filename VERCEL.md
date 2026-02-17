@@ -30,6 +30,8 @@ En **Settings → Environment Variables** del proyecto hay que definir **al meno
 | `NEXT_PUBLIC_CANONICAL_HOST` | (opcional) `pr4y.cl` | Redirección de `*.vercel.app` al dominio canónico. |
 | `ADMIN_SECRET_KEY` | (opcional) Tu secreto para la puerta `/admin/gate` | Si no se define, el panel admin solo exige JWT de admin. |
 
+**Quién es administrador:** Lo define la **base de datos** (campo `User.role`: `admin` o `super_admin`). No se hardcodea en la web ni en env. Quien tenga ese rol en la API puede establecer sesión en `/admin/login`. Para tener un único admin (ej. crherrera@c4a.cl), crear o actualizar ese usuario en la BD con el rol correspondiente (script en API o panel cuando exista).
+
 **Checklist:** Si la versión web falla o en login sale *"Falta configuración en Vercel"*:
 
 1. Vercel → proyecto → **Settings** → **Environment Variables**.
@@ -38,6 +40,8 @@ En **Settings → Environment Variables** del proyecto hay que definir **al meno
 3. **Google:** Añade `NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID` = el **cliente Web** de Google (el mismo que usa el backend en Railway). En Google Cloud Console es el OAuth 2.0 Client ID de tipo **Web application**.
 4. Marca las variables para **Production** (y Preview si usas previews).
 5. **Redeploy**: Deployments → menú (⋯) del último deployment → **Redeploy** (o haz push de un commit). Las variables se inyectan en el build; sin redeploy no se aplican.
+
+**CORS (API en Railway):** Para que el login admin en pr4y.cl pueda llamar a la API, en Railway la variable **CORS_ORIGINS** del servicio API debe incluir los orígenes web: `https://pr4y.cl` y `https://www.pr4y.cl`. Sin ellos el navegador bloqueará las peticiones a `/auth/google` o podrás ver errores de red o 405 en consola. Ver **docs/PROMPT-FIX-ADMIN-LOGIN-WEB.md** si aparecen errores de COOP o 405 en /admin/login.
 
 ## Después del deploy
 

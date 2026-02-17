@@ -55,7 +55,10 @@ export async function middleware(request: NextRequest) {
   }
 
   if (pathname === '/admin/login' || pathname === '/admin/gate') {
-    return NextResponse.next();
+    const res = NextResponse.next();
+    // Necesario para que Google Identity Services (postMessage) funcione en /admin/login
+    res.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+    return res;
   }
 
   const token = request.cookies.get(ADMIN_COOKIE)?.value;
@@ -71,7 +74,9 @@ export async function middleware(request: NextRequest) {
     return res;
   }
 
-  return NextResponse.next();
+  const res = NextResponse.next();
+  res.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  return res;
 }
 
 export const config = {

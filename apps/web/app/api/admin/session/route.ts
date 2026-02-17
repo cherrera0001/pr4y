@@ -7,7 +7,11 @@ function isAdmin(role: string) {
   return role === 'admin' || role === 'super_admin';
 }
 
-/** POST: establece la sesión admin (cookie) si el token es de un admin. */
+/**
+ * POST: establece la sesión admin (cookie) si el token es de un usuario con rol admin en la BD.
+ * Quién es administrador se valida en la API (auth/me) según User.role en la base de datos; nada hardcodeado en la web.
+ * La app móvil no usa esta ruta: cualquier usuario puede usar la app con su cuenta Google.
+ */
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
