@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.pr4y.app",
+      "sha256_cert_fingerprints": [
+        "F3:3A:7F:E9:65:01:FB:F1:C3:B4:31:D8:8B:B2:9E:F0:E0:D9:8F:00:D0:F3:11:28:49:07:97:1D:58:59:64:50"
+      ]
+    }
+  }
+]

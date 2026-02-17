@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, Suspense, useEffect, useRef } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Script from 'next/script';
 import { toast } from 'sonner';
@@ -23,13 +23,11 @@ declare global {
         id: {
           initialize: (config: {
             client_id: string;
-            callback: (response: { credential: string }) => void;
-            auto_select?: boolean;
+            login_uri?: string;
+            ux_mode?: 'popup' | 'redirect';
+            auto_prompt?: boolean;
           }) => void;
-          renderButton: (
-            parent: HTMLElement,
-            options: { type?: string; theme?: string; size?: string; width?: number }
-          ) => void;
+          renderButton: (parent: HTMLElement, options: { type?: string; size?: string; theme?: string; width?: number }) => void;
         };
       };
     };
@@ -37,81 +35,60 @@ declare global {
 }
 
 function AdminLoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const [loading, setLoading] = useState(false);
-  const [scriptReady, setScriptReady] = useState(false);
-  const buttonRef = useRef<HTMLDivElement>(null);
+  const [loading] = useState(false);
+  const [loginUri, setLoginUri] = useState('');
+  const buttonContainerRef = useRef<HTMLDivElement>(null);
   const clientId = getGoogleWebClientId();
   const apiBase = getApiBaseUrl();
 
   useEffect(() => {
-    if (!scriptReady || !clientId || !buttonRef.current || !window.google?.accounts?.id) return;
-    window.google.accounts.id.initialize({
-      client_id: clientId,
-      callback: async (response: { credential: string }) => {
-        if (!apiBase) {
-          toast.error('Configuración: falta NEXT_PUBLIC_API_URL');
-          return;
-        }
-        setLoading(true);
-        try {
-          const authRes = await fetch(`${apiBase}/auth/google`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ idToken: response.credential }),
-          });
-          const authData = await authRes.json();
-          if (!authRes.ok) {
-            toast.error(authData?.error?.message ?? 'Error al validar con Google');
-            setLoading(false);
-            return;
-          }
-          const token = authData?.accessToken;
-          if (!token) {
-            toast.error('Respuesta inválida del servidor');
-            setLoading(false);
-            return;
-          }
-          const sessionRes = await fetch('/api/admin/session', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token }),
-          });
-          if (!sessionRes.ok) {
-            const err = await sessionRes.json();
-            toast.error(
-              err?.error === 'admin required'
-                ? 'No tienes rol de administrador'
-                : 'Error al iniciar sesión'
-            );
-            setLoading(false);
-            return;
-          }
-          toast.success('Sesión iniciada');
-          router.push('/admin');
-          router.refresh();
-        } catch {
-          toast.error('Error de conexión. Revisa la API.');
-        }
-        setLoading(false);
-      },
-    });
-    window.google.accounts.id.renderButton(buttonRef.current, {
-      type: 'standard',
-      theme: 'outline',
-      size: 'large',
-      width: 320,
-    });
-  }, [scriptReady, clientId, apiBase, router]);
+    if (typeof window !== 'undefined') setLoginUri(`${window.location.origin}/api/admin/login`);
+  }, []);
+
+  const canShowButton = clientId && apiBase && loginUri;
+  const [gsiLoaded, setGsiLoaded] = useState(false);
+  const gsiInitialized = useRef(false);
 
   useEffect(() => {
-    if (searchParams.get('error') === 'forbidden') {
+    if (!gsiLoaded || !loginUri || !clientId || !buttonContainerRef.current || !window.google?.accounts?.id || gsiInitialized.current) return;
+    gsiInitialized.current = true;
+    window.google.accounts.id.initialize({
+      client_id: clientId,
+      login_uri: loginUri,
+      ux_mode: 'redirect',
+      auto_prompt: false,
+    });
+    window.google.accounts.id.renderButton(buttonContainerRef.current, {
+      type: 'standard',
+      size: 'large',
+      theme: 'outline',
+      width: 320,
+    });
+  }, [gsiLoaded, loginUri, clientId]);
+
+  useEffect(() => {
+    const err = searchParams.get('error');
+    if (!err) return;
+    if (err === 'forbidden') {
       toast.error('Sesión no autorizada. Inicia sesión como admin.');
+      return;
     }
+    if (err === 'config') {
+      toast.error('Configuración: falta NEXT_PUBLIC_API_URL');
+      return;
+    }
+    if (err === 'admin_required') {
+      toast.error('No tienes rol de administrador');
+      return;
+    }
+    if (err === 'invalid_token' || err === 'invalid_response') {
+      toast.error('Error al validar con Google. Intenta de nuevo.');
+      return;
+    }
+    toast.error(err.length > 60 ? 'Error al iniciar sesión' : err);
   }, [searchParams]);
 
-  const showGoogleButton = clientId && apiBase;
   const showConfigError = !clientId || !apiBase;
   const missingApi = !apiBase;
   const missingClientId = !clientId;
@@ -138,23 +115,20 @@ function AdminLoginForm() {
               </p>
             </div>
           )}
-          {showGoogleButton && (
-            <>
+          {canShowButton && (
+            <div className="flex flex-col items-center gap-4">
               <Script
                 src="https://accounts.google.com/gsi/client"
                 strategy="afterInteractive"
-                onLoad={() => setScriptReady(true)}
+                onLoad={() => setGsiLoaded(true)}
               />
-              <div className="flex flex-col items-center gap-4">
-                {loading ? (
-                  <div className="flex h-10 w-[320px] items-center justify-center rounded-md border border-input bg-background">
-                    <Loader2 className="size-5 animate-spin text-muted-foreground" />
-                  </div>
-                ) : (
-                  <div ref={buttonRef} />
-                )}
-              </div>
-            </>
+              <div ref={buttonContainerRef} className="flex justify-center" />
+              {loading && (
+                <div className="flex h-10 w-[320px] items-center justify-center rounded-md border border-input bg-background">
+                  <Loader2 className="size-5 animate-spin text-muted-foreground" />
+                </div>
+              )}
+            </div>
           )}
           <p className="text-center">
             <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
