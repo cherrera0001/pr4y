@@ -41,6 +41,7 @@ import kotlinx.coroutines.delay
 fun UnlockScreen(
     viewModel: UnlockViewModel,
     onUnlocked: () -> Unit,
+    onSessionExpired: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -83,6 +84,7 @@ fun UnlockScreen(
     LaunchedEffect(uiState) {
         when (val state = uiState) {
             is UnlockUiState.Unlocked -> onUnlocked()
+            is UnlockUiState.SessionExpired -> onSessionExpired()
             is UnlockUiState.Error -> {
                 snackbarHostState.showSnackbar(state.message)
             }
@@ -164,6 +166,15 @@ fun UnlockScreen(
 
                 when (val state = uiState) {
                     is UnlockUiState.Loading -> CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                    is UnlockUiState.SessionExpired -> {
+                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                        Spacer(Modifier.height(16.dp))
+                        Text(
+                            text = "Sesión expirada. Redirigiendo al inicio de sesión…",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                     else -> {
                         val isLocked = state is UnlockUiState.Locked
                         val isSetup = state is UnlockUiState.SetupRequired

@@ -1,6 +1,7 @@
 package com.pr4y.app.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -34,6 +35,14 @@ fun Pr4yNavHost(
     val context = androidx.compose.ui.platform.LocalContext.current
     val api = remember { RetrofitClient.create(context) }
     val syncRepository = remember { SyncRepository(authRepository, context) }
+
+    LaunchedEffect(loggedIn) {
+        if (!loggedIn && navController.currentDestination?.route != Routes.LOGIN) {
+            navController.navigate(Routes.LOGIN) {
+                popUpTo(navController.graph.startDestinationId) { inclusive = true }
+            }
+        }
+    }
 
     val startDestination = when {
         !loggedIn -> Routes.LOGIN
@@ -73,7 +82,8 @@ fun Pr4yNavHost(
                     navController.navigate(nextRoute) {
                         popUpTo(Routes.UNLOCK) { inclusive = true }
                     }
-                }
+                },
+                onSessionExpired = onLogout
             )
         }
         

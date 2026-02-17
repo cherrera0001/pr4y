@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 /**
  * Tech Lead Note: Managed UI State for Unlock.
@@ -26,6 +27,15 @@ sealed interface UnlockUiState {
     data class Locked(val canUseBiometrics: Boolean, val biometricEnabled: Boolean) : UnlockUiState
     data object Unlocked : UnlockUiState
     data class Error(val message: String) : UnlockUiState
+    /** Sesión expirada (401 tras fallo de refresh); la app debe llevar a Login. */
+    data object SessionExpired : UnlockUiState
+}
+
+/** Resultado de obtener wrapped DEK con posible refresh ante 401. */
+private sealed class WrappedDekResult {
+    data class Ok(val response: Response<WrappedDekResponse>) : WrappedDekResult()
+    data object SessionExpired : WrappedDekResult()
+    data object Error : WrappedDekResult()
 }
 
 class UnlockViewModel(
@@ -39,21 +49,43 @@ class UnlockViewModel(
 
     private var isForgottenState = false
 
+    /** Obtiene wrapped DEK; ante 401 intenta refresh y un reintento. Si sigue 401 o falla refresh → SessionExpired. */
+    private suspend fun getWrappedDekWithRefresh(): WrappedDekResult {
+        var bearer = authRepository.getBearer() ?: return WrappedDekResult.Error
+        var res = api.getWrappedDek(bearer)
+        if (res.code() == 401) {
+            if (!authRepository.refreshToken()) {
+                authRepository.logout()
+                return WrappedDekResult.SessionExpired
+            }
+            bearer = authRepository.getBearer() ?: return WrappedDekResult.Error
+            res = api.getWrappedDek(bearer)
+            if (res.code() == 401) {
+                authRepository.logout()
+                return WrappedDekResult.SessionExpired
+            }
+        }
+        return WrappedDekResult.Ok(res)
+    }
+
     fun checkStatus(canAuthenticate: Boolean) {
         viewModelScope.launch {
             _uiState.value = UnlockUiState.Loading
-            val bearer = authRepository.getBearer() ?: ""
             try {
-                val res = api.getWrappedDek(bearer)
-                val hasWrapped = res.isSuccessful && res.body() != null
-                
-                if (hasWrapped && !isForgottenState) {
-                    _uiState.value = UnlockUiState.Locked(
-                        canUseBiometrics = canAuthenticate,
-                        biometricEnabled = authRepository.isBiometricEnabled()
-                    )
-                } else {
-                    _uiState.value = UnlockUiState.SetupRequired(canAuthenticate)
+                when (val result = getWrappedDekWithRefresh()) {
+                    is WrappedDekResult.Ok -> {
+                        val hasWrapped = result.response.isSuccessful && result.response.body() != null
+                        if (hasWrapped && !isForgottenState) {
+                            _uiState.value = UnlockUiState.Locked(
+                                canUseBiometrics = canAuthenticate,
+                                biometricEnabled = authRepository.isBiometricEnabled()
+                            )
+                        } else {
+                            _uiState.value = UnlockUiState.SetupRequired(canAuthenticate)
+                        }
+                    }
+                    is WrappedDekResult.SessionExpired -> _uiState.value = UnlockUiState.SessionExpired
+                    is WrappedDekResult.Error -> _uiState.value = UnlockUiState.Error("Error de conexión con el búnker")
                 }
             } catch (e: Exception) {
                 _uiState.value = UnlockUiState.Error("Error de conexión con el búnker")
@@ -70,24 +102,28 @@ class UnlockViewModel(
         viewModelScope.launch {
             _uiState.value = UnlockUiState.Loading
             try {
-                val bearer = authRepository.getBearer() ?: ""
-                
                 if (isForgottenState || _uiState.value is UnlockUiState.SetupRequired) {
+                    val bearer = authRepository.getBearer() ?: ""
                     setupNewBunker(passphrase, useBiometrics, bearer, context)
                 } else {
-                    val res = api.getWrappedDek(bearer)
-                    if (res.isSuccessful && res.body() != null) {
-                        val body: WrappedDekResponse = res.body()!!
-                        val kek = DekManager.deriveKek(passphrase.toCharArray(), body.kdf.saltB64)
-                        val dek = DekManager.unwrapDek(body.wrappedDekB64, kek)
-                        DekManager.setDek(dek)
-                        
-                        if (useBiometrics || authRepository.isBiometricEnabled()) {
-                            authRepository.savePassphrase(passphrase)
+                    when (val result = getWrappedDekWithRefresh()) {
+                        is WrappedDekResult.Ok -> {
+                            val res = result.response
+                            if (res.isSuccessful && res.body() != null) {
+                                val body: WrappedDekResponse = res.body()!!
+                                val kek = DekManager.deriveKek(passphrase.toCharArray(), body.kdf.saltB64)
+                                val dek = DekManager.unwrapDek(body.wrappedDekB64, kek)
+                                DekManager.setDek(dek)
+                                if (useBiometrics || authRepository.isBiometricEnabled()) {
+                                    authRepository.savePassphrase(passphrase)
+                                }
+                                finalizeUnlock(context)
+                            } else {
+                                _uiState.value = UnlockUiState.Error("No se pudo cargar la clave del servidor")
+                            }
                         }
-                        finalizeUnlock(context)
-                    } else {
-                        _uiState.value = UnlockUiState.Error("No se pudo cargar la clave del servidor")
+                        is WrappedDekResult.SessionExpired -> _uiState.value = UnlockUiState.SessionExpired
+                        is WrappedDekResult.Error -> _uiState.value = UnlockUiState.Error("No se pudo cargar la clave del servidor")
                     }
                 }
             } catch (e: javax.crypto.AEADBadTagException) {
@@ -104,15 +140,25 @@ class UnlockViewModel(
         val dek = DekManager.generateDek()
         val kek = DekManager.deriveKek(passphrase.toCharArray(), saltB64)
         val wrappedB64 = DekManager.wrapDek(dek, kek)
-        
-        val putRes = api.putWrappedDek(
-            bearer,
-            WrappedDekBody(
-                kdf = KdfDto("pbkdf2", mapOf("iterations" to 120000), saltB64),
-                wrappedDekB64 = wrappedB64,
-            ),
+        val body = WrappedDekBody(
+            kdf = KdfDto("pbkdf2", mapOf("iterations" to 120000), saltB64),
+            wrappedDekB64 = wrappedB64,
         )
-        
+
+        var currentBearer = bearer
+        var putRes = api.putWrappedDek(currentBearer, body)
+        if (putRes.code() == 401) {
+            if (authRepository.refreshToken()) {
+                currentBearer = authRepository.getBearer() ?: ""
+                putRes = api.putWrappedDek(currentBearer, body)
+            }
+            if (putRes.code() == 401) {
+                authRepository.logout()
+                _uiState.value = UnlockUiState.SessionExpired
+                return
+            }
+        }
+
         if (putRes.isSuccessful) {
             DekManager.setDek(dek)
             if (useBiometrics) {
