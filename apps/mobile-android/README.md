@@ -84,8 +84,10 @@ Los valores de `local.properties` deberían coincidir con los de Railway para qu
 1. **Cliente Android** (recomendado para login en la app):
    - En **Google Cloud Console** → Credentials → OAuth 2.0 Client ID de tipo **Android** (no pide secret; sí package + SHA-1).
    - **Package name**: `com.pr4y.app.dev` (flavor dev) y/o `com.pr4y.app` (prod).
-   - **SHA-1**: `keytool -list -v -keystore %USERPROFILE%\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android` (Windows).
-   - En `local.properties`: `GOOGLE_ANDROID_CLIENT_ID=...` (el mismo valor que en Railway). Opcional: `GOOGLE_WEB_CLIENT_ID` para fallback o para que la app funcione si solo tienes Web configurado.
+   - **SHA-1**: debes registrar **las dos** si usas ambos builds:
+     - **Debug** (para instalar desde Android Studio en tu móvil): `keytool -list -v -keystore %USERPROFILE%\.android\debug.keystore -alias androiddebugkey -storepass android` (Windows).
+     - **Release** (para el APK que compartes o publicas): la del keystore de release (`storeFile` y `keyAlias` en `local.properties`). Ver **APK para compartir** más abajo y `COMO-RESOLVER-LOGIN.md`.
+   - En `local.properties`: `GOOGLE_ANDROID_CLIENT_ID=...` (el mismo valor que en Railway). Opcional: `GOOGLE_WEB_CLIENT_ID` para fallback.
 
 2. **Ejemplo `local.properties`** (mismos valores que en Railway):
    ```properties
@@ -95,7 +97,15 @@ Los valores de `local.properties` deberían coincidir con los de Railway para qu
 
 3. **Vuelve a compilar e instalar** si cambiaste `local.properties`.
 
-Si ves **NoCredentialException**: (a) `GOOGLE_ANDROID_CLIENT_ID` vacío o incorrecto, (b) app no registrada con package + SHA-1 en Google Cloud, o (c) ninguna cuenta de Google en el dispositivo.
+Si ves **NoCredentialException**: (a) `GOOGLE_ANDROID_CLIENT_ID` vacío o incorrecto, (b) app no registrada con package + SHA-1 en Google Cloud (si repartes APK, falta la **SHA-1 de release**), o (c) ninguna cuenta de Google en el dispositivo. Detalle: `COMO-RESOLVER-LOGIN.md`.
+
+### APK para compartir (testers / familia)
+
+Cuando **compartes el APK** (por correo, Drive, etc.), ese APK suele ser **prodRelease**, firmado con el keystore de release (p. ej. `keystore-pr4y.jks` configurado en `local.properties`). Para que "Continuar con Google" funcione en los dispositivos de quienes lo instalan:
+
+1. **Añade en Google Cloud Console** la **SHA-1 del keystore de release** en el cliente OAuth Android (package `com.pr4y.app`). Puedes tener varias huellas en el mismo cliente (debug + release).
+2. **No hace falta compilar de nuevo** ni enviar otra APK: una vez registrada la SHA-1 de release, el mismo APK que ya repartiste funcionará.
+3. Pasos concretos y comando keytool: ver **`COMO-RESOLVER-LOGIN.md`** (sección 0) y **`BUILD-APK-COMPARTIR.md`**.
 
 ### Depurar login con Google (logcat)
 

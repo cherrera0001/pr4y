@@ -21,28 +21,26 @@ Te pedirá contraseña y datos (nombre, organización, etc.). **Guarda la ruta d
 
 ## 3. Configurar firma en el proyecto
 
-En **`local.properties`** (en este monorepo suele estar en la raíz del repo, p. ej. `pr4y/local.properties`; no subas este archivo a Git), añade o completa:
+En **`local.properties`** (en este repo está en `apps/mobile-android/local.properties`; no subas este archivo a Git), añade o completa:
 
 ```properties
 # Ya deberías tener:
 sdk.dir=C\:\\Users\\TU_USUARIO\\AppData\\Local\\Android\\Sdk
 GOOGLE_WEB_CLIENT_ID=583962207001-....apps.googleusercontent.com
 
-# Firma release (rutas en una sola línea, barras normales o doble barra en Windows):
-storeFile=C:/ruta/absoluta/a/pr4y-release.keystore
+# Firma release: ruta al .jks (en este proyecto suele ser keystore-pr4y.jks en app/ o ruta absoluta)
+storeFile=keystore-pr4y.jks
+# O ruta absoluta: storeFile=C:/ruta/a/keystore-pr4y.jks
 storePassword=TU_STORE_PASSWORD
-keyAlias=pr4y
+keyAlias=TU_ALIAS
 keyPassword=TU_KEY_PASSWORD
 
-# Google OAuth: prod (flavor prod) y opcionalmente dev (flavor dev)
+# Google OAuth
 GOOGLE_WEB_CLIENT_ID=583962207001-....apps.googleusercontent.com
 GOOGLE_ANDROID_CLIENT_ID=583962207001-....apps.googleusercontent.com
-# Opcional para flavor dev (evita mezclar credenciales prod/dev):
-# GOOGLE_WEB_CLIENT_ID_DEV=...-dev.apps.googleusercontent.com
-# GOOGLE_ANDROID_CLIENT_ID_DEV=...-dev.apps.googleusercontent.com
 ```
 
-El `build.gradle.kts` usa **flavor prod** con `GOOGLE_WEB_CLIENT_ID` y `GOOGLE_ANDROID_CLIENT_ID`, y **flavor dev** con `GOOGLE_*_DEV` si existen (si no, usa los de prod). Así las credenciales de prod y dev no se mezclan.
+El `build.gradle.kts` lee `storeFile`, `storePassword`, `keyAlias` y `keyPassword` de `local.properties` (o variables de entorno) para el signingConfig "release". El archivo puede llamarse `keystore-pr4y.jks` o `pr4y-release.keystore`; lo importante es que la ruta y el alias coincidan.
 
 ---
 
@@ -101,11 +99,13 @@ La revisión suele tardar desde horas hasta unos días.
 
 ---
 
-## 8. Notas
+## 8. Notas y checklist antes de publicar
 
 - **Flavor**: Para la tienda se usa el flavor **prod** (package `com.pr4y.app`). El flavor **dev** (`com.pr4y.app.dev`) es para desarrollo.
 - **SHA-1 de release**: En Google Cloud (Credenciales → cliente Android) añade también el **SHA-1 del keystore de release**, para que “Iniciar sesión con Google” funcione en la app publicada:
   ```powershell
-  & "C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -list -v -keystore C:\ruta\a\pr4y-release.keystore -alias pr4y
+  & "C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -list -v -keystore RUTA_STOREFILE -alias TU_KEY_ALIAS
   ```
+  Copia la línea **SHA1:** y pégala en "Huella digital del certificado SHA-1". Ver también `COMO-RESOLVER-LOGIN.md` y `BUILD-APK-COMPARTIR.md`.
+- **Checklist antes de subir**: (1) Incrementar `versionCode` en `app/build.gradle.kts`; (2) SHA-1 de release registrada en GCP; (3) AAB generado con `.\gradlew bundleProdRelease`.
 - **ProGuard**: El build release tiene `isMinifyEnabled = true`; si algo falla en release, revisa `proguard-rules.pro` y los logs de ofuscación.

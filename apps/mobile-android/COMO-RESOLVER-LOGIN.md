@@ -16,6 +16,12 @@ El APK que repartes suele ser **release** (o prodRelease), firmado con **tu keys
    ```
    (Te pedirá la contraseña del keystore.) Copia la línea **SHA1** (formato `AA:BB:CC:...`).
 
+   **En este proyecto:** el keystore suele ser `keystore-pr4y.jks` (en `app/` o la ruta indicada en `local.properties` como `storeFile`). El `keyAlias` está en `local.properties`. Ejemplo (Windows, ajusta la ruta si tu archivo está en otro sitio):
+   ```powershell
+   & "C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -list -v -keystore "C:\Users\TU_USUARIO\StudioProjects\pr4y\apps\mobile-android\app\keystore-pr4y.jks" -alias TU_ALIAS_DE_LOCAL_PROPERTIES
+   ```
+   **Importante:** Si tienes un archivo `sha1_real.txt` en `app/`, comprueba si es la salida del certificado **debug** (`Alias name: androiddebugkey`). Esa SHA-1 no sirve para el APK que compartes; necesitas la SHA-1 del keystore de **release** (keystore-pr4y.jks).
+
 2. **En Google Cloud Console**  
    - APIs y servicios → Credenciales → Cliente OAuth 2.0 de tipo **Android** (o créalo si no existe).  
    - **Nombre del paquete:** debe ser el del APK que compartes:
