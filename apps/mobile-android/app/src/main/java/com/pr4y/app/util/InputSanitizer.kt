@@ -5,6 +5,7 @@ package com.pr4y.app.util
  * - Trim de espacios.
  * - Eliminación de caracteres de control (ASCII 0-31, 127) que pueden causar problemas.
  * - Límite de longitud para evitar payloads desproporcionados.
+ * Política alineada con API: se permiten letras, números, puntuación y emojis (no se eliminan).
  */
 object InputSanitizer {
 

@@ -1,0 +1,18 @@
+---
+description: The Prayer Flow – Ramas y CI/CD. Nada toca main sin pasar por dev.
+globs: 
+alwaysApply: true
+---
+
+# The Prayer Flow – Ramas y CI/CD
+
+- **main** = producción (pr4y.cl, Google Play). Solo recibe merges de **dev** tras validación.
+- **dev** = integración; aquí se une Web y Mobile. Versión .dev para pruebas físicas.
+- **feat/...** y **fix/...** = ramas de trabajo. Se fusionan a **dev**, nunca directamente a **main**.
+
+Al proponer cambios:
+1. Crear rama desde **dev** (ej: `feat/reminders`, `fix/sync-cursor`).
+2. Los PRs van hacia **dev** primero; el CI ejecuta pre-flight y sanitización.
+3. Solo después de validar en **dev**, se hace merge de **dev** → **main** para producción.
+
+No hacer hotfixes directos a main: en dispositivos como Xiaomi un cambio de firma/paquete puede hacer que el usuario pierda acceso a sus datos cifrados.

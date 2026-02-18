@@ -86,6 +86,10 @@ function AdminLoginForm() {
       toast.error('Error al validar con Google. Intenta de nuevo.');
       return;
     }
+    if (err === 'server') {
+      toast.error('Error temporal del servidor. Intenta de nuevo en unos minutos.');
+      return;
+    }
     toast.error(err.length > 60 ? 'Error al iniciar sesión' : err);
   }, [searchParams]);
 

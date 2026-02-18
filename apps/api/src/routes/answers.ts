@@ -16,6 +16,19 @@ const createBodySchema = {
 
 export default async function answersRoutes(server: FastifyInstance) {
   server.get(
+    '/answers/stats',
+    {
+      config: { rateLimit: defaultRateLimit },
+      preHandler: [server.authenticate],
+    },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const userId = (request.user as { sub: string }).sub;
+      const answeredCount = await answersService.getAnsweredCount(userId);
+      reply.code(200).send({ answeredCount });
+    }
+  );
+
+  server.get(
     '/answers',
     {
       config: { rateLimit: defaultRateLimit },

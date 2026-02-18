@@ -59,6 +59,20 @@ data class RejectedDto(
     val serverUpdatedAt: String? = null,
 )
 
+/** Respuesta de GET /v1/answers/stats (conteo para dashboard). */
+data class AnswersStatsResponse(val answeredCount: Int)
+
+/** Elemento de GET /v1/answers (Muro de Fe). */
+data class AnswerDto(
+    val id: String,
+    val recordId: String,
+    val answeredAt: String,
+    val testimony: String?,
+    val record: AnswerRecordDto?,
+)
+data class AnswerRecordDto(val id: String, val type: String, val clientUpdatedAt: String)
+data class AnswersListResponse(val answers: List<AnswerDto>)
+
 /** Configuración pública desde el backend. La app Android usa solo googleAndroidClientId para login. La web usa googleWebClientId. */
 data class PublicConfigResponse(
     val googleWebClientId: String,
@@ -108,4 +122,10 @@ interface ApiService {
         @Header("Authorization") bearer: String,
         @Body body: PushBody,
     ): Response<PushResponse>
+
+    @GET("answers/stats")
+    suspend fun getAnswersStats(@Header("Authorization") bearer: String): Response<AnswersStatsResponse>
+
+    @GET("answers")
+    suspend fun getAnswers(@Header("Authorization") bearer: String): Response<AnswersListResponse>
 }

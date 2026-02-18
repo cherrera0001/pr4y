@@ -29,6 +29,12 @@ Sí puedes **generar el APK e instalar en tu teléfono desde la terminal de Curs
      pnpm run mobile:installDebug
      ```
      o desde `apps/mobile-android`: `.\gradlew.bat installDebug` (Windows) / `./gradlew installDebug` (Mac/Linux).
+   - **Varios móviles conectados:** para listar dispositivos e instalar en el que elijas (o en uno concreto por serial):
+     ```powershell
+     cd apps/mobile-android
+     .\scripts\list-and-install-on-device.ps1
+     ```
+     El script usa ADB del SDK, lista los dispositivos y te pide elegir número; luego compila e instala la variante **dev debug** en ese dispositivo.
 
 El proyecto ya incluye el wrapper de Gradle (`gradlew`, `gradlew.bat` y `gradle-wrapper.jar`), así que no hace falta Android Studio para compilar; solo necesitas el SDK (y JDK 17) para que el build funcione.
 

@@ -3,6 +3,9 @@ local.properties
 # Keystores (nunca subir al repo)
 *.jks
 keystore*
+# Último versionCode publicado (cada dev/CI mantiene el suyo o usa -PlastReleasedVersionCode)
+.last-release-versioncode
+
 # Cache de Gradle
 .gradle/
 build/

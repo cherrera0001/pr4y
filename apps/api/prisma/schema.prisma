@@ -86,7 +86,7 @@ model Record {
   user                User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   type                String    // metadato: tipo de registro; no cifrado
   version             Int
-  encryptedPayloadB64 String    @map("encrypted_payload_b64")
+  encryptedPayloadB64 String    @db.Text @map("encrypted_payload_b64") // hasta 512KB por registro (límite en API)
   clientUpdatedAt     DateTime  @map("client_updated_at")
   serverUpdatedAt     DateTime  @updatedAt @map("server_updated_at")
   deleted             Boolean   @default(false)

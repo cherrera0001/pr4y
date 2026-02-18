@@ -1,0 +1,52 @@
+# Despliegue de la API a Railway solo cuando dev se fusiona con main (push a main).
+# Solo se ejecuta si hay cambios en apps/api o packages (contrato compartido).
+# Así, cambios solo en apps/web o solo en apps/mobile-android no fuerzan redeploy de la API.
+
+name: Deploy API (Railway)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/api/**'
+      - 'packages/**'
+
+concurrency:
+  group: deploy-railway-main
+  cancel-in-progress: false
+
+jobs:
+  verify-and-deploy:
+    name: Verificar API y desplegar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: API typecheck
+        run: pnpm run api:typecheck
+
+      - name: API build
+        run: pnpm run build
+
+      # Despliegue con Railway CLI (opcional).
+      # Configura en GitHub: Settings → Secrets → RAILWAY_TOKEN (token de cuenta, railway.com/account/tokens).
+      # Si tu servicio está conectado por GitHub en Railway, el deploy ya se dispara al push a main; este step es por si usas CLI.
+      - name: Deploy to Railway (CLI)
+        if: ${{ secrets.RAILWAY_TOKEN != '' }}
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          npx -y @railway/cli up --detach
+        continue-on-error: true

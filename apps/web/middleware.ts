@@ -55,6 +55,12 @@ export async function middleware(request: NextRequest) {
   }
 
   if (pathname === '/admin/login' || pathname === '/admin/gate') {
+    // El script de Google (client) hace POST a /admin/login; Next puede devolver 405. Rewrite a la API.
+    if (request.method === 'POST' && pathname === '/admin/login') {
+      const url = request.nextUrl.clone();
+      url.pathname = '/api/admin/login';
+      return NextResponse.rewrite(url);
+    }
     const res = NextResponse.next();
     // Necesario para que Google Identity Services (postMessage) funcione en /admin/login
     res.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');

@@ -25,7 +25,8 @@ sealed interface UnlockUiState {
     data object Loading : UnlockUiState
     data class SetupRequired(val canUseBiometrics: Boolean) : UnlockUiState
     data class Locked(val canUseBiometrics: Boolean, val biometricEnabled: Boolean) : UnlockUiState
-    data object Unlocked : UnlockUiState
+    /** offerBiometric: true si se acaba de desbloquear con clave y se puede ofrecer activar huella. */
+    data class Unlocked(val offerBiometric: Boolean = false) : UnlockUiState
     data class Error(val message: String) : UnlockUiState
     /** Sesión expirada (401 tras fallo de refresh); la app debe llevar a Login. */
     data object SessionExpired : UnlockUiState
@@ -48,6 +49,8 @@ class UnlockViewModel(
     val uiState: StateFlow<UnlockUiState> = _uiState.asStateFlow()
 
     private var isForgottenState = false
+    /** Passphrase temporal para ofrecer "activar huella la próxima vez" tras desbloquear con clave. */
+    private var pendingPassphraseForBiometricOffer: String? = null
 
     /** Obtiene wrapped DEK; ante 401 intenta refresh y un reintento. Si sigue 401 o falla refresh → SessionExpired. */
     private suspend fun getWrappedDekWithRefresh(): WrappedDekResult {
@@ -93,7 +96,10 @@ class UnlockViewModel(
         }
     }
 
-    fun unlockWithPassphrase(passphrase: String, useBiometrics: Boolean, context: Context) {
+    /**
+     * @param canUseBiometrics Si el dispositivo soporta biometría; usado para ofrecer "activar huella la próxima vez" tras desbloquear con clave (solo en estado Locked).
+     */
+    fun unlockWithPassphrase(passphrase: String, useBiometrics: Boolean, context: Context, canUseBiometrics: Boolean = false) {
         if (passphrase.length < 6) {
             _uiState.value = UnlockUiState.Error("La clave debe tener al menos 6 caracteres")
             return
@@ -116,6 +122,8 @@ class UnlockViewModel(
                                 DekManager.setDek(dek)
                                 if (useBiometrics || authRepository.isBiometricEnabled()) {
                                     authRepository.savePassphrase(passphrase)
+                                } else if (canUseBiometrics) {
+                                    pendingPassphraseForBiometricOffer = passphrase
                                 }
                                 finalizeUnlock(context)
                             } else {
@@ -188,7 +196,15 @@ class UnlockViewModel(
 
     private suspend fun finalizeUnlock(context: Context) {
         syncRepository.processJournalDraft(context)
-        _uiState.value = UnlockUiState.Unlocked
+        _uiState.value = UnlockUiState.Unlocked(offerBiometric = pendingPassphraseForBiometricOffer != null)
+    }
+
+    /** Activa la huella para la próxima vez usando la passphrase guardada tras desbloqueo. Llamar cuando el usuario acepta el diálogo "¿Prefieres entrar con huella?". */
+    fun savePassphraseForBiometric() {
+        pendingPassphraseForBiometricOffer?.let {
+            authRepository.savePassphrase(it)
+            pendingPassphraseForBiometricOffer = null
+        }
     }
 
     fun resetError(canAuthenticate: Boolean) {

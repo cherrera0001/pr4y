@@ -72,5 +72,20 @@ Este archivo define cómo deben trabajar agentes (Cursor/LLM) y humanos en el re
 
 ## 7) Scope y límites
 - No construir chat ni comunidad.
-- No “racha” obligatoria ni rankings.
-- Recordatorios deben ser “suaves” y opcionales.
+- No "racha" obligatoria ni rankings.
+- Recordatorios deben ser "suaves" y opcionales.
+
+## 8) The Prayer Flow – Estructura de ramas y CI/CD
+
+**Objetivo:** Nada toca producción sin pasar por integración. Evitar hotfixes que rompan firma/paquete en dispositivos (p. ej. Xiaomi) y pérdida de acceso a datos cifrados.
+
+### Ramas
+- **main (Producción):** Código 100% estable. Solo recibe merges de `dev` tras validación. Es lo que está en pr4y.cl y Google Play.
+- **dev (Integración):** Donde se une el trabajo de Web y Mobile. Aquí vive la versión .dev para pruebas físicas.
+- **feat/...** y **fix/...:** Ramas temporales para cada tarea (ej: `feat/reminders`, `fix/sync-cursor`). Se fusionan a `dev`, nunca directamente a `main`.
+
+### Reglas
+- Las nuevas características deben nacer en ramas `feat/` o `fix/`.
+- No hacer merge a `main` sin haber pasado por `dev` y por el CI (pre-flight, sanitización, tipos).
+- Cambios en `apps/web` no deben forzar redeploy de `apps/mobile-android`; el deploy de la API en Railway solo cuando corresponda (merge a `main` y cambios en API).
+- Sanitización obligatoria: el CI impide el merge si se detectan strings prohibidos (p. ej. STRESS TEST, delay(2000), patrones de script/javascript/on*=) o falta de tipos en el esquema de sincronización (`apps/api/src/routes/sync.ts`).

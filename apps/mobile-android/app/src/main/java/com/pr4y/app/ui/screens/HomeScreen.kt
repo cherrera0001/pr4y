@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Security
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -173,6 +174,11 @@ private fun QuickActionsRow(navController: NavController) {
             onClick = { navController.navigate(Routes.SEARCH) },
             label = { Text("Buscar") },
             leadingIcon = { Icon(Icons.Default.Search, null, Modifier.size(18.dp)) }
+        )
+        AssistChip(
+            onClick = { navController.navigate(Routes.VICTORIAS) },
+            label = { Text("Mis Victorias") },
+            leadingIcon = { Icon(Icons.Default.Star, null, Modifier.size(18.dp)) }
         )
     }
 }

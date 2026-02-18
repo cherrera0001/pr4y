@@ -48,6 +48,13 @@ export async function createAnswer(
   };
 }
 
+/** Conteo de oraciones respondidas (Victorias) para dashboard. */
+export async function getAnsweredCount(userId: string): Promise<number> {
+  return prisma.answer.count({
+    where: { record: { userId } },
+  });
+}
+
 /** Listar testimonios del usuario (pedidos respondidos) para el Muro de Fe. */
 export async function listByUser(userId: string) {
   const answers = await prisma.answer.findMany({

@@ -41,7 +41,7 @@ const pullResponseSchema = {
   additionalProperties: false,
 };
 
-// Schema de push con límites de tamaño para evitar DoS
+// Schema de push: el cliente no envía serverUpdatedAt (lo asigna el servidor al guardar)
 const pushRecordSchema = {
   type: 'object',
   properties: {
@@ -57,7 +57,7 @@ const pushRecordSchema = {
     serverUpdatedAt: { type: 'string' },
     deleted: { type: 'boolean' },
   },
-  required: ['recordId', 'type', 'version', 'encryptedPayloadB64', 'clientUpdatedAt', 'serverUpdatedAt', 'deleted'],
+  required: ['recordId', 'type', 'version', 'encryptedPayloadB64', 'clientUpdatedAt', 'deleted'],
   additionalProperties: false,
 };
 

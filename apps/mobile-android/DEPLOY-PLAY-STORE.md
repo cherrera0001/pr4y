@@ -33,18 +33,27 @@ storeFile=C:/ruta/absoluta/a/pr4y-release.keystore
 storePassword=TU_STORE_PASSWORD
 keyAlias=pr4y
 keyPassword=TU_KEY_PASSWORD
+
+# Google OAuth: prod (flavor prod) y opcionalmente dev (flavor dev)
+GOOGLE_WEB_CLIENT_ID=583962207001-....apps.googleusercontent.com
+GOOGLE_ANDROID_CLIENT_ID=583962207001-....apps.googleusercontent.com
+# Opcional para flavor dev (evita mezclar credenciales prod/dev):
+# GOOGLE_WEB_CLIENT_ID_DEV=...-dev.apps.googleusercontent.com
+# GOOGLE_ANDROID_CLIENT_ID_DEV=...-dev.apps.googleusercontent.com
 ```
 
-El `build.gradle.kts` ya usa `signingConfigs.release` para el build `release`; solo necesitas que esas propiedades estén definidas.
+El `build.gradle.kts` usa **flavor prod** con `GOOGLE_WEB_CLIENT_ID` y `GOOGLE_ANDROID_CLIENT_ID`, y **flavor dev** con `GOOGLE_*_DEV` si existen (si no, usa los de prod). Así las credenciales de prod y dev no se mezclan.
 
 ---
 
 ## 4. Versión para la tienda
 
-La primera versión está configurada como **1.0.0** (`versionName`) y **versionCode = 1** en `app/build.gradle.kts`. Para futuras publicaciones:
+En `app/build.gradle.kts`: **versionName** (p. ej. 1.3.0) y **versionCode** (entero que sube en cada publicación). Para futuras publicaciones:
 
-- Sube **versionCode** (1, 2, 3…) en cada subida a Play.
-- Cambia **versionName** cuando quieras (p. ej. 1.0.1, 1.1.0).
+- **Incrementa versionCode** en cada subida a Play (1, 2, 3…). El build de release **falla** si el versionCode actual no es mayor que el último publicado (archivo `.last-release-versioncode` en la raíz del proyecto Android, o propiedad `-PlastReleasedVersionCode=X`).
+- Tras publicar, actualiza `.last-release-versioncode` con el versionCode que acabas de subir (o usa `-PlastReleasedVersionCode=X` en la siguiente compilación).
+- Para saltar la comprobación solo en local (no en CI): `-PskipReleaseVersionCheck=true`.
+- Opcional: puedes fijar **versionCode** desde variable de entorno `VERSION_CODE` (útil en CI).
 
 ---
 

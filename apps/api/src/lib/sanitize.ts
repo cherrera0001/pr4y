@@ -1,6 +1,7 @@
 /**
  * Sanitización y validación de texto (título, cuerpo, notas).
- * Elimina HTML/scripts y caracteres de control; permite solo alfanumérico y puntuación básica.
+ * Elimina HTML/scripts y caracteres de control.
+ * Permite: letras, números, espacios, puntuación básica y emojis (expresión emocional).
  * Usado en API y debe replicarse en Android (InputSanitizer) para consistencia.
  */
 
@@ -17,8 +18,8 @@ export function stripHtmlAndControlChars(value: string): string {
     .trim();
 }
 
-/** Regex: solo letras, números, espacios y puntuación básica (evita inyección). */
-const SAFE_TEXT = /^[\p{L}\p{N}\s.,;:!?'"\-()¿¡—–áéíóúüñÁÉÍÓÚÜÑ]+$/u;
+/** Regex: letras, números, espacios, puntuación básica y emojis (evita inyección HTML/SQL). */
+const SAFE_TEXT = /^[\p{L}\p{N}\s.,;:!?'"\-()¿¡—–áéíóúüñÁÉÍÓÚÜÑ\p{Emoji}]+$/u;
 
 /** Longitudes máximas por tipo (alineado con cliente). */
 export const LIMITS = {
@@ -36,7 +37,7 @@ const safeStringSchema = (maxLen: number) =>
     .refine((s) => s.length <= maxLen, `Máximo ${maxLen} caracteres tras limpieza`)
     .refine(
       (s) => s === '' || SAFE_TEXT.test(s),
-      'Solo se permiten letras, números, espacios y puntuación básica'
+      'Solo se permiten letras, números, espacios, puntuación y emojis'
     );
 
 export const sanitizeSchema = {

@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { Loader2, RefreshCw, LogIn } from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -9,7 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { AreaChart, BarChart, Grid } from '@tremor/react';
+
+const DAYS_OPTIONS = [7, 14, 30] as const;
 
 interface Stats {
   totalUsers: number;
@@ -35,39 +40,68 @@ function formatBytes(n: string | number): string {
 }
 
 export default function AdminDashboardPage() {
+  const router = useRouter();
+  const [days, setDays] = useState<number>(14);
   const [stats, setStats] = useState<Stats | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    let cancelled = false;
-    fetch('/api/admin/stats?days=14')
+  const loadStats = useCallback(() => {
+    setError(null);
+    setLoading(true);
+    fetch(`/api/admin/stats?days=${days}`, { credentials: 'same-origin' })
       .then((res) => {
-        if (!res.ok) throw new Error(res.statusText);
+        if (res.status === 401) {
+          router.replace('/admin/login');
+          return null;
+        }
+        if (!res.ok) throw new Error(res.status === 503 ? 'API no configurada' : res.statusText);
         return res.json();
       })
       .then((data) => {
-        if (!cancelled) setStats(data);
+        if (data) {
+          setStats(data);
+          setError(null);
+        }
       })
-      .catch((err) => {
-        if (!cancelled) setError(err.message || 'Error al cargar estadísticas');
-      });
-    return () => { cancelled = true; };
-  }, []);
+      .catch((err) => setError(err.message || 'Error al cargar estadísticas'))
+      .finally(() => setLoading(false));
+  }, [days, router]);
+
+  useEffect(() => {
+    loadStats();
+  }, [loadStats]);
 
   if (error) {
     return (
-      <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-destructive">
-        {error}
+      <div className="space-y-4">
+        <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+        <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-destructive flex flex-col gap-3">
+          <p>{error}</p>
+          <div className="flex flex-wrap gap-2">
+            <Button variant="outline" size="sm" onClick={loadStats}>
+              <RefreshCw className="size-4 mr-2" />
+              Reintentar
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/admin/login">
+                <LogIn className="size-4 mr-2" />
+                Ir al login
+              </Link>
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
-  if (!stats) {
+  if (loading && !stats) {
     return (
       <div className="flex items-center justify-center py-12 text-muted-foreground">
         <Loader2 className="size-6 animate-spin" />
       </div>
     );
   }
+  if (!stats) return null;
 
   const chartData = stats.byDay.map((d) => ({
     fecha: d.day.slice(5),
@@ -78,11 +112,29 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Datos en tiempo real: conteo de usuarios (public.users), registros, sincronizaciones y almacenamiento E2EE en Railway.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Usuarios, registros, sincronizaciones y almacenamiento E2EE. Período:
+          </p>
+        </div>
+        <div className="flex items-center gap-1">
+          {DAYS_OPTIONS.map((d) => (
+            <Button
+              key={d}
+              variant={days === d ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setDays(d)}
+              disabled={loading}
+            >
+              {d} días
+            </Button>
+          ))}
+          <Button variant="ghost" size="sm" onClick={loadStats} disabled={loading} title="Actualizar">
+            <RefreshCw className={`size-4 ${loading ? 'animate-spin' : ''}`} />
+          </Button>
+        </div>
       </div>
 
       <Grid numItemsSm={2} numItemsLg={4} className="gap-4">
@@ -115,7 +167,7 @@ export default function AdminDashboardPage() {
       <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
         <CardHeader>
           <CardTitle>Usuarios activos diarios (DAU)</CardTitle>
-          <CardDescription>Últimos 14 días</CardDescription>
+          <CardDescription>Últimos {days} días</CardDescription>
         </CardHeader>
         <CardContent>
           <AreaChart
@@ -133,7 +185,7 @@ export default function AdminDashboardPage() {
       <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
         <CardHeader>
           <CardTitle>Tráfico de sincronización por día</CardTitle>
-          <CardDescription>Bytes subidos y bajados</CardDescription>
+          <CardDescription>Últimos {days} días — bytes subidos y bajados</CardDescription>
         </CardHeader>
         <CardContent>
           <BarChart

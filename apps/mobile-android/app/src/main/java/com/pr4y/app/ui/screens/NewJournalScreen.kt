@@ -1,12 +1,20 @@
 package com.pr4y.app.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -21,10 +29,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import kotlinx.coroutines.launch
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.pr4y.app.crypto.DekManager
 import com.pr4y.app.crypto.LocalCrypto
@@ -33,12 +44,15 @@ import com.pr4y.app.data.local.entity.JournalEntity
 import com.pr4y.app.data.local.entity.OutboxEntity
 import com.pr4y.app.data.sync.SyncRepository
 import com.pr4y.app.di.AppContainer
-import com.pr4y.app.ui.components.Pr4yTopAppBar
+import com.pr4y.app.ui.theme.MidnightBlue
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.util.UUID
+
+private val JournalPlaceholder = "Cuéntale a Dios cómo estuvo tu día…"
 
 @Composable
 fun NewJournalScreen(navController: NavController) {
@@ -56,18 +70,28 @@ fun NewJournalScreen(navController: NavController) {
 
     Scaffold(
         snackbarHost = { SnackbarHost(snackbar) },
+        containerColor = MidnightBlue,
         topBar = {
-            Pr4yTopAppBar(
-                title = "Nueva entrada",
-                onBackClick = { navController.navigateUp() },
-            )
+            Surface(color = MidnightBlue) {
+                IconButton(
+                    onClick = { navController.navigateUp() },
+                    modifier = Modifier.statusBarsPadding()
+                ) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Atrás",
+                        tint = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
         },
     ) { padding ->
         Column(
             Modifier
                 .fillMaxSize()
+                .background(MidnightBlue)
                 .padding(padding)
-                .padding(16.dp),
+                .padding(horizontal = 20.dp),
         ) {
             if (!dekAvailable) {
                 Surface(
@@ -84,12 +108,33 @@ fun NewJournalScreen(navController: NavController) {
                 }
                 Spacer(Modifier.padding(vertical = 8.dp))
             }
-            OutlinedTextField(
+            Spacer(Modifier.padding(vertical = 8.dp))
+            BasicTextField(
                 value = content,
                 onValueChange = { content = it },
-                label = { Text("Entrada del diario") },
-                modifier = Modifier.fillMaxWidth().weight(1f),
-                minLines = 5,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState()),
+                textStyle = MaterialTheme.typography.bodyLarge.copy(
+                    fontFamily = FontFamily.Serif,
+                    fontSize = 18.sp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                ),
+                cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+                decorationBox = { inner ->
+                    if (content.isEmpty()) {
+                        Text(
+                            text = JournalPlaceholder,
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontFamily = FontFamily.Serif,
+                                fontSize = 18.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                            ),
+                        )
+                    }
+                    inner()
+                },
             )
             TextButton(
                 onClick = {

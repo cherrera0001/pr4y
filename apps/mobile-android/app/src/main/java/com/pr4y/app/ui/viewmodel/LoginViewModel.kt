@@ -105,7 +105,10 @@ class LoginViewModel(
         } catch (e: NoCredentialException) {
             Pr4yLog.e("Login: NoCredentialException (Google no reconoce la app). Revisa SHA-1 en GCP.", e)
             if (useNonce) {
-                _uiState.value = LoginUiState.Error("No se encontraron cuentas de Google. Regístrala en Ajustes.")
+                _uiState.value = LoginUiState.Error(
+                    "No se pudo iniciar sesión con Google. Comprueba que tengas una cuenta de Google en Ajustes del dispositivo. " +
+                    "Si ya la tienes, puede que esta versión de la app no esté autorizada; pide una actualización al que te compartió la app."
+                )
                 return true
             }
             return false

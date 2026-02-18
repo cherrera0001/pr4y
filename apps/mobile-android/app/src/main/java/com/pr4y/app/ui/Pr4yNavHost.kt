@@ -100,8 +100,9 @@ fun Pr4yNavHost(
         
         composable(Routes.MAIN) {
             InnerNavHost(
-                authRepository = authRepository, 
+                authRepository = authRepository,
                 syncRepository = syncRepository,
+                api = api,
                 onLogout = onLogout
             )
         }
@@ -112,6 +113,7 @@ fun Pr4yNavHost(
 private fun InnerNavHost(
     authRepository: AuthRepository,
     syncRepository: SyncRepository,
+    api: com.pr4y.app.data.remote.ApiService,
     onLogout: () -> Unit,
 ) {
     val navController = rememberNavController()
@@ -144,6 +146,12 @@ private fun InnerNavHost(
         }
         composable(Routes.SEARCH) { SearchScreen(navController = navController) }
         composable(Routes.FOCUS_MODE) { FocusModeScreen(navController = navController) }
+        composable(Routes.VICTORIAS) {
+            val victoriasViewModel: com.pr4y.app.ui.viewmodel.VictoriasViewModel = viewModel(
+                factory = com.pr4y.app.ui.viewmodel.VictoriasViewModelFactory(authRepository, api)
+            )
+            VictoriasScreen(navController = navController, viewModel = victoriasViewModel)
+        }
         composable(Routes.SETTINGS) {
             SettingsScreen(
                 navController = navController,

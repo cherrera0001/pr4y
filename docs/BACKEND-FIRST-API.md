@@ -17,7 +17,7 @@ El `recordId` debe corresponder a un record del usuario. El cliente debe program
 
 ## 2. Sanitización y seguridad
 
-- **Módulo** `apps/api/src/lib/sanitize.ts`: validación con Zod, eliminación de HTML/scripts y caracteres de control; solo texto alfanumérico y puntuación básica.
+- **Módulo** `apps/api/src/lib/sanitize.ts`: validación con Zod, eliminación de HTML/scripts y caracteres de control; permite letras, números, espacios, puntuación básica y **emojis** (para expresión emocional).
 - **Uso**: testimonios en `POST /v1/answers` (campo `testimony`) se sanitizan en backend.
 - **Android**: usar la misma lógica en `InputSanitizer` y en `NewEditScreen`/`NewJournalScreen` (filtros en `OutlinedTextField`, mensaje al pegar contenido sospechoso).
 
@@ -27,6 +27,7 @@ El `recordId` debe corresponder a un record del usuario. El cliente debe program
 - **GET /v1/sync/pull**: cada record incluye ahora el campo `status`.
 - **PATCH /v1/records/:recordId/status** – Actualiza estado. Body: `{ status: "PENDING" | "IN_PROCESS" | "ANSWERED" }`.
 - **Tabla `answers`**: registra cuándo/cómo respondió Dios.
+  - **GET /v1/answers/stats** – Conteo de oraciones respondidas. Respuesta: `{ answeredCount: number }` (para dashboard / Victorias).
   - **GET /v1/answers** – Lista testimonios del usuario (Muro de Fe).
   - **GET /v1/answers/:id** – Detalle de un testimonio.
   - **POST /v1/answers** – Crear testimonio. Body: `{ recordId, testimony? }`. Marca el record como `ANSWERED` y opcionalmente guarda texto (sanitizado).

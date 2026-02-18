@@ -65,13 +65,25 @@ fun UnlockScreen(
                     viewModel.unlockWithBiometrics(context)
                 }
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                    if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) showPassphraseField = true
+                    if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
+                        showPassphraseField = true
+                    } else {
+                        val humanMessage = when (errorCode) {
+                            BiometricPrompt.ERROR_LOCKOUT,
+                            BiometricPrompt.ERROR_LOCKOUT_PERMANENT -> "Demasiados intentos. Usa tu clave o espera un momento."
+                            BiometricPrompt.ERROR_HW_UNAVAILABLE,
+                            BiometricPrompt.ERROR_NO_BIOMETRICS,
+                            BiometricPrompt.ERROR_HW_NOT_PRESENT -> "El sensor no está disponible. Usa tu clave."
+                            else -> "El búnker está ocupado protegiendo tus datos. Reintenta en un segundo."
+                        }
+                        snackbarHostState.showSnackbar(humanMessage)
+                    }
                 }
             }
         )
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Desbloquear Búnker")
-            .setSubtitle("Autenticación biométrica requerida")
+            .setSubtitle("Toca el sensor para entrar")
             .setNegativeButtonText("Usar clave")
             .build()
         biometricPrompt.authenticate(promptInfo)
@@ -81,9 +93,13 @@ fun UnlockScreen(
         viewModel.checkStatus(canAuthenticate)
     }
 
+    var showOfferBiometricDialog by remember { mutableStateOf(false) }
     LaunchedEffect(uiState) {
         when (val state = uiState) {
-            is UnlockUiState.Unlocked -> onUnlocked()
+            is UnlockUiState.Unlocked -> {
+                if (state.offerBiometric) showOfferBiometricDialog = true
+                else onUnlocked()
+            }
             is UnlockUiState.SessionExpired -> onSessionExpired()
             is UnlockUiState.Error -> {
                 snackbarHostState.showSnackbar(state.message)
@@ -96,6 +112,24 @@ fun UnlockScreen(
             }
             else -> {}
         }
+    }
+
+    if (showOfferBiometricDialog) {
+        AlertDialog(
+            onDismissRequest = { showOfferBiometricDialog = false; onUnlocked() },
+            title = { Text("¿Prefieres entrar con tu huella la próxima vez?") },
+            text = { Text("Es más rápido y igual de seguro.") },
+            confirmButton = {
+                TextButton(onClick = {
+                    viewModel.savePassphraseForBiometric()
+                    showOfferBiometricDialog = false
+                    onUnlocked()
+                }) { Text("Sí, usar huella") }
+            },
+            dismissButton = {
+                TextButton(onClick = { showOfferBiometricDialog = false; onUnlocked() }) { Text("No") }
+            }
+        )
     }
 
     if (showForgotConfirm) {
@@ -227,7 +261,7 @@ fun UnlockScreen(
                             Spacer(Modifier.height(24.dp))
 
                             Button(
-                                onClick = { viewModel.unlockWithPassphrase(passphrase, rememberWithBiometrics, context) },
+                                onClick = { viewModel.unlockWithPassphrase(passphrase, rememberWithBiometrics, context, canUseBiometrics = canAuthenticate) },
                                 modifier = Modifier.fillMaxWidth().height(56.dp),
                                 shape = RoundedCornerShape(28.dp),
                                 colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black)

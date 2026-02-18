@@ -1,5 +1,35 @@
 # Cómo resolver el login con Google (Credential Manager)
 
+## 0. APK compartido con otros usuarios: "No se pudo iniciar sesión con Google"
+
+Si **compartes el APK** (por correo, Drive, etc.) y quienes lo instalan ven el mensaje de error al pulsar "Continuar con Google", la causa habitual es:
+
+**Google no reconoce el certificado con el que está firmado ese APK.**  
+El APK que repartes suele ser **release** (o prodRelease), firmado con **tu keystore de release**. La **huella SHA-1 de ese keystore** debe estar registrada en Google Cloud Console en el cliente OAuth de tipo **Android**, con el **nombre del paquete** que usa ese build.
+
+### Qué hacer (desarrollador)
+
+1. **Obtener la SHA-1 del keystore con el que firmas el APK que compartes**  
+   Si usas el `signingConfig` "release" de `app/build.gradle.kts` (leyendo `storeFile`, etc. de `local.properties` o variables de entorno):
+   ```bash
+   keytool -list -v -keystore RUTA_A_TU_KEYSTORE -alias TU_ALIAS
+   ```
+   (Te pedirá la contraseña del keystore.) Copia la línea **SHA1** (formato `AA:BB:CC:...`).
+
+2. **En Google Cloud Console**  
+   - APIs y servicios → Credenciales → Cliente OAuth 2.0 de tipo **Android** (o créalo si no existe).  
+   - **Nombre del paquete:** debe ser el del APK que compartes:
+     - Si es build **prod**: `com.pr4y.app`
+     - Si es **dev**: `com.pr4y.app.dev`
+   - **Huella digital del certificado SHA-1:** pega la SHA-1 del paso 1.  
+   - Puedes tener **varias** huellas en el mismo cliente (por ejemplo debug + release).
+
+3. Guarda. Los cambios pueden tardar unos minutos en aplicarse. Vuelve a probar con el mismo APK.
+
+Si solo tenías registrada la SHA-1 de **debug** (tu PC), el APK **release** que repartes tiene otra SHA-1 y por eso a los usuarios les falla. Añadir la SHA-1 de **release** soluciona el problema.
+
+---
+
 ## 1. Confirmar la causa en el siguiente logcat
 
 Se han añadido logs en `LoginViewModel` para que la próxima captura sea útil:
@@ -34,12 +64,13 @@ Cuando Google devuelve `NoCredentialException`, suele ser porque la app instalad
 ### Checklist en Google Cloud Console
 
 1. **APIs y servicios → Credenciales** → Abre el cliente OAuth 2.0 de tipo **Android** (no el de tipo Web).
-2. **Nombre del paquete:** debe ser exactamente `com.pr4y.app.dev` (el que usa tu build de desarrollo).
+2. **Nombre del paquete:** el del APK que usas: `com.pr4y.app` (build prod) o `com.pr4y.app.dev` (build dev). Si repartes APK a otros, suele ser `com.pr4y.app`.
 3. **Huella digital SHA-1:** debe ser la del certificado con el que firmas el APK que instalas:
-   - **Debug:** la del keystore por defecto de Android Studio (p. ej. `~/.android/debug.keystore`). Para verla:
+   - **Debug / desarrollo:** la del keystore por defecto de Android Studio (p. ej. `~/.android/debug.keystore`). Para verla:
      ```bash
      keytool -list -v -keystore %USERPROFILE%\.android\debug.keystore -alias androiddebugkey -storepass android
      ```
+   - **Release / APK para compartir:** la del keystore que configuraste en `app/build.gradle.kts` (signingConfig "release", `storeFile` en `local.properties`). Mismo comando con esa ruta y alias.
    - Copia la línea **SHA1** (formato `AA:BB:CC:...`) y pégala en el campo **Huella digital del certificado SHA-1** del cliente Android en GCP. Puedes tener varias huellas (debug + release) en el mismo cliente.
 4. Guarda los cambios. Los cambios pueden tardar unos minutos en propagarse.
 

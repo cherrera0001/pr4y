@@ -43,10 +43,36 @@ En **Settings → Environment Variables** del proyecto hay que definir **al meno
 
 **CORS (API en Railway):** Para que el login admin en pr4y.cl pueda llamar a la API, en Railway la variable **CORS_ORIGINS** del servicio API debe incluir los orígenes web: `https://pr4y.cl` y `https://www.pr4y.cl`. Sin ellos el navegador bloqueará las peticiones a `/auth/google` o podrás ver errores de red o 405 en consola. Ver **docs/PROMPT-FIX-ADMIN-LOGIN-WEB.md** si aparecen errores de COOP o 405 en /admin/login.
 
+**Login admin con Google (modo redirect):** El botón usa `ux_mode: redirect`: el usuario va a Google y vuelve por POST a **`/api/admin/login`** con el credential. En **Google Cloud Console** → cliente OAuth 2.0 (Web) → **Authorized redirect URIs** debe incluir exactamente: `https://www.pr4y.cl/api/admin/login` y `https://pr4y.cl/api/admin/login`. Sin ellas Google rechazará el redirect.
+
+## Panel administrador: dejarlo operativo (checklist)
+
+1. **Vercel → Environment Variables** (Production y Preview):
+   - `NEXT_PUBLIC_API_URL` = `https://pr4yapi-production.up.railway.app/v1` (o tu API en Railway; debe terminar en `/v1`).
+   - `NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID` = cliente OAuth **Web** de Google (ej. `583962207001-xxx.apps.googleusercontent.com`).
+   - (Opcional) `ADMIN_SECRET_KEY` = secreto para la puerta; si no se define, no hay pantalla /admin/gate.
+   - (Opcional) `NEXT_PUBLIC_CANONICAL_HOST` = `pr4y.cl` para redirigir vercel.app → pr4y.cl.
+
+2. **Google Cloud Console** → Credenciales → Cliente OAuth 2.0 (Aplicación web):
+   - **Orígenes autorizados de JavaScript:** `https://pr4y.cl`, `https://www.pr4y.cl`.
+   - **URIs de redireccionamiento autorizados:** además del callback de la API, añadir:
+     - `https://www.pr4y.cl/api/admin/login`
+     - `https://pr4y.cl/api/admin/login`
+
+3. **Railway (API):**
+   - **CORS_ORIGINS** debe incluir `https://pr4y.cl` y `https://www.pr4y.cl` para que el navegador permita las peticiones desde la web.
+   - En la base de datos, al menos un usuario debe tener `role = 'admin'` o `'super_admin'` (el que inicia sesión con Google en /admin/login).
+
+4. **Flujo esperado:**
+   - Si definiste `ADMIN_SECRET_KEY`: ir a **https://www.pr4y.cl/admin/gate** → introducir el token → Continuar → **/admin/login** → "Iniciar sesión con Google" → redirección a Google → vuelta a **/admin** (dashboard).
+   - Si no definiste `ADMIN_SECRET_KEY`: ir directo a **https://www.pr4y.cl/admin/login** → Google → **/admin** (dashboard).
+
+5. **Redeploy** en Vercel después de cambiar variables para que se apliquen.
+
 ## Después del deploy
 
 - **Landing:** https://pr4y.cl
-- **Admin:** https://pr4y.cl/admin (protegido por gate y JWT)
+- **Admin:** https://pr4y.cl/admin (protegido por gate —si existe ADMIN_SECRET_KEY— y JWT de admin)
 - Las visitas a `*.vercel.app` se redirigen con 308 a **pr4y.cl** (middleware).
 
 ## Resumen de arquitectura

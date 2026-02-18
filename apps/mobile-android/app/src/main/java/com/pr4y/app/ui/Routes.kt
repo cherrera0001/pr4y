@@ -15,6 +15,7 @@ object Routes {
     const val SEARCH = "search"
     const val SETTINGS = "settings"
     const val FOCUS_MODE = "focus_mode"
+    const val VICTORIAS = "victorias"
 
     fun detail(id: String) = "detail/$id"
     fun newEdit(id: String?) = if (id != null) "new_edit/$id" else NEW_EDIT

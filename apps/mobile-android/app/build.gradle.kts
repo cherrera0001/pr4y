@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.pr4y.app" 
+    namespace = "com.pr4y.app"
     compileSdk = 35
 
     val keystoreProperties = Properties()
@@ -26,11 +26,10 @@ android {
         applicationId = "com.pr4y.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = (getSignProperty("VERSION_CODE")?.toIntOrNull() ?: 1)
+        versionName = "1.3.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Manifest: usado por AndroidManifest.xml meta-data (MIUI / estabilización dev)
         manifestPlaceholders["miui_optimization"] = "false"
     }
 
@@ -50,15 +49,11 @@ android {
         }
     }
 
-    val googleWebClientId = getSignProperty("GOOGLE_WEB_CLIENT_ID") ?: ""
-    val googleAndroidClientId = getSignProperty("GOOGLE_ANDROID_CLIENT_ID") ?: ""
-
     buildTypes {
         debug {
             buildConfigField("String", "API_BASE_URL", "\"https://pr4yapi-production.up.railway.app/v1/\"")
             buildConfigField("String", "TEST_USER_EMAIL", "\"test_user_${UUID.randomUUID()}@pr4y.cl\"")
-            buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"$googleWebClientId\"")
-            buildConfigField("String", "GOOGLE_ANDROID_CLIENT_ID", "\"$googleAndroidClientId\"")
+            buildConfigField("Boolean", "DEBUG_RELEASE_GUARD", "false")
         }
         release {
             isMinifyEnabled = true
@@ -67,8 +62,7 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("String", "API_BASE_URL", "\"https://pr4yapi-production.up.railway.app/v1/\"")
             buildConfigField("String", "TEST_USER_EMAIL", "\"\"")
-            buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"$googleWebClientId\"")
-            buildConfigField("String", "GOOGLE_ANDROID_CLIENT_ID", "\"$googleAndroidClientId\"")
+            buildConfigField("Boolean", "DEBUG_RELEASE_GUARD", "false")
             signingConfig = signingConfigs.getByName("release")
         }
     }
@@ -77,9 +71,16 @@ android {
     productFlavors {
         create("dev") {
             dimension = "environment"
-            applicationIdSuffix = ".dev"
+            applicationId = "com.pr4y.app.dev"
+            buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"${getSignProperty("GOOGLE_WEB_CLIENT_ID_DEV") ?: getSignProperty("GOOGLE_WEB_CLIENT_ID") ?: ""}\"")
+            buildConfigField("String", "GOOGLE_ANDROID_CLIENT_ID", "\"${getSignProperty("GOOGLE_ANDROID_CLIENT_ID_DEV") ?: getSignProperty("GOOGLE_ANDROID_CLIENT_ID") ?: ""}\"")
         }
-        create("prod") { dimension = "environment" }
+        create("prod") {
+            dimension = "environment"
+            applicationId = "com.pr4y.app"
+            buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"${getSignProperty("GOOGLE_WEB_CLIENT_ID") ?: ""}\"")
+            buildConfigField("String", "GOOGLE_ANDROID_CLIENT_ID", "\"${getSignProperty("GOOGLE_ANDROID_CLIENT_ID") ?: ""}\"")
+        }
     }
 
     buildFeatures {
@@ -101,16 +102,34 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     }
 }
 
-// APK para compartir: después de ./gradlew assembleDevDebug, ejecuta ./gradlew copyPr4yApk
-// El APK quedará en apps/mobile-android/dist/pr4y-0.0.1.apk
-val distDir = file("${rootProject.projectDir}/dist")
-tasks.register<Copy>("copyPr4yApk") {
-    description = "Copia el APK a dist/pr4y-<version>.apk para compartir"
-    group = "distribution"
-    from(file("build/outputs/apk/dev/debug/app-dev-debug.apk"))
-    into(distDir)
-    rename { _ -> "pr4y-${android.defaultConfig.versionName}.apk" }
-    onlyIf { file("build/outputs/apk/dev/debug/app-dev-debug.apk").exists() }
+// Bloqueo de hotfixes: impide APK release si versionCode no se ha incrementado respecto al último publicado
+val releaseVersionCodeFile = rootProject.file(".last-release-versioncode")
+
+tasks.register("validateRelease") {
+    group = "verification"
+    description = "Falla si se intenta release con versionCode no incrementado"
+    doLast {
+        if (project.findProperty("skipReleaseVersionCheck") == "true") return@doLast
+
+        val vc = android.defaultConfig.versionCode
+        val last = project.findProperty("lastReleasedVersionCode")?.toString()?.toIntOrNull()
+            ?: (if (releaseVersionCodeFile.exists()) releaseVersionCodeFile.readText().trim().toIntOrNull() else null)
+            ?: 0
+
+        if (vc <= last) {
+            throw GradleException(
+                "Release bloqueado: versionCode ($vc) debe ser mayor que el último publicado ($last). " +
+                    "Incrementa versionCode en app/build.gradle.kts. Tras publicar, actualiza .last-release-versioncode con $vc. " +
+                    "Para saltar solo en local: -PskipReleaseVersionCheck=true"
+            )
+        }
+    }
+}
+
+afterEvaluate {
+    tasks.matching { it.name.startsWith("assemble") && it.name.contains("Release") }.configureEach {
+        dependsOn("validateRelease")
+    }
 }
 
 dependencies {
