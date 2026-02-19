@@ -25,7 +25,7 @@ En **Settings → Environment Variables** del proyecto hay que definir **al meno
 
 | Variable | Valor | Uso |
 |----------|--------|-----|
-| `NEXT_PUBLIC_API_URL` **o** `NEXT_PUBLIC_API_BASE_URL` | `https://pr4yapi-production.up.railway.app/v1` | URL base de la API (Railway). **Obligatoria** (basta con una de las dos). Sin ella la web no puede llamar al backend. |
+| `NEXT_PUBLIC_API_URL` **o** `NEXT_PUBLIC_API_BASE_URL` | `https://pr4yapi-production.up.railway.app/v1` o `pr4yapi-production.up.railway.app/v1` | URL base de la API (Railway). **Obligatoria**. Debe incluir `/v1`. Si no incluyes `https://`, el código lo añade. |
 | `NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID` | Mismo que en el backend (Railway): `xxxxx.apps.googleusercontent.com` | Cliente OAuth **Web** de Google. **Obligatoria** para "Sign in with Google" en `/admin/login`. Sin ella aparece el mensaje de configuración y no se muestra el botón. |
 | `NEXT_PUBLIC_CANONICAL_HOST` | (opcional) `pr4y.cl` | Redirección de `*.vercel.app` al dominio canónico. |
 | `ADMIN_SECRET_KEY` | (opcional) Tu secreto para la puerta `/admin/gate` | Si no se define, el panel admin solo exige JWT de admin. |
@@ -40,6 +40,13 @@ En **Settings → Environment Variables** del proyecto hay que definir **al meno
 3. **Google:** Añade `NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID` = el **cliente Web** de Google (el mismo que usa el backend en Railway). En Google Cloud Console es el OAuth 2.0 Client ID de tipo **Web application**.
 4. Marca las variables para **Production** (y Preview si usas previews).
 5. **Redeploy**: Deployments → menú (⋯) del último deployment → **Redeploy** (o haz push de un commit). Las variables se inyectan en el build; sin redeploy no se aplican.
+
+**Error "No se pudo conectar con la API" (api_unreachable):** La petición desde Vercel (serverless) a Railway está fallando. Comprueba:
+
+1. **Variable en Vercel:** En **Settings → Environment Variables** debe existir **`NEXT_PUBLIC_API_URL`** (o `NEXT_PUBLIC_API_BASE_URL`) con la URL base de la API **incluyendo `/v1`**, sin barra final. Ejemplo: `https://pr4yapi-production.up.railway.app/v1` (o sin esquema: `pr4yapi-production.up.railway.app/v1`; el código añade `https://` si falta). Debe estar marcada para **Production** (y Preview si usas).
+2. **Redeploy:** Tras crear o cambiar la variable, haz **Redeploy** del último deployment (Redeploy **sin** "Use existing Build Cache") para que se inyecte en el runtime.
+3. **API activa:** Comprueba que la API en Railway esté en marcha y que `https://TU_HOST/v1/health` responda (en el navegador o con `curl`). Si Railway está en cold start, el primer request puede tardar; prueba de nuevo.
+4. **Logs en Vercel:** En **Deployments** → último deployment → **Logs** (o **Functions**), busca líneas `[admin/login] API unreachable ... host=...` para ver el host que se está usando y el error exacto (timeout, ECONNREFUSED, etc.).
 
 **CORS (API en Railway):** Para que el login admin en pr4y.cl pueda llamar a la API, en Railway la variable **CORS_ORIGINS** del servicio API debe incluir los orígenes web: `https://pr4y.cl` y `https://www.pr4y.cl`. Sin ellos el navegador bloqueará las peticiones a `/auth/google` o podrás ver errores de red o 405 en consola. Ver **docs/PROMPT-FIX-ADMIN-LOGIN-WEB.md** si aparecen errores de COOP o 405 en /admin/login.
 

@@ -82,7 +82,12 @@ export async function POST(request: NextRequest) {
         cache: 'no-store',
       });
     } catch (fetchErr) {
-      console.error('[admin/login] API unreachable (auth/google):', fetchErr instanceof Error ? fetchErr.message : fetchErr);
+      try {
+        const host = new URL(apiBase).host;
+        console.error('[admin/login] API unreachable (auth/google) host=%s error=%s', host, fetchErr instanceof Error ? fetchErr.message : String(fetchErr));
+      } catch {
+        console.error('[admin/login] API unreachable (auth/google) apiBase invalid error=%s', fetchErr instanceof Error ? fetchErr.message : String(fetchErr));
+      }
       return redirectToLogin(request, 'api_unreachable');
     }
     const authData = await authRes.json().catch(() => ({}));
@@ -100,7 +105,12 @@ export async function POST(request: NextRequest) {
         cache: 'no-store',
       });
     } catch (fetchErr) {
-      console.error('[admin/login] API unreachable (auth/me):', fetchErr instanceof Error ? fetchErr.message : fetchErr);
+      try {
+        const host = new URL(apiBase).host;
+        console.error('[admin/login] API unreachable (auth/me) host=%s error=%s', host, fetchErr instanceof Error ? fetchErr.message : String(fetchErr));
+      } catch {
+        console.error('[admin/login] API unreachable (auth/me) apiBase invalid error=%s', fetchErr instanceof Error ? fetchErr.message : String(fetchErr));
+      }
       return redirectToLogin(request, 'api_unreachable');
     }
     if (!meRes.ok) {
