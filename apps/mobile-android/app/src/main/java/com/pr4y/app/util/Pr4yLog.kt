@@ -9,16 +9,16 @@ object Pr4yLog {
     private const val ERROR_TAG = "PR4Y_ERROR"
     private const val CRYPTO_TAG = "PR4Y_CRYPTO"
 
-    fun d(message: String) {
-        if (BuildConfig.DEBUG) Log.d(TAG, message)
+    fun d(message: String, throwable: Throwable? = null) {
+        if (BuildConfig.DEBUG) Log.d(TAG, message, throwable)
     }
 
-    fun i(message: String) {
-        Log.i(TAG, message)
+    fun i(message: String, throwable: Throwable? = null) {
+        Log.i(TAG, message, throwable)
     }
 
-    fun w(message: String) {
-        Log.w(TAG, message)
+    fun w(message: String, throwable: Throwable? = null) {
+        Log.w(TAG, message, throwable)
     }
 
     fun e(message: String, throwable: Throwable? = null) {

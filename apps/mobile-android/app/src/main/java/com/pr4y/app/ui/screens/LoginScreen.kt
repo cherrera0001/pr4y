@@ -16,6 +16,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -38,6 +40,12 @@ fun LoginScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
 
+    val legacySignInLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        viewModel.handleLegacySignInResult(context, result.data)
+    }
+
     LaunchedEffect(uiState) {
         when (val state = uiState) {
             is LoginUiState.Success -> onSuccess()
@@ -47,6 +55,10 @@ fun LoginScreen(
                     duration = SnackbarDuration.Short
                 )
                 viewModel.resetState()
+            }
+            is LoginUiState.LaunchLegacyGoogleSignIn -> {
+                legacySignInLauncher.launch(state.signInIntent)
+                viewModel.onLegacySignInLaunched()
             }
             else -> {}
         }
@@ -114,7 +126,8 @@ fun LoginScreen(
 
                 Crossfade(targetState = uiState, label = "LoginState") { state ->
                     when (state) {
-                        is LoginUiState.Loading -> {
+                        is LoginUiState.Loading,
+                        is LoginUiState.LaunchLegacyGoogleSignIn -> {
                             CircularProgressIndicator(
                                 modifier = Modifier.size(48.dp),
                                 color = MaterialTheme.colorScheme.primary

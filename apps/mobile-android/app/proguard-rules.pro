@@ -30,3 +30,7 @@
 # 7. Reglas para Google Tink y EncryptedSharedPreferences
 -keep class com.google.crypto.tink.** { *; }
 -dontwarn com.google.crypto.tink.**
+
+# 8. Google Sign-In (fallback legacy)
+-keep class com.google.android.gms.auth.** { *; }
+-dontwarn com.google.android.gms.auth.**

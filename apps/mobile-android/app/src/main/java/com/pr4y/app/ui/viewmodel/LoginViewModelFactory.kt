@@ -6,7 +6,7 @@ import com.pr4y.app.data.auth.AuthRepository
 
 /**
  * Tech Lead Note: Dependency injection via Factory.
- * Standard: Ensures ViewModels receive their required repositories without manual instantiation in the UI.
+ * LoginViewModel recibe context en handleLegacySignInResult para obtener SHA-1 cuando falla con ApiException 10.
  */
 class LoginViewModelFactory(
     private val authRepository: AuthRepository

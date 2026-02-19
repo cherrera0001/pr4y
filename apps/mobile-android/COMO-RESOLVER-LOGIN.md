@@ -1,5 +1,18 @@
 # Cómo resolver el login con Google (Credential Manager)
 
+## Cómo se resuelven las dos firmas (release vs debug)
+
+El código **no** elige ni envía ninguna SHA-1. La app solo usa el **Web Client ID** en `setServerClientId` / `requestIdToken`. Cuando el dispositivo llama a Google para el login, Google recibe la petición del APK y obtiene por su cuenta el **package** y la **firma del certificado** de ese APK. Con eso busca en GCP un cliente Android que coincida (mismo package + misma SHA-1). Si hay uno (release o debug), autoriza y devuelve el token. No hace falta lógica en nuestro código para “elegir” entre firmas: Google lo resuelve según con qué certificado esté firmado el APK instalado.
+
+## Referencia de clientes Android (sin pegar huellas en el repo)
+
+- **Release / Play:** un cliente Android en GCP (p. ej. "pr4y-android-client") con package `com.pr4y.app.dev` y la huella SHA-1 del keystore de release. Esa huella se ve en GCP o con `keytool` sobre tu keystore de producción.
+- **Debug:** otro cliente Android (p. ej. "pr4y-android-client-debug") con el mismo package y la huella SHA-1 del debug keystore. Para obtener la de debug sin keytool en PATH: `.\gradlew :app:showDebugSha1` (desde `apps/mobile-android`). No guardes esa salida en el repo.
+
+Variables de entorno y BuildConfig no cambian: mismo Web Client ID; Google asocia cada build al cliente por la firma del APK.
+
+---
+
 ## 0. APK compartido con otros usuarios: "No se pudo iniciar sesión con Google"
 
 Si **compartes el APK** (por correo, Drive, etc.) y quienes lo instalan ven el mensaje de error al pulsar "Continuar con Google", la causa habitual es:
@@ -33,6 +46,10 @@ El APK que repartes suele ser **release** (o prodRelease), firmado con **tu keys
 3. Guarda. Los cambios pueden tardar unos minutos en aplicarse. Vuelve a probar con el mismo APK.
 
 Si solo tenías registrada la SHA-1 de **debug** (tu PC), el APK **release** que repartes tiene otra SHA-1 y por eso a los usuarios les falla. Añadir la SHA-1 de **release** soluciona el problema.
+
+### Alternativa: firmar los builds de desarrollo con el mismo keystore que Play
+
+Si en **`local.properties`** tienes configurado el keystore de release (`storeFile`, `storePassword`, `keyAlias`, `keyPassword`), el proyecto está configurado para que **también los builds debug** (prodDebug, devDebug) se firmen con ese keystore. Así solo necesitas **una** SHA-1 en GCP (la de producción) y el login con Google funciona tanto en desarrollo como en Play. No hace falta registrar la SHA-1 del debug.keystore. Si quieres volver a usar la firma debug por defecto, comenta o borra las propiedades del keystore en `local.properties` (o usa un `local.properties` sin ellas).
 
 ---
 
@@ -90,6 +107,8 @@ Cuando Google devuelve `NoCredentialException`, suele ser porque la app instalad
 
 | Si en el logcat ves… | Acción |
 |----------------------|--------|
+| **`serverClientId should not be empty`** / **`IllegalArgumentException`** en `setServerClientId` o `LoginViewModel.performAuth` | La app se compiló sin Web Client ID. Añade en `local.properties`: `GOOGLE_WEB_CLIENT_ID=TU_WEB_CLIENT_ID.apps.googleusercontent.com` (prod) o `GOOGLE_WEB_CLIENT_ID_DEV=...` (dev). Recompila e instala. |
+| **`Login: legacy failed`** / **`ApiException: 10`** (DEVELOPER_ERROR) tras elegir cuenta en el flujo legacy | Google no reconoce la combinación **package + certificado** del APK. Añade la **huella SHA-1** del certificado con el que firmas este APK en el cliente OAuth de tipo **Android** en GCP (mismo proyecto que el Web Client ID). Package: `com.pr4y.app` (prod) o `com.pr4y.app.dev` (dev). Ver sección 2. |
 | **AuthRepository: googleLogin network/DNS error** | Revisar conexión a internet y que el backend (Railway) esté accesible. |
 | **AuthRepository: getPublicConfig failed** | Revisar URL del API y que el servidor responda. |
 | **Acceso denegado por el búnker** | El backend rechazó el token (p. ej. `GOOGLE_WEB_CLIENT_ID` en Railway distinto al de la app). Revisar que backend y app usen el mismo Web Client ID. |

@@ -6,6 +6,7 @@ Este directorio es la **fuente detallada** de documentación. El README principa
 
 | Documento | Descripción |
 |-----------|-------------|
+| [PLAN-TRABAJO-DEV-MOBILE-Y-PUBLICO.md](PLAN-TRABAJO-DEV-MOBILE-Y-PUBLICO.md) | **Plan único:** orden del proceso (dev mobile + producto público), fases y checklist |
 | [AGENTS.md](AGENTS.md) | Reglas para agentes de IA y colaboradores |
 | [skills.md](skills.md) | Competencias técnicas y de producto |
 | [architecture.md](architecture.md) | Decisiones y modelo de arquitectura |

@@ -21,7 +21,8 @@
         android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pr4y"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:enableOnBackInvokedCallback="true">
 
         <!-- Estabilización dev / MIUI: reducir intentos de optimización propietaria (LB/FrameInsert) -->
         <meta-data

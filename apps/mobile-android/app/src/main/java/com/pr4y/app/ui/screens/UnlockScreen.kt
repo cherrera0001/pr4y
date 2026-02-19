@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentActivity
 import com.pr4y.app.ui.viewmodel.UnlockUiState
 import com.pr4y.app.ui.viewmodel.UnlockViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * Tech Lead Review: UnlockScreen Production Version.
@@ -47,6 +48,7 @@ fun UnlockScreen(
     val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
     var passphrase by rememberSaveable { mutableStateOf("") }
     var rememberWithBiometrics by remember { mutableStateOf(false) }
     var showPassphraseField by remember { mutableStateOf(false) }
@@ -67,7 +69,7 @@ fun UnlockScreen(
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
                         showPassphraseField = true
-                    } else {
+                        } else {
                         val humanMessage = when (errorCode) {
                             BiometricPrompt.ERROR_LOCKOUT,
                             BiometricPrompt.ERROR_LOCKOUT_PERMANENT -> "Demasiados intentos. Usa tu clave o espera un momento."
@@ -76,7 +78,7 @@ fun UnlockScreen(
                             BiometricPrompt.ERROR_HW_NOT_PRESENT -> "El sensor no está disponible. Usa tu clave."
                             else -> "El búnker está ocupado protegiendo tus datos. Reintenta en un segundo."
                         }
-                        snackbarHostState.showSnackbar(humanMessage)
+                        scope.launch { snackbarHostState.showSnackbar(humanMessage) }
                     }
                 }
             }
