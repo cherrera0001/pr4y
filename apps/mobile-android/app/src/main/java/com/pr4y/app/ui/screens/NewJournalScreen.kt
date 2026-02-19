@@ -1,10 +1,12 @@
 package com.pr4y.app.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
@@ -34,11 +36,16 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.pr4y.app.crypto.DekManager
+import com.pr4y.app.ui.theme.ElectricCyan
 import com.pr4y.app.crypto.LocalCrypto
+import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.data.local.JournalDraftStore
 import com.pr4y.app.data.local.entity.JournalEntity
 import com.pr4y.app.data.local.entity.OutboxEntity
@@ -57,6 +64,7 @@ private val JournalPlaceholder = "Cuéntale a Dios cómo estuvo tu día…"
 @Composable
 fun NewJournalScreen(navController: NavController) {
     val context = LocalContext.current
+    val userId = remember(context) { AuthTokenStore(context.applicationContext).getUserId() ?: "" }
     var content by rememberSaveable { mutableStateOf("") }
     val snackbar = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -100,7 +108,7 @@ fun NewJournalScreen(navController: NavController) {
                     tonalElevation = 0.dp,
                 ) {
                     Text(
-                        text = "Se guardará como borrador. Desbloquea la app para proteger y sincronizar.",
+                        text = "Tus palabras se guardan aquí de forma temporal. Al desbloquear la app se protegerán y sincronizarán.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(12.dp),
@@ -136,8 +144,23 @@ fun NewJournalScreen(navController: NavController) {
                     inner()
                 },
             )
-            TextButton(
-                onClick = {
+            Spacer(Modifier.height(16.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(
+                                MidnightBlue,
+                                ElectricCyan.copy(alpha = 0.1f),
+                            )
+                        )
+                    )
+                    .padding(8.dp),
+            ) {
+                TextButton(
+                    onClick = {
                     if (content.isNotBlank()) {
                         val now = System.currentTimeMillis()
                         val id = UUID.randomUUID().toString()
@@ -151,10 +174,11 @@ fun NewJournalScreen(navController: NavController) {
                             navController.navigateUp()
                             return@TextButton
                         }
+                        val (cleanContent, hadDangerous) = com.pr4y.app.util.InputSanitizer.sanitizeBodyWithDetection(trimmed)
                         runBlocking {
                             val encrypted = withContext(Dispatchers.Default) {
                                 val payload = JSONObject().apply {
-                                    put("content", com.pr4y.app.util.InputSanitizer.sanitizeBody(trimmed))
+                                    put("content", cleanContent)
                                     put("createdAt", now)
                                     put("updatedAt", now)
                                 }.toString().toByteArray(Charsets.UTF_8)
@@ -164,6 +188,7 @@ fun NewJournalScreen(navController: NavController) {
                                 AppContainer.db.journalDao().insert(
                                     JournalEntity(
                                         id = id,
+                                        userId = userId,
                                         content = "",
                                         createdAt = now,
                                         updatedAt = now,
@@ -184,11 +209,18 @@ fun NewJournalScreen(navController: NavController) {
                                 JournalDraftStore.clearDraft(context)
                             }
                         }
-                        navController.navigateUp()
+                        scope.launch {
+                            if (hadDangerous) {
+                                snackbar.showSnackbar("Mantenemos tu búnker limpio de cualquier código externo para que solo tus palabras existan aquí.")
+                            }
+                            navController.navigateUp()
+                        }
                     }
                 },
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 Text("Guardar")
+            }
             }
         }
     }

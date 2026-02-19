@@ -18,12 +18,22 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.foundation.Canvas
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.data.local.entity.RequestEntity
+import com.pr4y.app.di.AppContainer
 import com.pr4y.app.ui.Routes
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.withContext
 import com.pr4y.app.ui.components.Pr4yTopAppBar
 import com.pr4y.app.ui.viewmodel.HomeUiState
 import com.pr4y.app.ui.viewmodel.HomeViewModel
@@ -75,7 +85,7 @@ fun HomeScreen(
                 }
                 is HomeUiState.Success -> {
                     SyncStatusHeader(state, onRetry = { viewModel.runSync() })
-                    
+                    FidelidadCard()
                     QuickActionsRow(navController)
 
                     if (state.requests.isEmpty()) {
@@ -154,6 +164,94 @@ private fun SyncStatusHeader(state: HomeUiState.Success, onRetry: () -> Unit) {
                     fontWeight = FontWeight.Bold
                 )
                 TextButton(onClick = onRetry) { Text("Sincronizar ahora") }
+            }
+        }
+    }
+}
+
+private const val WEEK_MS = 7L * 24 * 60 * 60 * 1000
+
+@Composable
+private fun FidelidadCard() {
+    val context = LocalContext.current
+    val userId = remember(context) { AuthTokenStore(context.applicationContext).getUserId() ?: "" }
+    var weekCounts by remember { mutableStateOf<List<Int>>(emptyList()) }
+    LaunchedEffect(userId) {
+        if (userId.isEmpty()) return@LaunchedEffect
+        weekCounts = withContext(Dispatchers.IO) {
+            val now = System.currentTimeMillis()
+            val requests = AppContainer.db.requestDao().getAll(userId).first()
+            val journal = AppContainer.db.journalDao().getAll(userId).first()
+            val timestamps = requests.map { it.createdAt } + journal.map { it.createdAt }
+            val counts = (0 until 4).map { weekIndex ->
+                val weekStart = now - (weekIndex + 1) * WEEK_MS
+                val weekEnd = now - weekIndex * WEEK_MS
+                timestamps.count { it in weekStart until weekEnd }
+            }.reversed()
+            counts
+        }
+    }
+    if (weekCounts.isEmpty() || weekCounts.all { it == 0 }) return
+    val labels = listOf("Esta semana", "Semana anterior", "Hace 2 sem.", "Hace 3 sem.")
+    val maxCount = (weekCounts.maxOrNull() ?: 1).coerceAtLeast(1)
+    val barColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+        ),
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            Text(
+                "Mi constancia",
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Medium,
+            )
+            Spacer(Modifier.height(12.dp))
+            weekCounts.take(4).forEachIndexed { index, count ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text(
+                        labels.getOrElse(index) { "" },
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.width(100.dp),
+                    )
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(20.dp)
+                            .padding(vertical = 2.dp)
+                    ) {
+                        Canvas(modifier = Modifier.fillMaxSize()) {
+                            val w = size.width
+                            val h = size.height
+                            val barW = (w * (count.toFloat() / maxCount)).coerceIn(0f, w)
+                            drawRect(
+                                color = barColor,
+                                topLeft = Offset(0f, 0f),
+                                size = Size(barW, h),
+                            )
+                        }
+                    }
+                }
+            }
+            if (weekCounts.any { it > 0 }) {
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    "En los momentos más difíciles, fue cuando más busqué a Dios.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                    fontStyle = FontStyle.Italic,
+                )
             }
         }
     }

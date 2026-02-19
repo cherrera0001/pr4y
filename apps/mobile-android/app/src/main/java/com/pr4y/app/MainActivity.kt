@@ -3,12 +3,15 @@ package com.pr4y.app
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
@@ -60,6 +63,7 @@ class MainViewModel : ViewModel() {
                     loggedIn = token != null
                     
                     if (loggedIn) {
+                        // tryRecoverDekSilently ya no es suspend porque solo mira memoria en tee_v2
                         isUnlocked = DekManager.tryRecoverDekSilently()
                         SyncScheduler.schedulePeriodic(context)
                     }
@@ -92,12 +96,14 @@ class MainActivity : AppCompatActivity() {
 
         val handler = Handler(Looper.getMainLooper())
         var clearDekRunnable: Runnable? = null
+        
+        // Observador de ciclo de vida global para "Cero Rastro"
         ProcessLifecycleOwner.get().lifecycle.addObserver(LifecycleEventObserver { _, event ->
             when (event) {
                 Lifecycle.Event.ON_STOP -> {
                     clearDekRunnable = Runnable {
                         DekManager.clearDek()
-                        com.pr4y.app.util.Pr4yLog.crypto("DEK borrada por sesión cero rastro (30s en segundo plano).")
+                        Pr4yLog.crypto("DEK borrada por sesión cero rastro (30s en segundo plano).")
                     }
                     handler.postDelayed(clearDekRunnable!!, BACKGROUND_DEK_CLEAR_MS)
                 }
@@ -111,11 +117,21 @@ class MainActivity : AppCompatActivity() {
         
         setContent {
             val vm: MainViewModel = viewModel()
+            val scope = rememberCoroutineScope()
+
+            // Vincular estado del DekManager con el ViewModel
+            DisposableEffect(Unit) {
+                DekManager.setDekClearedListener {
+                    vm.isUnlocked = false
+                }
+                onDispose {
+                    DekManager.setDekClearedListener(null)
+                }
+            }
+
             LaunchedEffect(Unit) {
-                DekManager.setDekClearedListener { vm.isUnlocked = false }
-                delay(300)
+                delay(300) 
                 vm.initBunker(applicationContext)
-                onDispose { DekManager.setDekClearedListener(null) }
             }
 
             Pr4yTheme {
@@ -133,9 +149,11 @@ class MainActivity : AppCompatActivity() {
                                 loggedIn = vm.loggedIn,
                                 onLoginSuccess = { vm.loggedIn = true },
                                 onLogout = {
-                                    DekManager.clearDek()
-                                    vm.loggedIn = false
-                                    vm.isUnlocked = false
+                                    scope.launch {
+                                        vm.authRepository?.logout()
+                                        vm.loggedIn = false
+                                        vm.isUnlocked = false
+                                    }
                                 },
                                 unlocked = vm.isUnlocked,
                                 onUnlocked = { vm.isUnlocked = true },
