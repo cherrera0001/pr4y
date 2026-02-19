@@ -78,6 +78,10 @@ function AdminLoginForm() {
       toast.error('Configuración: falta NEXT_PUBLIC_API_URL');
       return;
     }
+    if (err === 'api_unreachable') {
+      toast.error('No se pudo conectar con la API. Revisa NEXT_PUBLIC_API_URL en Vercel y que la API (Railway) esté activa.');
+      return;
+    }
     if (err === 'admin_required') {
       toast.error('No tienes rol de administrador');
       return;

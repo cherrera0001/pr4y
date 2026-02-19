@@ -72,12 +72,19 @@ export async function POST(request: NextRequest) {
     if (!apiBase) {
       return redirectToLogin(request, 'config');
     }
-    const authRes = await fetch(`${apiBase}/auth/google`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ idToken: credential }),
-      cache: 'no-store',
-    });
+    let authRes: Response;
+    let meRes: Response;
+    try {
+      authRes = await fetch(`${apiBase}/auth/google`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken: credential }),
+        cache: 'no-store',
+      });
+    } catch (fetchErr) {
+      console.error('[admin/login] API unreachable (auth/google):', fetchErr instanceof Error ? fetchErr.message : fetchErr);
+      return redirectToLogin(request, 'api_unreachable');
+    }
     const authData = await authRes.json().catch(() => ({}));
     if (!authRes.ok) {
       const msg = authData?.error?.message ?? 'Error al validar con Google';
@@ -87,10 +94,15 @@ export async function POST(request: NextRequest) {
     if (!token) {
       return redirectToLogin(request, 'invalid_response');
     }
-    const meRes = await fetch(`${apiBase}/auth/me`, {
-      headers: { Authorization: `Bearer ${token}` },
-      cache: 'no-store',
-    });
+    try {
+      meRes = await fetch(`${apiBase}/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+        cache: 'no-store',
+      });
+    } catch (fetchErr) {
+      console.error('[admin/login] API unreachable (auth/me):', fetchErr instanceof Error ? fetchErr.message : fetchErr);
+      return redirectToLogin(request, 'api_unreachable');
+    }
     if (!meRes.ok) {
       return redirectToLogin(request, 'invalid_token');
     }
@@ -114,14 +126,17 @@ export async function POST(request: NextRequest) {
     return redirect;
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
+    const name = err instanceof Error ? err.name : '';
     const isDev = process.env.NODE_ENV !== 'production';
     if (isDev) {
-      // En desarrollo, exponer causa para depuración (máx. 60 chars en query)
       const code = message.length > 60 ? 'server' : message.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 60);
       return redirectToLogin(request, code);
     }
-    // En producción no exponer detalles; logs en Vercel mostrarán el error
-    console.error('[admin/login] POST error:', message);
+    // En producción: log completo para Vercel (causa típica: API inalcanzable, timeout o NEXT_PUBLIC_API_URL sin /v1)
+    console.error('[admin/login] POST error:', name, message);
+    if (err instanceof Error && err.cause) {
+      console.error('[admin/login] cause:', err.cause);
+    }
     return redirectToLogin(request, 'server');
   }
 }

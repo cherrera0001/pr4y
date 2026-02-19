@@ -65,6 +65,8 @@ export async function middleware(request: NextRequest) {
     }
     const res = NextResponse.next();
     res.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+    res.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.headers.set('Pragma', 'no-cache');
     return res;
   }
 

@@ -13,11 +13,18 @@ const nextConfig = {
         source: '/.well-known/assetlinks.json',
         headers: [{ key: 'Content-Type', value: 'application/json' }],
       },
-      { source: '/admin/login', headers: [{ key: 'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups' }] },
+      {
+        source: '/admin/login',
+        headers: [
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups' },
+          { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate' },
+        ],
+      },
       {
         source: '/admin/:path*',
         headers: [
           { key: 'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups' },
+          { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate' },
         ],
       },
     ];
