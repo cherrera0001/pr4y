@@ -122,3 +122,109 @@ export async function getUsageStats(daysBack: number = 7): Promise<UsageStatsRow
     byDay,
   };
 }
+
+/** Tipo para el endpoint de detalle: pulso de la app (DAU + volumen de sincronización) sin tocar contenido de usuario. */
+export interface UsageStatsDetailRow {
+  dau: {
+    today: number;
+    byDay: Array< { day: string; usersActive: number } >;
+  };
+  syncVolume: {
+    syncsToday: number;
+    bytesPushedToday: string;
+    bytesPulledToday: string;
+    byDay: Array< { day: string; bytesPushed: string; bytesPulled: string } >;
+  };
+  totals: {
+    totalUsers: number;
+    totalRecords: number;
+    totalBlobBytes: string;
+  };
+}
+
+/**
+ * Estadísticas detalladas para GET /v1/admin/stats/detail.
+ * Permite al administrador ver el pulso de la app (DAU, volumen de sincronización) sin acceder a contenido.
+ */
+export async function getUsageStatsDetail(daysBack: number = 7): Promise<UsageStatsDetailRow> {
+  const full = await getUsageStats(daysBack);
+  return {
+    dau: {
+      today: full.byDay.find((d) => d.day === new Date().toISOString().slice(0, 10))?.usersActive ?? 0,
+      byDay: full.byDay.map((d) => ({ day: d.day, usersActive: d.usersActive })),
+    },
+    syncVolume: {
+      syncsToday: full.syncsToday,
+      bytesPushedToday: String(full.bytesPushedToday),
+      bytesPulledToday: String(full.bytesPulledToday),
+      byDay: full.byDay.map((d) => ({
+        day: d.day,
+        bytesPushed: String(d.bytesPushed),
+        bytesPulled: String(d.bytesPulled),
+      })),
+    },
+    totals: {
+      totalUsers: full.totalUsers,
+      totalRecords: full.totalRecords,
+      totalBlobBytes: String(full.totalBlobBytes),
+    },
+  };
+}
+
+/** Formatea "hace X min/horas/días" en español. */
+function formatLastActivity(at: Date | null): string {
+  if (!at) return 'Nunca';
+  const now = new Date();
+  const diffMs = now.getTime() - at.getTime();
+  const diffMin = Math.floor(diffMs / 60_000);
+  const diffHours = Math.floor(diffMs / 3_600_000);
+  const diffDays = Math.floor(diffMs / 86_400_000);
+  if (diffMin < 1) return 'Hace un momento';
+  if (diffMin < 60) return `Hace ${diffMin} min`;
+  if (diffHours < 24) return `Hace ${diffHours} h`;
+  if (diffDays < 7) return `Hace ${diffDays} días`;
+  return at.toISOString().slice(0, 10);
+}
+
+export interface StatsDetailRow {
+  lastSyncActivity: string;
+  recordsByTypeByDay: Array<{ day: string; type: string; count: number }>;
+}
+
+/**
+ * Estadísticas de detalle para admin: última actividad de sync y volumen por tipo/día.
+ * Sin IDs de usuarios ni correos (solo pulso del sistema, Zero-Knowledge).
+ */
+export async function getStatsDetail(daysBack: number = 7): Promise<StatsDetailRow> {
+  const since = new Date();
+  since.setUTCDate(since.getUTCDate() - daysBack);
+  since.setUTCHours(0, 0, 0, 0);
+
+  const [lastSyncRow, byDayTypeRows] = await Promise.all([
+    prisma.record.findFirst({
+      orderBy: { serverUpdatedAt: 'desc' },
+      select: { serverUpdatedAt: true },
+    }),
+    prisma.$queryRaw<
+      Array<{ day: Date; type: string; count: bigint }>
+    >`
+      SELECT (server_updated_at)::date AS day, type, COUNT(*)::bigint AS count
+      FROM records
+      WHERE server_updated_at >= ${since}
+      GROUP BY (server_updated_at)::date, type
+      ORDER BY day ASC, type ASC
+    `,
+  ]);
+
+  const lastSyncAt = lastSyncRow?.serverUpdatedAt ?? null;
+  const recordsByTypeByDay = byDayTypeRows.map((r) => ({
+    day: r.day instanceof Date ? r.day.toISOString().slice(0, 10) : String(r.day).slice(0, 10),
+    type: r.type,
+    count: Number(r.count),
+  }));
+
+  return {
+    lastSyncActivity: formatLastActivity(lastSyncAt),
+    recordsByTypeByDay,
+  };
+}

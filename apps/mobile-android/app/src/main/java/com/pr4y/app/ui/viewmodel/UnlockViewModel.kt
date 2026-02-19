@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pr4y.app.crypto.DekManager
+import javax.crypto.Cipher
 import com.pr4y.app.data.auth.AuthRepository
 import com.pr4y.app.data.remote.ApiService
 import com.pr4y.app.data.remote.KdfDto
@@ -49,8 +50,8 @@ class UnlockViewModel(
     val uiState: StateFlow<UnlockUiState> = _uiState.asStateFlow()
 
     private var isForgottenState = false
-    /** Passphrase temporal para ofrecer "activar huella la próxima vez" tras desbloquear con clave. */
-    private var pendingPassphraseForBiometricOffer: String? = null
+    /** Si true, tras desbloquear con passphrase se ofrece "Guardar con huella" (persistir DEK en TEE). */
+    private var pendingOfferPersistWithBiometric = false
 
     /** Obtiene wrapped DEK; ante 401 intenta refresh y un reintento. Si sigue 401 o falla refresh → SessionExpired. */
     private suspend fun getWrappedDekWithRefresh(): WrappedDekResult {
@@ -81,7 +82,7 @@ class UnlockViewModel(
                         if (hasWrapped && !isForgottenState) {
                             _uiState.value = UnlockUiState.Locked(
                                 canUseBiometrics = canAuthenticate,
-                                biometricEnabled = authRepository.isBiometricEnabled()
+                                biometricEnabled = DekManager.hasPersistedDekForBiometric()
                             )
                         } else {
                             _uiState.value = UnlockUiState.SetupRequired(canAuthenticate)
@@ -120,10 +121,8 @@ class UnlockViewModel(
                                 val kek = DekManager.deriveKek(passphrase.toCharArray(), body.kdf.saltB64)
                                 val dek = DekManager.unwrapDek(body.wrappedDekB64, kek)
                                 DekManager.setDek(dek)
-                                if (useBiometrics || authRepository.isBiometricEnabled()) {
-                                    authRepository.savePassphrase(passphrase)
-                                } else if (canUseBiometrics) {
-                                    pendingPassphraseForBiometricOffer = passphrase
+                                if (useBiometrics && canUseBiometrics) {
+                                    pendingOfferPersistWithBiometric = true
                                 }
                                 finalizeUnlock(context)
                             } else {
@@ -170,7 +169,7 @@ class UnlockViewModel(
         if (putRes.isSuccessful) {
             DekManager.setDek(dek)
             if (useBiometrics) {
-                authRepository.savePassphrase(passphrase)
+                pendingOfferPersistWithBiometric = true
             }
             isForgottenState = false
             finalizeUnlock(context)
@@ -185,26 +184,40 @@ class UnlockViewModel(
         _uiState.value = UnlockUiState.SetupRequired(true)
     }
 
-    fun unlockWithBiometrics(context: Context) {
-        val savedPass = authRepository.getPassphrase()
-        if (savedPass != null) {
-            unlockWithPassphrase(savedPass, true, context)
-        } else {
-            _uiState.value = UnlockUiState.Error("Biometría no configurada correctamente")
+    /**
+     * Desbloqueo por huella cuando la DEK está persistida en TEE.
+     * Llamar desde la UI tras BiometricPrompt.AuthenticationResult exitoso (con CryptoObject).
+     */
+    fun unlockWithBiometricCipher(cipher: Cipher, context: Context) {
+        viewModelScope.launch {
+            if (DekManager.recoverDekWithCipher(cipher)) {
+                finalizeUnlock(context)
+            } else {
+                _uiState.value = UnlockUiState.Error("No se pudo liberar la llave. Usa tu clave.")
+            }
         }
+    }
+
+    /** Llamar cuando la UI no tiene CryptoObject (sin DEK persistida en TEE). */
+    fun unlockWithBiometrics(context: Context) {
+        _uiState.value = UnlockUiState.Error("Primero entra con tu clave y activa \"Guardar con huella\".")
     }
 
     private suspend fun finalizeUnlock(context: Context) {
         syncRepository.processJournalDraft(context)
-        _uiState.value = UnlockUiState.Unlocked(offerBiometric = pendingPassphraseForBiometricOffer != null)
+        _uiState.value = UnlockUiState.Unlocked(offerBiometric = pendingOfferPersistWithBiometric)
     }
 
-    /** Activa la huella para la próxima vez usando la passphrase guardada tras desbloqueo. Llamar cuando el usuario acepta el diálogo "¿Prefieres entrar con huella?". */
-    fun savePassphraseForBiometric() {
-        pendingPassphraseForBiometricOffer?.let {
-            authRepository.savePassphrase(it)
-            pendingPassphraseForBiometricOffer = null
-        }
+    /** Persiste la DEK en TEE con huella. Llamar tras BiometricPrompt exitoso (Cipher de encrypt). */
+    fun persistDekWithBiometric(cipher: Cipher): Boolean {
+        val key = DekManager.getDek() ?: return false
+        val ok = DekManager.persistDekWithCipher(key, cipher)
+        if (ok) pendingOfferPersistWithBiometric = false
+        return ok
+    }
+
+    fun clearOfferPersistWithBiometric() {
+        pendingOfferPersistWithBiometric = false
     }
 
     fun resetError(canAuthenticate: Boolean) {

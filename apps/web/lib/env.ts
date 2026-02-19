@@ -3,7 +3,11 @@
  * Zero hardcoding: sin URLs ni IDs en código. Configurar en .env y en Vercel/Railway.
  */
 
-/** Base URL de la API (ej. Railway). Obligatoria en producción. Acepta NEXT_PUBLIC_API_URL o NEXT_PUBLIC_API_BASE_URL (Vercel). */
+/**
+ * Base URL de la API (ej. Railway). Obligatoria en producción.
+ * Acepta NEXT_PUBLIC_API_URL o NEXT_PUBLIC_API_BASE_URL (Vercel).
+ * Debe incluir el prefijo /v1 (ej. https://xxx.up.railway.app/v1) para que auth/me, auth/google y admin/stats resuelvan correctamente.
+ */
 export function getApiBaseUrl(): string {
   const url =
     process.env.NEXT_PUBLIC_API_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? '';

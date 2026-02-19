@@ -15,16 +15,29 @@ export interface SyncRecord {
   status: string;
 }
 
+/**
+ * Pull: aislamiento estricto por usuario. Solo se devuelven registros del userId del JWT.
+ * El cursor se valida para que no se pueda paginar usando un recordId de otro usuario.
+ */
 export async function pull(userId: string, cursor: string | undefined, limit: number): Promise<{ nextCursor: string; records: SyncRecord[] }> {
   const take = Math.min(Math.max(1, limit || DEFAULT_LIMIT), MAX_LIMIT);
   const orderBy = { clientUpdatedAt: 'asc' as const };
   const where = { userId };
-  const records = cursor
+
+  let effectiveCursor: string | undefined = cursor;
+  if (cursor && cursor.trim() !== '') {
+    const cursorRecord = await prisma.record.findUnique({ where: { id: cursor }, select: { userId: true } });
+    if (cursorRecord && cursorRecord.userId !== userId) {
+      effectiveCursor = undefined;
+    }
+  }
+
+  const records = effectiveCursor
     ? await prisma.record.findMany({
         where,
         orderBy,
         take: take + 1,
-        cursor: { id: cursor },
+        cursor: { id: effectiveCursor },
       })
     : await prisma.record.findMany({
         where,
@@ -79,6 +92,19 @@ function logConflict(recordId: string, reason: string, meta?: { serverVersion?: 
   }
 }
 
+/** Log when a device tries to sync a record that belongs to another user (ownership mismatch / desincronización). */
+function logOwnershipMismatch(recordId: string) {
+  const payload = { event: 'sync_push_ownership_mismatch', recordId, message: 'Device attempted to push record owned by another user' };
+  if (process.env.NODE_ENV !== 'test') {
+    console.warn('[sync]', JSON.stringify(payload));
+  }
+}
+
+/**
+ * Push: validación de propiedad estricta. Cada recordId debe pertenecer al userId del JWT.
+ * Si un registro ya existe bajo otro dueño, se rechaza con 'forbidden'. El servidor es el
+ * guardián final para que un usuario no pueda, ni por error, subir datos como si fueran de otro.
+ */
 export async function push(userId: string, records: PushRecordInput[]): Promise<PushResult> {
   const serverTime = new Date().toISOString();
   const accepted: string[] = [];
@@ -90,9 +116,10 @@ export async function push(userId: string, records: PushRecordInput[]): Promise<
       rejected.push({ recordId: rec.recordId, reason: 'invalid clientUpdatedAt' });
       continue;
     }
-    const existing = await prisma.record.findUnique({ where: { id: rec.recordId } });
+    const existing = await prisma.record.findUnique({ where: { id: rec.recordId }, select: { userId: true, version: true, serverUpdatedAt: true } });
     if (existing) {
       if (existing.userId !== userId) {
+        logOwnershipMismatch(rec.recordId);
         rejected.push({ recordId: rec.recordId, reason: 'forbidden' });
         continue;
       }
@@ -128,8 +155,19 @@ export async function push(userId: string, records: PushRecordInput[]): Promise<
         },
       });
       accepted.push(rec.recordId);
-    } catch (e) {
-      rejected.push({ recordId: rec.recordId, reason: 'database error' });
+    } catch (e: unknown) {
+      const prismaCode = e && typeof e === 'object' && 'code' in e ? (e as { code: string }).code : undefined;
+      if (prismaCode === 'P2002') {
+        const recheck = await prisma.record.findUnique({ where: { id: rec.recordId }, select: { userId: true } });
+        if (recheck && recheck.userId !== userId) {
+          logOwnershipMismatch(rec.recordId);
+          rejected.push({ recordId: rec.recordId, reason: 'forbidden' });
+        } else {
+          rejected.push({ recordId: rec.recordId, reason: 'database error' });
+        }
+      } else {
+        rejected.push({ recordId: rec.recordId, reason: 'database error' });
+      }
     }
   }
 

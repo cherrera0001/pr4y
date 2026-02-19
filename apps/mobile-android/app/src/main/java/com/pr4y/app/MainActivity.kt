@@ -1,6 +1,8 @@
 package com.pr4y.app
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,9 +11,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.pr4y.app.crypto.DekManager
 import com.pr4y.app.data.auth.AuthRepository
 import com.pr4y.app.data.auth.AuthTokenStore
@@ -78,16 +83,39 @@ class MainViewModel : ViewModel() {
     }
 }
 
+/** Tiempo en segundo plano tras el cual se borra la DEK de memoria (sesión "cero rastro"). */
+private const val BACKGROUND_DEK_CLEAR_MS = 30_000L
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val handler = Handler(Looper.getMainLooper())
+        var clearDekRunnable: Runnable? = null
+        ProcessLifecycleOwner.get().lifecycle.addObserver(LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_STOP -> {
+                    clearDekRunnable = Runnable {
+                        DekManager.clearDek()
+                        com.pr4y.app.util.Pr4yLog.crypto("DEK borrada por sesión cero rastro (30s en segundo plano).")
+                    }
+                    handler.postDelayed(clearDekRunnable!!, BACKGROUND_DEK_CLEAR_MS)
+                }
+                Lifecycle.Event.ON_START -> {
+                    clearDekRunnable?.let { handler.removeCallbacks(it) }
+                    clearDekRunnable = null
+                }
+                else -> {}
+            }
+        })
         
         setContent {
             val vm: MainViewModel = viewModel()
-            
             LaunchedEffect(Unit) {
-                delay(300) 
+                DekManager.setDekClearedListener { vm.isUnlocked = false }
+                delay(300)
                 vm.initBunker(applicationContext)
+                onDispose { DekManager.setDekClearedListener(null) }
             }
 
             Pr4yTheme {

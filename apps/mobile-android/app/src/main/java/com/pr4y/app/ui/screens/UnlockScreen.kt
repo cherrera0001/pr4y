@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import com.pr4y.app.crypto.DekManager
 import com.pr4y.app.ui.viewmodel.UnlockUiState
 import com.pr4y.app.ui.viewmodel.UnlockViewModel
 import kotlinx.coroutines.delay
@@ -36,7 +37,7 @@ import kotlinx.coroutines.launch
 
 /**
  * Tech Lead Review: UnlockScreen Production Version.
- * Standards: Midnight Blue identity, Reactive state, Biometric first.
+ * Standards: Midnight Blue identity, Reactive state, Biometric first (TEE, sin passphrase guardada).
  */
 @Composable
 fun UnlockScreen(
@@ -58,18 +59,21 @@ fun UnlockScreen(
     val canAuthenticate = biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS
 
     val launchBiometrics = {
+        val crypto = DekManager.getInitializedCipherForRecovery()
         val executor = ContextCompat.getMainExecutor(context)
         val biometricPrompt = BiometricPrompt(
             context as FragmentActivity,
             executor,
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                    viewModel.unlockWithBiometrics(context)
+                    result.cryptoObject?.cipher?.let { cipher ->
+                        viewModel.unlockWithBiometricCipher(cipher, context)
+                    } ?: viewModel.unlockWithBiometrics(context)
                 }
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
                         showPassphraseField = true
-                        } else {
+                    } else {
                         val humanMessage = when (errorCode) {
                             BiometricPrompt.ERROR_LOCKOUT,
                             BiometricPrompt.ERROR_LOCKOUT_PERMANENT -> "Demasiados intentos. Usa tu clave o espera un momento."
@@ -88,7 +92,11 @@ fun UnlockScreen(
             .setSubtitle("Toca el sensor para entrar")
             .setNegativeButtonText("Usar clave")
             .build()
-        biometricPrompt.authenticate(promptInfo)
+        if (crypto != null) {
+            biometricPrompt.authenticate(promptInfo, crypto)
+        } else {
+            biometricPrompt.authenticate(promptInfo)
+        }
     }
 
     LaunchedEffect(Unit) {
@@ -118,18 +126,50 @@ fun UnlockScreen(
 
     if (showOfferBiometricDialog) {
         AlertDialog(
-            onDismissRequest = { showOfferBiometricDialog = false; onUnlocked() },
-            title = { Text("¿Prefieres entrar con tu huella la próxima vez?") },
-            text = { Text("Es más rápido y igual de seguro.") },
+            onDismissRequest = { viewModel.clearOfferPersistWithBiometric(); showOfferBiometricDialog = false; onUnlocked() },
+            title = { Text("¿Guardar acceso con huella?") },
+            text = { Text("La próxima vez podrás entrar solo con tu huella. La llave queda en el chip de seguridad del dispositivo.") },
             confirmButton = {
                 TextButton(onClick = {
-                    viewModel.savePassphraseForBiometric()
-                    showOfferBiometricDialog = false
-                    onUnlocked()
-                }) { Text("Sí, usar huella") }
+                    val crypto = DekManager.getInitializedCipherForEncrypt()
+                    if (crypto != null) {
+                        val executor = ContextCompat.getMainExecutor(context)
+                        val prompt = BiometricPrompt(
+                            context as FragmentActivity,
+                            executor,
+                            object : BiometricPrompt.AuthenticationCallback() {
+                                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                                    result.cryptoObject?.cipher?.let { cipher ->
+                                        if (viewModel.persistDekWithBiometric(cipher)) {
+                                            scope.launch { snackbarHostState.showSnackbar("Listo. La próxima vez entra con tu huella.") }
+                                        }
+                                    }
+                                    showOfferBiometricDialog = false
+                                    onUnlocked()
+                                }
+                                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                                    if (errorCode != BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
+                                        scope.launch { snackbarHostState.showSnackbar("No se pudo guardar. Podrás activarlo más tarde.") }
+                                    }
+                                    showOfferBiometricDialog = false
+                                    onUnlocked()
+                                }
+                            }
+                        )
+                        val info = BiometricPrompt.PromptInfo.Builder()
+                            .setTitle("Guardar con huella")
+                            .setSubtitle("Toca el sensor para que la llave quede protegida en el dispositivo")
+                            .setNegativeButtonText("Ahora no")
+                            .build()
+                        prompt.authenticate(info, crypto)
+                    } else {
+                        showOfferBiometricDialog = false
+                        onUnlocked()
+                    }
+                }) { Text("Sí, guardar con huella") }
             },
             dismissButton = {
-                TextButton(onClick = { showOfferBiometricDialog = false; onUnlocked() }) { Text("No") }
+                TextButton(onClick = { viewModel.clearOfferPersistWithBiometric(); showOfferBiometricDialog = false; onUnlocked() }) { Text("Ahora no") }
             }
         )
     }

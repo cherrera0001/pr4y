@@ -17,6 +17,7 @@ import adminRoutes from './routes/admin';
 import remindersRoutes from './routes/reminders';
 import answersRoutes from './routes/answers';
 import recordsRoutes from './routes/records';
+import userRoutes from './routes/user';
 
 const BODY_LIMIT = 2 * 1024 * 1024; // 2MB global
 
@@ -131,6 +132,7 @@ server.register(cryptoRoutes, { prefix: '/v1' });
 server.register(remindersRoutes, { prefix: '/v1' });
 server.register(answersRoutes, { prefix: '/v1' });
 server.register(recordsRoutes, { prefix: '/v1' });
+server.register(userRoutes, { prefix: '/v1' });
 server.register(adminRoutes, { prefix: '/v1' });
 
 // Arranque: Railway espera escucha en puerto 8080. Binding 0.0.0.0 obligatorio para que el proxy enrute.

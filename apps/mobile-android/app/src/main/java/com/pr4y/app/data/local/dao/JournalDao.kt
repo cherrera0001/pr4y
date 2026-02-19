@@ -9,15 +9,15 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface JournalDao {
-    @Query("SELECT * FROM journal ORDER BY updatedAt DESC")
-    fun getAll(): Flow<List<JournalEntity>>
+    @Query("SELECT * FROM journal WHERE userId = :userId ORDER BY updatedAt DESC")
+    fun getAll(userId: String): Flow<List<JournalEntity>>
 
-    @Query("SELECT * FROM journal WHERE id = :id")
-    suspend fun getById(id: String): JournalEntity?
+    @Query("SELECT * FROM journal WHERE id = :id AND userId = :userId")
+    suspend fun getById(id: String, userId: String): JournalEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(entity: JournalEntity)
 
-    @Query("DELETE FROM journal WHERE id = :id")
-    suspend fun deleteById(id: String)
+    @Query("DELETE FROM journal WHERE id = :id AND userId = :userId")
+    suspend fun deleteById(id: String, userId: String)
 }

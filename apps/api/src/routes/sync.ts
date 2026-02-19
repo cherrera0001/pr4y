@@ -106,13 +106,14 @@ export default async function syncRoutes(server: FastifyInstance) {
       config: { rateLimit: defaultRateLimit },
       schema: { querystring: pullQuerySchema, response: { 200: pullResponseSchema } },
       preHandler: [server.authenticate],
+      // Aislamiento: solo se devuelven registros del userId del JWT; cursor validado por propiedad.
     },
     async (request: FastifyRequest, reply: FastifyReply) => {
       const userId = (request.user as { sub: string }).sub;
       const query = request.query as { cursor?: string; limit?: number };
       const cursor = typeof query?.cursor === 'string' ? query.cursor : undefined;
       const rawLimit = query?.limit;
-const limit = typeof rawLimit === 'number' ? rawLimit : typeof rawLimit === 'string' ? parseInt(rawLimit, 10) : 100;
+      const limit = typeof rawLimit === 'number' ? rawLimit : typeof rawLimit === 'string' ? parseInt(rawLimit, 10) : 100;
       const result = await syncService.pull(userId, cursor, limit);
       reply.code(200).send(result);
     }
@@ -124,6 +125,7 @@ const limit = typeof rawLimit === 'number' ? rawLimit : typeof rawLimit === 'str
       config: { rateLimit: defaultRateLimit },
       schema: { body: pushBodySchema, response: { 200: pushResponseSchema } },
       preHandler: [server.authenticate],
+      // Propiedad: cada recordId se valida contra el userId del JWT; registros de otro dueño → rejected reason 'forbidden'.
     },
     async (request: FastifyRequest, reply: FastifyReply) => {
       const userId = (request.user as { sub: string }).sub;

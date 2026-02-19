@@ -31,6 +31,11 @@ interface Stats {
   }>;
 }
 
+interface StatsDetail {
+  lastSyncActivity: string;
+  recordsByTypeByDay: Array<{ day: string; type: string; count: number }>;
+}
+
 function formatBytes(n: string | number): string {
   const num = typeof n === 'string' ? BigInt(n) : BigInt(n);
   if (num < 1024n) return `${num} B`;
@@ -43,24 +48,32 @@ export default function AdminDashboardPage() {
   const router = useRouter();
   const [days, setDays] = useState<number>(14);
   const [stats, setStats] = useState<Stats | null>(null);
+  const [detail, setDetail] = useState<StatsDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const loadStats = useCallback(() => {
     setError(null);
     setLoading(true);
-    fetch(`/api/admin/stats?days=${days}`, { credentials: 'same-origin' })
-      .then((res) => {
-        if (res.status === 401) {
+    const daysParam = days;
+    Promise.all([
+      fetch(`/api/admin/stats?days=${daysParam}`, { credentials: 'same-origin' }),
+      fetch(`/api/admin/stats/detail?days=${daysParam}`, { credentials: 'same-origin' }),
+    ])
+      .then(([statsRes, detailRes]) => {
+        if (statsRes.status === 401 || detailRes.status === 401) {
           router.replace('/admin/login');
-          return null;
+          return { stats: null, detail: null };
         }
-        if (!res.ok) throw new Error(res.status === 503 ? 'API no configurada' : res.statusText);
-        return res.json();
+        if (!statsRes.ok) throw new Error(statsRes.status === 503 ? 'API no configurada' : statsRes.statusText);
+        return Promise.all([statsRes.json(), detailRes.ok ? detailRes.json() : Promise.resolve(null)]).then(
+          ([statsData, detailData]) => ({ stats: statsData, detail: detailData })
+        );
       })
-      .then((data) => {
-        if (data) {
-          setStats(data);
+      .then(({ stats: statsData, detail: detailData }) => {
+        if (statsData) {
+          setStats(statsData);
+          setDetail(detailData);
           setError(null);
         }
       })
@@ -114,9 +127,9 @@ export default function AdminDashboardPage() {
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+          <h1 className="text-2xl font-bold text-foreground">Dashboard de salud</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Usuarios, registros, sincronizaciones y almacenamiento E2EE. Período:
+            DAU, tráfico de sincronización y pulso del sistema. Selecciona el período:
           </p>
         </div>
         <div className="flex items-center gap-1">
@@ -127,6 +140,7 @@ export default function AdminDashboardPage() {
               size="sm"
               onClick={() => setDays(d)}
               disabled={loading}
+              title={`Ver últimos ${d} días`}
             >
               {d} días
             </Button>
@@ -136,6 +150,15 @@ export default function AdminDashboardPage() {
           </Button>
         </div>
       </div>
+
+      {detail?.lastSyncActivity && (
+        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
+          <CardHeader className="pb-2">
+            <CardDescription>Última actividad de sincronización</CardDescription>
+            <CardTitle className="text-xl">{detail.lastSyncActivity}</CardTitle>
+          </CardHeader>
+        </Card>
+      )}
 
       <Grid numItemsSm={2} numItemsLg={4} className="gap-4">
         <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
@@ -199,6 +222,37 @@ export default function AdminDashboardPage() {
           />
         </CardContent>
       </Card>
+
+      {detail?.recordsByTypeByDay && detail.recordsByTypeByDay.length > 0 && (
+        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
+          <CardHeader>
+            <CardTitle>Registros por tipo y día</CardTitle>
+            <CardDescription>Volumen agregado por tipo (oración, diario, etc.) en los últimos {days} días</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="mt-2 overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-2 font-medium">Día</th>
+                    <th className="text-left py-2 font-medium">Tipo</th>
+                    <th className="text-right py-2 font-medium">Cantidad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {detail.recordsByTypeByDay.slice(-30).reverse().map((r, i) => (
+                    <tr key={`${r.day}-${r.type}-${i}`} className="border-b border-border/50">
+                      <td className="py-1.5">{r.day.slice(5)}</td>
+                      <td className="py-1.5">{r.type}</td>
+                      <td className="text-right py-1.5">{r.count.toLocaleString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }

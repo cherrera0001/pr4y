@@ -34,6 +34,12 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
+/** Tipos de contenido global que se muestran en el búnker del usuario. */
+const CONTENT_TYPES = [
+  { value: 'encouragement', label: 'Palabras de Aliento' },
+  { value: 'announcement', label: 'Avisos' },
+] as const;
+
 const createContentSchema = z.object({
   type: z.string().min(1, 'Tipo requerido').max(64),
   title: z.string().min(1, 'Título requerido').max(512),
@@ -109,7 +115,7 @@ export default function AdminContentPage() {
 
   const openCreate = () => {
     setEditing(null);
-    setFormType('prayer');
+    setFormType('encouragement');
     setFormTitle('');
     setFormBody('');
     setFormPublished(false);
@@ -216,6 +222,7 @@ export default function AdminContentPage() {
     }
   };
 
+  const typeLabel = (t: string) => CONTENT_TYPES.find((c) => c.value === t)?.label ?? t;
   const types = Array.from(new Set(items.map((i) => i.type))).sort();
 
   if (loading) {
@@ -238,10 +245,10 @@ export default function AdminContentPage() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-foreground">
-            Gestor de contenido
+            Gestor de contenido global
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Oraciones y avisos que la app móvil consume. Crear, editar, publicar o eliminar.
+            Palabras de Aliento y Avisos que se publican en el búnker del usuario. Crear, editar, publicar o eliminar.
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -253,7 +260,7 @@ export default function AdminContentPage() {
               <SelectItem value="all">Todos los tipos</SelectItem>
               {types.map((t) => (
                 <SelectItem key={t} value={t}>
-                  {t}
+                  {typeLabel(t)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -280,7 +287,7 @@ export default function AdminContentPage() {
           <TableBody>
             {items.map((item) => (
               <TableRow key={item.id}>
-                <TableCell className="font-medium">{item.type}</TableCell>
+                <TableCell className="font-medium">{typeLabel(item.type)}</TableCell>
                 <TableCell className="max-w-xs truncate">{item.title}</TableCell>
                 <TableCell>
                   <Badge variant={item.published ? 'default' : 'secondary'}>
@@ -330,18 +337,27 @@ export default function AdminContentPage() {
           <DialogHeader>
             <DialogTitle>{editing ? 'Editar contenido' : 'Nuevo contenido'}</DialogTitle>
             <DialogDescription>
-              Las oraciones y avisos se muestran en la app según tipo y orden.
+              Este contenido se muestra en el búnker del usuario. El orden de clasificación (orden) define la prioridad de visualización.
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
               <Label htmlFor="form-type">Tipo</Label>
-              <Input
-                id="form-type"
-                value={formType}
-                onChange={(e) => setFormType(e.target.value)}
-                placeholder="prayer, announcement…"
-              />
+              <Select value={formType} onValueChange={setFormType}>
+                <SelectTrigger id="form-type">
+                  <SelectValue placeholder="Selecciona tipo" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CONTENT_TYPES.map(({ value, label }) => (
+                    <SelectItem key={value} value={value}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                  {!CONTENT_TYPES.some((c) => c.value === formType) && formType && (
+                    <SelectItem value={formType}>{formType}</SelectItem>
+                  )}
+                </SelectContent>
+              </Select>
             </div>
             <div className="grid gap-2">
               <Label htmlFor="form-title">Título</Label>
@@ -353,13 +369,14 @@ export default function AdminContentPage() {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="form-body">Cuerpo</Label>
+              <Label htmlFor="form-body">Cuerpo (texto largo)</Label>
               <Textarea
                 id="form-body"
                 value={formBody}
                 onChange={(e) => setFormBody(e.target.value)}
-                rows={4}
-                placeholder="Texto que verán los usuarios"
+                rows={6}
+                className="min-h-[120px]"
+                placeholder="Texto que verán los usuarios en el búnker. Soporta texto largo."
               />
             </div>
             <div className="flex items-center gap-6">
@@ -372,13 +389,14 @@ export default function AdminContentPage() {
                 <Label htmlFor="form-published">Publicado</Label>
               </div>
               <div className="flex items-center gap-2">
-                <Label htmlFor="form-sort">Orden</Label>
+                <Label htmlFor="form-sort">Orden de clasificación</Label>
                 <Input
                   id="form-sort"
                   type="number"
                   value={formSortOrder}
                   onChange={(e) => setFormSortOrder(Number(e.target.value))}
                   className="w-20"
+                  title="Menor número = mayor prioridad en el búnker"
                 />
               </div>
             </div>

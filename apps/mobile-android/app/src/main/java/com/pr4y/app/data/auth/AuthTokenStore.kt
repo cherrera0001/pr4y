@@ -5,7 +5,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
 /**
- * Almacena access token, refresh token y passphrase (para biometría) de forma segura.
+ * Almacena access token, refresh token, userId y passphrase (para biometría) de forma segura.
  */
 class AuthTokenStore(context: Context) {
     private val masterKey = MasterKey.Builder(context)
@@ -21,11 +21,13 @@ class AuthTokenStore(context: Context) {
 
     fun getAccessToken(): String? = prefs.getString(KEY_ACCESS, null)
     fun getRefreshToken(): String? = prefs.getString(KEY_REFRESH, null)
+    fun getUserId(): String? = prefs.getString(KEY_USER_ID, null)
 
-    fun setTokens(accessToken: String, refreshToken: String) {
+    fun setTokens(accessToken: String, refreshToken: String, userId: String) {
         prefs.edit()
             .putString(KEY_ACCESS, accessToken)
             .putString(KEY_REFRESH, refreshToken)
+            .putString(KEY_USER_ID, userId)
             .apply()
     }
 
@@ -49,11 +51,12 @@ class AuthTokenStore(context: Context) {
         prefs.edit().putBoolean(KEY_HAS_SEEN_WELCOME, seen).apply()
     }
 
-    /** Borra sesión (tokens y passphrase). Mantiene hasSeenWelcome para no repetir Welcome al volver a entrar. */
+    /** Borra sesión (tokens, userId y passphrase). Mantiene hasSeenWelcome para no repetir Welcome al volver a entrar. */
     fun clear() {
         prefs.edit()
             .remove(KEY_ACCESS)
             .remove(KEY_REFRESH)
+            .remove(KEY_USER_ID)
             .remove(KEY_PASSPHRASE)
             .apply()
     }
@@ -61,6 +64,7 @@ class AuthTokenStore(context: Context) {
     companion object {
         private const val KEY_ACCESS = "access_token"
         private const val KEY_REFRESH = "refresh_token"
+        private const val KEY_USER_ID = "user_id"
         private const val KEY_PASSPHRASE = "passphrase"
         private const val KEY_HAS_SEEN_WELCOME = "has_seen_welcome"
     }

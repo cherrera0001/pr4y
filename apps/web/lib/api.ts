@@ -83,8 +83,23 @@ export interface AdminStats {
     bytesPulled: string;
   }>;
 }
+
+/** Pulso de la app: DAU y volumen de sincronización (sin contenido de usuario). */
+export interface AdminStatsDetail {
+  dau: { today: number; byDay: Array<{ day: string; usersActive: number }> };
+  syncVolume: {
+    syncsToday: number;
+    bytesPushedToday: string;
+    bytesPulledToday: string;
+    byDay: Array<{ day: string; bytesPushed: string; bytesPulled: string }>;
+  };
+  totals: { totalUsers: number; totalRecords: number; totalBlobBytes: string };
+}
+
 export const admin = {
   users: (token: string) => apiRequest<AdminUserRow[]>('/admin/users', { token }),
   stats: (token: string, days = 7) =>
     apiRequest<AdminStats>(`/admin/stats?days=${days}`, { token }),
+  statsDetail: (token: string, days = 7) =>
+    apiRequest<AdminStatsDetail>(`/admin/stats/detail?days=${days}`, { token }),
 };

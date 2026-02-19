@@ -55,6 +55,24 @@ const statsResponseSchema = {
   additionalProperties: false,
 };
 
+/** Formato esperado por el dashboard web: última actividad de sync y registros por tipo/día. */
+const statsDetailResponseSchema = {
+  type: 'object' as const,
+  properties: {
+    lastSyncActivity: { type: 'string', description: 'Última actividad de sincronización (ej. "Hace 5 min")' },
+    recordsByTypeByDay: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: { day: { type: 'string' }, type: { type: 'string' }, count: { type: 'number' } },
+        required: ['day', 'type', 'count'],
+      },
+    },
+  },
+  required: ['lastSyncActivity', 'recordsByTypeByDay'],
+  additionalProperties: false,
+};
+
 export default async function adminRoutes(server: FastifyInstance) {
   server.get(
     '/admin/stats',
@@ -87,6 +105,27 @@ export default async function adminRoutes(server: FastifyInstance) {
           bytesPulled: String(d.bytesPulled),
         })),
       });
+    }
+  );
+
+  server.get(
+    '/admin/stats/detail',
+    {
+      config: { rateLimit: defaultRateLimit },
+      preHandler: [server.authenticate, server.requireAdmin],
+      schema: {
+        querystring: {
+          type: 'object',
+          properties: { days: { type: 'number', default: 7 } },
+          additionalProperties: false,
+        },
+        response: { 200: statsDetailResponseSchema },
+      },
+    },
+    async (request: FastifyRequest<{ Querystring: { days?: number } }>, reply: FastifyReply) => {
+      const days = Math.min(31, Math.max(1, request.query?.days ?? 7));
+      const detail = await usageService.getStatsDetail(days);
+      reply.code(200).send(detail);
     }
   );
 

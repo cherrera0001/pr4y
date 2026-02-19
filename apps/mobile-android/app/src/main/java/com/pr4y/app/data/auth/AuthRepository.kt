@@ -6,7 +6,9 @@ import com.pr4y.app.data.remote.GoogleLoginBody
 import com.pr4y.app.data.remote.PublicConfigResponse
 import com.pr4y.app.data.remote.RefreshBody
 import com.pr4y.app.util.Pr4yLog
-import retrofit2.Response
+import com.pr4y.app.di.AppContainer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -14,17 +16,15 @@ import java.net.UnknownHostException
 /**
  * Tech Lead Note: Managed authentication repository.
  * Standards: Separation of concerns, clear error handling, and security-first IDs.
+ * Fixed: Added userId persistence and database cleanup on logout.
  */
 class AuthRepository(
     private val api: ApiService,
     private val tokenStore: AuthTokenStore,
 ) {
     fun hasToken(): Boolean = tokenStore.getAccessToken() != null
+    fun getUserId(): String? = tokenStore.getUserId()
 
-    /** 
-     * Gets public configuration. 
-     * Security Standard: Credential Manager REQUIRES the Web Client ID for cross-platform token validation.
-     */
     suspend fun getPublicConfig(): Result<PublicConfigResponse> {
         return runCatching {
             val res = api.getPublicConfig()
@@ -52,7 +52,7 @@ class AuthRepository(
                 throw AuthError(res.code(), body)
             }
             val auth = res.body()!!
-            tokenStore.setTokens(auth.accessToken, auth.refreshToken)
+            tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
             auth
         }
     }
@@ -65,7 +65,7 @@ class AuthRepository(
                 throw AuthError(res.code(), body)
             }
             val auth = res.body()!!
-            tokenStore.setTokens(auth.accessToken, auth.refreshToken)
+            tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
             auth
         }
     }
@@ -79,12 +79,12 @@ class AuthRepository(
                 throw AuthError(res.code(), body)
             }
             val auth = res.body()!!
-            tokenStore.setTokens(auth.accessToken, auth.refreshToken)
+            tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
             auth
         }.recoverCatching { e ->
             throw when (e) {
                 is UnknownHostException, is ConnectException, is SocketTimeoutException -> {
-                    Pr4yLog.e("AuthRepository: googleLogin network/DNS error", e)
+                    Pr4yLog.net("AuthRepository: googleLogin network/DNS error")
                     Exception("Comprueba tu conexión a internet e inténtalo de nuevo.")
                 }
                 else -> e
@@ -92,14 +92,26 @@ class AuthRepository(
         }
     }
 
-    fun logout() {
-        tokenStore.clear()
+    suspend fun logout() {
+        withContext(Dispatchers.IO) {
+            Pr4yLog.i("AuthRepository: Performing full logout and búnker cleanup")
+            tokenStore.clear()
+            try {
+                AppContainer.db.clearAllTables()
+            } catch (e: Exception) {
+                Pr4yLog.e("AuthRepository: Error clearing tables on logout", e)
+            }
+        }
     }
 
     suspend fun logoutRemote() {
         val refresh = tokenStore.getRefreshToken() ?: return
-        api.logout(RefreshBody(refresh))
-        tokenStore.clear()
+        try {
+            api.logout(RefreshBody(refresh))
+        } catch (e: Exception) {
+            Pr4yLog.e("AuthRepository: Remote logout failed", e)
+        }
+        logout()
     }
 
     fun getAccessToken(): String? = tokenStore.getAccessToken()
@@ -111,7 +123,7 @@ class AuthRepository(
         val res = api.refresh(RefreshBody(refresh))
         if (!res.isSuccessful) return false
         val auth = res.body()!!
-        tokenStore.setTokens(auth.accessToken, auth.refreshToken)
+        tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
         return true
     }
 
