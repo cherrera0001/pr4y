@@ -6,16 +6,17 @@
 /**
  * Base URL de la API (ej. Railway). Obligatoria en producción.
  * Acepta NEXT_PUBLIC_API_URL o NEXT_PUBLIC_API_BASE_URL (Vercel).
- * Debe incluir el prefijo /v1 (ej. https://xxx.up.railway.app/v1) para que auth/me, auth/google y admin/stats resuelvan correctamente.
- * Si el valor no empieza por http:// o https://, se antepone https:// para evitar "Failed to parse URL".
+ * Si la URL no termina en /v1, se añade automáticamente para que auth/google, auth/me y admin/* resuelvan (las rutas están bajo /v1 en la API).
+ * Si el valor no empieza por http:// o https://, se antepone https://.
  */
 export function getApiBaseUrl(): string {
   const raw =
     process.env.NEXT_PUBLIC_API_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? '';
-  const url = (typeof raw === 'string' ? raw.trim() : '').replace(/\/$/, '') || '';
+  let url = (typeof raw === 'string' ? raw.trim() : '').replace(/\/$/, '') || '';
   if (!url) return '';
-  if (/^https?:\/\//i.test(url)) return url;
-  return `https://${url}`;
+  if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
+  if (!/\/v1$/i.test(url)) url = `${url}/v1`;
+  return url;
 }
 
 /** Cliente Web: solo para la versión web (Sign in with Google en /admin). No usar el de Android aquí. */
