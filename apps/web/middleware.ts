@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getApiBaseUrl, getCanonicalHost } from '@/lib/env';
+import { isAllowedAdminEmail } from '@/lib/admin-allowlist';
 
 const ADMIN_COOKIE = 'pr4y_admin_token';
 const GATE_COOKIE = 'pr4y_admin_gate';
@@ -20,7 +21,8 @@ async function validateAdminToken(token: string): Promise<boolean> {
     if (!res.ok) return false;
     const body = await res.json();
     const role = body?.role;
-    return role === 'admin' || role === 'super_admin';
+    if (role !== 'admin' && role !== 'super_admin') return false;
+    return isAllowedAdminEmail(body?.email);
   } catch {
     return false;
   }
@@ -90,5 +92,5 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   // Incluir todas las rutas para redirección canónica vercel.app → pr4y.cl
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon\\.ico|favicon\\.png).*)'],
 };

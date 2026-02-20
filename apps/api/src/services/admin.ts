@@ -1,4 +1,5 @@
 import { prisma } from '../lib/db';
+import { isAllowedAdminEmail } from '../lib/admin-allowlist';
 
 /** Lista de usuarios para backoffice: sin contenido sensible, solo metadatos para soporte. */
 export interface AdminUserRow {
@@ -48,6 +49,16 @@ export async function updateUser(
   if (data.role != null && allowedRoles.includes(data.role)) update.role = data.role;
   if (data.status != null && allowedStatuses.includes(data.status)) update.status = data.status;
   if (Object.keys(update).length === 0) return null;
+
+  // Solo las cuentas en la allowlist pueden tener rol admin/super_admin. Cualquier otra queda user.
+  if (update.role === 'admin' || update.role === 'super_admin') {
+    const existing = await prisma.user.findUnique({ where: { id }, select: { email: true } });
+    if (!existing || !isAllowedAdminEmail(existing.email)) {
+      const err = new Error('ADMIN_EMAIL_NOT_ALLOWED') as Error & { code: string };
+      err.code = 'ADMIN_EMAIL_NOT_ALLOWED';
+      throw err;
+    }
+  }
 
   const user = await prisma.user.update({
     where: { id },

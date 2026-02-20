@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getApiBaseUrl } from '@/lib/env';
+import { isAllowedAdminEmail } from '@/lib/admin-allowlist';
 
 const ADMIN_COOKIE = 'pr4y_admin_token';
 
@@ -118,6 +119,11 @@ export async function POST(request: NextRequest) {
     }
     const user = await meRes.json();
     if (!isAdmin(user?.role)) {
+      console.warn('[admin/login] role not allowed', { email: user?.email, role: user?.role });
+      return redirectToLogin(request, 'admin_required');
+    }
+    if (!isAllowedAdminEmail(user?.email)) {
+      console.warn('[admin/login] email not in allowlist', { email: user?.email });
       return redirectToLogin(request, 'admin_required');
     }
     const origin = new URL(request.url).origin;

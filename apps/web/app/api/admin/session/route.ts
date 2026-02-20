@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getApiBaseUrl } from '@/lib/env';
+import { isAllowedAdminEmail } from '@/lib/admin-allowlist';
 
 const ADMIN_COOKIE = 'pr4y_admin_token';
 
@@ -32,6 +33,9 @@ export async function POST(request: NextRequest) {
     const user = await me.json();
     if (!isAdmin(user?.role)) {
       return NextResponse.json({ error: 'admin required' }, { status: 403 });
+    }
+    if (!isAllowedAdminEmail(user?.email)) {
+      return NextResponse.json({ error: 'admin access restricted to allowed accounts only' }, { status: 403 });
     }
     const res = NextResponse.json({ ok: true });
     res.cookies.set(ADMIN_COOKIE, token, {
