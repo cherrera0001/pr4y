@@ -178,11 +178,19 @@ export default async function adminRoutes(server: FastifyInstance) {
       if (!parsed.success) {
         return reply.code(400).send({ error: { code: 'validation_error', message: 'Invalid input', details: parsed.error.flatten() } });
       }
-      const updated = await adminService.updateUser(request.params.id, parsed.data);
-      if (!updated) {
-        return reply.code(400).send({ error: { code: 'validation_error', message: 'Nada que actualizar' } });
+      try {
+        const updated = await adminService.updateUser(request.params.id, parsed.data);
+        if (!updated) {
+          return reply.code(400).send({ error: { code: 'validation_error', message: 'Nada que actualizar' } });
+        }
+        reply.code(200).send(updated);
+      } catch (e) {
+        const err = e as Error & { code?: string };
+        if (err.code === 'ADMIN_EMAIL_NOT_ALLOWED' || err.message === 'ADMIN_EMAIL_NOT_ALLOWED') {
+          return reply.code(403).send({ error: { code: 'forbidden', message: 'Solo las cuentas autorizadas pueden tener rol administrador', details: {} } });
+        }
+        throw e;
       }
-      reply.code(200).send(updated);
     }
   );
 

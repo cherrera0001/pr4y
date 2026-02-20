@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "db:migrate": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
-    "create-test-user": "node scripts/create-test-user.mjs"
+    "create-test-user": "node scripts/create-test-user.mjs",
+    "set-admin-users": "node scripts/set-admin-users.mjs"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.0",

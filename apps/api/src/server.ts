@@ -8,6 +8,7 @@ import rateLimit from '@fastify/rate-limit';
 import jwt from '@fastify/jwt';
 import { prisma } from './lib/db';
 import { safeDetailsFromError } from './lib/errors';
+import { isAllowedAdminEmail } from './lib/admin-allowlist';
 import authRoutes from './routes/auth';
 import syncRoutes from './routes/sync';
 import cryptoRoutes from './routes/crypto';
@@ -80,12 +81,15 @@ server.decorate('authenticate', async function (request: FastifyRequest, reply: 
   }
 });
 
-// Decorador requireAdmin: debe usarse después de authenticate. Restringe métricas/marketing a role admin.
+// Decorador requireAdmin: solo role admin/super_admin Y email en allowlist pueden acceder a /admin/*.
 server.decorate('requireAdmin', async function (request: FastifyRequest, reply: FastifyReply) {
   const user = request.user as { sub?: string; email?: string; role?: string };
   const role = user?.role;
   if (role !== 'admin' && role !== 'super_admin') {
-    reply.code(403).send({ error: { code: 'forbidden', message: 'Admin role required', details: {} } });
+    return reply.code(403).send({ error: { code: 'forbidden', message: 'Admin role required', details: {} } });
+  }
+  if (!isAllowedAdminEmail(user?.email)) {
+    return reply.code(403).send({ error: { code: 'forbidden', message: 'Admin access restricted to allowed accounts only', details: {} } });
   }
 });
 
