@@ -42,9 +42,8 @@ jobs:
 
       # Despliegue con Railway CLI (opcional).
       # Configura en GitHub: Settings → Secrets → RAILWAY_TOKEN (token de cuenta, railway.com/account/tokens).
-      # Si tu servicio está conectado por GitHub en Railway, el deploy ya se dispara al push a main; este step es por si usas CLI.
+      # Si RAILWAY_TOKEN no está definido, el step falla pero el job sigue (continue-on-error). No usamos secrets en if (GitHub no lo permite).
       - name: Deploy to Railway (CLI)
-        if: ${{ secrets.RAILWAY_TOKEN != '' }}
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
