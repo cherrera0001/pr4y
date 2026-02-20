@@ -49,11 +49,16 @@ server.register(cors, {
   credentials: true,
 });
 
-// Rate limiting: global: false para que los límites por ruta en auth (login/register) se apliquen
+// Rate limiting: global: false para que los límites por ruta se apliquen.
+// keyGenerator: por usuario autenticado (userId) para mitigar DoS por cuenta; por IP si no hay JWT.
 server.register(rateLimit, {
   global: false,
   max: 300,
   timeWindow: '1 minute',
+  keyGenerator: (request: FastifyRequest) => {
+    const user = (request as FastifyRequest & { user?: { sub?: string } }).user;
+    return (user?.sub ?? request.ip) as string;
+  },
 });
 
 // JWT: obligatorio desde env; sin valor por defecto en producción
@@ -121,10 +126,10 @@ const defaultRateLimit = { max: 300, timeWindow: '1 minute' as const };
 
 // Listener de rutas: al arranque se imprimen en logs (Railway) como "Mapped {/v1/auth/login, POST}"
 const routesLog: Array<{ path: string; method: string }> = [];
-server.addHook('onRoute', (routeOptions: { url?: string; path?: string; method?: string }) => {
+server.addHook('onRoute', (routeOptions) => {
   const path = (routeOptions.url ?? routeOptions.path ?? '').trim() || '/';
-  const method = (routeOptions.method ?? 'GET').toUpperCase();
-  routesLog.push({ path, method });
+  const method = Array.isArray(routeOptions.method) ? routeOptions.method[0] : routeOptions.method ?? 'GET';
+  routesLog.push({ path, method: String(method).toUpperCase() });
 });
 
 // Prefijo global /v1: cada módulo se registra con prefix '/v1' (rutas finales: /v1/health, /v1/auth/register, etc.).

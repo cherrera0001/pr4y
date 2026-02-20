@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -24,6 +25,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.collectAsState
@@ -42,7 +44,9 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.pr4y.app.BuildConfig
 import com.pr4y.app.data.auth.AuthRepository
+import com.pr4y.app.data.remote.ApiService
 import com.pr4y.app.data.remote.EndpointProvider
+import com.pr4y.app.data.remote.ReminderPreferencesResponse
 import com.pr4y.app.data.sync.LastSyncStatus
 import com.pr4y.app.data.sync.SyncRepository
 import com.pr4y.app.data.sync.SyncResult
@@ -52,10 +56,18 @@ import com.pr4y.app.work.ReminderScheduler
 import com.pr4y.app.work.SyncScheduler
 import kotlinx.coroutines.launch
 
+private val TIME_PRESETS = listOf(
+    "07:00" to "Mañana",
+    "14:00" to "Tarde",
+    "21:00" to "Noche",
+)
+private val DAY_LABELS = listOf("L", "M", "X", "J", "V", "S", "D")
+
 @Composable
 fun SettingsScreen(
     navController: NavController,
     authRepository: AuthRepository,
+    api: ApiService,
     onLogout: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -91,29 +103,48 @@ fun SettingsScreen(
     val showSyncPausedBanner = recentErrorAt != null &&
         (System.currentTimeMillis() - recentErrorAt) < 24 * 60 * 60 * 1000L
 
+    var reminderPrefs by remember { mutableStateOf<ReminderPreferencesResponse?>(null) }
+    LaunchedEffect(Unit) {
+        val bearer = authRepository.getBearer() ?: return@LaunchedEffect
+        val res = api.getReminderPreferences(bearer)
+        if (res.isSuccessful) reminderPrefs = res.body()
+    }
+
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
     ) { granted ->
         if (granted) {
-            ReminderScheduler.scheduleDaily(context)
-            scope.launch { snackbar.showSnackbar("Recordatorio diario programado (9:00)") }
+            reminderPrefs?.let { p ->
+                ReminderScheduler.scheduleFromPreferences(context, p.time, p.daysOfWeek, p.enabled)
+            } ?: ReminderScheduler.scheduleDaily(context)
+            scope.launch { snackbar.showSnackbar("Recordatorio programado") }
         } else {
             scope.launch { snackbar.showSnackbar("Sin permiso de notificaciones no se pueden mostrar recordatorios") }
         }
     }
 
-    fun scheduleReminder() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            when (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)) {
-                PackageManager.PERMISSION_GRANTED -> {
-                    ReminderScheduler.scheduleDaily(context)
-                    scope.launch { snackbar.showSnackbar("Recordatorio diario programado (9:00)") }
+    fun saveReminderPreferences(time: String, daysOfWeek: List<Int>, enabled: Boolean) {
+        scope.launch {
+            val bearer = authRepository.getBearer() ?: return@launch
+            val body = ReminderPreferencesResponse(time, daysOfWeek, enabled)
+            val res = api.putReminderPreferences(bearer, body)
+            if (res.isSuccessful) {
+                reminderPrefs = res.body()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    when (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)) {
+                        PackageManager.PERMISSION_GRANTED -> {
+                            ReminderScheduler.scheduleFromPreferences(context, time, daysOfWeek, enabled)
+                            snackbar.showSnackbar("Recordatorio guardado")
+                        }
+                        else -> notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    }
+                } else {
+                    ReminderScheduler.scheduleFromPreferences(context, time, daysOfWeek, enabled)
+                    snackbar.showSnackbar("Recordatorio guardado")
                 }
-                else -> notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                snackbar.showSnackbar("No se pudo guardar")
             }
-        } else {
-            ReminderScheduler.scheduleDaily(context)
-            scope.launch { snackbar.showSnackbar("Recordatorio diario programado (9:00)") }
         }
     }
 
@@ -201,8 +232,70 @@ fun SettingsScreen(
             }
             Spacer(Modifier.height(16.dp))
             Text("Recordatorios", style = MaterialTheme.typography.titleMedium)
-            TextButton(onClick = { scheduleReminder() }) {
-                Text("Configurar recordatorio diario (9:00)")
+            reminderPrefs?.let { prefs ->
+                var selectedTime by remember(prefs) { mutableStateOf(prefs.time) }
+                var selectedDays by remember(prefs) { mutableStateOf(prefs.daysOfWeek.toSet()) }
+                var enabled by remember(prefs) { mutableStateOf(prefs.enabled) }
+                Row(
+                    Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Text("Activar recordatorio", style = MaterialTheme.typography.bodyMedium)
+                    Switch(checked = enabled, onCheckedChange = { enabled = it })
+                }
+                Text("Hora", style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(top = 8.dp))
+                Row(
+                    Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    TIME_PRESETS.forEach { (time, label) ->
+                        FilterChip(
+                            selected = selectedTime == time,
+                            onClick = { selectedTime = time },
+                            label = { Text(label) },
+                        )
+                    }
+                }
+                Text("Días", style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(top = 8.dp))
+                Row(
+                    Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    DAY_LABELS.forEachIndexed { index, label ->
+                        FilterChip(
+                            selected = selectedDays.contains(index),
+                            onClick = {
+                                selectedDays = if (selectedDays.contains(index)) selectedDays - index else selectedDays + index
+                            },
+                            label = { Text(label) },
+                        )
+                    }
+                }
+                TextButton(
+                    onClick = {
+                        saveReminderPreferences(selectedTime, selectedDays.toList().sorted(), enabled)
+                    },
+                ) {
+                    Text("Guardar recordatorio")
+                }
+            } ?: run {
+                TextButton(onClick = {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        when (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)) {
+                            PackageManager.PERMISSION_GRANTED -> {
+                                ReminderScheduler.scheduleDaily(context)
+                                scope.launch { snackbar.showSnackbar("Recordatorio programado (9:00)") }
+                            }
+                            else -> notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                        }
+                    } else {
+                        ReminderScheduler.scheduleDaily(context)
+                        scope.launch { snackbar.showSnackbar("Recordatorio programado (9:00)") }
+                    }
+                }) {
+                    Text("Configurar recordatorio diario (9:00)")
+                }
             }
             Spacer(Modifier.height(16.dp))
             Text("Cuenta", style = MaterialTheme.typography.titleMedium)

@@ -79,6 +79,13 @@ data class PublicConfigResponse(
     val googleAndroidClientId: String = "",
 )
 
+/** Preferencias de recordatorio diario (GET/PUT /v1/user/reminder-preferences). */
+data class ReminderPreferencesResponse(
+    val time: String,
+    val daysOfWeek: List<Int>,
+    val enabled: Boolean,
+)
+
 interface ApiService {
     @GET("health")
     suspend fun health(): Response<Map<String, String>>
@@ -128,4 +135,13 @@ interface ApiService {
 
     @GET("answers")
     suspend fun getAnswers(@Header("Authorization") bearer: String): Response<AnswersListResponse>
+
+    @GET("user/reminder-preferences")
+    suspend fun getReminderPreferences(@Header("Authorization") bearer: String): Response<ReminderPreferencesResponse>
+
+    @PUT("user/reminder-preferences")
+    suspend fun putReminderPreferences(
+        @Header("Authorization") bearer: String,
+        @Body body: ReminderPreferencesResponse,
+    ): Response<ReminderPreferencesResponse>
 }

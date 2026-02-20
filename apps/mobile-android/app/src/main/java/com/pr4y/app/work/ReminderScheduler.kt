@@ -1,9 +1,6 @@
 package com.pr4y.app.work
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
@@ -15,11 +12,17 @@ object ReminderScheduler {
 
     private const val WORK_NAME = "pr4y_daily_reminder"
 
-    // TODO: Permitir horario configurable (ej. 7:00, 21:00), múltiples recordatorios y/o elegir 1/2/todos los pedidos.
-    fun scheduleDaily(context: Context) {
+    /** Programa el recordatorio con hora y días configurables (sincronizado con API). */
+    fun scheduleFromPreferences(context: Context, time: String, daysOfWeek: List<Int>, enabled: Boolean) {
         createNotificationChannelIfNeeded(context)
+        if (!enabled || daysOfWeek.isEmpty()) {
+            WorkManager.getInstance(context).cancelUniqueWork(WORK_NAME)
+            return
+        }
+        val (hour, minute) = parseTime(time)
+        val initialDelay = delayUntilNext(context, hour, minute, daysOfWeek)
         val request = PeriodicWorkRequestBuilder<ReminderWorker>(24, TimeUnit.HOURS)
-            .setInitialDelay(delayUntilNextNine(context), TimeUnit.MILLISECONDS)
+            .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
             .build()
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
             WORK_NAME,
@@ -28,16 +31,38 @@ object ReminderScheduler {
         )
     }
 
-    private fun delayUntilNextNine(context: Context): Long {
+    /** Mantiene compatibilidad: programa a las 9:00. */
+    fun scheduleDaily(context: Context) {
+        scheduleFromPreferences(context, "09:00", listOf(1, 2, 3, 4, 5, 6), true)
+    }
+
+    private fun parseTime(time: String): Pair<Int, Int> {
+        val parts = time.split(":")
+        val hour = parts.getOrNull(0)?.toIntOrNull() ?: 9
+        val minute = parts.getOrNull(1)?.toIntOrNull() ?: 0
+        return hour to minute
+    }
+
+    private fun delayUntilNext(context: Context, hour: Int, minute: Int, daysOfWeek: List<Int>): Long {
         val cal = Calendar.getInstance()
         val now = cal.timeInMillis
-        cal.set(Calendar.HOUR_OF_DAY, 9)
-        cal.set(Calendar.MINUTE, 0)
+        cal.set(Calendar.HOUR_OF_DAY, hour)
+        cal.set(Calendar.MINUTE, minute)
         cal.set(Calendar.SECOND, 0)
         cal.set(Calendar.MILLISECOND, 0)
         var next = cal.timeInMillis
-        if (next <= now) next += 24 * 60 * 60 * 1000
-        return next - now
+        if (next <= now) cal.add(Calendar.DAY_OF_MONTH, 1).let { next = cal.timeInMillis }
+        var dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1
+        if (dayOfWeek == -1) dayOfWeek = 0
+        var advances = 0
+        while (advances < 8 && !daysOfWeek.contains(dayOfWeek)) {
+            cal.add(Calendar.DAY_OF_MONTH, 1)
+            next = cal.timeInMillis
+            advances++
+            dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1
+            if (dayOfWeek == -1) dayOfWeek = 0
+        }
+        return (next - now).coerceAtLeast(60_000L)
     }
 
     private fun createNotificationChannelIfNeeded(context: Context) {

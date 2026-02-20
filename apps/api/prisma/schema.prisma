@@ -10,18 +10,21 @@ datasource db {
 }
 
 model User {
-  id           String        @id @default(uuid())
-  email        String        @unique
-  passwordHash String?       @map("password_hash") // null para usuarios OAuth (Google)
-  googleId     String?       @unique @map("google_id")
-  role         String        @default("user") // "user" | "admin" | "super_admin"
-  status       String        @default("active") // "active" | "banned"
-  lastLoginAt  DateTime?     @map("last_login_at")
-  createdAt    DateTime      @default(now()) @map("created_at")
-  refreshTokens RefreshToken[]
-  wrappedDek   WrappedDek?
-  records      Record[]
-  usageLogs    UsageLog[]
+  id                   String        @id @default(uuid())
+  email                String        @unique
+  passwordHash         String?       @map("password_hash") // null para usuarios OAuth (Google)
+  googleId             String?       @unique @map("google_id")
+  role                 String        @default("user") // "user" | "admin" | "super_admin"
+  status               String        @default("active") // "active" | "banned"
+  lastLoginAt          DateTime?     @map("last_login_at")
+  createdAt            DateTime      @default(now()) @map("created_at")
+  reminderTime         String?       @map("reminder_time") // "HH:mm" recordatorio diario de oración
+  reminderDaysOfWeek   Json?         @map("reminder_days_of_week") // [0..6]
+  reminderEnabled      Boolean       @default(false) @map("reminder_enabled")
+  refreshTokens        RefreshToken[]
+  wrappedDek           WrappedDek?
+  records              Record[]
+  usageLogs            UsageLog[]
   @@map("users")
 }
 

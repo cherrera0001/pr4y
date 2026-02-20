@@ -37,11 +37,12 @@ class SyncRepository(
         Pr4yLog.i("Iniciando proceso de sincronización...")
         val bearer = authRepository.getBearer() ?: return@withContext SyncResult.Error("No autenticado")
         val dek = DekManager.getDek() ?: return@withContext SyncResult.Error("Llave de privacidad no disponible")
+        val userId = authRepository.getUserId() ?: return@withContext SyncResult.Error("Sesión no identificada")
 
         try {
             // 0. Pull-before-push
             Pr4yLog.d("Sync: Ejecutando Pull inicial...")
-            pull(bearer, dek)
+            pull(bearer, dek, userId)
 
             // 1. Push outbox
             var outbox = outboxDao.getAll()
@@ -97,7 +98,7 @@ class SyncRepository(
 
             // 2. Pull final
             Pr4yLog.d("Sync: Ejecutando Pull final...")
-            pull(bearer, dek)
+            pull(bearer, dek, userId)
 
             persistLastSyncStatus("ok", null)
             Pr4yLog.i("Sync: Sincronización finalizada correctamente.")
@@ -109,7 +110,7 @@ class SyncRepository(
         }
     }
 
-    private suspend fun pull(bearer: String, dek: javax.crypto.SecretKey) {
+    private suspend fun pull(bearer: String, dek: javax.crypto.SecretKey, userId: String) {
         var cursor: String? = syncStateDao.get(SYNC_CURSOR_KEY)?.value
         do {
             val pullRes = api.pull(bearer, cursor, 100)
@@ -123,7 +124,7 @@ class SyncRepository(
                 db.runInTransaction {
                     runBlocking {
                         for (rec in body.records) {
-                            processRemoteRecord(rec, dek)
+                            processRemoteRecord(rec, dek, userId)
                         }
                     }
                 }
@@ -148,7 +149,8 @@ class SyncRepository(
     suspend fun processJournalDraft(context: Context): Boolean = withContext(Dispatchers.IO) {
         val draft = JournalDraftStore.getDraft(context) ?: return@withContext false
         val dek = DekManager.getDek() ?: return@withContext false
-        
+        val userId = authRepository.getUserId() ?: return@withContext false
+
         Pr4yLog.i("Sync: Procesando borrador de diario pendiente...")
         try {
             val now = System.currentTimeMillis()
@@ -165,6 +167,7 @@ class SyncRepository(
                     journalDao.insert(
                         JournalEntity(
                             id = id,
+                            userId = userId,
                             content = "",
                             createdAt = now,
                             updatedAt = now,
@@ -209,11 +212,11 @@ class SyncRepository(
         LastSyncStatus(status == "ok", errorAt)
     }
 
-    private suspend fun processRemoteRecord(rec: SyncRecordDto, dek: javax.crypto.SecretKey) {
+    private suspend fun processRemoteRecord(rec: SyncRecordDto, dek: javax.crypto.SecretKey, userId: String) {
         if (rec.deleted) {
             when (rec.type) {
-                TYPE_PRAYER_REQUEST -> requestDao.deleteById(rec.recordId)
-                TYPE_JOURNAL_ENTRY -> journalDao.deleteById(rec.recordId)
+                TYPE_PRAYER_REQUEST -> requestDao.deleteById(rec.recordId, userId)
+                TYPE_JOURNAL_ENTRY -> journalDao.deleteById(rec.recordId, userId)
             }
             return
         }
@@ -228,6 +231,7 @@ class SyncRepository(
                     requestDao.insert(
                         RequestEntity(
                             id = rec.recordId,
+                            userId = userId,
                             title = json.optString("title", ""),
                             body = json.optString("body", ""),
                             createdAt = updatedAt,
@@ -243,6 +247,7 @@ class SyncRepository(
                 journalDao.insert(
                     JournalEntity(
                         id = rec.recordId,
+                        userId = userId,
                         content = "",
                         createdAt = updatedAt,
                         updatedAt = updatedAt,

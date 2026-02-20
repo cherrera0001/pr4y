@@ -99,11 +99,16 @@ fun Pr4yNavHost(
         }
         
         composable(Routes.MAIN) {
+            val mainContext = androidx.compose.ui.platform.LocalContext.current
+            val mainUserId = remember(mainContext) {
+                com.pr4y.app.data.auth.AuthTokenStore(mainContext.applicationContext).getUserId() ?: ""
+            }
             InnerNavHost(
                 authRepository = authRepository,
                 syncRepository = syncRepository,
                 api = api,
-                onLogout = onLogout
+                onLogout = onLogout,
+                userId = mainUserId,
             )
         }
     }
@@ -115,6 +120,7 @@ private fun InnerNavHost(
     syncRepository: SyncRepository,
     api: com.pr4y.app.data.remote.ApiService,
     onLogout: () -> Unit,
+    userId: String = "",
 ) {
     val navController = rememberNavController()
 
@@ -122,11 +128,11 @@ private fun InnerNavHost(
         navController = navController,
         startDestination = Routes.HOME,
     ) {
-        composable(Routes.HOME) { 
+        composable(Routes.HOME) {
             val homeViewModel: HomeViewModel = viewModel(
-                factory = HomeViewModelFactory(AppContainer.db, syncRepository)
+                factory = HomeViewModelFactory(AppContainer.db, syncRepository, userId)
             )
-            HomeScreen(navController = navController, viewModel = homeViewModel) 
+            HomeScreen(navController = navController, viewModel = homeViewModel)
         }
 
         composable(Routes.NEW_EDIT) { NewEditScreen(navController = navController, requestId = null) }
@@ -156,6 +162,7 @@ private fun InnerNavHost(
             SettingsScreen(
                 navController = navController,
                 authRepository = authRepository,
+                api = api,
                 onLogout = onLogout,
             )
         }

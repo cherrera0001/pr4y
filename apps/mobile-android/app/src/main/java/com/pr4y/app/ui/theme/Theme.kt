@@ -18,12 +18,15 @@ val ElectricCyan = Color(0xFF0EA5E9)
 
 private val DarkColorScheme = darkColorScheme(
     primary = ElectricCyan,
+    primaryContainer = ElectricCyan.copy(alpha = 0.25f),
     secondary = Color(0xFF81C784),
     background = MidnightBlue,
     surface = SurfaceDark,
+    surfaceVariant = ElectricCyan.copy(alpha = 0.08f),
     onSurfaceVariant = Color(0xFFB3B3B3),
     onBackground = Color.White,
-    onSurface = Color.White
+    onSurface = Color.White,
+    outlineVariant = ElectricCyan.copy(alpha = 0.2f),
 )
 
 private val LightColorScheme = lightColorScheme(

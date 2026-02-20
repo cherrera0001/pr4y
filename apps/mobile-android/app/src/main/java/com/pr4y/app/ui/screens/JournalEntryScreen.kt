@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.pr4y.app.crypto.DekManager
+import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.crypto.LocalCrypto
 import com.pr4y.app.data.local.entity.JournalEntity
 import com.pr4y.app.di.AppContainer
@@ -19,12 +21,15 @@ import java.util.*
 
 @Composable
 fun JournalEntryScreen(navController: NavController, id: String) {
+    val context = LocalContext.current
+    val userId = remember(context) { AuthTokenStore(context.applicationContext).getUserId() ?: "" }
     var entry by remember { mutableStateOf<JournalEntity?>(null) }
     var decryptedContent by remember { mutableStateOf("") }
     val db = AppContainer.db
 
-    LaunchedEffect(id) {
-        entry = withContext(Dispatchers.IO) { db.journalDao().getById(id) }
+    LaunchedEffect(id, userId) {
+        if (userId.isEmpty()) return@LaunchedEffect
+        entry = withContext(Dispatchers.IO) { db.journalDao().getById(id, userId) }
         entry?.let {
             val dek = DekManager.getDek()
             if (it.encryptedPayloadB64 != null && dek != null) {

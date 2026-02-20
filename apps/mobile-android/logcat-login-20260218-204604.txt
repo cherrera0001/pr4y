@@ -1,0 +1,902 @@
+﻿--------- beginning of main
+02-18 20:47:04.691 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:04.992 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:05.293 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:05.592 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:05.893 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:06.193 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:06.493 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:06.793 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:07.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:07.384 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:47:07.392 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:07.693 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:07.994 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:08.293 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:08.593 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:08.893 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:09.194 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:09.495 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:09.795 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:10.095 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:10.394 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:10.407 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:47:10.696 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:10.785 E/sensors-hal( 1370): handle_sns_client_event:57, har-sensor-hal: time=168923586335211 data 0.000000
+02-18 20:47:10.994 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:11.294 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:11.594 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:11.658 E/PreStartUtils( 3966): preLaunchProcess success infoPackage: com.pr4y.app
+02-18 20:47:11.695 E/Launcher.application( 3966): setClickAppWaitForCallback = true
+02-18 20:47:11.696 E/Launcher.application( 3966): setClickAppWaitForCallback = true
+02-18 20:47:11.697 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:11.697 E/Launcher( 3966): superStartActivity   type=13
+--------- beginning of system
+02-18 20:47:11.702 E/WindowManager( 2702): setClientVisible ActivityRecord{1aa38b6 u0 com.pr4y.app/.MainActivity true
+02-18 20:47:11.704 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:11.704 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:11.704 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:11.704 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:11.705 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:11.706 E/ANDR-PERF-JNI( 2702): com_qualcomm_qtiperformance_native_perf_io_prefetch_start
+02-18 20:47:11.713 E/Zygote  (23309): process_name_ptr:23309 com.pr4y.app
+02-18 20:47:11.714 E/Zygote  (23309): SetMemoryProtected process_name_ptr:23309 com.pr4y.app
+02-18 20:47:11.719 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:11.719 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:11.719 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:11.723 E/ANDR-IOP( 1457): io prefetch is disabled
+02-18 20:47:11.735 E/WindowManager( 2702): setClientVisible ActivityRecord{1aa38b6 u0 com.pr4y.app/.MainActivity t419} true
+02-18 20:47:11.765 E/WindowManager( 2702): setClientVisible ActivityRecord{1aa38b6 u0 com.pr4y.app/.MainActivity t419} true
+02-18 20:47:11.776 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 0
+02-18 20:47:11.780 E/onWindowDecorRectChanged( 4462): start size:1
+02-18 20:47:11.780 E/onWindowDecorRectChanged( 4462): windowDecorRect: Rect(535, 10 - 684, 128)
+02-18 20:47:11.783 E/WindowTransitionCompat( 3966): startAnimation isFastLaunch = false
+02-18 20:47:11.783 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:11.785 E/WindowTransitionCompat( 3966): printLeash::index = 0, root = Surface(name=Transition Root #3367: Task=419#43432)/@0x779aafb
+02-18 20:47:11.785 E/WindowTransitionCompat( 3966): 0, check isClosingType type = 1, mode = 1
+02-18 20:47:11.785 E/WindowTransitionCompat( 3966): 1, check isClosingType type = 2, mode = 4
+02-18 20:47:11.794 E/WindowAnimParamsProvider( 3966): getWindowTargetBounds    bounds=Rect(0, 0 - 1220, 2712)
+02-18 20:47:11.794 E/ClipAnimationHelper( 3966): updateSourceStack  mSourceInsets=Rect(0, 0 - 0, 0), mSourceStackBounds=Rect(0, 0 - 1220, 2712)
+02-18 20:47:11.794 E/ClipAnimationHelper( 3966): updateHomeStack  mSourceInsets=Rect(0, 0 - 0, 0), mHomeStackBounds=Rect(0, 0 - 1220, 2712)
+02-18 20:47:11.794 E/ClipAnimationHelper( 3966): updateTargetRect  mSourceRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mTargetRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mSourceWindowClipInsets=RectF(0.0, 0.0, 0.0, 0.0)   mHomeStackBounds=Rect(0, 0 - 1220, 2712)   targetRect=Rect(0, 0 - 1220, 2712)
+02-18 20:47:11.799 E/MultiSpringDynamicAnimation8b22d52( 3966): ERROR Not Found Bundle scaleY
+02-18 20:47:11.799 E/Launcher.application( 3966): setClickAppWaitForCallback = false
+02-18 20:47:11.806 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:11.808 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:11.808 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:11.820 E/NativeTurboSchedManagerJni( 2702): ioctl 8 failed!
+02-18 20:47:11.832 E/ActivityManagerWrapper( 3966): get all recent tasks force including 419
+02-18 20:47:11.836 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-18 20:47:11.836 E/ActivityManagerWrapper( 3966):  mainTaskId=419   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app/com.pr4y.app.MainActivity} }
+02-18 20:47:11.845 E/ActivityManagerWrapper( 3966): get all recent tasks force including 419
+02-18 20:47:11.847 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-18 20:47:11.847 E/ActivityManagerWrapper( 3966):  mainTaskId=419   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app/com.pr4y.app.MainActivity} }
+02-18 20:47:11.895 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:12.047 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:12.048 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:12.066 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:47:12.069 E/HyperSentinel( 2702): Event_ThreadAmount
+02-18 20:47:12.073 E/HyperSentinel( 2702): -> audit event by proc 23309 "usap64": running threads amount, 0 -> 12
+02-18 20:47:12.077 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:47:12.077 E/HyperSentinel( 2702): Event_ResidentSize
+02-18 20:47:12.078 E/HyperSentinel( 2702): -> audit event by proc 23309 "usap64": RSS increasement, peak 70008kb -> 105160kb
+02-18 20:47:12.195 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:12.265 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:47:12.266 E/HyperSentinel( 2702): Event_ResidentSize
+02-18 20:47:12.266 E/HyperSentinel( 2702): -> audit event by proc 23309 "usap64": RSS increasement, peak 105160kb -> 157952kb
+02-18 20:47:12.467 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:47:12.468 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:47:12.468 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:47:12.469 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-18 20:47:12.492 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:12.561 E/WindowTransitionCompat( 3966): com.android.systemui.shared.recents.system.WindowTransitionCompat@da631b7 finishTransition toHome = false
+02-18 20:47:12.577 E/WindowManager( 2702): setClientVisible ActivityRecord{7e2ed68 u0 com.miui.home/.launcher.Launcher t2} false
+02-18 20:47:12.580 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:12.580 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{6516dda token=android.os.Binder@8bc8bc9} false
+02-18 20:47:12.581 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{bf25d92 token=android.os.Binder@97d971d} false
+02-18 20:47:12.583 E/MI-SF   ( 1606): surfaceflinger resetAffinity failed.
+02-18 20:47:12.596 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{6516dda token=android.os.Binder@8bc8bc9} false
+02-18 20:47:12.597 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{bf25d92 token=android.os.Binder@97d971d} false
+02-18 20:47:12.597 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{6516dda token=android.os.Binder@8bc8bc9} false
+02-18 20:47:12.597 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{bf25d92 token=android.os.Binder@97d971d} false
+02-18 20:47:12.600 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{6516dda token=android.os.Binder@8bc8bc9} false
+02-18 20:47:12.601 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{bf25d92 token=android.os.Binder@97d971d} false
+02-18 20:47:12.607 E/NativeTurboSchedManagerJni( 2702): ioctl 8 failed!
+02-18 20:47:12.621 E/ActivityManagerWrapper( 3966): get all recent tasks force including 419
+02-18 20:47:12.622 E/sensors-hal( 1370): handle_sns_client_event:57, har-sensor-hal: time=168925424592273 data 5.000000
+02-18 20:47:12.626 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-18 20:47:12.626 E/ActivityManagerWrapper( 3966):  mainTaskId=419   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app/com.pr4y.app.MainActivity} }
+02-18 20:47:12.702 I/PR4Y_DEBUG(23309): Pr4yApp.onCreate|pkg=com.pr4y.app|pid=23309|uid=10305|userId=0|hypothesisId=H1,H5
+02-18 20:47:12.745 E/BluetoothAdapterService( 4271): getActiveDevices: LeAudioService is null
+02-18 20:47:12.794 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:12.827 E/ANDR-PERF-LM( 1468): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-18 20:47:12.827 E/ANDR-PERF-LM( 1468): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-18 20:47:12.828 E/ANDR-PERF-LM( 1468): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-18 20:47:12.915 E/FramePredict(23309): registerContentObserver fail
+02-18 20:47:12.942 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:47:12.944 E/HyperSentinel( 2702): Event_ResidentSize
+02-18 20:47:12.944 E/HyperSentinel( 2702): -> audit event by proc 23309 "usap64": RSS increasement, peak 157952kb -> 237584kb
+02-18 20:47:12.944 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:47:12.945 E/HyperSentinel( 2702): Event_ThreadAmount
+02-18 20:47:12.945 E/HyperSentinel( 2702): -> audit event by proc 23309 "usap64": running threads amount, 12 -> 23
+02-18 20:47:13.094 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:13.226 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.260 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.265 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.274 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.284 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.285 E/Launcher.application( 3966): setClickAppWaitForCallback = false
+02-18 20:47:13.292 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.300 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.311 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.321 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.336 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.343 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.348 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.356 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.364 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.373 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.381 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.389 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.392 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:13.398 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.407 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.415 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.424 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.430 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:47:13.433 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.441 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.449 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.457 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.465 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.473 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.482 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.490 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.498 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.506 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.515 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.523 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.532 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.533 I/PR4Y_APP(23309): --- Iniciando B├║nker PR4Y (Async) ---
+02-18 20:47:13.538 I/PR4Y_CRYPTO(23309): Inicializando almac├⌐n de hardware (Intento 1)...
+02-18 20:47:13.543 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.549 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.557 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.565 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.573 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.586 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.590 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.599 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.607 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.616 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.623 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.628 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.628 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.628 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.633 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.641 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.646 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.646 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.646 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.652 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.659 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.666 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.667 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.667 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.667 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.673 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.681 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.685 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.685 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.685 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.690 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.692 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:13.699 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.702 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.702 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.702 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.706 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.714 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.719 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.719 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.719 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.721 I/PR4Y_CRYPTO(23309): Almac├⌐n cifrado listo.
+02-18 20:47:13.724 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.732 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.739 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.745 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.745 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.745 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.749 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.756 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.765 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.765 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.765 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.766 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.773 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.783 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.783 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.783 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.783 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.791 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.799 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.803 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.804 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.804 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.807 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.815 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.820 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.820 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.820 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.824 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.832 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.835 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.835 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.835 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.841 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.848 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.857 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.866 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.874 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.882 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.890 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:13.926 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.926 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.926 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.942 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.942 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.942 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.960 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.960 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.960 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.982 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.982 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.982 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:13.992 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:13.999 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:13.999 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:13.999 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:14.016 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:14.016 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:14.016 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:14.043 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:14.043 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:14.043 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:14.060 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:14.060 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:14.060 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:14.078 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:14.078 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:14.078 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:14.098 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:14.098 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:14.098 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:14.114 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:14.114 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:14.114 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:14.132 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:14.132 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:14.132 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:14.291 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:14.313 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:14.593 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:14.893 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:15.164 E/RTMode  ( 2702): pkgName: com.pr4y.app has no permission
+02-18 20:47:15.193 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:15.230 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.233 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.241 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.249 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.260 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.269 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.303 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.321 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.323 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.331 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.338 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.345 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.353 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.360 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.369 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.378 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.386 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.393 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.402 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.411 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.418 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.426 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.435 E/LB      (23309): fail to open node: No such file or directory
+02-18 20:47:15.492 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:15.586 E/PR4Y_ERROR(23309): Login: NoCredentialException (useNonce=false)
+02-18 20:47:15.587 I/PR4Y_APP(23309): Login: Intento sin nonce fall├│ o no devolvi├│ credencial, intentando con nonce
+02-18 20:47:15.610 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:15.610 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:15.610 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:15.635 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:15.635 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:15.635 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:15.668 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:15.668 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:15.668 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:15.735 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:15.735 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:15.735 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:15.792 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:16.093 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:16.302 E/PR4Y_ERROR(23309): Login: NoCredentialException (useNonce=true)
+02-18 20:47:16.335 E/WindowManager( 2702): setClientVisible ActivityRecord{b444407 u0 com.pr4y.app/com.google.android.gms.auth.api.signin.internal.SignInHubActivity true
+02-18 20:47:16.337 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.338 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:16.341 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.361 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.364 E/WindowManager( 2702): setClientVisible ActivityRecord{b444407 u0 com.pr4y.app/com.google.android.gms.auth.api.signin.internal.SignInHubActivity t419} true
+02-18 20:47:16.365 E/WindowManager( 2702): setClientVisible ActivityRecord{b444407 u0 com.pr4y.app/com.google.android.gms.auth.api.signin.internal.SignInHubActivity t419} true
+02-18 20:47:16.365 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:16.382 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:16.382 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:16.382 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:16.392 E/WindowManager( 2702): setClientVisible ActivityRecord{3217115 u0 com.google.android.gms/.auth.api.signin.ui.SignInActivity true
+02-18 20:47:16.393 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:16.394 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.395 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:16.399 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.412 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:16.412 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:16.412 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:16.429 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:16.429 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:16.429 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:16.442 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:47:16.445 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.449 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:16.450 E/WindowManager( 2702): setClientVisible ActivityRecord{3217115 u0 com.google.android.gms/.auth.api.signin.ui.SignInActivity t419} true
+02-18 20:47:16.451 E/WindowManager( 2702): setClientVisible ActivityRecord{3217115 u0 com.google.android.gms/.auth.api.signin.ui.SignInActivity t419} true
+02-18 20:47:16.455 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:16.455 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:16.455 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:16.482 E/BluetoothAdapterService( 4271): getActiveDevices: LeAudioService is null
+02-18 20:47:16.549 E/NativeTurboSchedManagerJni(31110): open /dev/metis failed!
+02-18 20:47:16.550 E/NativeTurboSchedManagerJni(31110): open /dev/metis failed!
+02-18 20:47:16.554 E/WindowManager( 2702): setClientVisible ActivityRecord{3217115 u0 com.google.android.gms/.auth.api.signin.ui.SignInActivity t419} true
+02-18 20:47:16.563 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 2
+02-18 20:47:16.563 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 2
+02-18 20:47:16.582 E/NativeTurboSchedManagerJni( 2702): ioctl 8 failed!
+02-18 20:47:16.589 E/WindowManager( 2702): setClientVisible ActivityRecord{f572f51 u0 com.google.android.gms/.common.api.GoogleApiActivity true
+02-18 20:47:16.591 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.592 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:16.595 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.609 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.611 E/WindowManager( 2702): setClientVisible ActivityRecord{f572f51 u0 com.google.android.gms/.common.api.GoogleApiActivity t419} true
+02-18 20:47:16.611 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:16.616 E/ActivityManagerWrapper( 3966): get all recent tasks force including 419
+02-18 20:47:16.616 E/WindowManager( 2702): setClientVisible ActivityRecord{f572f51 u0 com.google.android.gms/.common.api.GoogleApiActivity t419} true
+02-18 20:47:16.627 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-18 20:47:16.627 E/ActivityManagerWrapper( 3966):  mainTaskId=419   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app/com.pr4y.app.MainActivity} }
+02-18 20:47:16.639 E/PhoneAdapter( 4437): get ntnphones failed, exception: java.lang.IllegalStateException: Default phones haven't been made yet!
+02-18 20:47:16.653 E/WindowManager( 2702): setClientVisible ActivityRecord{d9ec666 u0 com.google.android.gms/.signin.activity.SignInActivity true
+02-18 20:47:16.661 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.661 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:16.668 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.692 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:16.698 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.703 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:16.705 E/WindowManager( 2702): setClientVisible ActivityRecord{d9ec666 u0 com.google.android.gms/.signin.activity.SignInActivity t419} true
+02-18 20:47:16.709 E/WindowManager( 2702): setClientVisible ActivityRecord{d9ec666 u0 com.google.android.gms/.signin.activity.SignInActivity t419} true
+02-18 20:47:16.735 E/NativeTurboSchedManagerJni(31110): open /dev/metis failed!
+02-18 20:47:16.736 E/NativeTurboSchedManagerJni(31110): open /dev/metis failed!
+02-18 20:47:16.750 E/ActivityThread( 3966): Failed to find provider info for com.miui.personalassistant.servicedeliver.system.provider
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): isSupportServiceDelivery
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): java.lang.IllegalArgumentException: Unknown authority com.miui.personalassistant.servicedeliver.system.provider
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at android.content.ContentResolver.call(ContentResolver.java:2466)
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at android.content.ContentResolver.call(ContentResolver.java:2449)
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryUtils.isSupportServiceDelivery(ServiceDeliveryUtils.kt:28)
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper.lambda$tryReplaceToServiceDelivery$1(ServiceDeliveryReplaceHelper.java:67)
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper.$r8$lambda$WUWmthv-UjITX40FJ8ag1YKl6O8(Unknown Source:0)
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper$$ExternalSyntheticLambda1.run(Unknown Source:2)
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:520)
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at java.util.concurrent.FutureTask.run(FutureTask.java:317)
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1154)
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:652)
+02-18 20:47:16.752 E/ServiceDeliveryCompat( 3966): 	at java.lang.Thread.run(Thread.java:1563)
+02-18 20:47:16.754 E/jccc    (31110): *~*~*~ Previous channel {0} was garbage collected without being shut down! ~*~*~*
+02-18 20:47:16.754 E/jccc    (31110):     Make sure to call shutdown()/shutdownNow()
+02-18 20:47:16.754 E/jccc    (31110): java.lang.RuntimeException: ManagedChannel allocation site
+02-18 20:47:16.754 E/jccc    (31110): 	at jccb.<init>(:com.google.android.gms@260438035@26.04.38 (260400-867839860):21)
+02-18 20:47:16.754 E/jccc    (31110): 	at jccc.<init>(:com.google.android.gms@260438035@26.04.38 (260400-867839860):10)
+02-18 20:47:16.754 E/jccc    (31110): 	at jcca.a(:com.google.android.gms@260438035@26.04.38 (260400-867839860):300)
+02-18 20:47:16.754 E/jccc    (31110): 	at jbma.a(:com.google.android.gms@260438035@26.04.38 (260400-867839860):5)
+02-18 20:47:16.754 E/jccc    (31110): 	at bfck.a(:com.google.android.gms@260438035@26.04.38 (260400-867839860):85)
+02-18 20:47:16.754 E/jccc    (31110): 	at bfcb.t(:com.google.android.gms@260438035@26.04.38 (260400-867839860):119)
+02-18 20:47:16.754 E/jccc    (31110): 	at bfcb.G(:com.google.android.gms@260438035@26.04.38 (260400-867839860):5)
+02-18 20:47:16.754 E/jccc    (31110): 	at ezcg.call(:com.google.android.gms@260438035@26.04.38 (260400-867839860):265)
+02-18 20:47:16.754 E/jccc    (31110): 	at java.util.concurrent.FutureTask.run(FutureTask.java:317)
+02-18 20:47:16.754 E/jccc    (31110): 	at bfin.c(:com.google.android.gms@260438035@26.04.38 (260400-867839860):50)
+02-18 20:47:16.754 E/jccc    (31110): 	at bfin.run(:com.google.android.gms@260438035@26.04.38 (260400-867839860):73)
+02-18 20:47:16.754 E/jccc    (31110): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1154)
+02-18 20:47:16.754 E/jccc    (31110): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:652)
+02-18 20:47:16.754 E/jccc    (31110): 	at bfoe.run(:com.google.android.gms@260438035@26.04.38 (260400-867839860):8)
+02-18 20:47:16.754 E/jccc    (31110): 	at java.lang.Thread.run(Thread.java:1563)
+02-18 20:47:16.791 E/NativeTurboSchedManagerJni(31110): open /dev/metis failed!
+02-18 20:47:16.793 E/NativeTurboSchedManagerJni(31110): open /dev/metis failed!
+02-18 20:47:16.796 E/WindowManager( 2702): setClientVisible ActivityRecord{f572f51 u0 com.google.android.gms/.common.api.GoogleApiActivity t419} true
+02-18 20:47:16.796 E/WindowManager( 2702): setClientVisible ActivityRecord{d9ec666 u0 com.google.android.gms/.signin.activity.SignInActivity t419} true
+02-18 20:47:16.811 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 2
+02-18 20:47:16.811 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 2
+02-18 20:47:16.821 E/ActivityManagerWrapper( 3966): get all recent tasks force including 419
+02-18 20:47:16.823 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-18 20:47:16.823 E/ActivityManagerWrapper( 3966):  mainTaskId=419   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app/com.pr4y.app.MainActivity} }
+02-18 20:47:16.939 E/WindowManager( 2702): setClientVisible ActivityRecord{f51511 u0 com.google.android.gms/.common.account.AccountPickerActivity true
+02-18 20:47:16.943 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.944 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:16.950 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.958 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:16.962 E/WindowManager( 2702): setClientVisible ActivityRecord{f51511 u0 com.google.android.gms/.common.account.AccountPickerActivity t419} true
+02-18 20:47:16.962 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 20:47:16.962 E/WindowManager( 2702): setClientVisible ActivityRecord{f51511 u0 com.google.android.gms/.common.account.AccountPickerActivity t419} true
+02-18 20:47:16.982 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:16.982 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:16.985 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:16.987 E/.android.gms.ui(31110): Invalid resource ID 0x00000000.
+02-18 20:47:17.055 E/NativeTurboSchedManagerJni(31110): open /dev/metis failed!
+02-18 20:47:17.055 E/NativeTurboSchedManagerJni(31110): open /dev/metis failed!
+02-18 20:47:17.057 E/WindowManager( 2702): setClientVisible ActivityRecord{f51511 u0 com.google.android.gms/.common.account.AccountPickerActivity t419} true
+02-18 20:47:17.067 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:17.067 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:17.083 E/.android.gms.ui(31110): Invalid resource ID 0x00000000.
+02-18 20:47:17.084 E/ActivityManagerWrapper( 3966): get all recent tasks force including 419
+02-18 20:47:17.088 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-18 20:47:17.088 E/ActivityManagerWrapper( 3966):  mainTaskId=419   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app/com.pr4y.app.MainActivity} }
+02-18 20:47:17.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:17.283 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:17.284 E/MI-SF   ( 1606): surfaceflinger setAffinity failed.
+02-18 20:47:17.284 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:17.284 E/MI-SF   ( 1606): surfaceflinger setreAffinity failed.
+02-18 20:47:17.290 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:17.290 E/MI-SF   ( 1606): surfaceflinger resetAffinity failed.
+02-18 20:47:17.395 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:17.400 E/ANDR-PERF-LM( 1468): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-18 20:47:17.400 E/ANDR-PERF-LM( 1468): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-18 20:47:17.402 E/ANDR-PERF-LM( 1468): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-18 20:47:17.582 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:17.582 E/MI-SF   ( 1606): surfaceflinger setAffinity failed.
+02-18 20:47:17.582 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:17.582 E/MI-SF   ( 1606): surfaceflinger setreAffinity failed.
+02-18 20:47:17.588 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:17.588 E/MI-SF   ( 1606): surfaceflinger resetAffinity failed.
+02-18 20:47:17.693 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:17.883 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:17.883 E/MI-SF   ( 1606): surfaceflinger setAffinity failed.
+02-18 20:47:17.883 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:17.883 E/MI-SF   ( 1606): surfaceflinger setreAffinity failed.
+02-18 20:47:17.889 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:17.889 E/MI-SF   ( 1606): surfaceflinger resetAffinity failed.
+02-18 20:47:17.992 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:18.183 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:18.183 E/MI-SF   ( 1606): surfaceflinger setAffinity failed.
+02-18 20:47:18.183 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:18.184 E/MI-SF   ( 1606): surfaceflinger setreAffinity failed.
+02-18 20:47:18.189 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:18.189 E/MI-SF   ( 1606): surfaceflinger resetAffinity failed.
+02-18 20:47:18.227 E/com.pr4y.app(23309): FrameInsert open fail: No such file or directory
+02-18 20:47:18.293 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:18.485 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:18.485 E/MI-SF   ( 1606): surfaceflinger setAffinity failed.
+02-18 20:47:18.485 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:18.485 E/MI-SF   ( 1606): surfaceflinger setreAffinity failed.
+02-18 20:47:18.490 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 20:47:18.490 E/MI-SF   ( 1606): surfaceflinger resetAffinity failed.
+02-18 20:47:18.504 E/RTMode  ( 2702): pkgName: com.google.android.gms has no permission
+02-18 20:47:18.592 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:18.649 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:18.674 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:18.674 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:18.678 E/WindowManager( 2702): setClientVisible ActivityRecord{f51511 u0 com.google.android.gms/.common.account.AccountPickerActivity t419 f}} false
+02-18 20:47:18.764 E/NativeTurboSchedManagerJni( 2702): ioctl 8 failed!
+02-18 20:47:18.768 E/ActivityManagerWrapper( 3966): get all recent tasks force including 419
+02-18 20:47:18.773 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-18 20:47:18.773 E/ActivityManagerWrapper( 3966):  mainTaskId=419   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app/com.pr4y.app.MainActivity} }
+02-18 20:47:18.790 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:18.790 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:18.795 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:18.891 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:18.903 E/SysUtils(24978): cancelNotificationById: 5,showRedDot:-1
+02-18 20:47:18.943 E/Zygote  (26843): process_name_ptr:26843 com.miui.cloudservice
+02-18 20:47:18.943 E/Zygote  (26843): SetMemoryProtected process_name_ptr:26843 com.miui.cloudservice
+02-18 20:47:18.999 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:18.999 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:18.999 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:19.097 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:19.097 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:19.104 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:19.113 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:19.191 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:19.236 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:19.310 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:19.318 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:19.318 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:19.318 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:19.330 E/Zygote  (26894): process_name_ptr:26894 com.xiaomi.finddevice
+02-18 20:47:19.330 E/Zygote  (26894): SetMemoryProtected process_name_ptr:26894 com.xiaomi.finddevice
+02-18 20:47:19.336 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:19.364 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:19.364 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:19.372 E/WindowManager( 2702): setClientVisible ActivityRecord{d9ec666 u0 com.google.android.gms/.signin.activity.SignInActivity t419 f}} false
+02-18 20:47:19.398 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:19.398 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:19.405 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 20:47:19.407 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:19.429 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:19.429 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:19.433 E/WindowManager( 2702): setClientVisible ActivityRecord{f572f51 u0 com.google.android.gms/.common.api.GoogleApiActivity t419 f}} false
+02-18 20:47:19.457 E/libprocessgroup( 2702): Failed to open /sys/fs/cgroup/uid_10421/pid_21353/cgroup.procs: No such file or directory
+02-18 20:47:19.459 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:47:19.491 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:19.508 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:19.546 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:19.546 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:19.573 E/WindowManager( 2702): setClientVisible ActivityRecord{3217115 u0 com.google.android.gms/.auth.api.signin.ui.SignInActivity t419 f}} false
+02-18 20:47:19.612 E/BluetoothAdapterService( 4271): getActiveDevices: LeAudioService is null
+02-18 20:47:19.650 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 20:47:19.669 E/ANDR-PERF-LM( 1468): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-18 20:47:19.669 E/ANDR-PERF-LM( 1468): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-18 20:47:19.675 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:19.675 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 1
+02-18 20:47:19.678 E/WindowManager( 2702): setClientVisible ActivityRecord{b444407 u0 com.pr4y.app/com.google.android.gms.auth.api.signin.internal.SignInHubActivity t419 f}} false
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): Login: legacy failed
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): com.google.android.gms.common.api.ApiException: 10: 
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at com.google.android.gms.common.internal.ApiExceptionUtil.fromStatus(com.google.android.gms:play-services-base@@18.4.0:3)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at com.google.android.gms.auth.api.signin.GoogleSignIn.getSignedInAccountFromIntent(com.google.android.gms:play-services-auth@@21.3.0:3)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at com.pr4y.app.ui.viewmodel.LoginViewModel$handleLegacySignInResult$1.invokeSuspend(LoginViewModel.kt:170)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at kotlinx.coroutines.internal.DispatchedContinuationKt.resumeCancellableWith(DispatchedContinuation.kt:375)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at kotlinx.coroutines.intrinsics.CancellableKt.startCoroutineCancellable(Cancellable.kt:26)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at kotlinx.coroutines.CoroutineStart.invoke(CoroutineStart.kt:358)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at kotlinx.coroutines.AbstractCoroutine.start(AbstractCoroutine.kt:134)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at kotlinx.coroutines.BuildersKt__Builders_commonKt.launch(Builders.common.kt:52)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at kotlinx.coroutines.BuildersKt.launch(Unknown Source:1)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at kotlinx.coroutines.BuildersKt__Builders_commonKt.launch$default(Builders.common.kt:43)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at kotlinx.coroutines.BuildersKt.launch$default(Unknown Source:1)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at com.pr4y.app.ui.viewmodel.LoginViewModel.handleLegacySignInResult(LoginViewModel.kt:164)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at com.pr4y.app.ui.screens.LoginScreenKt.LoginScreen$lambda$3$lambda$2(LoginScreen.kt:46)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at com.pr4y.app.ui.screens.LoginScreenKt.$r8$lambda$0n4kKBuB71RsA8wUSl31H7fiGUk(Unknown Source:0)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at com.pr4y.app.ui.screens.LoginScreenKt$$ExternalSyntheticLambda0.invoke(D8$$SyntheticClass:0)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at androidx.activity.compose.ActivityResultRegistryKt$rememberLauncherForActivityResult$1$1.invoke$lambda$0(ActivityResultRegistry.kt:106)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at androidx.activity.compose.ActivityResultRegistryKt$rememberLauncherForActivityResult$1$1.$r8$lambda$VLs2Oqd6MzDD-LGilzyhNhDSH_4(Unknown Source:0)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at androidx.activity.compose.ActivityResultRegistryKt$rememberLauncherForActivityResult$1$1$$ExternalSyntheticLambda0.onActivityResult(D8$$SyntheticClass:0)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at androidx.activity.result.ActivityResultRegistry.doDispatch(ActivityResultRegistry.kt:371)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at androidx.activity.result.ActivityResultRegistry.dispatchResult(ActivityResultRegistry.kt:331)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at androidx.activity.ComponentActivity.onActivityResult(ComponentActivity.kt:786)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at androidx.fragment.app.FragmentActivity.onActivityResult(FragmentActivity.java:152)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.Activity.onActivityResult(Activity.java:7661)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.Activity.internalDispatchActivityResult(Activity.java:9680)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.Activity.dispatchActivityResult(Activity.java:9654)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.ActivityThread.deliverResults(ActivityThread.java:6328)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.ActivityThread.handleSendResult(ActivityThread.java:6384)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.servertransaction.ActivityResultItem.execute(ActivityResultItem.java:72)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.servertransaction.ActivityTransactionItem.execute(ActivityTransactionItem.java:60)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:186)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:112)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:84)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2875)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.os.Handler.dispatchMessage(Handler.java:107)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.os.Looper.loopOnce(Looper.java:249)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.os.Looper.loop(Looper.java:337)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at android.app.ActivityThread.main(ActivityThread.java:9608)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at java.lang.reflect.Method.invoke(Native Method)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:615)
+02-18 20:47:19.692 E/PR4Y_ERROR(23309): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)
+02-18 20:47:19.693 E/ANDR-PERF-LM( 1468): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-18 20:47:19.788 E/NativeTurboSchedManagerJni( 2702): ioctl 8 failed!
+02-18 20:47:19.791 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:19.804 E/ActivityManagerWrapper( 3966): get all recent tasks force including 419
+02-18 20:47:19.816 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-18 20:47:19.816 E/ActivityManagerWrapper( 3966):  mainTaskId=419   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app/com.pr4y.app.MainActivity} }
+02-18 20:47:19.860 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:47:19.860 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:47:19.860 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:47:19.860 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-18 20:47:19.872 E/ActivityManager( 2702): System internals registering for IntentFilter { pri=0 act={android.intent.action.ACTION_SHUTDOWN} } with app priority; this will race with apps!
+02-18 20:47:19.872 E/ActivityManager( 2702): java.lang.Throwable
+02-18 20:47:19.872 E/ActivityManager( 2702): 	at com.android.server.am.ActivityManagerService.registerReceiverWithFeatureTraced(ActivityManagerService.java:15805)
+02-18 20:47:19.872 E/ActivityManager( 2702): 	at com.android.server.am.ActivityManagerService.registerReceiverWithFeature(ActivityManagerService.java:15712)
+02-18 20:47:19.872 E/ActivityManager( 2702): 	at android.app.IActivityManager$Stub.onTransact$registerReceiverWithFeature$(IActivityManager.java:13060)
+02-18 20:47:19.872 E/ActivityManager( 2702): 	at android.app.IActivityManager$Stub.onTransact(IActivityManager.java:3386)
+02-18 20:47:19.872 E/ActivityManager( 2702): 	at com.android.server.am.ActivityManagerService.onTransact(ActivityManagerService.java:3102)
+02-18 20:47:19.872 E/ActivityManager( 2702): 	at android.os.Binder.execTransactInternal(Binder.java:1507)
+02-18 20:47:19.872 E/ActivityManager( 2702): 	at android.os.Binder.execTransact(Binder.java:1451)
+02-18 20:47:19.886 E/ActivityManager( 2702): System internals registering for IntentFilter { pri=0 act={android.intent.action.USER_UNLOCKED} } with app priority; this will race with apps!
+02-18 20:47:19.886 E/ActivityManager( 2702): java.lang.Throwable
+02-18 20:47:19.886 E/ActivityManager( 2702): 	at com.android.server.am.ActivityManagerService.registerReceiverWithFeatureTraced(ActivityManagerService.java:15805)
+02-18 20:47:19.886 E/ActivityManager( 2702): 	at com.android.server.am.ActivityManagerService.registerReceiverWithFeature(ActivityManagerService.java:15712)
+02-18 20:47:19.886 E/ActivityManager( 2702): 	at android.app.IActivityManager$Stub.onTransact$registerReceiverWithFeature$(IActivityManager.java:13060)
+02-18 20:47:19.886 E/ActivityManager( 2702): 	at android.app.IActivityManager$Stub.onTransact(IActivityManager.java:3386)
+02-18 20:47:19.886 E/ActivityManager( 2702): 	at com.android.server.am.ActivityManagerService.onTransact(ActivityManagerService.java:3102)
+02-18 20:47:19.886 E/ActivityManager( 2702): 	at android.os.Binder.execTransactInternal(Binder.java:1507)
+02-18 20:47:19.886 E/ActivityManager( 2702): 	at android.os.Binder.execTransact(Binder.java:1451)
+02-18 20:47:19.933 E/Zygote  (26951): process_name_ptr:26951 com.xiaomi.simactivate.service
+02-18 20:47:19.933 E/Zygote  (26951): SetMemoryProtected process_name_ptr:26951 com.xiaomi.simactivate.service
+02-18 20:47:19.964 E/Zygote  (26960): process_name_ptr:26960 com.miui.micloudsync
+02-18 20:47:19.964 E/Zygote  (26960): SetMemoryProtected process_name_ptr:26960 com.miui.micloudsync
+02-18 20:47:19.979 E/aomi.finddevice(26894): No package ID 6a found for resource ID 0x6a0b0013.
+02-18 20:47:19.991 E/Zygote  (26975): process_name_ptr:26975 com.xiaomi.account
+02-18 20:47:19.991 E/Zygote  (26975): SetMemoryProtected process_name_ptr:26975 com.xiaomi.account
+02-18 20:47:20.091 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:20.103 E/##XLogger##(26843): o5.@IPV6@SourceFile:2, thread:36994--cloud config is not expired , request canceled
+02-18 20:47:20.121 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:20.137 E/Zygote  (27020): process_name_ptr:27020 com.xiaomi.aicr
+02-18 20:47:20.137 E/Zygote  (27020): SetMemoryProtected process_name_ptr:27020 com.xiaomi.aicr
+02-18 20:47:20.178 E/XiaomiAccountManager(26975): PassportLog@A2^6C[c2V0dXAgdHJ1ZQ==]
+02-18 20:47:20.181 E/XiaomiAccountManager(26975): PassportLog@A2^6C[aXMgaW4gc3lzdGVtIGFjY291bnQgYXBw]
+02-18 20:47:20.187 E/MiMoverProvider(26975): PassportLog@A2^6C[Y3JlYXRl]
+02-18 20:47:20.187 E/XiaomiAccountManager(26975): PassportLog@A2^6C[c2V0dXAgdHJ1ZQ==]
+02-18 20:47:20.201 E/XiaomiAccountManager(26975): PassportLog@A2^6C[c2V0dXAgdHJ1ZQ==]
+02-18 20:47:20.201 E/AppProcessUtil(26975): PassportLog@A2^6C[Z2V0Q3VycmVudFByb2Nlc3NOYW1lQnlBcHBsaWNhdGlvbj4+PnByb2Nlc3NOYW1lPWNvbS54aWFvbWkuYWNjb3VudA==]
+02-18 20:47:20.202 E/AppProcessUtil(26975): PassportLog@A2^6C[aXNJbk1haW5Qcm9jZXNzPj4+bWFpblByb2Nlc3NOYW1lPWNvbS54aWFvbWkuYWNjb3VudCAgY3VyUHJvY2Vzc05hbWU9Y29tLnhpYW9taS5hY2NvdW50]
+02-18 20:47:20.206 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!hds6Q7dkK93nTIwfdjoQrndxdwhlK61wR9chWRANL/G9JwSjMAMznRpsDi4mZElDlz3hxTRdlXmL2owODKY265GActbXHQGdnBk3wnD9ri8=^&#
+02-18 20:47:20.209 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!hXlV7nfV6RoMyvQarMtge7ALasTRIj+fsVJzvjT83lShBBT66JOmJeIA6rjs0yRnEB4y8jD8aH9rSBbg7OvaUg==^&#
+02-18 20:47:20.210 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!hXlV7nfV6RoMyvQarMtge2eZII9Ehj4hdQhp2nz3REC5WSZuTZh8krKw32ig2eyJcRN9STgdng/JI5C6ay1NBxzlpGYM6iBMTKGHMxER5iI=^&#
+02-18 20:47:20.212 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!XzFSXYr3iTMk7/LEsUGT5w/rmlVAO0Tl+gfGmFYTbaL0dJ/6lG/P9KO6PcqlC/LfZjmaR15/ALznYEKpyVdRFA==^&#
+02-18 20:47:20.214 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!Ko7pm6QUEjPUleEgrMhLZgIDCovV3qQt5bNE60IeVlavcwjlNvSiJs8vpY4s+vVLPXEHWHhhn/pqbKzDifdUseZUgLlDxKbYUD7KNilRhvKB8y5TqztpnEbusi6pCK3LAmGugicxnLGNS201qO8YYg==^&#
+02-18 20:47:20.214 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!wgmpk8VowONDfTm5JDI3TQbJiq/CzyENu9DwiZ0V9HUIJe/Y//vjUML+mYM12ikh^&#
+02-18 20:47:20.215 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!l9zObk/s4u8LJ5tm0j82v9RjY5lt1dMbGSMglCS8kv42wiq4Fx2oiB80lJNl+wqikV6Cll7FD61c8lvsctih7g==^&#
+02-18 20:47:20.219 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5YHcc3rtZ2t3+smfGUAnka02HdM1XQW17b1d3Xey1uKzmPaDzwBnGg3O5Pudy7sy+4u8I3MAWffAfPLlNTHs3U=^&#
+02-18 20:47:20.219 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQtypBn7OMz8F7GQYIRqigv9XkgGTM8jP8s9Lqej0HR6AnkYZr+2dU/mt0LsEBRsVerfgR3TkqoRPqPlPqtnmwBXIwTZjDCQuyRu6ONf3i4zmO^&#
+02-18 20:47:20.219 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt8Br/6R2UUKcCwH0DQYFzrrKgabMUITDhEXuHRkHMfWtenuwJHslVkPI/hKTv/rC5o9LpLnrYDQ2IqnzEAYV/688n3pL2G5s6Mcbvop5HBFa^&#
+02-18 20:47:20.222 E/##XLogger##(26951): #&^FR5PSGFnnmj/HosTsFxLPKvWJXd3mOT/2BlrlL2ofQborHT/GoJWdG2swg6L4kPDAo8SwaB08Kck1l+jnPmYg8PAY+YVKjQ1vqU4ntQjxuIndnJ6Kpt+agK9qPcZlfG5srQt8xxcG572JxL00T5bpP6QAzPwg6oON44sJ3cq/vc=!simactivate!o68iZ/QY1AxzgMgEyi1WsUe26qU6PrFaTUvw8F5OOMyMObJ5Lzl/3P8eGsz31yl8qD0XVEISbmHKMNOFECvovr7+JObXzWxzHYnjbAJINHF+yB8B/D9yCR+4OpvuNYMh^&#
+02-18 20:47:20.224 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!OqgSo1K3kczNkNdsRV3GEWu7bSIyf57O/V3diZg8cJNoXHpwgfS4bomV7pSpyd1JpWy7A6zmoP7tnAYcDVyR391/T2vCd5NRmpespTPMTeDZiJW8DDriN1BZ0aYpMByJFW4Bi4rE2z9BbgcqVwYttBr5lyjRwdHw3GQPr+cdmAI=^&#
+02-18 20:47:20.224 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!sj23O15yuAdjai+i86dZO60JUOqhkJeB161Mu5bbeyQk5BaWSGe+u11jthpexGoU4H7wazwz2O3Co/TKV9IVhAlkxXIN+byMPqIOJXj52a0=^&#
+02-18 20:47:20.232 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!Ko7pm6QUEjPUleEgrMhLZt0jS6Dszo8FHhLgEnrhwImdMp4WfOmHAqd1kYAKkcdhBNmRxEMiHQtt4q+WQ2NAzn7EWOqSgoVvamukT0JXQXg=^&#
+02-18 20:47:20.232 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!3Xk8Gjx7yZcGhW65a+rN/ifLTUVOCea/P0eYz2kRA5mCh940qb3Ilpzw1KEAE40e^&#
+02-18 20:47:20.240 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:20.267 E/Zygote  (27070): process_name_ptr:27070 com.alibaba.aliexpresshd:channel
+02-18 20:47:20.267 E/Zygote  (27070): SetMemoryProtected process_name_ptr:27070 com.alibaba.aliexpresshd:channel
+02-18 20:47:20.282 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5mKwXiI/pCJRp7a8Hs0gEqPmF0afCVFc2y5Yrd1WnfMGObUu89PmEBFAoycsw5l5Gy67esbeZaCKHEU/MMZENS415nOJcHPUtRNeJNpz1wemLKlsELARbTrEG98N1tBKWYw61nLe56FIUX0XKzV3WKR0d4nai+EdbQPCmHZRLp6Sp9Ni/iPumrX7R1xUWMgDdTp3SzqmenfaDAtV3I4yHMZlFbg9tJPDFR1K2jpJu7/ihdSC/XpNT9WwwcGaQO+v0+Xxozn4pHD6Sza93Qv3r0E6Uiwsm1Is5gT9KE0Mh+stYxq+Ns58jYneW+k5qETnb8+qeLhNJJq5tOsEbJsvCPCjEBQSnP3s2HfieWF1pWhj2D7NvOWWc7WqKHB5feaSDe77TbFuRomlkOnK8TdcTWJJTc1vNsnmzU6IRDKLw84uTjfWEwVWsIctNuRGLzaQvLV2Lc/ptPQCOtu54czP8cLVpYv/gObOpNNNQesZZ6u1ToitX4QMvx54zOz5TGEcbRhj7UhtKvLchQ6WWjzk15LYmam2xlVd8hmj0rxrO5SrJEVJNRnc2h0aNUETRmDFHLivIFB51dOrXd5fzZ7gbgY5/BKjMrcVGZWAyTzKe0DG9AvWXXBqb8c0GWmX9I+WpPQLsuK3hXxMRQ32C+blVXgzR20/gEMwmA12STPdi6YKd7i9iKj1OOSBYBfAjmpBxtSD963U6XlBYu0O8S+sJBqCpl70FJIyizn8pAAxs7Ew0i66Uh1rJ83nwZ9f40PI56dLVPvzHxKUx3Yxf0jF0ZOd4K5uFaq6atL6v6NjIzjWwWoZ50ZXJ/D1VjRXh0GSfkqiINlpJ/r5BaeiDfZu4WETZFVUtjF7i7dTn/uytU7GgfX/F99WnjUfAEAIeWXhjY1U9MXsx+Usw/At6gns+mPfXC+iJdD1NwOzQ5uRcWzSq2rnz1HzF7yG+JFmAUegNe+aqZGDLhQKMw5twA2lsOgOf5PyoIficztni8IfV/b89V9EjL2SLvhuyhZv2h+7z9iovnGzXDMHCrlS2k36yw=^&#
+02-18 20:47:20.287 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5mKwXiI/pCJRp7a8Hs0gEqPmF0afCVFc2y5Yrd1WnfMGObUu89PmEBFAoycsw5l5Gy67esbeZaCKHEU/MMZENTFhbYnHHKHQAC5KXFGg/Pk2VVhzDWk53KBJ5MweRIHfmPyoulGhYjiIO+4qqpE8DjU6JjPJXX/ZdNxJy13ULjJUlXycLNV4U6Nd9RQSr/Xlv00xyQcDCVX47gwvObWxDCwMFtqi8bpNucqd9zI9YgQfGGGwUcS99gpF7VkB42uHlu/3wPp7re5JMd/39TMGW3qvt4gl7+LM+nCQUuMX6jHk/Olu4zWiejz2Kf3zlVYiRkligydVfUTaOu3TVYu+3hxGkxhogq0DfMljonRaKYbcUHxxv22lRKM39VL0vk5LZ5knE2buZTZ/fuogqic5bLwLp2IhPlUrvIKdvchLSA4ftdasRXKqO9be+8m77FsDKrgdQnSsF4c72ttP4C8LFJKMxD5A2j7OES0sZyjO21BWxYz9cbrG59PDxWaQaWkI2f4NxTkxiv7ZgYulmwShYxgpacLgWL1bakMQi+ZEMw6PcwJJ7zQWQg6xM+X1tfxhUxPEqIxvG/FD4H9kcDlP5UJzWV30UyoSo6zkHLDlTR8qEEIahH+AjzqN2we7vo/NeE9juQGgRSnP0tzh5Yt+1xcJsjAMeY7ujxXAfLz1lpSlpCEsJ0+qx4I0LXyCLxfOA==^&#
+02-18 20:47:20.294 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5mKwXiI/pCJRp7a8Hs0gEqPmF0afCVFc2y5Yrd1WnfMGObUu89PmEBFAoycsw5l5Gy67esbeZaCKHEU/MMZENSUFf9ezHFkvaupyiP1RvNaeOzTozcplBp4gmpG5uVwknCnlNgF0RnPO44k7Ro4uKeI3ysC8vS8hs6Mwj9cdegQ^&#
+02-18 20:47:20.295 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5mKwXiI/pCJRp7a8Hs0gEqPmF0afCVFc2y5Yrd1WnfMGObUu89PmEBFAoycsw5l5GCZi9KVwhhyOV4bkqOM0/CroDvs5oEC3WZG0SFnpoPPG802EQe3dx1Em2tN2Tv9kynqTZGnVWYMihn2+4T1FvrwK7iqqTbMl/cRs7206Fra9KvjfXossRtNXyGp+BMX5JOYmHg8TPKAHMyp1pkqFymceTHGM3UuOdOtyg6D/YMrNrfMv5/2OugSMV3CpyA/FPjn+K+vZZnLjfoKsVgIysZykPR10+3TzUDcogwLHUymaiw+SBA7Cq9UgrGELI7jkZZJQd8ksKcN2+HenOvg0azL57HbN1re1p6OojJPG1dNZlah8JbZW8NfpwxVI3sNj6sx+4kqnMLRIUOareDYfhChbHI/qjyRli7WR7kA9V2jxJtxQfO3Qc+M6Ibes2wvo6+n6GfJcpSpM8IK2xkWAdj28Mq0029IbWvHjFYxySRfYh6PPGXZljjAvsN2fgAUWU4mB9Kz5YQTrS2Oomp95e+fUeLdDdRWKTMJDym3WrxpVZBkhi4/oLQwaojMiJRrE/wD9UAe3KxjjnFECABaJ+uy8E7vKj6Y5vK9FiYdHSCZbTiXyX3yVSMX0lXXYJojTFFP5k0x1HAS41clxJGrVqzy40yBI4hm+OETF/ugh6VGuJk4/WfojiwSGoMe8divzilayo8Yv+m57+jDRX1iLExmEXXOh5p5ed3EAiJHRkmheCP2qij4pY+fJkhOPPTdbpwmlSrUP4pwSJr8gdsKjBtrIgGMrKp4WzCosi4i6lgs0prr2tFSoFx3i0lUaSAnXechIjiVzv5ecBKLi+AyxG8Fyej/axlfU2Lg7cC5wA/I0Zvb1FGMGDaKQMK89UUXRfeQalfdEUCXNg32GItd9ZocytBuSq8sn0Wr4GIpdaH6w/hmM6pQHSwH3BrCqepnVQK0kS2ENGqBc7IYSyzuFtaHmbQmHFA8IYhuAl7tfQo1hbwKzzxsjBXDs+Q2ujnftpAqYCik7iLt5LzA9rJgaWk=^&#
+02-18 20:47:20.296 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5mKwXiI/pCJRp7a8Hs0gEqPmF0afCVFc2y5Yrd1WnfMGObUu89PmEBFAoycsw5l5Gy67esbeZaCKHEU/MMZENQ8jCoVH8t3Z7W7AqxjWJGRf/CVeWXGNeGke8MgZP0MPSWrqlxqbEAfAgu+CXiz6NoX7hxpp8iuIC8jeJMTH4aL^&#
+02-18 20:47:20.298 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5mKwXiI/pCJRp7a8Hs0gEqPmF0afCVFc2y5Yrd1WnfMGObUu89PmEBFAoycsw5l5Gy67esbeZaCKHEU/MMZENSQcxJ3C9sxUtJAcselaXNwqN4xjIn2T5Dux/GFBcs/KYMiialOdbINpIbMOZFcv4U=^&#
+02-18 20:47:20.299 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5mKwXiI/pCJRp7a8Hs0gEqPmF0afCVFc2y5Yrd1WnfMGObUu89PmEBFAoycsw5l5Gy67esbeZaCKHEU/MMZENQjTQaSxrVvo7cPY9RCmDJvRiX9ZlKpJbxZeuCCedVdZR2zpfAqFYFEf+VxvumzzpxEUD8DCZ6gb/VFssraAKt1ZageHAgoK09PN1pE59HeBiMYhnjbcpkxxmh1oWbvyRU=^&#
+02-18 20:47:20.300 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5mKwXiI/pCJRp7a8Hs0gEqPmF0afCVFc2y5Yrd1WnfMGObUu89PmEBFAoycsw5l5Gy67esbeZaCKHEU/MMZENTP1kxIiZJ+adJoaIZ+KVfwnarzddq2NIsTqvxEvnCkm8U0Gayx9xpjTnkkzWjEGng=^&#
+02-18 20:47:20.303 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5mKwXiI/pCJRp7a8Hs0gEqPmF0afCVFc2y5Yrd1WnfMGObUu89PmEBFAoycsw5l5Gy67esbeZaCKHEU/MMZENQzq209DzMWJ4KiePBXqOGOsDFU/Nn6BkwTdKi5PVjpvOfk2nWOZYMM967r10EKb1MXPbGuUiZot4Jhtvt1YAlg^&#
+02-18 20:47:20.304 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt5mKwXiI/pCJRp7a8Hs0gEqPmF0afCVFc2y5Yrd1WnfMGObUu89PmEBFAoycsw5l5Gy67esbeZaCKHEU/MMZENSRpsHkX/RJQ8Io7axjI72VMaxDUWhZAE1JKCQQR7sKz2L15Aga/6PcHZXdZti3jDl8Se3In8DN8l3MnCIUlMI9eHJRJ+JJPrK2651jS2EFFQ2mjy8j8GOi84iVKWS1MdZ/5XGp9brfxjlgUfjg+F3NsZgVtOXdTdoeZ4+K9nkTDP/ccrEcl0Wup2+mp0iAg4YEzxzIMW0C8LnNHqclbBTO/kGVFBAlihxuqndqHkQaMsmcdOtVER0MmEs5jeRM99ZC20UeX9Q18WFhBlU5/vBW09MG9e0yTcC+nuyc94SyXjP7vG1qAtYWoa3MopQ5a5tWqvA94/rhrIPTCpxL9779GqE0Y5i033TJ0B/PDe1LVJh94HgS7//V9rZSbFHFVp8p7IRk1fgdPaox0xL5Wi9cab/ZKtw+qS+268JzME5Dw5jR20rrjYzhhq9WzVAPO53K0tiNNDk8ucK9jOEIHFQwxd2j0PpxItJBn+P/TRDFdWAXSLjbhBqPWrdyMV089ZKFb2v3XNPPtEl0VsovnL5XhHRyjC+YlcP2tQKqomUBE5Psb1byd5LG3bMYGbxGUnQ=^&#
+02-18 20:47:20.317 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!VOqrgyrYZiNcFpn4+OEo2QLWELmfZ5Cs/azZy/HQnBFKa2Yvrlm5S9G1IGRc2V7QaQaOAUQRGB/Z95hLnzvjBvu+Ol+eUvs2r8DuoUt5z0apFK3pJ2eek5GgqavesN59ogviQEd6PR59WEKpJaIxpQ==^&#
+02-18 20:47:20.319 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!BNlX9672XrQvwbyuAIdWBONFH0VFzr09PiSHAkVploIikJjvY5PlWNQu0RrERUcz^&#
+02-18 20:47:20.320 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!BiaXTb5+Dlqf50hhKRbBN0pzTGh4TcL1kGfJHsCU52Utw9yyxO+EslbYKNySrWv4ek2rl66hd4Kixji3UD0s7g==^&#
+02-18 20:47:20.323 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!BNlX9672XrQvwbyuAIdWBGPhL2FT/p1XW2xfp3qF0j7BO1VtCzx3Z8hSJDZqEF2j^&#
+02-18 20:47:20.323 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!xgVlpYsyw/CrPuRJ0FbDDsH+DIsQlKmWIlL6gwde7kUwRan7PWg+aEJh4VfXv0OlabO7P8x034nyQYwbVl7oVQ==^&#
+02-18 20:47:20.327 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!XzFSXYr3iTMk7/LEsUGT5w/rmlVAO0Tl+gfGmFYTbaL0dJ/6lG/P9KO6PcqlC/LfZjmaR15/ALznYEKpyVdRFA==^&#
+02-18 20:47:20.330 E/##XLogger##(26951): #&^FR5PSGFnnmj/HosTsFxLPKvWJXd3mOT/2BlrlL2ofQborHT/GoJWdG2swg6L4kPDAo8SwaB08Kck1l+jnPmYg8PAY+YVKjQ1vqU4ntQjxuIndnJ6Kpt+agK9qPcZlfG5srQt8xxcG572JxL00T5bpP6QAzPwg6oON44sJ3cq/vc=!simactivate!o68iZ/QY1AxzgMgEyi1WsUe26qU6PrFaTUvw8F5OOMz8kCUgZ3UExXUNHTxpF6cacNy/gCSLvojzGReEMtvu2IPXP41rsYNDbjI0Z7g3JGduR6Ue/t/EuyT2DKg5h5lm^&#
+02-18 20:47:20.336 E/Utils   (27020): updateDebugConfig: false,flavor=beta,buildType=release,openDebugLog=true
+02-18 20:47:20.338 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!zp5VGXP++jcxpAChlZqealp12AVHAoz2JTP0Ic7wVwn8yDsKsh8x7VqnPW33gkQFte9CVl44UlrGbZZ0XZjlCMSvjzxsH4rktc+50t5ermHbA8nT+swzmhUNh3TcfJV6RaaegXoW5Qv/lME0s5bCDA==^&#
+02-18 20:47:20.339 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt6RBe02/J2vCkjYH9Frmubi9BFhr7rT92XcDxTDM2p9bM0SyQmtFbh7wYa0BMpsyevfYbwEvJYtmJWZ+gb/MIw0=^&#
+02-18 20:47:20.339 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt9p1nm/ylbVw7Cw/hXNuHTQH/TT8gpfa2b2QOZHWmeOguQzAELKYCd1VWu28PZIga57ZtXElePpSo48pbgfKepeQvKEnO6RGk37BOsPiFeAEUIwQWNlyBq/cUoYdIGQNTg==^&#
+02-18 20:47:20.340 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt2hV/eW6rUjegx5qoo3y+32tswVYWPTbTe73fXKAL3nq6oU9bH/j7/BW/cwKp3cMDDbiKmkRki8uVU1nQla/QpfueyYrGxUgbKN4eUsFZ6Hfck5AaksRoSYXV8fQGDW1CzwgW+vCk65w1E9iwf9JWLNQ6tKCIgvBzOXmavqIAYb5^&#
+02-18 20:47:20.341 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt2hV/eW6rUjegx5qoo3y+32tswVYWPTbTe73fXKAL3nq6oU9bH/j7/BW/cwKp3cMDLYk1Fv8xF1hSy23nGR4BgSW/9JJHTBzlfInYAwMTnUjypwiFImQj1vG9GGudEv3wtMaCKGoETYeqZoUsESJSWU0L9Zc1hCtoRYSFQG6vhlJ^&#
+02-18 20:47:20.342 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt2hV/eW6rUjegx5qoo3y+32tswVYWPTbTe73fXKAL3nq6oU9bH/j7/BW/cwKp3cMDLYk1Fv8xF1hSy23nGR4BgSW/9JJHTBzlfInYAwMTnUjN+GS5nDGmKudGDnJxCEF3n3V2IQPm2DQQvoE+TBhyIT8HkQEEqJf8YK6Z6epbcem^&#
+02-18 20:47:20.343 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt2hV/eW6rUjegx5qoo3y+32tswVYWPTbTe73fXKAL3nq6oU9bH/j7/BW/cwKp3cMDA9mlu5/4O/uFU9OM1H2/Dz15NuX5B8XEumuAYJSu7o8kwiI5oT97IHd0iHsFX6krJf/rx6TQRjvYmqxjXUddE8=^&#
+02-18 20:47:20.344 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt2hV/eW6rUjegx5qoo3y+32tswVYWPTbTe73fXKAL3nq6oU9bH/j7/BW/cwKp3cMDLYk1Fv8xF1hSy23nGR4BgSW/9JJHTBzlfInYAwMTnUjypwiFImQj1vG9GGudEv3wvf6iUywC/RWYiRIpug59h8=^&#
+02-18 20:47:20.344 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt2hV/eW6rUjegx5qoo3y+32tswVYWPTbTe73fXKAL3nq6oU9bH/j7/BW/cwKp3cMDA9mlu5/4O/uFU9OM1H2/Dz15NuX5B8XEumuAYJSu7o8kwiI5oT97IHd0iHsFX6krAwPTKa0RJInddV8ruE80o6QeJQmJzCqD8C7ornijKti^&#
+02-18 20:47:20.346 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt2hV/eW6rUjegx5qoo3y+32tswVYWPTbTe73fXKAL3nq6oU9bH/j7/BW/cwKp3cMDO+wQTdcRqKzZUoSsBc3qYIdruVk/KrAzeMeMZOR2nnHUPIS9P+GVsdiH5XE5kGM5ZbooDI4Q7ffeJFi0ROSutCXMokDMz6V3CdcHifJz+Z/^&#
+02-18 20:47:20.347 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt2hV/eW6rUjegx5qoo3y+32tswVYWPTbTe73fXKAL3nq6oU9bH/j7/BW/cwKp3cMDO+wQTdcRqKzZUoSsBc3qYIdruVk/KrAzeMeMZOR2nnHUPIS9P+GVsdiH5XE5kGM5eeeQ4cngBD3jWCs/1dzNLeoMPW3Q5LCDr7kTV7guZ04^&#
+02-18 20:47:20.347 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt2hV/eW6rUjegx5qoo3y+32tswVYWPTbTe73fXKAL3nq6oU9bH/j7/BW/cwKp3cMDMWQhMaY6/j/NJ3QO58a031mLjohmwEWRHg54DoYTUBiDOaUkS9/hPMBInH2qBLicGXMzOWAGxgZ10NXVyvtF/0=^&#
+02-18 20:47:20.348 E/AIRC_[FN]_F[Int]DP(27020): FocusNotifyManager init
+02-18 20:47:20.348 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQt2hV/eW6rUjegx5qoo3y+32tswVYWPTbTe73fXKAL3nq6oU9bH/j7/BW/cwKp3cMDPh7JsxEUF/7DRuEVmu5U5W39/VINh+v4PDG0NGzFvsziqUfAHpWnBFENdsh3biECA4CGv0V9yru8LdhW/qkDXufUuYaznPtq8sQsUiNkJD3XMrjMyxXOGrD7+Exb0CXlg==^&#
+02-18 20:47:20.349 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQtx1GpIiRlXJ/OcSZK3KG743CLPn6+OFPEiJUIeo7jcogFNwUewZ2nbbzv2+jIEzcywr3tAJWTJ0QuRDntfqvjb99jw/0AEpP3GuND/zslw5iCw/RJhe2JUvWSFSjdOzD0xliDzPohrcYDSvXj0DhrF3JAHSWkFmCZQRB+fl/3kRzcUxhx+Iw20OF8FsYnRA8znwJtIYBcdqTw0kXM3sCFTH1HRWiV/7UekMoG6UN+tUrHKowytQ05SC1eVmaWihVRv3M/VLJeSmAyAqg2UN+SzILbNlT9bIkI8zhhozmcGqnjisf6RoedNc0YPoGH3eDsYZoZ8IXUeqgDULm4IC2Jr89MjmCmFl4EtJHGo1qvBhB^&#
+02-18 20:47:20.349 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!RvL6cZjMUl3vs1CX2AeQtxBmFgjfoIVTuskDGnU+57Don/NGMwhPRc+LoxsBjg2yo0MZzWFzhFU47QLDvYHXeQ==^&#
+02-18 20:47:20.352 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!Fh0g050zzWYNF7qbX51sT1cADZcm4qkrJ4ppJ6W6MS1Y4duTYDvTVtBovvzWimYt^&#
+02-18 20:47:20.356 E/Hmind   (27020): init
+02-18 20:47:20.359 E/##XLogger##(26843): f6.@IPV6@SourceFile:10, thread:36998--STATUS_OFF cancel
+02-18 20:47:20.365 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!Fh0g050zzWYNF7qbX51sT+IhJvdyzdACO3Rz2BdKPMBaZU7DbwSZo6ecRBFx3p0eT9CRh2aCnzfkyFoEAmg7QPwmLORwCrdU5W3PB6YLebHChJqwD86b7+KEGQEjbX4ZQJ3FS4yKfbVsWQoSlyI6K5PO4an0vS3mdq/zCD0fM8OjkhRcid67PJQqaBCx5thH^&#
+02-18 20:47:20.391 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:20.401 E/AccountChangeReceiver(27020): onReceive hmind refresh token
+02-18 20:47:20.403 E/XiaomiAccountManager(27020): PassportLog@A2^6C[c2V0dXAgdHJ1ZQ==]
+02-18 20:47:20.411 E/QC-time-services(  871): Receive Passed == base = 13, unit = 1, operation = 2, result = 0
+02-18 20:47:20.411 E/QC-time-services( 1209): Daemon: Time-services: Waiting to acceptconnection
+02-18 20:47:20.413 E/Zygote  (27111): process_name_ptr:27111 com.google.android.apps.docs
+02-18 20:47:20.413 E/QC-time-services( 1209): Daemon: Time-services: Waiting to acceptconnection
+02-18 20:47:20.413 E/Zygote  (27111): SetMemoryProtected process_name_ptr:27111 com.google.android.apps.docs
+02-18 20:47:20.428 E/XiaomiAccountManager(27020): PassportLog@A2^6C[Y2FsbGVyIHNpZ25hdHVyZSA9IEFwcFNpZ25hdHVyZUhhc2h7c2hhMT0nN0I2REM3MDc5QzM0NzM5Q0U4MTE1OTcxOUZCNUVCNjFEMkEwMzIyNScsIG1kNT0nNzAxNDc4QTFFM0I0QjdFMzk3OEVBNjk0Njk0MTBGMTMnfQ==]
+02-18 20:47:20.429 E/XiaomiAccountManager(27020): PassportLog@A2^6C[c3lzIGFjY291bnQgc2lnbmF0dXJlID0gQXBwU2lnbmF0dXJlSGFzaHtzaGExPSc3QjZEQzcwNzlDMzQ3MzlDRTgxMTU5NzE5RkI1RUI2MUQyQTAzMjI1JywgbWQ1PSc3MDE0NzhBMUUzQjRCN0UzOTc4RUE2OTQ2OTQxMEYxMyd9]
+02-18 20:47:20.432 E/XiaomiAccountManager(27020): PassportLog@A2^6C[aGFzIHN5c3RlbSBhY2NvdW50IGFwcCBhbmQgY3VycmVudCBjb20ueGlhb21pLmFpY3IgaGFzIHNhbWUgc2lnbmF0dXJl]
+02-18 20:47:20.436 E/MiJiaAccountManager(27020): init:mIsInitialized=false,CoreService.getAppContext=com.xiaomi.aicr.AiCrApplication@4e833c
+02-18 20:47:20.457 E/LoginMiAccount(27020): SystemTokenUtils onReceiveAccountChange broadcast
+02-18 20:47:20.471 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:20.472 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:20.472 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:20.473 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:20.473 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:20.473 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:20.595 E/DocsApplication(27111): from onCreate Completable for sending summary about blocked SyncRequests
+02-18 20:47:20.595 E/DocsApplication(27111): java.lang.IllegalStateException
+02-18 20:47:20.595 E/DocsApplication(27111): 	at hji.i(PG:64)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at gvz.lambda$onCreate$2(PG:272)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at gvz.$r8$lambda$M-tqsz8QJK2QrqieVTlg-c3Lhbo(PG:1)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at gmr$1.run(PG:197)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at aavk.d(PG:13)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at aasy.e(PG:3)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at aavs$a.run(PG:3)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at aati$a.run(PG:10)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at aazh.run(PG:14)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at aazh.call(PG:1)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at java.util.concurrent.FutureTask.run(FutureTask.java:317)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:348)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1154)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:652)
+02-18 20:47:20.595 E/DocsApplication(27111): 	at java.lang.Thread.run(Thread.java:1563)
+02-18 20:47:20.650 E/Zygote  (27188): process_name_ptr:27188 com.google.android.apps.maps
+02-18 20:47:20.650 E/Zygote  (27188): SetMemoryProtected process_name_ptr:27188 com.google.android.apps.maps
+02-18 20:47:20.691 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:20.798 E/MediaProvider( 6948): Creating or writing to a non-default top level directory is not allowed!
+02-18 20:47:20.802 E/MediaProvider( 6948): Creating or writing to a non-default top level directory is not allowed!
+02-18 20:47:20.869 E/DatabaseUtils( 2702): Writing exception to parcel
+02-18 20:47:20.869 E/DatabaseUtils( 2702): java.lang.SecurityException: com.alibaba.aliexpresshd was not granted  this permission: android.permission.WRITE_SETTINGS.
+02-18 20:47:20.869 E/DatabaseUtils( 2702): 	at android.provider.Settings.isCallingPackageAllowedToPerformAppOpsProtectedOperation(Settings.java:21426)
+02-18 20:47:20.869 E/DatabaseUtils( 2702): 	at android.provider.Settings.checkAndNoteWriteSettingsOperation(Settings.java:21314)
+02-18 20:47:20.869 E/DatabaseUtils( 2702): 	at com.android.providers.settings.SettingsProvider.mutateSystemSetting(SettingsProvider.java:2004)
+02-18 20:47:20.869 E/DatabaseUtils( 2702): 	at com.android.providers.settings.SettingsProvider.insertSystemSetting(SettingsProvider.java:1960)
+02-18 20:47:20.869 E/DatabaseUtils( 2702): 	at com.android.providers.settings.SettingsProvider.call(SettingsProvider.java:501)
+02-18 20:47:20.869 E/DatabaseUtils( 2702): 	at android.content.ContentProvider.call(ContentProvider.java:2736)
+02-18 20:47:20.869 E/DatabaseUtils( 2702): 	at android.content.ContentProvider$Transport.call(ContentProvider.java:639)
+02-18 20:47:20.869 E/DatabaseUtils( 2702): 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:310)
+02-18 20:47:20.869 E/DatabaseUtils( 2702): 	at android.os.Binder.execTransactInternal(Binder.java:1507)
+02-18 20:47:20.869 E/DatabaseUtils( 2702): 	at android.os.Binder.execTransact(Binder.java:1451)
+02-18 20:47:20.986 E/presshd:channel(27070): No package ID 6a found for resource ID 0x6a0b0013.
+02-18 20:47:20.991 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:21.002 E/presshd:channel(27070): Invalid resource ID 0x00000000.
+02-18 20:47:21.004 E/Zygote  (27308): process_name_ptr:27308 com.google.android.apps.messaging
+02-18 20:47:21.004 E/Zygote  (27308): SetMemoryProtected process_name_ptr:27308 com.google.android.apps.messaging
+02-18 20:47:21.024 E/GoogleApiManager(27111): Failed to get service from broker. 
+02-18 20:47:21.024 E/GoogleApiManager(27111): java.lang.SecurityException: Unknown calling package name 'com.google.android.gms'.
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3256)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at android.os.Parcel.createException(Parcel.java:3240)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at android.os.Parcel.readException(Parcel.java:3223)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at android.os.Parcel.readException(Parcel.java:3165)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at beoy.a(:com.google.android.gms@260438035@26.04.38 (260400-867839860):36)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at bemz.z(:com.google.android.gms@260438035@26.04.38 (260400-867839860):143)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at bdtf.run(:com.google.android.gms@260438035@26.04.38 (260400-867839860):42)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at android.os.Handler.handleCallback(Handler.java:959)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at android.os.Handler.dispatchMessage(Handler.java:100)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at csuf.mz(:com.google.android.gms@260438035@26.04.38 (260400-867839860):1)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at csuf.dispatchMessage(:com.google.android.gms@260438035@26.04.38 (260400-867839860):5)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at android.os.Looper.loopOnce(Looper.java:249)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at android.os.Looper.loop(Looper.java:337)
+02-18 20:47:21.024 E/GoogleApiManager(27111): 	at android.os.HandlerThread.run(HandlerThread.java:85)
+02-18 20:47:21.116 E/presshd:channel(27070): Invalid resource ID 0x00000000.
+02-18 20:47:21.234 E/lowmemorykiller(  601): process_mrelease 25248 failed: No such process
+02-18 20:47:21.290 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:21.383 E/Zygote  (27412): process_name_ptr:27412 com.google.android.apps.wellbeing
+02-18 20:47:21.383 E/Zygote  (27412): SetMemoryProtected process_name_ptr:27412 com.google.android.apps.wellbeing
+02-18 20:47:21.522 E/Zygote  (27459): process_name_ptr:27459 com.google.android.gm
+02-18 20:47:21.522 E/Zygote  (27459): SetMemoryProtected process_name_ptr:27459 com.google.android.gm
+02-18 20:47:21.591 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:21.658 E/lowmemorykiller(  601): process_mrelease 25447 failed: No such process
+02-18 20:47:21.745 E/lowmemorykiller(  601): process_mrelease 26146 failed: No such process
+02-18 20:47:21.870 E/lowmemorykiller(  601): process_mrelease 26427 failed: No such process
+02-18 20:47:21.892 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:21.897 E/libprocessgroup( 2702): Failed to open /sys/fs/cgroup/uid_10266/pid_26427/cgroup.procs: No such file or directory
+02-18 20:47:21.950 E/lowmemorykiller(  601): process_mrelease 20597 failed: No such process
+02-18 20:47:22.075 E/##XLogger##(26843): f5.a::h@SourceFile:2, thread:36997--url is https://keyapi.micloud.xiaomi.net/mic/keychain/v1/status, respone = {"result":"ok","retriable":false,"code":0,"data":{"appId":"micloud","status":false},"description":"µêÉσèƒ","ts":1771458442029}
+02-18 20:47:22.095 E/system_server( 2702): No package ID 7f found for resource ID 0x7f08045f.
+02-18 20:47:22.095 E/system_server( 2702): No package ID 7f found for resource ID 0x7f140b0c.
+02-18 20:47:22.095 E/system_server( 2702): No package ID 7f found for resource ID 0x7f140b0c.
+02-18 20:47:22.096 E/system_server( 2702): No package ID 7f found for resource ID 0x7f08045b.
+02-18 20:47:22.096 E/system_server( 2702): No package ID 7f found for resource ID 0x7f140b0a.
+02-18 20:47:22.096 E/system_server( 2702): No package ID 7f found for resource ID 0x7f140b0a.
+02-18 20:47:22.096 E/system_server( 2702): No package ID 7f found for resource ID 0x7f08045d.
+02-18 20:47:22.096 E/system_server( 2702): No package ID 7f found for resource ID 0x7f140b0b.
+02-18 20:47:22.096 E/system_server( 2702): No package ID 7f found for resource ID 0x7f140b0b.
+02-18 20:47:22.096 E/ShortcutService( 2702): Ignoring excessive intent tag.
+02-18 20:47:22.098 E/SmsApplication( 4437): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
+02-18 20:47:22.112 E/lowmemorykiller(  601): process_mrelease 756 failed: No such process
+02-18 20:47:22.117 E/RegisteredServicesCache( 7196): Skipping application component ComponentInfo{com.cl.srcei.iddigital/com.idemia.android.iso18013.engagement.nfc.HceTagService}: it must request the permission android.permission.NFC
+02-18 20:47:22.151 E/Zygote  (27566): process_name_ptr:27566 com.google.android.permissioncontroller
+02-18 20:47:22.151 E/Zygote  (27566): SetMemoryProtected process_name_ptr:27566 com.google.android.permissioncontroller
+02-18 20:47:22.183 E/Zygote  (27581): process_name_ptr:27581 com.google.android.syncadapters.calendar
+02-18 20:47:22.184 E/Zygote  (27581): SetMemoryProtected process_name_ptr:27581 com.google.android.syncadapters.calendar
+02-18 20:47:22.190 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:22.235 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:22.296 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:47:22.296 E/HyperSentinel( 2702): Event_ThreadAmount
+02-18 20:47:22.296 E/HyperSentinel( 2702): -> audit event by proc 26843 "com.miui.cloudservice": running threads amount, 0 -> 44
+02-18 20:47:22.370 E/FeatureFlagsImplExport(27566): android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package com.android.permission.flags cannot be found on the device
+02-18 20:47:22.374 E/FeatureFlagsImplExport(27566): android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package android.permission.flags cannot be found on the device
+02-18 20:47:22.374 E/FeatureFlagsImplExport(27566): android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package android.companion cannot be found on the device
+02-18 20:47:22.374 E/FeatureFlagsImplExport(27566): android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package android.content.pm cannot be found on the device
+02-18 20:47:22.376 E/FeatureFlagsImplExport(27566): android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package android.companion.virtualdevice.flags cannot be found on the device
+02-18 20:47:22.390 E/FeatureFlagsImplExport(27566): android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package android.xr cannot be found on the device
+02-18 20:47:22.433 E/presshd:channel(27070): Invalid resource ID 0x00000000.
+02-18 20:47:22.462 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:47:22.479 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:47:22.479 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:47:22.479 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:47:22.480 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-18 20:47:22.491 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:22.498 E/Zygote  (27657): process_name_ptr:27657 com.google.android.videos
+02-18 20:47:22.498 E/Zygote  (27657): SetMemoryProtected process_name_ptr:27657 com.google.android.videos
+02-18 20:47:22.588 E/lowmemorykiller(  601): process_mrelease 26546 failed: No such process
+02-18 20:47:22.789 E/SQLiteLog(27657): (5) statement aborts at 2: [PRAGMA journal_mode=PERSIST] database is locked
+02-18 20:47:22.790 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:22.794 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:22.912 E/lowmemorykiller(  601): process_mrelease 19467 failed: No such process
+02-18 20:47:23.022 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:23.049 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!+MmJ++7JgTsl/NZcwzLOQwmllgw8QicGguUmN3OuMrjQD4NBSl5ba2JZVg1N7lIynOZZyn676HIvDzNutFbP8ZtHl5beTAyl+9T4O4ZqB6Gaa3hSicf35id/z2yJJ8rk0m5H20F3oL2MiUVZ0SWSgQ==^&#
+02-18 20:47:23.053 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!BNlX9672XrQvwbyuAIdWBGPhL2FT/p1XW2xfp3qF0j7BO1VtCzx3Z8hSJDZqEF2j^&#
+02-18 20:47:23.074 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!sj23O15yuAdjai+i86dZO8t71OQ2Ix+piD4JTp1iVWqN1tmWzgCzo/ugqwaAu6530EecQHBcUcsOl3j77H2AwEXzfPGpz3Z8pEav5bwux7iOLlDsO+ahtLN+JKWY0umiOL4oSkrWyitxEjn4LjlPElGU3oeGYB4ffC4qd0geOkM=^&#
+02-18 20:47:23.075 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!sj23O15yuAdjai+i86dZOzubmWTPT0kttMjiR4pE1FHzzqZ2BXOqYsyCyC+iQYNUbAd6uDQYOW9V9Hz8lb3wGkwTjDjYo4J0hrp8yNkrtY0=^&#
+02-18 20:47:23.076 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!sj23O15yuAdjai+i86dZO4fjo4NF1A2TegLD+ZAtQfnRA6Of2X5MKWgkV3aYROylWGHkTR/gxEhv0ltZ0lZNQma6AyMjzGX1s0+SV4EgzWYVIXbTEB0ZPA03Bz/LKhLf7rEcqmX69j+flUcXEotcJ7egHpfZQ5Yki2t7liwOuB1Ti+1z2e0ha0zSKP3vl13W^&#
+02-18 20:47:23.078 E/##XLogger##(26975): #&^Pc5lF7k3asyW5u3ymTCHvqn56G3uiF5+5MJl9msP9vA9GG7kWabARBEVmHgCHgZbPT7w2aPZmFe8tPQSni0yTZBHqOWRxHwBm1xkbEo6soBzeDBlejRTAOdkY+R3y5NZbq+2tQ4zcTbD0P3jFou3Cc/O/BhaRUSljMdGdxV2QEs=!account!+MmJ++7JgTsl/NZcwzLOQ7dgV0C8XX+3Rnt6y8/2Qt8SoDXSnTdeBmdRlz5WUVod2vWUrxbMrOt37wNI+JHXFf27kO4JDNv01rdRYzJw8p/gnnGLa57fM8h+B1RtXG4WjEtPv+N/reAEOC9fKQ6LMA==^&#
+02-18 20:47:23.091 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:23.105 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:23.210 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:23.211 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:23.211 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:23.212 E/lowmemorykiller(  601): process_mrelease 25500 failed: No such process
+02-18 20:47:23.389 E/PlayMovies(27657): nnw.a:83 No worker key associated with this task with tags: [google_tv_widget_tag, com.google.android.apps.googletv.app.services.workmanager.WorkerWrapper]
+02-18 20:47:23.389 E/PlayMovies(27657): 
+02-18 20:47:23.391 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:23.488 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:47:23.488 E/HyperSentinel( 2702): Event_ResidentSize
+02-18 20:47:23.488 E/HyperSentinel( 2702): -> audit event by proc 27070 "com.alibaba.aliexpresshd:channel": RSS increasement, peak 0kb -> 241736kb
+02-18 20:47:23.497 E/bcxd    (27459): Sync subscriptions not available
+02-18 20:47:23.549 E/GoogleApiManager(27459): Failed to get service from broker. 
+02-18 20:47:23.549 E/GoogleApiManager(27459): java.lang.SecurityException: Unknown calling package name 'com.google.android.gms'.
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3256)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at android.os.Parcel.createException(Parcel.java:3240)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at android.os.Parcel.readException(Parcel.java:3223)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at android.os.Parcel.readException(Parcel.java:3165)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at beoy.a(:com.google.android.gms@260438035@26.04.38 (260400-867839860):36)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at bemz.z(:com.google.android.gms@260438035@26.04.38 (260400-867839860):143)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at bdtf.run(:com.google.android.gms@260438035@26.04.38 (260400-867839860):42)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at android.os.Handler.handleCallback(Handler.java:959)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at android.os.Handler.dispatchMessage(Handler.java:100)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at csuf.mz(:com.google.android.gms@260438035@26.04.38 (260400-867839860):1)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at csuf.dispatchMessage(:com.google.android.gms@260438035@26.04.38 (260400-867839860):5)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at android.os.Looper.loopOnce(Looper.java:249)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at android.os.Looper.loop(Looper.java:337)
+02-18 20:47:23.549 E/GoogleApiManager(27459): 	at android.os.HandlerThread.run(HandlerThread.java:85)
+02-18 20:47:23.593 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:47:23.593 E/HyperSentinel( 2702): Event_ThreadAmount
+02-18 20:47:23.594 E/HyperSentinel( 2702): -> audit event by proc 27111 "com.google.android.apps.docs": running threads amount, 0 -> 77
+02-18 20:47:23.691 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:23.756 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:23.835 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:47:23.991 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:24.240 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:47:24.240 E/HyperSentinel( 2702): Event_ThreadAmount
+02-18 20:47:24.240 E/HyperSentinel( 2702): -> audit event by proc 27020 "com.xiaomi.aicr": running threads amount, 0 -> 26
+02-18 20:47:24.263 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:24.264 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:24.264 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:24.292 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:24.306 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:24.306 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:24.306 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:24.405 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:24.405 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:24.405 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:24.407 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:47:24.407 E/HyperSentinel( 2702): Event_ResidentSize
+02-18 20:47:24.407 E/HyperSentinel( 2702): -> audit event by proc 26894 "com.xiaomi.finddevice": RSS increasement, peak 0kb -> 147688kb
+02-18 20:47:24.475 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:24.475 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:24.475 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:24.513 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:24.513 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:24.513 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:24.546 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:24.546 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:24.546 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:24.592 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:24.649 E/lowmemorykiller(  601): process_mrelease 25398 failed: No such process
+02-18 20:47:24.657 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:24.657 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:24.657 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:24.860 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:47:24.860 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:47:24.860 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:47:24.892 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:47:24.965 E/Cello   (27111): [27859:NonCelloThread] authenticated_transport.cc:183:DumpToLog Request 0xb4000070e083a958: 0 transport: drive::ds::Status::CANCELLED reader: drive::ds::Status::SUCCESS url: https://play.googleapis.com/log
+02-18 20:47:24.965 E/Cello   (27111): [27859:NonCelloThread] authenticated_transport.cc:183:DumpToLog req.hdr 0xb4000070e083a958: Content-Type=
+02-18 20:47:24.965 E/Cello   (27111): [27859:NonCelloThread] authenticated_transport.cc:183:DumpToLog Response body 0xb4000070e083a958: (no response body)
+02-18 20:47:24.965 E/Cello   (27111): [27862:MetricsTransportThread-CELLO] metrics_transport.cc:242:SendRequest Request failed: drive::ds::Status::CANCELLED

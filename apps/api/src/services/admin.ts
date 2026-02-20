@@ -1,5 +1,6 @@
 import { prisma } from '../lib/db';
 import { isAllowedAdminEmail } from '../lib/admin-allowlist';
+import { stripHtmlAndControlChars, LIMITS } from '../lib/sanitize';
 
 /** Lista de usuarios para backoffice: sin contenido sensible, solo metadatos para soporte. */
 export interface AdminUserRow {
@@ -122,11 +123,14 @@ export async function createContent(data: {
   published?: boolean;
   sortOrder?: number;
 }): Promise<GlobalContentRow> {
+  const type = stripHtmlAndControlChars(data.type).slice(0, LIMITS.recordType);
+  const title = stripHtmlAndControlChars(data.title).slice(0, LIMITS.adminContentTitle);
+  const body = stripHtmlAndControlChars(data.body).slice(0, LIMITS.adminContentBody);
   const c = await prisma.globalContent.create({
     data: {
-      type: data.type,
-      title: data.title,
-      body: data.body,
+      type,
+      title,
+      body,
       published: data.published ?? false,
       sortOrder: data.sortOrder ?? 0,
     },
@@ -147,15 +151,15 @@ export async function updateContent(
   id: string,
   data: { type?: string; title?: string; body?: string; published?: boolean; sortOrder?: number }
 ): Promise<GlobalContentRow | null> {
+  const update: { type?: string; title?: string; body?: string; published?: boolean; sortOrder?: number } = {};
+  if (data.type != null) update.type = stripHtmlAndControlChars(data.type).slice(0, LIMITS.recordType);
+  if (data.title != null) update.title = stripHtmlAndControlChars(data.title).slice(0, LIMITS.adminContentTitle);
+  if (data.body != null) update.body = stripHtmlAndControlChars(data.body).slice(0, LIMITS.adminContentBody);
+  if (data.published != null) update.published = data.published;
+  if (data.sortOrder != null) update.sortOrder = data.sortOrder;
   const c = await prisma.globalContent.update({
     where: { id },
-    data: {
-      ...(data.type != null && { type: data.type }),
-      ...(data.title != null && { title: data.title }),
-      ...(data.body != null && { body: data.body }),
-      ...(data.published != null && { published: data.published }),
-      ...(data.sortOrder != null && { sortOrder: data.sortOrder }),
-    },
+    data: update,
   });
   return {
     id: c.id,

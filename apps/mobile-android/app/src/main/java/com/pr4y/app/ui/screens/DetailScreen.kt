@@ -14,9 +14,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.pr4y.app.crypto.DekManager
+import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.crypto.LocalCrypto
 import com.pr4y.app.data.local.entity.RequestEntity
 import com.pr4y.app.di.AppContainer
@@ -28,12 +30,14 @@ import org.json.JSONObject
 
 @Composable
 fun DetailScreen(navController: NavController, id: String) {
+    val context = LocalContext.current
+    val userId = remember(context) { AuthTokenStore(context.applicationContext).getUserId() ?: "" }
     var request by remember { mutableStateOf<RequestEntity?>(null) }
 
-    LaunchedEffect(id) {
-        if (id.isNotEmpty()) {
+    LaunchedEffect(id, userId) {
+        if (id.isNotEmpty() && userId.isNotEmpty()) {
             request = withContext(Dispatchers.IO) {
-                val entity = AppContainer.db.requestDao().getById(id)
+                val entity = AppContainer.db.requestDao().getById(id, userId)
                 val dek = DekManager.getDek()
                 if (entity?.encryptedPayloadB64 != null && dek != null) {
                     try {
