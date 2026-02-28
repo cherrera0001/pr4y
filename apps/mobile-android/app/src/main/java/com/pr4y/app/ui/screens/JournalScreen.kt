@@ -49,7 +49,7 @@ private data class JournalDisplay(val id: String, val content: String, val updat
 fun JournalScreen(navController: NavController) {
     val context = LocalContext.current
     val userId = remember(context) { AuthTokenStore(context.applicationContext).getUserId() ?: "" }
-    val entities by AppContainer.db.journalDao().getAll(userId).collectAsState(initial = emptyList())
+    val entities by AppContainer.db.journalDao().getRecent(userId).collectAsState(initial = emptyList())
     var entries by remember { mutableStateOf<List<JournalDisplay>>(emptyList()) }
 
     LaunchedEffect(entities) {

@@ -14,30 +14,43 @@ export interface AdminUserRow {
   recordCount: number;
 }
 
-export async function listUsers(): Promise<AdminUserRow[]> {
-  const users = await prisma.user.findMany({
-    orderBy: { createdAt: 'desc' },
-    select: {
-      id: true,
-      email: true,
-      role: true,
-      status: true,
-      createdAt: true,
-      lastLoginAt: true,
-      wrappedDek: { select: { id: true } },
-      _count: { select: { records: true } },
-    },
-  });
-  return users.map((u) => ({
-    id: u.id,
-    email: u.email,
-    role: u.role,
-    status: u.status,
-    createdAt: u.createdAt.toISOString(),
-    lastLoginAt: u.lastLoginAt?.toISOString() ?? null,
-    hasDek: !!u.wrappedDek,
-    recordCount: u._count.records,
-  }));
+export interface ListUsersResult {
+  users: AdminUserRow[];
+  total: number;
+}
+
+export async function listUsers(limit = 50, offset = 0): Promise<ListUsersResult> {
+  const [users, total] = await Promise.all([
+    prisma.user.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: Math.min(limit, 200),
+      skip: offset,
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        status: true,
+        createdAt: true,
+        lastLoginAt: true,
+        wrappedDek: { select: { id: true } },
+        _count: { select: { records: true } },
+      },
+    }),
+    prisma.user.count(),
+  ]);
+  return {
+    users: users.map((u) => ({
+      id: u.id,
+      email: u.email,
+      role: u.role,
+      status: u.status,
+      createdAt: u.createdAt.toISOString(),
+      lastLoginAt: u.lastLoginAt?.toISOString() ?? null,
+      hasDek: !!u.wrappedDek,
+      recordCount: u._count.records,
+    })),
+    total,
+  };
 }
 
 export async function updateUser(

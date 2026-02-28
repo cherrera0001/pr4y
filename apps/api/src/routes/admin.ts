@@ -137,6 +137,14 @@ export default async function adminRoutes(server: FastifyInstance) {
       config: { rateLimit: defaultRateLimit },
       preHandler: [server.authenticate, server.requireAdmin],
       schema: {
+        querystring: {
+          type: 'object',
+          properties: {
+            limit: { type: 'number', default: 50 },
+            offset: { type: 'number', default: 0 },
+          },
+          additionalProperties: false,
+        },
         response: {
           200: {
             type: 'array',
@@ -159,9 +167,10 @@ export default async function adminRoutes(server: FastifyInstance) {
         },
       },
     },
-    async (_request: FastifyRequest, reply: FastifyReply) => {
-      const users = await adminService.listUsers();
-      reply.code(200).send(users);
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const { limit = 50, offset = 0 } = request.query as { limit?: number; offset?: number };
+      const { users, total } = await adminService.listUsers(limit, offset);
+      reply.header('X-Total-Count', String(total)).code(200).send(users);
     }
   );
 

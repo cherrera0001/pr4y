@@ -75,7 +75,7 @@ data class AnswerRecordDto(val id: String, val type: String, val clientUpdatedAt
 data class AnswersListResponse(val answers: List<AnswerDto>)
 
 /** Body para marcar un pedido como respondido con testimonio opcional. */
-data class AnswerBody(val testimony: String? = null)
+data class AnswerBody(val recordId: String, val testimony: String? = null)
 
 /** Configuración pública desde el backend. */
 data class PublicConfigResponse(
@@ -151,10 +151,9 @@ interface ApiService {
     @GET("answers")
     suspend fun getAnswers(@Header("Authorization") bearer: String): Response<AnswersListResponse>
 
-    @POST("answers/{recordId}")
+    @POST("answers")
     suspend fun createAnswer(
         @Header("Authorization") bearer: String,
-        @Path("recordId") recordId: String,
         @Body body: AnswerBody,
     ): Response<Map<String, Any>>
 

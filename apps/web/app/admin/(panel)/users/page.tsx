@@ -51,6 +51,7 @@ function formatDate(iso: string | null): string {
 
 export default function AdminUsersPage() {
   const [users, setUsers] = useState<AdminUserRow[]>([]);
+  const [total, setTotal] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -60,9 +61,11 @@ export default function AdminUsersPage() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch('/api/admin/users')
+    fetch('/api/admin/users?limit=200&offset=0')
       .then((res) => {
         if (!res.ok) throw new Error(res.statusText);
+        const count = parseInt(res.headers.get('X-Total-Count') ?? '0', 10);
+        if (!cancelled) setTotal(count);
         return res.json();
       })
       .then((data) => {
@@ -151,7 +154,7 @@ export default function AdminUsersPage() {
       <div>
         <h1 className="text-2xl font-bold text-foreground">Usuarios</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Mantenedor de usuarios. Búsqueda por email, filtro por rol, paginación y acciones. {users.length} en total.
+          Mantenedor de usuarios. Búsqueda por email, filtro por rol, paginación y acciones. {total} en total.
         </p>
       </div>
 

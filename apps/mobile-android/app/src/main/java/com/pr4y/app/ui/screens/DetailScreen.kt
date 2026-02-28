@@ -130,8 +130,10 @@ fun DetailScreen(
                                 }
                                 val res = api.createAnswer(
                                     bearer = bearer,
-                                    recordId = id,
-                                    body = AnswerBody(testimony = testimony.trim().ifBlank { null }),
+                                    body = AnswerBody(
+                                        recordId = id,
+                                        testimony = testimony.trim().ifBlank { null },
+                                    ),
                                 )
                                 if (res.isSuccessful) {
                                     alreadyAnswered = true
