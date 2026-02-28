@@ -6,10 +6,12 @@
 
 import { z } from 'zod';
 
+/* eslint-disable no-control-regex -- intencional: sanitización de caracteres de control */
 const CONTROL_AND_DANGEROUS = /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]|<[^>]*>|script\s*:|javascript\s*:|on\w+\s*=/gi;
 
 /** Patrones que rechazamos en texto libre (defensa en profundidad; Prisma ya usa consultas parametrizadas). */
-const SQLI_SUSPICIOUS = /[\x00]|;\s*--|\'\s*or\s*\'|\bunion\s+select\b/i;
+const SQLI_SUSPICIOUS = /[\x00]|;\s*--|'\s*or\s*'|\bunion\s+select\b/i;
+/* eslint-enable no-control-regex */
 
 /** Elimina etiquetas HTML, scripts y caracteres de control. */
 export function stripHtmlAndControlChars(value: string): string {

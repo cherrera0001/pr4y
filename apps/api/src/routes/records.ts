@@ -1,4 +1,4 @@
-import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyInstance } from 'fastify';
 import * as recordsService from '../services/records';
 import { sendError } from '../lib/errors';
 

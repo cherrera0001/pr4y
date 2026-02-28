@@ -122,9 +122,6 @@ server.setErrorHandler((error: Error & { validation?: unknown }, request, reply)
   });
 });
 
-// Límite por defecto para rutas que no definen el suyo (auth tiene límites más estrictos)
-const defaultRateLimit = { max: 300, timeWindow: '1 minute' as const };
-
 // Listener de rutas: al arranque se imprimen en logs (Railway) como "Mapped {/v1/auth/login, POST}"
 const routesLog: Array<{ path: string; method: string }> = [];
 server.addHook('onRoute', (routeOptions) => {
