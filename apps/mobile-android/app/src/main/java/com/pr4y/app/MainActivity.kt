@@ -8,10 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
@@ -29,6 +25,7 @@ import com.pr4y.app.ui.components.ShimmerLoading
 import com.pr4y.app.ui.theme.Pr4yTheme
 import com.pr4y.app.util.Pr4yLog
 import com.pr4y.app.work.SyncScheduler
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -63,7 +60,6 @@ class MainViewModel : ViewModel() {
                     loggedIn = token != null
                     
                     if (loggedIn) {
-                        // tryRecoverDekSilently ya no es suspend porque solo mira memoria en tee_v2
                         isUnlocked = DekManager.tryRecoverDekSilently()
                         SyncScheduler.schedulePeriodic(context)
                     }
@@ -90,6 +86,7 @@ class MainViewModel : ViewModel() {
 /** Tiempo en segundo plano tras el cual se borra la DEK de memoria (sesión "cero rastro"). */
 private const val BACKGROUND_DEK_CLEAR_MS = 30_000L
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
