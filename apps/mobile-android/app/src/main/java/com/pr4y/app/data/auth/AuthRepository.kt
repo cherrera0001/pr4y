@@ -51,7 +51,7 @@ class AuthRepository(
                 val body = res.errorBody()?.string() ?: ""
                 throw AuthError(res.code(), body)
             }
-            val auth = res.body()!!
+            val auth = res.body() ?: throw AuthError(res.code(), "Respuesta vacía del servidor")
             tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
             auth
         }
@@ -64,7 +64,7 @@ class AuthRepository(
                 val body = res.errorBody()?.string() ?: ""
                 throw AuthError(res.code(), body)
             }
-            val auth = res.body()!!
+            val auth = res.body() ?: throw AuthError(res.code(), "Respuesta vacía del servidor")
             tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
             auth
         }
@@ -78,7 +78,7 @@ class AuthRepository(
                 val body = res.errorBody()?.string() ?: ""
                 throw AuthError(res.code(), body)
             }
-            val auth = res.body()!!
+            val auth = res.body() ?: throw AuthError(res.code(), "Respuesta vacía del servidor")
             tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
             auth
         }.recoverCatching { e ->
@@ -122,7 +122,10 @@ class AuthRepository(
         val refresh = tokenStore.getRefreshToken() ?: return false
         val res = api.refresh(RefreshBody(refresh))
         if (!res.isSuccessful) return false
-        val auth = res.body()!!
+        val auth = res.body() ?: run {
+            Pr4yLog.e("AuthRepository: refreshToken body null con código ${res.code()}")
+            return false
+        }
         tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
         return true
     }

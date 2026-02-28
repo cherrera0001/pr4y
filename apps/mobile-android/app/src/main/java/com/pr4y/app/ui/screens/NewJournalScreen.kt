@@ -54,7 +54,6 @@ import com.pr4y.app.di.AppContainer
 import com.pr4y.app.ui.theme.MidnightBlue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.util.UUID
@@ -175,7 +174,7 @@ fun NewJournalScreen(navController: NavController) {
                             return@TextButton
                         }
                         val (cleanContent, hadDangerous) = com.pr4y.app.util.InputSanitizer.sanitizeBodyWithDetection(trimmed)
-                        runBlocking {
+                        scope.launch {
                             val encrypted = withContext(Dispatchers.Default) {
                                 val payload = JSONObject().apply {
                                     put("content", cleanContent)
@@ -208,8 +207,6 @@ fun NewJournalScreen(navController: NavController) {
                                 )
                                 JournalDraftStore.clearDraft(context)
                             }
-                        }
-                        scope.launch {
                             if (hadDangerous) {
                                 snackbar.showSnackbar("Mantenemos tu búnker limpio de cualquier código externo para que solo tus palabras existan aquí.")
                             }

@@ -26,7 +26,7 @@ import com.pr4y.app.data.local.entity.SyncStateEntity
         LedgerEntity::class,
     ],
     version = 5,
-    exportSchema = false,
+    exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -74,7 +74,9 @@ abstract class AppDatabase : RoomDatabase() {
                     "pr4y_db",
                 )
                     .addMigrations(MIGRATION_3_4, MIGRATION_4_5)
-                    .fallbackToDestructiveMigration()
+                    // Versiones 1 y 2 no tienen migration path; datos se restauran desde sync.
+                    // Las versiones 3+ tienen migraciones explícitas — NO se destruyen silenciosamente.
+                    .fallbackToDestructiveMigrationFrom(1, 2)
                     .build()
                     .also { INSTANCE = it }
             }
