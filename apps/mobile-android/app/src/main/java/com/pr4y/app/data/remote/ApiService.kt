@@ -6,6 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 data class RegisterBody(val email: String, val password: String)
@@ -73,18 +74,29 @@ data class AnswerDto(
 data class AnswerRecordDto(val id: String, val type: String, val clientUpdatedAt: String)
 data class AnswersListResponse(val answers: List<AnswerDto>)
 
-/** Configuración pública desde el backend. La app Android usa solo googleAndroidClientId para login. La web usa googleWebClientId. */
+/** Configuración pública desde el backend. */
 data class PublicConfigResponse(
     val googleWebClientId: String,
     val googleAndroidClientId: String = "",
 )
 
-/** Preferencias de recordatorio diario (GET/PUT /v1/user/reminder-preferences). */
+/** Preferencias de recordatorio diario. */
 data class ReminderPreferencesResponse(
     val time: String,
     val daysOfWeek: List<Int>,
     val enabled: Boolean,
 )
+
+/** DTO para Roulette (Intercesión Anónima). */
+data class PublicRequestDto(
+    val id: String,
+    val title: String,
+    val body: String?,
+    val prayerCount: Int,
+    val createdAt: String
+)
+
+data class PublicRequestsResponse(val requests: List<PublicRequestDto>)
 
 interface ApiService {
     @GET("health")
@@ -144,4 +156,23 @@ interface ApiService {
         @Header("Authorization") bearer: String,
         @Body body: ReminderPreferencesResponse,
     ): Response<ReminderPreferencesResponse>
+
+    // --- Roulette (Anonymous) ---
+    
+    /** 
+     * Obtiene oraciones públicas aleatorias. 
+     * Se debe llamar con el header X-Anonymous: true para activar el stripping en el interceptor.
+     */
+    @GET("public/requests")
+    suspend fun getPublicRequests(@Header("X-Anonymous") anon: String = "true"): Response<PublicRequestsResponse>
+
+    /** 
+     * Incrementa el contador de oración de forma anónima. 
+     * Se debe llamar con el header X-Anonymous: true.
+     */
+    @POST("public/requests/{id}/pray")
+    suspend fun prayForPublicRequest(
+        @Path("id") id: String,
+        @Header("X-Anonymous") anon: String = "true"
+    ): Response<Map<String, Any>>
 }

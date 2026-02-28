@@ -3,6 +3,7 @@ package com.pr4y.app.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -17,8 +18,7 @@ import com.pr4y.app.ui.viewmodel.*
 
 /**
  * Tech Lead Review: Navigation Integration Final.
- * Standards: Full ViewModel injection, consistent M3 identity.
- * Status: Refactored Login, Unlock, and Home.
+ * Standards: Transitioning to Hilt, consistent M3 identity.
  */
 @Composable
 fun Pr4yNavHost(
@@ -153,8 +153,8 @@ private fun InnerNavHost(
         composable(Routes.SEARCH) { SearchScreen(navController = navController) }
         composable(Routes.FOCUS_MODE) { FocusModeScreen(navController = navController) }
         composable(Routes.VICTORIAS) {
-            val victoriasViewModel: com.pr4y.app.ui.viewmodel.VictoriasViewModel = viewModel(
-                factory = com.pr4y.app.ui.viewmodel.VictoriasViewModelFactory(authRepository, api)
+            val victoriasViewModel: VictoriasViewModel = viewModel(
+                factory = VictoriasViewModelFactory(authRepository, api)
             )
             VictoriasScreen(navController = navController, viewModel = victoriasViewModel)
         }
@@ -165,6 +165,10 @@ private fun InnerNavHost(
                 api = api,
                 onLogout = onLogout,
             )
+        }
+        composable(Routes.ROULETTE) {
+            // Spec: Arquitectura Hilt. Uso de hiltViewModel() para Roulette.
+            RouletteScreen(navController = navController)
         }
     }
 }
