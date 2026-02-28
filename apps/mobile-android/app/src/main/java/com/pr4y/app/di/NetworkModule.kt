@@ -16,7 +16,16 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
 import javax.inject.Singleton
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class AuthInterceptor
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class TelemetryInterceptor
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -40,6 +49,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    @AuthInterceptor
     fun provideAuthInterceptor(tokenStore: AuthTokenStore): Interceptor {
         return Interceptor { chain ->
             val original = chain.request()
@@ -68,6 +78,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    @TelemetryInterceptor
     fun provideTelemetryInterceptor(): Interceptor {
         return Interceptor { chain ->
             val start = System.currentTimeMillis()
@@ -78,7 +89,14 @@ object NetworkModule {
             // Registro de telemetría siguiendo estándar MCP Feb 2026
             // "Validación de Seguridad: No registrar payloads cifrados"
             if (!response.isSuccessful) {
-                Pr4yLog.e("TELEMETRY: [${response.code}] ${request.method} ${request.url} took ${duration}ms")
+                val url = request.url.toString()
+                val getPublicRequests404 = response.code == 404 && request.method == "GET" && url.contains("public/requests")
+                if (getPublicRequests404) {
+                    // GET public/requests puede devolver 404 si el backend aún no expone la ruta (Roulette)
+                    Pr4yLog.i("TELEMETRY: [404] GET public/requests (endpoint opcional) took ${duration}ms")
+                } else {
+                    Pr4yLog.e("TELEMETRY: [${response.code}] ${request.method} ${request.url} took ${duration}ms")
+                }
             } else {
                 Pr4yLog.net("TELEMETRY: SUCCESS [${response.code}] took ${duration}ms")
                 
@@ -96,8 +114,8 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        authInterceptor: Interceptor,
-        telemetryInterceptor: Interceptor
+        @AuthInterceptor authInterceptor: Interceptor,
+        @TelemetryInterceptor telemetryInterceptor: Interceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(authInterceptor)

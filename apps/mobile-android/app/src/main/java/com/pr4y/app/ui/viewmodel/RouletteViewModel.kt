@@ -36,15 +36,20 @@ class RouletteViewModel @Inject constructor(
             _uiState.value = RouletteUiState.Loading
             try {
                 val response = api.getPublicRequests()
-                if (response.isSuccessful) {
-                    val requests = response.body()?.requests ?: emptyList()
-                    if (requests.isEmpty()) {
-                        _uiState.value = RouletteUiState.Empty
-                    } else {
-                        _uiState.value = RouletteUiState.Success(requests)
+                when {
+                    response.isSuccessful -> {
+                        val requests = response.body()?.requests ?: emptyList()
+                        if (requests.isEmpty()) {
+                            _uiState.value = RouletteUiState.Empty
+                        } else {
+                            _uiState.value = RouletteUiState.Success(requests)
+                        }
                     }
-                } else {
-                    _uiState.value = RouletteUiState.Error("Error al conectar con el búnker público")
+                    response.code() == 404 -> {
+                        // Backend puede no exponer aún GET /public/requests; mostrar estado vacío
+                        _uiState.value = RouletteUiState.Empty
+                    }
+                    else -> _uiState.value = RouletteUiState.Error("Error al conectar con el búnker público")
                 }
             } catch (e: Exception) {
                 Pr4yLog.e("RouletteViewModel: Error loading requests", e)
