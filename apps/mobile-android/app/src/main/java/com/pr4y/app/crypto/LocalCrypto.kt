@@ -30,7 +30,9 @@ object LocalCrypto {
 
     /** Descifra un Base64 (IV + Ciphertext) y devuelve el ByteArray original. */
     fun decrypt(encryptedB64: String, key: SecretKey): ByteArray {
-        Pr4yLog.d("Descifrando contenido (E2EE)...")
+        // #region agent log
+        Pr4yLog.d("Descifrando contenido (E2EE)... [thread=${Thread.currentThread().name}]")
+        // #endregion
         val combined = Base64.decode(encryptedB64, Base64.NO_WRAP)
         val iv = combined.copyOfRange(0, GCM_IV_LENGTH)
         val cipherText = combined.copyOfRange(GCM_IV_LENGTH, combined.size)

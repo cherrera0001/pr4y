@@ -29,19 +29,23 @@ fun JournalEntryScreen(navController: NavController, id: String) {
 
     LaunchedEffect(id, userId) {
         if (userId.isEmpty()) return@LaunchedEffect
-        entry = withContext(Dispatchers.IO) { db.journalDao().getById(id, userId) }
-        entry?.let {
-            val dek = DekManager.getDek()
-            if (it.encryptedPayloadB64 != null && dek != null) {
-                try {
-                    val plain = LocalCrypto.decrypt(it.encryptedPayloadB64, dek)
-                    decryptedContent = JSONObject(String(plain)).optString("content", "")
-                } catch (e: Exception) {
-                    decryptedContent = it.content
+        val loaded = withContext(Dispatchers.IO) { db.journalDao().getById(id, userId) }
+        entry = loaded
+        loaded?.let {
+            val content = withContext(Dispatchers.Default) {
+                val dek = DekManager.getDek()
+                if (it.encryptedPayloadB64 != null && dek != null) {
+                    try {
+                        val plain = LocalCrypto.decrypt(it.encryptedPayloadB64, dek)
+                        JSONObject(String(plain)).optString("content", "")
+                    } catch (e: Exception) {
+                        it.content
+                    }
+                } else {
+                    it.content
                 }
-            } else {
-                decryptedContent = it.content
             }
+            decryptedContent = content
         }
     }
 

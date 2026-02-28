@@ -9,6 +9,7 @@ import com.pr4y.app.data.local.entity.JournalEntity
 import com.pr4y.app.data.local.entity.OutboxEntity
 import com.pr4y.app.data.local.entity.RequestEntity
 import com.pr4y.app.data.local.entity.SyncStateEntity
+import com.pr4y.app.data.remote.parseApiErrorMessage
 import com.pr4y.app.data.remote.PushBody
 import com.pr4y.app.data.remote.PushRecordDto
 import com.pr4y.app.data.remote.RetrofitClient
@@ -106,7 +107,14 @@ class SyncRepository(
         } catch (e: Exception) {
             Pr4yLog.e("Sync: Error crítico durante la sincronización", e)
             persistLastSyncStatus("error", System.currentTimeMillis())
-            SyncResult.Error(e.message ?: "Error de red o seguridad")
+            val message = when {
+                e is retrofit2.HttpException -> {
+                    val body = e.response()?.errorBody()?.string()
+                    parseApiErrorMessage(body) ?: e.message() ?: "Error de red o seguridad"
+                }
+                else -> e.message ?: "Error de red o seguridad"
+            }
+            SyncResult.Error(message)
         }
     }
 
@@ -237,6 +245,7 @@ class SyncRepository(
                             createdAt = updatedAt,
                             updatedAt = updatedAt,
                             synced = true,
+                            status = rec.status,
                         ),
                     )
                 } catch (e: Exception) {

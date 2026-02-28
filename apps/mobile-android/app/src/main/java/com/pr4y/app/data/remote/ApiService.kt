@@ -1,5 +1,6 @@
 package com.pr4y.app.data.remote
 
+import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -37,6 +38,7 @@ data class SyncRecordDto(
     val clientUpdatedAt: String,
     val serverUpdatedAt: String,
     val deleted: Boolean,
+    val status: String = "PENDING", // PENDING | IN_PROCESS | ANSWERED (autoritativo del servidor)
 )
 
 data class PushBody(val records: List<PushRecordDto>)
@@ -184,4 +186,19 @@ interface ApiService {
         @Path("id") id: String,
         @Header("X-Anonymous") anon: String = "true"
     ): Response<Map<String, Any>>
+}
+
+/**
+ * Extrae error.message del cuerpo JSON de la API ({ "error": { "message": "..." } }).
+ * Backend-First: el cliente debe mostrar el mensaje del servidor cuando exista.
+ */
+fun parseApiErrorMessage(jsonBody: String?): String? {
+    if (jsonBody.isNullOrBlank()) return null
+    return try {
+        val obj = JSONObject(jsonBody)
+        val err = obj.optJSONObject("error") ?: return null
+        err.optString("message").takeIf { it.isNotEmpty() }
+    } catch (_: Exception) {
+        null
+    }
 }

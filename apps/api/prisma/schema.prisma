@@ -126,3 +126,16 @@ model Answer {
   @@index([recordId])
   @@map("answers")
 }
+
+// Pedidos de oración públicos (anonimos). Alimentan la Ruleta en la app. Solo se listan los aprobados.
+model PublicRequest {
+  id          String   @id @default(uuid())
+  title       String   @default("Pedido de oración") // opcional; si no se envía se usa este valor
+  body        String   @db.Text
+  prayerCount Int      @default(0) @map("prayer_count")
+  status      String   @default("approved") // "approved" | "rejected" (moderación por listas/reglas)
+  createdAt   DateTime @default(now()) @map("created_at")
+  @@index([status])
+  @@index([createdAt])
+  @@map("public_requests")
+}

@@ -2,6 +2,7 @@ package com.pr4y.app.data.auth
 
 import com.pr4y.app.data.remote.ApiService
 import com.pr4y.app.data.remote.AuthResponse
+import com.pr4y.app.data.remote.parseApiErrorMessage
 import com.pr4y.app.data.remote.GoogleLoginBody
 import com.pr4y.app.data.remote.PublicConfigResponse
 import com.pr4y.app.data.remote.RefreshBody
@@ -49,7 +50,7 @@ class AuthRepository(
             val res = api.register(com.pr4y.app.data.remote.RegisterBody(email, password))
             if (!res.isSuccessful) {
                 val body = res.errorBody()?.string() ?: ""
-                throw AuthError(res.code(), body)
+                throw AuthError(res.code(), parseApiErrorMessage(body) ?: body)
             }
             val auth = res.body() ?: throw AuthError(res.code(), "Respuesta vacía del servidor")
             tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
@@ -62,7 +63,7 @@ class AuthRepository(
             val res = api.login(com.pr4y.app.data.remote.LoginBody(email, password))
             if (!res.isSuccessful) {
                 val body = res.errorBody()?.string() ?: ""
-                throw AuthError(res.code(), body)
+                throw AuthError(res.code(), parseApiErrorMessage(body) ?: body)
             }
             val auth = res.body() ?: throw AuthError(res.code(), "Respuesta vacía del servidor")
             tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
@@ -76,7 +77,7 @@ class AuthRepository(
             val res = api.googleLogin(GoogleLoginBody(idToken))
             if (!res.isSuccessful) {
                 val body = res.errorBody()?.string() ?: ""
-                throw AuthError(res.code(), body)
+                throw AuthError(res.code(), parseApiErrorMessage(body) ?: body)
             }
             val auth = res.body() ?: throw AuthError(res.code(), "Respuesta vacía del servidor")
             tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)

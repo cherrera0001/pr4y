@@ -227,6 +227,73 @@ paths:
                         reason: { type: string }
                   serverTime: { type: string }
 
+  /public/requests:
+    get:
+      summary: Listar pedidos de oración públicos aprobados (Ruleta; sin auth)
+      responses:
+        "200":
+          description: Lista de pedidos para la Ruleta
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [requests]
+                properties:
+                  requests:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        title: { type: string }
+                        body: { type: string, nullable: true }
+                        prayerCount: { type: integer }
+                        createdAt: { type: string, format: date-time }
+    post:
+      summary: Crear pedido de oración público (anónimo; rate limit 5/5min por IP)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [body]
+              properties:
+                title: { type: string, maxLength: 200 }
+                body: { type: string, minLength: 10, maxLength: 2000 }
+      responses:
+        "201":
+          description: Pedido creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: string }
+                  message: { type: string }
+        "400":
+          description: Validación o moderación (contenido rechazado)
+
+  /public/requests/{id}/pray:
+    post:
+      summary: Incrementar contador de oraciones (anónimo)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: { type: boolean, enum: [true] }
+        "404":
+          description: Pedido no encontrado
+
 components:
   securitySchemes:
     bearerAuth:
@@ -256,6 +323,7 @@ components:
         clientUpdatedAt: { type: string }
         serverUpdatedAt: { type: string }
         deleted: { type: boolean }
+        status: { type: string, enum: [PENDING, IN_PROCESS, ANSWERED], description: "Estado autoritativo del servidor" }
     EncryptedRecordInput:
       type: object
       required: [recordId, type, version, encryptedPayloadB64, clientUpdatedAt, deleted]

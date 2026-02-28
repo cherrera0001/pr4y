@@ -40,6 +40,19 @@ export default function Home() {
               size="lg"
               className="rounded-full px-8 bg-sky-500 hover:bg-sky-600 text-slate-950 font-semibold shadow-lg shadow-sky-500/25"
             >
+              <Link href="/pedir-oracion">
+                <span className="flex items-center gap-2">
+                  Pedir oración
+                  <ArrowRight className="size-4" />
+                </span>
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="rounded-full px-8 border-slate-600 text-slate-200 hover:bg-slate-800 hover:text-slate-50"
+            >
               <Link href="/admin">
                 <span className="flex items-center gap-2">
                   Panel Admin

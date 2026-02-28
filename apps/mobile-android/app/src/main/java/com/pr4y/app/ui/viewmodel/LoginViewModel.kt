@@ -109,7 +109,7 @@ class LoginViewModel(
                         true
                     },
                     onFailure = {
-                        _uiState.value = LoginUiState.Error("Acceso denegado por el búnker.")
+                        _uiState.value = LoginUiState.Error(it.message ?: "Acceso denegado por el búnker.")
                         false
                     }
                 )
