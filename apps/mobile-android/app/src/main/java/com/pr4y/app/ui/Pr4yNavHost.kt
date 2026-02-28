@@ -142,7 +142,12 @@ private fun InnerNavHost(
         }
         composable(Routes.DETAIL) { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id") ?: ""
-            DetailScreen(navController = navController, id = id)
+            DetailScreen(
+                navController = navController,
+                id = id,
+                authRepository = authRepository,
+                api = api,
+            )
         }
         composable(Routes.JOURNAL) { JournalScreen(navController = navController) }
         composable(Routes.NEW_JOURNAL) { NewJournalScreen(navController = navController) }
