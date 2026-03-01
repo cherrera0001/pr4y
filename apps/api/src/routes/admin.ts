@@ -3,7 +3,7 @@ import { z } from 'zod';
 import * as usageService from '../services/usage';
 import * as adminService from '../services/admin';
 import { adminContentSanitizeSchema } from '../lib/sanitize';
-import { sendError } from '../lib/errors';
+import { sendError, safeDetailsFromError } from '../lib/errors';
 
 /** Payload JWT con role para restringir métricas a admin. */
 type JwtUser = { sub: string; email: string; role?: string };
@@ -20,16 +20,20 @@ const createContentBodySchema = z.object({
   title: adminContentSanitizeSchema.title,
   body: adminContentSanitizeSchema.body,
   published: z.boolean().optional(),
-  sortOrder: z.number().int().optional(),
-}).strict();
+  sortOrder: z.coerce.number().int().optional(),
+});
 
-const updateContentBodySchema = z.object({
-  type: adminContentSanitizeSchema.type.optional(),
-  title: adminContentSanitizeSchema.title.optional(),
-  body: adminContentSanitizeSchema.body.optional(),
-  published: z.boolean().optional(),
-  sortOrder: z.number().int().optional(),
-}).strict().refine((d) => Object.keys(d).length > 0, { message: 'Al menos un campo es requerido' });
+const updateContentBodySchema = z
+  .object({
+    type: adminContentSanitizeSchema.type.optional(),
+    title: adminContentSanitizeSchema.title.optional(),
+    body: adminContentSanitizeSchema.body.optional(),
+    published: z.boolean().optional(),
+    sortOrder: z.coerce.number().int().optional(),
+  })
+  .refine((d) => Object.keys(d).filter((k) => d[k as keyof typeof d] !== undefined).length > 0, {
+    message: 'Al menos un campo es requerido',
+  });
 
 const statsResponseSchema = {
   type: 'object' as const,
@@ -234,11 +238,17 @@ export default async function adminRoutes(server: FastifyInstance) {
     async (request: FastifyRequest, reply: FastifyReply) => {
       const parsed = createContentBodySchema.safeParse(request.body);
       if (!parsed.success) {
-        sendError(reply, 400, 'validation_error', 'Invalid input', {});
+        const details = parsed.error.flatten().fieldErrors as Record<string, unknown>;
+        sendError(reply, 400, 'validation_error', 'Invalid input', details);
         return;
       }
-      const created = await adminService.createContent(parsed.data);
-      reply.code(201).send(created);
+      try {
+        const created = await adminService.createContent(parsed.data);
+        reply.code(201).send(created);
+      } catch (e) {
+        request.log.error(e, 'POST /admin/content failed');
+        sendError(reply, 500, 'internal_error', 'Error al crear contenido', safeDetailsFromError(e));
+      }
     }
   );
 

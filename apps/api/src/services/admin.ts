@@ -136,9 +136,9 @@ export async function createContent(data: {
   published?: boolean;
   sortOrder?: number;
 }): Promise<GlobalContentRow> {
-  const type = stripHtmlAndControlChars(data.type).slice(0, LIMITS.recordType);
-  const title = stripHtmlAndControlChars(data.title).slice(0, LIMITS.adminContentTitle);
-  const body = stripHtmlAndControlChars(data.body).slice(0, LIMITS.adminContentBody);
+  const type = stripHtmlAndControlChars(String(data.type ?? '')).slice(0, LIMITS.recordType);
+  const title = stripHtmlAndControlChars(String(data.title ?? '')).slice(0, LIMITS.adminContentTitle);
+  const body = stripHtmlAndControlChars(String(data.body ?? '')).slice(0, LIMITS.adminContentBody);
   const c = await prisma.globalContent.create({
     data: {
       type,
