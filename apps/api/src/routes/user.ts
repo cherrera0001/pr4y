@@ -22,6 +22,30 @@ const purgeResponseSchema = {
   additionalProperties: false,
 };
 
+const faithStatsResponseSchema = {
+  type: 'object',
+  properties: {
+    totalRecords: { type: 'number' },
+    totalAnswered: { type: 'number' },
+    totalInProcess: { type: 'number' },
+    totalPending: { type: 'number' },
+    streakDays: { type: 'number' },
+    longestStreakDays: { type: 'number' },
+    firstEntryAt: { type: ['string', 'null'] },
+    recordsByType: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: { type: { type: 'string' }, count: { type: 'number' } },
+        required: ['type', 'count'],
+        additionalProperties: false,
+      },
+    },
+  },
+  required: ['totalRecords', 'totalAnswered', 'totalInProcess', 'totalPending', 'streakDays', 'longestStreakDays', 'firstEntryAt', 'recordsByType'],
+  additionalProperties: false,
+};
+
 const reminderPrefsSchema = {
   type: 'object',
   properties: {
@@ -36,6 +60,20 @@ const reminderPrefsSchema = {
 const defaultRateLimit = { max: 300, timeWindow: '1 minute' as const };
 
 export default async function userRoutes(server: FastifyInstance) {
+  server.get(
+    '/user/faith-stats',
+    {
+      config: { rateLimit: defaultRateLimit },
+      schema: { response: { 200: faithStatsResponseSchema } },
+      preHandler: [server.authenticate],
+    },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const userId = (request.user as { sub: string }).sub;
+      const stats = await userService.getFaithStats(userId);
+      reply.code(200).send(stats);
+    }
+  );
+
   server.get(
     '/user/reminder-preferences',
     {

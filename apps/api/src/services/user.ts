@@ -51,6 +51,98 @@ export async function updateReminderPreferences(
   };
 }
 
+export type FaithStats = {
+  totalRecords: number;
+  totalAnswered: number;
+  totalInProcess: number;
+  totalPending: number;
+  streakDays: number;
+  longestStreakDays: number;
+  firstEntryAt: string | null;
+  recordsByType: { type: string; count: number }[];
+};
+
+/**
+ * Estadísticas de fe del usuario, calculadas solo sobre metadatos no cifrados.
+ * Nunca accede al contenido encryptedPayloadB64.
+ */
+export async function getFaithStats(userId: string): Promise<FaithStats> {
+  const [statusCounts, usageLogs, firstRecord, typeCounts] = await Promise.all([
+    prisma.record.groupBy({
+      by: ['status'],
+      where: { userId, deleted: false },
+      _count: { id: true },
+    }),
+    prisma.usageLog.findMany({
+      where: { userId },
+      select: { day: true, pushCount: true, pullCount: true },
+      orderBy: { day: 'desc' },
+    }),
+    prisma.record.findFirst({
+      where: { userId, deleted: false },
+      orderBy: { clientUpdatedAt: 'asc' },
+      select: { clientUpdatedAt: true },
+    }),
+    prisma.record.groupBy({
+      by: ['type'],
+      where: { userId, deleted: false },
+      _count: { id: true },
+    }),
+  ]);
+
+  const totalAnswered = statusCounts.find((c) => c.status === 'ANSWERED')?._count.id ?? 0;
+  const totalInProcess = statusCounts.find((c) => c.status === 'IN_PROCESS')?._count.id ?? 0;
+  const totalPending = statusCounts.find((c) => c.status === 'PENDING')?._count.id ?? 0;
+  const totalRecords = totalAnswered + totalInProcess + totalPending;
+
+  // Conjunto de días con al menos un push o pull
+  const activeDays = new Set(
+    usageLogs
+      .filter((l) => l.pushCount > 0 || l.pullCount > 0)
+      .map((l) => l.day.toISOString().slice(0, 10))
+  );
+
+  // Streak actual: días consecutivos hacia atrás desde hoy (o ayer si hoy sin actividad)
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  const cursor = new Date(today);
+  if (!activeDays.has(cursor.toISOString().slice(0, 10))) {
+    cursor.setUTCDate(cursor.getUTCDate() - 1);
+  }
+  let streakDays = 0;
+  while (activeDays.has(cursor.toISOString().slice(0, 10))) {
+    streakDays++;
+    cursor.setUTCDate(cursor.getUTCDate() - 1);
+  }
+
+  // Racha más larga histórica
+  const sortedDays = Array.from(activeDays).sort();
+  let longestStreakDays = 0;
+  let currentStreak = 0;
+  let prevMs = 0;
+  for (const dayStr of sortedDays) {
+    const ms = new Date(dayStr + 'T00:00:00Z').getTime();
+    if (prevMs && ms - prevMs === 86_400_000) {
+      currentStreak++;
+    } else {
+      currentStreak = 1;
+    }
+    if (currentStreak > longestStreakDays) longestStreakDays = currentStreak;
+    prevMs = ms;
+  }
+
+  return {
+    totalRecords,
+    totalAnswered,
+    totalInProcess,
+    totalPending,
+    streakDays,
+    longestStreakDays,
+    firstEntryAt: firstRecord?.clientUpdatedAt?.toISOString() ?? null,
+    recordsByType: typeCounts.map((r) => ({ type: r.type, count: r._count.id })),
+  };
+}
+
 /**
  * Purga todos los datos del usuario en el servidor (derecho al olvido en el búnker).
  * Elimina: registros (y por cascade reminders/answers), wrapped DEK, usage logs.
