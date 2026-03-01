@@ -60,15 +60,27 @@ fun UnlockScreen(
 
     val launchBiometrics = {
         val crypto = DekManager.getInitializedCipherForRecovery()
+        if (crypto == null) {
+            scope.launch {
+                snackbarHostState.showSnackbar("No se pudo usar la huella en este dispositivo. Introduce tu clave.")
+            }
+            showPassphraseField = true
+        } else {
         val executor = ContextCompat.getMainExecutor(context)
         val biometricPrompt = BiometricPrompt(
             context as FragmentActivity,
             executor,
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                    result.cryptoObject?.cipher?.let { cipher ->
+                    val cipher = result.cryptoObject?.cipher
+                    if (cipher != null) {
                         viewModel.unlockWithBiometricCipher(cipher, context)
-                    } ?: viewModel.unlockWithBiometrics(context)
+                    } else {
+                        scope.launch {
+                            snackbarHostState.showSnackbar("Usa tu clave para entrar.")
+                        }
+                        showPassphraseField = true
+                    }
                 }
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
@@ -92,10 +104,7 @@ fun UnlockScreen(
             .setSubtitle("Toca el sensor para entrar")
             .setNegativeButtonText("Usar clave")
             .build()
-        if (crypto != null) {
-            biometricPrompt.authenticate(promptInfo, crypto)
-        } else {
-            biometricPrompt.authenticate(promptInfo)
+        biometricPrompt.authenticate(promptInfo, crypto)
         }
     }
 
@@ -107,8 +116,17 @@ fun UnlockScreen(
     LaunchedEffect(uiState) {
         when (val state = uiState) {
             is UnlockUiState.Unlocked -> {
-                if (state.offerBiometric) showOfferBiometricDialog = true
-                else onUnlocked()
+                if (state.offerBiometric) {
+                    if (DekManager.getInitializedCipherForEncrypt() != null) {
+                        showOfferBiometricDialog = true
+                    } else {
+                        viewModel.clearOfferPersistWithBiometric()
+                        scope.launch {
+                            snackbarHostState.showSnackbar("La huella no está disponible en este dispositivo. Puedes entrar con tu clave.")
+                        }
+                        onUnlocked()
+                    }
+                } else onUnlocked()
             }
             is UnlockUiState.SessionExpired -> onSessionExpired()
             is UnlockUiState.Error -> {
@@ -116,8 +134,12 @@ fun UnlockScreen(
             }
             is UnlockUiState.Locked -> {
                 if (state.biometricEnabled && state.canUseBiometrics && !showPassphraseField) {
-                    delay(300)
-                    launchBiometrics()
+                    if (DekManager.getInitializedCipherForRecovery() == null) {
+                        showPassphraseField = true
+                    } else {
+                        delay(300)
+                        launchBiometrics()
+                    }
                 }
             }
             else -> {}
@@ -139,10 +161,15 @@ fun UnlockScreen(
                             executor,
                             object : BiometricPrompt.AuthenticationCallback() {
                                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                                    result.cryptoObject?.cipher?.let { cipher ->
+                                    val cipher = result.cryptoObject?.cipher
+                                    if (cipher != null) {
                                         if (viewModel.persistDekWithBiometric(cipher)) {
                                             scope.launch { snackbarHostState.showSnackbar("Listo. La próxima vez entra con tu huella.") }
+                                        } else {
+                                            scope.launch { snackbarHostState.showSnackbar("No se pudo guardar la huella. Puedes activarlo en Ajustes más tarde.") }
                                         }
+                                    } else {
+                                        scope.launch { snackbarHostState.showSnackbar("No se pudo activar. Usa tu clave la próxima vez.") }
                                     }
                                     showOfferBiometricDialog = false
                                     onUnlocked()
@@ -163,7 +190,11 @@ fun UnlockScreen(
                             .build()
                         prompt.authenticate(info, crypto)
                     } else {
+                        scope.launch {
+                            snackbarHostState.showSnackbar("No se pudo activar la huella en este dispositivo. Puedes intentarlo en Ajustes más tarde.")
+                        }
                         showOfferBiometricDialog = false
+                        viewModel.clearOfferPersistWithBiometric()
                         onUnlocked()
                     }
                 }) { Text("Sí, guardar con huella") }

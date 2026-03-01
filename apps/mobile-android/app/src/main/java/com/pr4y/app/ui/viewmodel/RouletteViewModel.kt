@@ -8,15 +8,14 @@ import com.pr4y.app.util.Pr4yLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 sealed class RouletteUiState {
     object Loading : RouletteUiState()
     data class Success(val requests: List<PublicRequestDto>) : RouletteUiState()
-    data class Error(val message: String) : RouletteUiState()
     object Empty : RouletteUiState()
+    data class Error(val message: String) : RouletteUiState()
 }
 
 @HiltViewModel
@@ -25,7 +24,7 @@ class RouletteViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<RouletteUiState>(RouletteUiState.Loading)
-    val uiState: StateFlow<RouletteUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<RouletteUiState> = _uiState
 
     init {
         loadRequests()
@@ -35,36 +34,33 @@ class RouletteViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = RouletteUiState.Loading
             try {
+                // Spec: Llamada anónima para intercesión aleatoria
                 val response = api.getPublicRequests()
-                when {
-                    response.isSuccessful -> {
-                        val requests = response.body()?.requests ?: emptyList()
-                        if (requests.isEmpty()) {
-                            _uiState.value = RouletteUiState.Empty
-                        } else {
-                            _uiState.value = RouletteUiState.Success(requests)
-                        }
-                    }
-                    response.code() == 404 -> {
-                        // Backend puede no exponer aún GET /public/requests; mostrar estado vacío
+                if (response.isSuccessful) {
+                    val requests = response.body()?.requests ?: emptyList()
+                    if (requests.isEmpty()) {
                         _uiState.value = RouletteUiState.Empty
+                    } else {
+                        _uiState.value = RouletteUiState.Success(requests)
                     }
-                    else -> _uiState.value = RouletteUiState.Error("Error al conectar con el búnker público")
+                } else {
+                    _uiState.value = RouletteUiState.Error("Error al cargar peticiones: ${response.code()}")
                 }
             } catch (e: Exception) {
-                Pr4yLog.e("RouletteViewModel: Error loading requests", e)
-                _uiState.value = RouletteUiState.Error("Sin conexión")
+                Pr4yLog.e("RouletteViewModel: Error de red", e)
+                _uiState.value = RouletteUiState.Error(e.message ?: "Error desconocido")
             }
         }
     }
 
-    fun prayForRequest(requestId: String) {
+    fun prayForRequest(id: String) {
         viewModelScope.launch {
             try {
-                // El interceptor TelemetryInterceptor registrará el evento roulette_intercession_success
-                api.prayForPublicRequest(requestId)
+                // Registro anónimo de la oración
+                api.prayForPublicRequest(id)
+                Pr4yLog.i("Roulette: Me he unido en oración para $id")
             } catch (e: Exception) {
-                Pr4yLog.e("RouletteViewModel: Error posting prayer", e)
+                Pr4yLog.e("RouletteViewModel: Error al registrar oración", e)
             }
         }
     }

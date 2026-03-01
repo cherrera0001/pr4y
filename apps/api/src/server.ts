@@ -185,6 +185,21 @@ const start = async () => {
       console.log(`Mapped {${r.path}, ${r.method}}`);
     }
     console.log('=== Fin rutas (onRoute) ===');
+    // Validación: rutas que deben existir para app y admin (evitar 404 por despliegue antiguo o build incompleto)
+    const requiredRoutes = [
+      { path: '/v1/public/requests', method: 'GET' },
+      { path: '/v1/public/content', method: 'GET' },
+      { path: '/v1/user/display-preferences', method: 'GET' },
+      { path: '/v1/user/reminder-schedules', method: 'GET' },
+    ];
+    const missing = requiredRoutes.filter(
+      (req) => !routesLog.some((r) => r.path === req.path && r.method === req.method)
+    );
+    if (missing.length > 0) {
+      server.log.error({ missing }, 'Rutas requeridas no registradas. ¿Build o despliegue incompleto?');
+      throw new Error(`Rutas faltantes: ${missing.map((m) => `${m.method} ${m.path}`).join(', ')}. Revisa que el despliegue use el código actual.`);
+    }
+    console.log('[PR4Y] Validación de rutas: OK (public/requests, public/content, user/display-preferences, user/reminder-schedules)');
     console.log(server.printRoutes());
     await server.listen({ port: Number(process.env.PORT) || 8080, host: '0.0.0.0' });
     console.log(`API PR4Y activa en puerto ${port} y host 0.0.0.0`);

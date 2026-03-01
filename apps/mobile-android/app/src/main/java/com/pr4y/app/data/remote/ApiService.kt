@@ -38,7 +38,7 @@ data class SyncRecordDto(
     val clientUpdatedAt: String,
     val serverUpdatedAt: String,
     val deleted: Boolean,
-    val status: String = "PENDING", // PENDING | IN_PROCESS | ANSWERED (autoritativo del servidor)
+    val status: String = "PENDING",
 )
 
 data class PushBody(val records: List<PushRecordDto>)
@@ -62,10 +62,8 @@ data class RejectedDto(
     val serverUpdatedAt: String? = null,
 )
 
-/** Respuesta de GET /v1/answers/stats (conteo para dashboard). */
 data class AnswersStatsResponse(val answeredCount: Int)
 
-/** Elemento de GET /v1/answers (Muro de Fe). */
 data class AnswerDto(
     val id: String,
     val recordId: String,
@@ -76,35 +74,30 @@ data class AnswerDto(
 data class AnswerRecordDto(val id: String, val type: String, val clientUpdatedAt: String)
 data class AnswersListResponse(val answers: List<AnswerDto>)
 
-/** Body para marcar un pedido como respondido con testimonio opcional. */
 data class AnswerBody(val recordId: String, val testimony: String? = null)
 
-/** Configuración pública desde el backend. */
 data class PublicConfigResponse(
     val googleWebClientId: String,
     val googleAndroidClientId: String = "",
 )
 
-/** Preferencias de recordatorio diario (sistema legado — un único horario). */
 data class ReminderPreferencesResponse(
     val time: String,
     val daysOfWeek: List<Int>,
     val enabled: Boolean,
 )
 
-/** Un recordatorio programado: hora libre + días + toggle. */
 data class ReminderScheduleDto(
-    val time: String,       // "HH:mm"
-    val daysOfWeek: List<Int>, // [0..6] 0=domingo
+    val id: String? = null,
+    val time: String,
+    val daysOfWeek: List<Int>,
     val enabled: Boolean,
 )
 
-/** Lista de hasta 5 recordatorios configurables por el usuario. */
 data class ReminderSchedulesResponse(
     val schedules: List<ReminderScheduleDto>,
 )
 
-/** DTO para Roulette (Intercesión Anónima). */
 data class PublicRequestDto(
     val id: String,
     val title: String,
@@ -115,7 +108,6 @@ data class PublicRequestDto(
 
 data class PublicRequestsResponse(val requests: List<PublicRequestDto>)
 
-/** Preferencias de visualización (tema, tipografía, modo contemplativo). */
 data class DisplayPreferencesDto(
     val theme: String,
     val fontSize: String,
@@ -124,7 +116,6 @@ data class DisplayPreferencesDto(
     val contemplativeMode: Boolean,
 )
 
-/** Contenido global publicado por admin (Palabras de Aliento, Avisos). Llega a todos los usuarios. */
 data class GlobalContentItemDto(
     val id: String,
     val type: String,
@@ -193,14 +184,7 @@ interface ApiService {
         @Body body: AnswerBody,
     ): Response<Map<String, Any>>
 
-    @GET("user/reminder-preferences")
-    suspend fun getReminderPreferences(@Header("Authorization") bearer: String): Response<ReminderPreferencesResponse>
-
-    @PUT("user/reminder-preferences")
-    suspend fun putReminderPreferences(
-        @Header("Authorization") bearer: String,
-        @Body body: ReminderPreferencesResponse,
-    ): Response<ReminderPreferencesResponse>
+    // --- Preferencias de Usuario (rutas deben coincidir con API: user/display-preferences, user/reminder-schedules) ---
 
     @GET("user/reminder-schedules")
     suspend fun getReminderSchedules(@Header("Authorization") bearer: String): Response<ReminderSchedulesResponse>
@@ -222,32 +206,20 @@ interface ApiService {
 
     // --- Roulette (Anonymous) ---
     
-    /** 
-     * Obtiene oraciones públicas aleatorias. 
-     * Se debe llamar con el header X-Anonymous: true para activar el stripping en el interceptor.
-     */
     @GET("public/requests")
     suspend fun getPublicRequests(@Header("X-Anonymous") anon: String = "true"): Response<PublicRequestsResponse>
 
-    /** 
-     * Incrementa el contador de oración de forma anónima. 
-     * Se debe llamar con el header X-Anonymous: true.
-     */
     @POST("public/requests/{id}/pray")
     suspend fun prayForPublicRequest(
         @Path("id") id: String,
         @Header("X-Anonymous") anon: String = "true"
     ): Response<Map<String, Any>>
 
-    /** Contenido global publicado (Palabras de Aliento, Avisos). Sin auth; llega a todos. */
+    /** GET /v1/public/content?type=... — contenido global publicado por admin. */
     @GET("public/content")
     suspend fun getGlobalContent(@Query("type") type: String? = null): Response<GlobalContentResponse>
 }
 
-/**
- * Extrae error.message del cuerpo JSON de la API ({ "error": { "message": "..." } }).
- * Backend-First: el cliente debe mostrar el mensaje del servidor cuando exista.
- */
 fun parseApiErrorMessage(jsonBody: String?): String? {
     if (jsonBody.isNullOrBlank()) return null
     return try {

@@ -45,3 +45,13 @@ apps/web/*.log
 # Prisma
 apps/api/prisma/dev.db
 apps/api/prisma/dev.db-journal
+
+# Dev artifacts / logs de build
+apps/mobile-android/gradle-*.txt
+apps/mobile-android/install.sh
+evidencia/
+list-apps.ps1
+
+# Claude Code / Cursor IDE
+.claude/
+.cursor/

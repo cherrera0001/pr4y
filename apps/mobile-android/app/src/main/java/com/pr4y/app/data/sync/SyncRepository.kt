@@ -23,34 +23,37 @@ import org.json.JSONObject
 import java.time.Instant
 import java.util.UUID
 
+/**
+ * Repositorio de sincronización.
+ * Refactorizado para usar acceso perezoso (lazy) a la base de datos para evitar crashes en init.
+ */
 class SyncRepository(
     private val authRepository: AuthRepository,
     context: Context,
 ) {
     private val api = RetrofitClient.create(context)
-    private val db = AppContainer.db
-    private val requestDao = db.requestDao()
-    private val journalDao = db.journalDao()
-    private val outboxDao = db.outboxDao()
-    private val syncStateDao = db.syncStateDao()
+    
+    // Acceso perezoso a los DAOs para evitar IllegalStateException si la DB no está lista al instanciar
+    private val requestDao by lazy { AppContainer.db.requestDao() }
+    private val journalDao by lazy { AppContainer.db.journalDao() }
+    private val outboxDao by lazy { AppContainer.db.outboxDao() }
+    private val syncStateDao by lazy { AppContainer.db.syncStateDao() }
 
     suspend fun sync(): SyncResult = withContext(Dispatchers.IO) {
+        if (!AppContainer.isInitialized()) return@withContext SyncResult.Error("Bóveda no disponible")
+        
         Pr4yLog.i("Iniciando proceso de sincronización...")
         val bearer = authRepository.getBearer() ?: return@withContext SyncResult.Error("No autenticado")
         val dek = DekManager.getDek() ?: return@withContext SyncResult.Error("Llave de privacidad no disponible")
         val userId = authRepository.getUserId() ?: return@withContext SyncResult.Error("Sesión no identificada")
 
         try {
-            // 0. Pull-before-push
-            Pr4yLog.d("Sync: Ejecutando Pull inicial...")
             pull(bearer, dek, userId)
 
-            // 1. Push outbox
             var outbox = outboxDao.getAll()
             var pushRound = 0
             val maxPushRounds = 2
             while (outbox.isNotEmpty() && pushRound < maxPushRounds) {
-                Pr4yLog.d("Sync: Ejecutando Push (Ronda ${pushRound + 1}). Elementos en outbox: ${outbox.size}")
                 val records = outbox.map { o ->
                     PushRecordDto(
                         recordId = o.recordId,
@@ -62,13 +65,8 @@ class SyncRepository(
                     )
                 }
                 val pushRes = api.push(bearer, PushBody(records))
-                if (!pushRes.isSuccessful) {
-                    Pr4yLog.e("Sync: Push fallido con código ${pushRes.code()}")
-                    break
-                }
+                if (!pushRes.isSuccessful) break
                 val pushBody = pushRes.body() ?: break
-                
-                Pr4yLog.i("Sync: Push exitoso. Aceptados: ${pushBody.accepted.size}, Rechazados: ${pushBody.rejected.size}")
                 
                 pushBody.accepted.forEach { recordId ->
                     outboxDao.deleteByRecordId(recordId)
@@ -77,7 +75,6 @@ class SyncRepository(
                 val rejected = pushBody.rejected
                 for (r in rejected) {
                     if (r.reason == "version conflict" && r.serverVersion != null) {
-                        Pr4yLog.w("Sync: Conflicto de versión en ${r.recordId}. Actualizando a serverVersion + 1 (${r.serverVersion + 1})")
                         val updated = outbox.find { it.recordId == r.recordId } ?: continue
                         outboxDao.insert(
                             OutboxEntity(
@@ -89,32 +86,20 @@ class SyncRepository(
                                 createdAt = updated.createdAt,
                             )
                         )
-                    } else {
-                        Pr4yLog.e("Sync: Registro ${r.recordId} rechazado por: ${r.reason}")
                     }
                 }
                 outbox = outboxDao.getAll()
                 pushRound++
             }
 
-            // 2. Pull final
-            Pr4yLog.d("Sync: Ejecutando Pull final...")
             pull(bearer, dek, userId)
 
             persistLastSyncStatus("ok", null)
-            Pr4yLog.i("Sync: Sincronización finalizada correctamente.")
             SyncResult.Success
         } catch (e: Exception) {
             Pr4yLog.e("Sync: Error crítico durante la sincronización", e)
             persistLastSyncStatus("error", System.currentTimeMillis())
-            val message = when {
-                e is retrofit2.HttpException -> {
-                    val body = e.response()?.errorBody()?.string()
-                    parseApiErrorMessage(body) ?: e.message() ?: "Error de red o seguridad"
-                }
-                else -> e.message ?: "Error de red o seguridad"
-            }
-            SyncResult.Error(message)
+            SyncResult.Error(e.message ?: "Error de red")
         }
     }
 
@@ -122,14 +107,10 @@ class SyncRepository(
         var cursor: String? = syncStateDao.get(SYNC_CURSOR_KEY)?.value
         do {
             val pullRes = api.pull(bearer, cursor, 100)
-            if (!pullRes.isSuccessful) {
-                Pr4yLog.e("Sync: Pull fallido con código ${pullRes.code()}")
-                break
-            }
+            if (!pullRes.isSuccessful) break
             val body = pullRes.body() ?: break
             if (body.records.isNotEmpty()) {
-                Pr4yLog.i("Sync: Pull recibió ${body.records.size} registros nuevos.")
-                db.runInTransaction {
+                AppContainer.db.runInTransaction {
                     runBlocking {
                         for (rec in body.records) {
                             processRemoteRecord(rec, dek, userId)
@@ -150,16 +131,12 @@ class SyncRepository(
         } while (!cursor.isNullOrEmpty())
     }
 
-    /**
-     * Procesa borradores del diario guardados sin conexión/llave.
-     * @return true si se procesó un borrador con éxito.
-     */
     suspend fun processJournalDraft(context: Context): Boolean = withContext(Dispatchers.IO) {
+        if (!AppContainer.isInitialized()) return@withContext false
         val draft = JournalDraftStore.getDraft(context) ?: return@withContext false
         val dek = DekManager.getDek() ?: return@withContext false
         val userId = authRepository.getUserId() ?: return@withContext false
 
-        Pr4yLog.i("Sync: Procesando borrador de diario pendiente...")
         try {
             val now = System.currentTimeMillis()
             val id = UUID.randomUUID().toString()
@@ -170,7 +147,7 @@ class SyncRepository(
             }.toString().toByteArray(Charsets.UTF_8)
             val encrypted = LocalCrypto.encrypt(payload, dek)
 
-            db.runInTransaction {
+            AppContainer.db.runInTransaction {
                 runBlocking {
                     journalDao.insert(
                         JournalEntity(
@@ -196,10 +173,8 @@ class SyncRepository(
                     JournalDraftStore.clearDraft(context)
                 }
             }
-            Pr4yLog.i("Sync: Borrador procesado y protegido con éxito.")
             true
         } catch (e: Exception) {
-            Pr4yLog.e("Sync: Error al procesar borrador", e)
             false
         }
     }
@@ -214,6 +189,7 @@ class SyncRepository(
     }
 
     suspend fun getLastSyncStatus(): LastSyncStatus? = withContext(Dispatchers.IO) {
+        if (!AppContainer.isInitialized()) return@withContext null
         val status = syncStateDao.get(KEY_LAST_SYNC_STATUS)?.value ?: return@withContext null
         val errorAtStr = syncStateDao.get(KEY_LAST_SYNC_ERROR_AT)?.value
         val errorAt = errorAtStr?.toLongOrNull()

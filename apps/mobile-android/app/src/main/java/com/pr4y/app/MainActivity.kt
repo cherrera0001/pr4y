@@ -76,15 +76,14 @@ class MainViewModel : ViewModel() {
                     tokenStore = store
 
                     val token = store.getAccessToken()
-                    loggedIn = token != null
+                    val userId = store.getUserId()
+                    // Solo considerar loggedIn si tenemos token Y userId (tras corrupción/limpieza puede faltar uno).
+                    loggedIn = token != null && userId != null
 
-                    if (loggedIn) {
+                    if (loggedIn && userId != null) {
                         // Inicializar la bóveda aislada del usuario autenticado (patrón TenantID).
                         // Si hay una sesión anterior de otro usuario, AppContainer elimina su archivo.
-                        val userId = store.getUserId()
-                        if (userId != null) {
-                            AppContainer.init(context, userId)
-                        }
+                        AppContainer.init(context, userId)
                         isUnlocked = DekManager.tryRecoverDekSilently()
                         SyncScheduler.schedulePeriodic(context)
                     }

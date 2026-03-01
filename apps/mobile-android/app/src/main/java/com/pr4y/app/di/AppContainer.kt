@@ -6,68 +6,56 @@ import com.pr4y.app.util.Pr4yLog
 
 /**
  * Contenedor de dependencias de la sesión activa.
- *
- * Patrón TenantID: cada usuario tiene su propia base de datos aislada.
- * La instancia se crea en `init(context, userId)` tras autenticación y se destruye en logout.
- *
- * Garantías de privacidad:
- * - Un usuario nunca abre la DB de otro usuario.
- * - Al cambiar de usuario, el archivo de la bóveda anterior se elimina del disco.
- * - En logout, `clearAllTables()` limpia los datos en memoria antes de que la UI navegue.
+ * Refactorizado para evitar UninitializedPropertyAccessException.
  */
 object AppContainer {
 
-    lateinit var db: AppDatabase
-        private set
+    private var _db: AppDatabase? = null
+    
+    val db: AppDatabase
+        get() = _db ?: throw IllegalStateException("Bóveda no inicializada. Llame a AppContainer.init() primero.")
 
     private var currentUserId: String? = null
 
-    /**
-     * Inicializa (o reutiliza) la bóveda del usuario autenticado.
-     *
-     * Si el userId es diferente al de la sesión anterior:
-     *   1. Cierra la DB anterior.
-     *   2. Elimina su archivo del disco (privacidad absoluta).
-     *   3. Abre la DB del nuevo usuario (o la crea si no existe).
-     */
+    fun isInitialized(): Boolean = _db != null
+
     fun init(context: Context, userId: String) {
         synchronized(this) {
-            if (currentUserId == userId && ::db.isInitialized && db.isOpen) {
-                return // Misma sesión — no hacer nada
+            if (currentUserId == userId && _db != null && _db!!.isOpen) {
+                return 
             }
 
-            // Cambio de usuario: destruir bóveda anterior
-            if (::db.isInitialized && currentUserId != null && currentUserId != userId) {
+            if (_db != null && currentUserId != null && currentUserId != userId) {
                 val prevId = currentUserId!!
-                Pr4yLog.i("AppContainer: cambiando de usuario. Eliminando bóveda de $prevId.")
-                try { db.close() } catch (e: Exception) {
-                    Pr4yLog.w("AppContainer: error al cerrar DB previa: ${e.message}")
+                Pr4yLog.i("AppContainer: Cambiando de usuario. Cerrando bóveda de $prevId.")
+                try { _db!!.close() } catch (e: Exception) {
+                    Pr4yLog.w("AppContainer: Error al cerrar DB previa: ${e.message}")
                 }
-                val deleted = context.applicationContext.deleteDatabase(AppDatabase.dbName(prevId))
-                Pr4yLog.i("AppContainer: bóveda anterior eliminada: $deleted")
+                _db = null
             }
 
             currentUserId = userId
-            db = AppDatabase.getInstance(context, userId)
-            Pr4yLog.i("AppContainer: bóveda inicializada para usuario $userId")
+            _db = AppDatabase.getInstance(context, userId)
+            Pr4yLog.i("AppContainer: Bóveda inicializada para usuario $userId")
         }
     }
 
-    /**
-     * Limpia todas las tablas de la sesión actual (seguro con flows activos).
-     * Llamar en logout antes de navegar a la pantalla de inicio de sesión.
-     */
     fun clearForLogout() {
-        if (::db.isInitialized) {
-            try {
-                db.clearAllTables()
-                Pr4yLog.i("AppContainer: tablas limpiadas en logout")
-            } catch (e: Exception) {
-                Pr4yLog.w("AppContainer: clearForLogout falló: ${e.message}")
+        synchronized(this) {
+            if (_db != null) {
+                try {
+                    _db!!.clearAllTables()
+                    _db!!.close()
+                    Pr4yLog.i("AppContainer: Bóveda cerrada y limpiada en logout")
+                } catch (e: Exception) {
+                    Pr4yLog.w("AppContainer: Fallo al cerrar bóveda: ${e.message}")
+                } finally {
+                    _db = null
+                    currentUserId = null
+                }
             }
         }
     }
 
-    /** userId de la sesión activa, o null si no hay sesión. */
     fun currentUserId(): String? = currentUserId
 }

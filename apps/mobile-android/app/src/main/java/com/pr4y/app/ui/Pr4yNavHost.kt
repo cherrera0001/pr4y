@@ -76,7 +76,13 @@ fun Pr4yNavHost(
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
     val api = remember { RetrofitClient.create(context) }
-    val syncRepository = remember { SyncRepository(authRepository, context) }
+    // Solo crear SyncRepository cuando hay sesión y la bóveda está inicializada (evita crash por db no init tras corrupción Keystore/reinstall).
+    val syncRepository = remember(authRepository, context, loggedIn) {
+        if (loggedIn && com.pr4y.app.di.AppContainer.isInitialized())
+            SyncRepository(authRepository, context)
+        else
+            null
+    }
 
     LaunchedEffect(loggedIn) {
         if (!loggedIn && navController.currentDestination?.route != Routes.LOGIN) {
@@ -118,20 +124,26 @@ fun Pr4yNavHost(
             }
 
             composable(Routes.UNLOCK) {
-                val unlockViewModel: UnlockViewModel = viewModel(
-                    factory = UnlockViewModelFactory(authRepository, syncRepository, api)
-                )
-                UnlockScreen(
-                    viewModel = unlockViewModel,
-                    onUnlocked = {
-                        onUnlocked()
-                        val nextRoute = if (!hasSeenWelcome) Routes.WELCOME else Routes.MAIN
-                        navController.navigate(nextRoute) {
-                            popUpTo(Routes.UNLOCK) { inclusive = true }
-                        }
-                    },
-                    onSessionExpired = onLogout
-                )
+                if (syncRepository == null) {
+                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        androidx.compose.material3.CircularProgressIndicator()
+                    }
+                } else {
+                    val unlockViewModel: UnlockViewModel = viewModel(
+                        factory = UnlockViewModelFactory(authRepository, syncRepository, api)
+                    )
+                    UnlockScreen(
+                        viewModel = unlockViewModel,
+                        onUnlocked = {
+                            onUnlocked()
+                            val nextRoute = if (!hasSeenWelcome) Routes.WELCOME else Routes.MAIN
+                            navController.navigate(nextRoute) {
+                                popUpTo(Routes.UNLOCK) { inclusive = true }
+                            }
+                        },
+                        onSessionExpired = onLogout
+                    )
+                }
             }
 
             composable(Routes.WELCOME) {
@@ -146,21 +158,27 @@ fun Pr4yNavHost(
             }
 
             composable(Routes.MAIN) {
-                val mainContext = androidx.compose.ui.platform.LocalContext.current
-                val mainUserId = remember(mainContext) {
-                    com.pr4y.app.data.auth.AuthTokenStore(mainContext.applicationContext).getUserId() ?: ""
+                if (syncRepository == null) {
+                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        androidx.compose.material3.CircularProgressIndicator()
+                    }
+                } else {
+                    val mainContext = androidx.compose.ui.platform.LocalContext.current
+                    val mainUserId = remember(mainContext) {
+                        com.pr4y.app.data.auth.AuthTokenStore(mainContext.applicationContext).getUserId() ?: ""
+                    }
+                    InnerNavHost(
+                        authRepository             = authRepository,
+                        syncRepository             = syncRepository,
+                        api                        = api,
+                        onLogout                   = onLogout,
+                        userId                     = mainUserId,
+                        displayPrefs               = displayPrefs,
+                        onUpdateDisplayPrefs       = onUpdateDisplayPrefs,
+                        reminderSchedules          = reminderSchedules,
+                        onUpdateReminderSchedules  = onUpdateReminderSchedules,
+                    )
                 }
-                InnerNavHost(
-                    authRepository             = authRepository,
-                    syncRepository             = syncRepository,
-                    api                        = api,
-                    onLogout                   = onLogout,
-                    userId                     = mainUserId,
-                    displayPrefs               = displayPrefs,
-                    onUpdateDisplayPrefs       = onUpdateDisplayPrefs,
-                    reminderSchedules          = reminderSchedules,
-                    onUpdateReminderSchedules  = onUpdateReminderSchedules,
-                )
             }
         }
 
