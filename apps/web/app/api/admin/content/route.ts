@@ -30,6 +30,10 @@ export async function POST(request: NextRequest) {
   if (!token) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
+  const apiBase = getApiBaseUrl();
+  if (!apiBase) {
+    return NextResponse.json({ error: 'api not configured' }, { status: 503 });
+  }
   const body = await request.json().catch(() => ({}));
   const res = await fetch(`${apiBase}/admin/content`, {
     method: 'POST',
