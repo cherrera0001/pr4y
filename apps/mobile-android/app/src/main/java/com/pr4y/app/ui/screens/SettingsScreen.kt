@@ -52,6 +52,7 @@ import com.pr4y.app.data.sync.LastSyncStatus
 import com.pr4y.app.data.sync.SyncRepository
 import com.pr4y.app.data.sync.SyncResult
 import com.pr4y.app.di.AppContainer
+import com.pr4y.app.ui.Routes
 import com.pr4y.app.ui.components.Pr4yTopAppBar
 import com.pr4y.app.work.ReminderScheduler
 import com.pr4y.app.work.SyncScheduler
@@ -302,7 +303,7 @@ fun SettingsScreen(
             }
             Spacer(Modifier.height(16.dp))
             HorizontalDivider(Modifier.padding(vertical = 4.dp))
-            AppearanceSection(prefs = displayPrefs, onUpdate = onUpdateDisplayPrefs)
+            AppearanceSection(prefs = displayPrefs, onUpdate = onUpdateDisplayPrefs, navController = navController)
             HorizontalDivider(Modifier.padding(vertical = 4.dp))
             Spacer(Modifier.height(8.dp))
             Text("Cuenta", style = MaterialTheme.typography.titleMedium)
@@ -352,6 +353,7 @@ private fun <T> ChipRow(
 private fun AppearanceSection(
     prefs: DisplayPrefs,
     onUpdate: (DisplayPrefs) -> Unit,
+    navController: NavController,
 ) {
     Text("Apariencia", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp))
 
@@ -416,7 +418,28 @@ private fun AppearanceSection(
         }
         Switch(
             checked = prefs.contemplativeMode,
-            onCheckedChange = { onUpdate(prefs.copy(contemplativeMode = it)) },
+            onCheckedChange = { enabled ->
+                if (enabled) {
+                    onUpdate(
+                        prefs.copy(
+                            contemplativeMode = true,
+                            fontFamily = "serif",
+                            fontSize = "xl",
+                            lineSpacing = "relaxed",
+                        )
+                    )
+                    navController.navigate(Routes.FOCUS_MODE)
+                } else {
+                    onUpdate(
+                        prefs.copy(
+                            contemplativeMode = false,
+                            fontFamily = "system",
+                            fontSize = "md",
+                            lineSpacing = "normal",
+                        )
+                    )
+                }
+            },
         )
     }
 }
