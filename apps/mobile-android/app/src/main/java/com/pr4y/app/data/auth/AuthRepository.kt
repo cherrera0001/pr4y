@@ -95,13 +95,13 @@ class AuthRepository(
 
     suspend fun logout() {
         withContext(Dispatchers.IO) {
-            Pr4yLog.i("AuthRepository: Performing full logout and búnker cleanup")
+            Pr4yLog.i("AuthRepository: Limpiando sesión y bóveda local")
+            // 1. Limpiar tokens — el usuario queda desautenticado
             tokenStore.clear()
-            try {
-                AppContainer.db.clearAllTables()
-            } catch (e: Exception) {
-                Pr4yLog.e("AuthRepository: Error clearing tables on logout", e)
-            }
+            // 2. Limpiar tablas en memoria (seguro con flows activos)
+            //    La eliminación física del archivo la gestiona AppContainer.init() al cambiar de usuario,
+            //    garantizando privacidad absoluta incluso ante cambio de cuenta sin logout explícito.
+            AppContainer.clearForLogout()
         }
     }
 

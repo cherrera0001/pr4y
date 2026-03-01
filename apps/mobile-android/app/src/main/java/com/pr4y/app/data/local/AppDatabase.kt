@@ -69,23 +69,26 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
+        /**
+         * Nombre de la base de datos para un usuario específico.
+         * Los UUIDs solo contienen caracteres alfanuméricos y guiones — seguros para nombres de archivo.
+         */
+        fun dbName(userId: String): String = "pr4y_${userId}.db"
 
-        fun getInstance(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "pr4y_db",
-                )
-                    .addMigrations(MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
-                    // Versiones 1 y 2 no tienen migration path; datos se restauran desde sync.
-                    // Las versiones 3+ tienen migraciones explícitas — NO se destruyen silenciosamente.
-                    .fallbackToDestructiveMigrationFrom(1, 2)
-                    .build()
-                    .also { INSTANCE = it }
-            }
+        /**
+         * Crea (o abre si ya existe) la base de datos privada del usuario.
+         * Cada usuario tiene su propio archivo aislado — patrón TenantID.
+         * No usa singleton: AppContainer gestiona el ciclo de vida de la instancia.
+         */
+        fun getInstance(context: Context, userId: String): AppDatabase {
+            return Room.databaseBuilder(
+                context.applicationContext,
+                AppDatabase::class.java,
+                dbName(userId),
+            )
+                .addMigrations(MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+                .fallbackToDestructiveMigrationFrom(1, 2)
+                .build()
         }
     }
 }

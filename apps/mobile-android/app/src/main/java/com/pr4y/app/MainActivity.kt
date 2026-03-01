@@ -29,6 +29,7 @@ import com.pr4y.app.data.remote.RetrofitClient
 import com.pr4y.app.ui.Pr4yNavHost
 import com.pr4y.app.ui.components.ShimmerLoading
 import com.pr4y.app.ui.theme.Pr4yTheme
+import com.pr4y.app.di.AppContainer
 import com.pr4y.app.util.Pr4yLog
 import com.pr4y.app.work.ReminderScheduler
 import com.pr4y.app.work.SyncScheduler
@@ -78,6 +79,12 @@ class MainViewModel : ViewModel() {
                     loggedIn = token != null
 
                     if (loggedIn) {
+                        // Inicializar la bóveda aislada del usuario autenticado (patrón TenantID).
+                        // Si hay una sesión anterior de otro usuario, AppContainer elimina su archivo.
+                        val userId = store.getUserId()
+                        if (userId != null) {
+                            AppContainer.init(context, userId)
+                        }
                         isUnlocked = DekManager.tryRecoverDekSilently()
                         SyncScheduler.schedulePeriodic(context)
                     }
@@ -131,6 +138,15 @@ class MainViewModel : ViewModel() {
                 Pr4yLog.w("updateDisplayPrefs: remote PUT failed: ${e.message}")
             }
         }
+    }
+
+    /**
+     * Inicializa la bóveda del usuario que acaba de autenticarse (login en caliente).
+     * Necesario cuando el usuario hace login SIN reinicio de app (initBunker ya corrió sin userId).
+     */
+    fun initVaultForCurrentUser(context: android.content.Context) {
+        val userId = tokenStore?.getUserId() ?: return
+        AppContainer.init(context, userId)
     }
 
     fun updateReminderSchedules(context: android.content.Context, schedules: List<ReminderScheduleDto>) {
@@ -256,12 +272,19 @@ class MainActivity : AppCompatActivity() {
                         else -> Pr4yNavHost(
                             authRepository             = vm.authRepository!!,
                             loggedIn                   = vm.loggedIn,
-                            onLoginSuccess             = { vm.loggedIn = true },
+                            onLoginSuccess             = {
+                                // Inicializar la bóveda del usuario que acaba de autenticarse.
+                                // tokenStore ya tiene el userId tras AuthRepository.login/googleLogin.
+                                vm.initVaultForCurrentUser(applicationContext)
+                                vm.loggedIn = true
+                            },
                             onLogout                   = {
                                 scope.launch {
-                                    vm.authRepository?.logout()
+                                    vm.authRepository?.logout() // clear tokens + clearAllTables()
                                     vm.loggedIn   = false
                                     vm.isUnlocked = false
+                                    // La próxima llamada a AppContainer.init() con otro userId
+                                    // eliminará automáticamente el archivo de esta bóveda.
                                 }
                             },
                             unlocked                   = vm.isUnlocked,

@@ -2,7 +2,7 @@ package com.pr4y.app
 
 import android.app.Application
 import com.pr4y.app.BuildConfig
-import com.pr4y.app.di.AppContainer
+import com.pr4y.app.util.Pr4yLog
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -15,6 +15,11 @@ class Pr4yApp : Application() {
             val userId = uid / 100000
             android.util.Log.i("PR4Y_DEBUG", "Pr4yApp.onCreate|pkg=$packageName|pid=$pid|uid=$uid|userId=$userId")
         }
-        AppContainer.init(this)
+        // Eliminar la base de datos legada compartida (anterior al modelo TenantID).
+        // No contiene datos de usuario activos: ya están cifrados en el servidor.
+        val deleted = deleteDatabase("pr4y_db")
+        if (deleted) Pr4yLog.i("Pr4yApp: DB legada 'pr4y_db' eliminada.")
+        // AppContainer.init() ya NO se llama aquí — requiere userId autenticado.
+        // Se llama en MainViewModel.initBunker() tras obtener la sesión del usuario.
     }
 }
