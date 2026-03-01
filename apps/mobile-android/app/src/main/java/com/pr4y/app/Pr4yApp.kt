@@ -1,8 +1,7 @@
 package com.pr4y.app
 
 import android.app.Application
-import android.os.Process
-import android.util.Log
+import com.pr4y.app.BuildConfig
 import com.pr4y.app.di.AppContainer
 import dagger.hilt.android.HiltAndroidApp
 
@@ -10,14 +9,12 @@ import dagger.hilt.android.HiltAndroidApp
 class Pr4yApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        // #region agent log
-        val pid = Process.myPid()
-        val uid = Process.myUid()
-        val userId = uid / 100000 
-        Log.i("PR4Y_DEBUG", "Pr4yApp.onCreate|pkg=$packageName|pid=$pid|uid=$uid|userId=$userId|hypothesisId=H1,H5")
-        // #endregion
-        
-        // Mantener inicialización de AppContainer para compatibilidad legacy durante la migración a Hilt
+        if (BuildConfig.DEBUG) {
+            val pid = android.os.Process.myPid()
+            val uid = android.os.Process.myUid()
+            val userId = uid / 100000
+            android.util.Log.i("PR4Y_DEBUG", "Pr4yApp.onCreate|pkg=$packageName|pid=$pid|uid=$uid|userId=$userId")
+        }
         AppContainer.init(this)
     }
 }

@@ -43,7 +43,7 @@ object NetworkModule {
         return HttpLoggingInterceptor { message ->
             Pr4yLog.net(message)
         }.apply {
-            level = HttpLoggingInterceptor.Level.HEADERS // Level.BODY en dev si es necesario
+            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.HEADERS else HttpLoggingInterceptor.Level.NONE
         }
     }
 
