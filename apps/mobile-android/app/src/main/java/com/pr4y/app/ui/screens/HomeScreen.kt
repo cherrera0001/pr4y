@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.data.local.entity.RequestEntity
+import com.pr4y.app.data.remote.ApiService
+import com.pr4y.app.data.remote.GlobalContentItemDto
 import com.pr4y.app.di.AppContainer
 import com.pr4y.app.ui.Routes
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +39,7 @@ import com.pr4y.app.ui.viewmodel.HomeViewModel
 fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel,
+    api: ApiService,
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val syncMessage by viewModel.syncMessage.collectAsState()
@@ -78,6 +81,7 @@ fun HomeScreen(
                     SyncStatusHeader(state, onRetry = { viewModel.runSync() })
                     FidelidadCard()
                     QuickActionsRow(navController)
+                    GlobalContentSection(api = api)
 
                     if (state.requests.isEmpty()) {
                         EmptyRequestsState { navController.navigate(Routes.NEW_EDIT) }
@@ -243,6 +247,68 @@ private fun FidelidadCard() {
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
                     fontStyle = FontStyle.Italic,
                 )
+            }
+        }
+    }
+}
+
+private val GLOBAL_CONTENT_TYPE_LABELS = mapOf(
+    "encouragement" to "Palabras de Aliento",
+    "announcement" to "Avisos",
+)
+
+@Composable
+private fun GlobalContentSection(api: ApiService) {
+    var items by remember { mutableStateOf<List<GlobalContentItemDto>>(emptyList()) }
+    LaunchedEffect(api) {
+        withContext(Dispatchers.IO) {
+            val res = api.getGlobalContent()
+            if (res.isSuccessful) {
+                items = res.body()?.items.orEmpty()
+            }
+        }
+    }
+    if (items.isEmpty()) return
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Text(
+            "Para ti",
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(bottom = 4.dp),
+        )
+        items.forEach { item ->
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                ),
+            ) {
+                Column(Modifier.padding(12.dp)) {
+                    Text(
+                        GLOBAL_CONTENT_TYPE_LABELS[item.type] ?: item.type,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Text(
+                        item.title,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                    if (item.body.isNotBlank()) {
+                        Text(
+                            item.body,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(top = 4.dp),
+                        )
+                    }
+                }
             }
         }
     }
