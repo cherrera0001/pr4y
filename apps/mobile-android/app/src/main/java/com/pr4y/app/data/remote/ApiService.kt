@@ -103,6 +103,28 @@ data class PublicRequestDto(
 
 data class PublicRequestsResponse(val requests: List<PublicRequestDto>)
 
+/** Preferencias de visualización (tema, tipografía, modo contemplativo). */
+data class DisplayPreferencesDto(
+    val theme: String,
+    val fontSize: String,
+    val fontFamily: String,
+    val lineSpacing: String,
+    val contemplativeMode: Boolean,
+)
+
+/** Contenido global publicado por admin (Palabras de Aliento, Avisos). Llega a todos los usuarios. */
+data class GlobalContentItemDto(
+    val id: String,
+    val type: String,
+    val title: String,
+    val body: String,
+    val published: Boolean,
+    val sortOrder: Int,
+    val createdAt: String,
+    val updatedAt: String,
+)
+data class GlobalContentResponse(val items: List<GlobalContentItemDto>)
+
 interface ApiService {
     @GET("health")
     suspend fun health(): Response<Map<String, String>>
@@ -168,6 +190,15 @@ interface ApiService {
         @Body body: ReminderPreferencesResponse,
     ): Response<ReminderPreferencesResponse>
 
+    @GET("user/display-preferences")
+    suspend fun getDisplayPreferences(@Header("Authorization") bearer: String): Response<DisplayPreferencesDto>
+
+    @PUT("user/display-preferences")
+    suspend fun putDisplayPreferences(
+        @Header("Authorization") bearer: String,
+        @Body body: DisplayPreferencesDto,
+    ): Response<DisplayPreferencesDto>
+
     // --- Roulette (Anonymous) ---
     
     /** 
@@ -186,6 +217,10 @@ interface ApiService {
         @Path("id") id: String,
         @Header("X-Anonymous") anon: String = "true"
     ): Response<Map<String, Any>>
+
+    /** Contenido global publicado (Palabras de Aliento, Avisos). Sin auth; llega a todos. */
+    @GET("public/content")
+    suspend fun getGlobalContent(@Query("type") type: String? = null): Response<GlobalContentResponse>
 }
 
 /**

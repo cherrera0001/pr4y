@@ -10,16 +10,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.pr4y.app.data.auth.AuthRepository
+import com.pr4y.app.data.prefs.DisplayPrefs
 import com.pr4y.app.data.remote.RetrofitClient
 import com.pr4y.app.data.sync.SyncRepository
 import com.pr4y.app.di.AppContainer
 import com.pr4y.app.ui.screens.*
 import com.pr4y.app.ui.viewmodel.*
 
-/**
- * Tech Lead Review: Navigation Integration Final.
- * Standards: Transitioning to Hilt, consistent M3 identity.
- */
 @Composable
 fun Pr4yNavHost(
     authRepository: AuthRepository,
@@ -31,6 +28,8 @@ fun Pr4yNavHost(
     onUnlocked: () -> Unit,
     hasSeenWelcome: Boolean,
     onSetHasSeenWelcome: () -> Unit,
+    displayPrefs: DisplayPrefs,
+    onUpdateDisplayPrefs: (DisplayPrefs) -> Unit,
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
     val api = remember { RetrofitClient.create(context) }
@@ -45,16 +44,13 @@ fun Pr4yNavHost(
     }
 
     val startDestination = when {
-        !loggedIn -> Routes.LOGIN
-        !unlocked -> Routes.UNLOCK
-        !hasSeenWelcome -> Routes.WELCOME
-        else -> Routes.MAIN
+        !loggedIn      -> Routes.LOGIN
+        !unlocked      -> Routes.UNLOCK
+        !hasSeenWelcome-> Routes.WELCOME
+        else           -> Routes.MAIN
     }
 
-    NavHost(
-        navController = navController,
-        startDestination = startDestination,
-    ) {
+    NavHost(navController = navController, startDestination = startDestination) {
         composable(Routes.LOGIN) {
             val loginViewModel: LoginViewModel = viewModel(
                 factory = LoginViewModelFactory(authRepository)
@@ -69,7 +65,7 @@ fun Pr4yNavHost(
                 }
             )
         }
-        
+
         composable(Routes.UNLOCK) {
             val unlockViewModel: UnlockViewModel = viewModel(
                 factory = UnlockViewModelFactory(authRepository, syncRepository, api)
@@ -86,7 +82,7 @@ fun Pr4yNavHost(
                 onSessionExpired = onLogout
             )
         }
-        
+
         composable(Routes.WELCOME) {
             WelcomeScreen(
                 onStartClick = {
@@ -97,18 +93,20 @@ fun Pr4yNavHost(
                 }
             )
         }
-        
+
         composable(Routes.MAIN) {
             val mainContext = androidx.compose.ui.platform.LocalContext.current
             val mainUserId = remember(mainContext) {
                 com.pr4y.app.data.auth.AuthTokenStore(mainContext.applicationContext).getUserId() ?: ""
             }
             InnerNavHost(
-                authRepository = authRepository,
-                syncRepository = syncRepository,
-                api = api,
-                onLogout = onLogout,
-                userId = mainUserId,
+                authRepository       = authRepository,
+                syncRepository       = syncRepository,
+                api                  = api,
+                onLogout             = onLogout,
+                userId               = mainUserId,
+                displayPrefs         = displayPrefs,
+                onUpdateDisplayPrefs = onUpdateDisplayPrefs,
             )
         }
     }
@@ -121,18 +119,17 @@ private fun InnerNavHost(
     api: com.pr4y.app.data.remote.ApiService,
     onLogout: () -> Unit,
     userId: String = "",
+    displayPrefs: DisplayPrefs,
+    onUpdateDisplayPrefs: (DisplayPrefs) -> Unit,
 ) {
     val navController = rememberNavController()
 
-    NavHost(
-        navController = navController,
-        startDestination = Routes.HOME,
-    ) {
+    NavHost(navController = navController, startDestination = Routes.HOME) {
         composable(Routes.HOME) {
             val homeViewModel: HomeViewModel = viewModel(
                 factory = HomeViewModelFactory(AppContainer.db, syncRepository, userId)
             )
-            HomeScreen(navController = navController, viewModel = homeViewModel)
+            HomeScreen(navController = navController, viewModel = homeViewModel, api = api)
         }
 
         composable(Routes.NEW_EDIT) { NewEditScreen(navController = navController, requestId = null) }
@@ -142,12 +139,7 @@ private fun InnerNavHost(
         }
         composable(Routes.DETAIL) { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id") ?: ""
-            DetailScreen(
-                navController = navController,
-                id = id,
-                authRepository = authRepository,
-                api = api,
-            )
+            DetailScreen(navController = navController, id = id, authRepository = authRepository, api = api)
         }
         composable(Routes.JOURNAL) { JournalScreen(navController = navController) }
         composable(Routes.NEW_JOURNAL) { NewJournalScreen(navController = navController) }
@@ -165,14 +157,15 @@ private fun InnerNavHost(
         }
         composable(Routes.SETTINGS) {
             SettingsScreen(
-                navController = navController,
-                authRepository = authRepository,
-                api = api,
-                onLogout = onLogout,
+                navController        = navController,
+                authRepository       = authRepository,
+                api                  = api,
+                onLogout             = onLogout,
+                displayPrefs         = displayPrefs,
+                onUpdateDisplayPrefs = onUpdateDisplayPrefs,
             )
         }
         composable(Routes.ROULETTE) {
-            // Spec: Arquitectura Hilt. Uso de hiltViewModel() para Roulette.
             RouletteScreen(navController = navController)
         }
     }
