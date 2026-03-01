@@ -31,6 +31,82 @@ body {
   @apply antialiased;
 }
 
+/* ─── Display preferences — CSS custom properties ───────────────────────────
+   Aplicadas desde JS via applyPrefsToDocument() en lib/display-prefs.ts.
+   Valores por defecto: escala 1, Inter, interlineado normal.
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  --pr4y-font-scale:   1;
+  --pr4y-line-scale:   1;
+  --pr4y-font-body:    var(--font-sans);
+  --pr4y-font-heading: Georgia, "Times New Roman", serif;
+}
+
+html {
+  font-size: calc(1rem * var(--pr4y-font-scale));
+}
+
+body {
+  font-family: var(--pr4y-font-body);
+  line-height: calc(1.5 * var(--pr4y-line-scale));
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--pr4y-font-heading);
+}
+
+/* ─── Modo contemplativo ─────────────────────────────────────────────────────
+   Claro: paleta sepia/crema — transmite calma y calidez.
+   Oscuro: índigo profundo y texto cálido.
+   ─────────────────────────────────────────────────────────────────────────── */
+html.contemplative:not(.dark) {
+  --background:         oklch(0.96 0.02 78);
+  --foreground:         oklch(0.22 0.03 60);
+  --card:               oklch(0.98 0.01 78);
+  --card-foreground:    oklch(0.22 0.03 60);
+  --popover:            oklch(0.98 0.01 78);
+  --popover-foreground: oklch(0.22 0.03 60);
+  --muted:              oklch(0.90 0.02 78);
+  --muted-foreground:   oklch(0.50 0.03 60);
+  --border:             oklch(0.82 0.03 78);
+  --input:              oklch(0.85 0.03 78);
+  --primary:            oklch(0.40 0.06 60);
+  --primary-foreground: oklch(0.98 0 0);
+  --accent:             oklch(0.88 0.04 78);
+  --accent-foreground:  oklch(0.22 0.03 60);
+}
+
+html.dark.contemplative {
+  --background:         oklch(0.09 0.01 280);
+  --foreground:         oklch(0.93 0.01 80);
+  --card:               oklch(0.12 0.01 280);
+  --card-foreground:    oklch(0.93 0.01 80);
+  --popover:            oklch(0.12 0.01 280);
+  --popover-foreground: oklch(0.93 0.01 80);
+  --muted:              oklch(0.18 0.01 280);
+  --muted-foreground:   oklch(0.65 0.01 80);
+  --border:             oklch(0.25 0.01 280 / 0.5);
+  --input:              oklch(0.25 0.01 280 / 0.6);
+  --primary:            oklch(0.60 0.08 230);
+  --primary-foreground: oklch(0.98 0 0);
+  --accent:             oklch(0.55 0.12 230);
+  --accent-foreground:  oklch(0.93 0.01 80);
+}
+
+/* ─── Transiciones suaves al cambiar tema/apariencia ────────────────────────
+   Solo propiedades de color para no interferir con animaciones de la UI.
+   ─────────────────────────────────────────────────────────────────────────── */
+body,
+main,
+aside,
+nav,
+header,
+footer,
+.glass,
+.glass-card {
+  transition: background-color 0.25s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
