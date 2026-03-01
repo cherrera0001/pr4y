@@ -104,7 +104,7 @@ android {
     sourceSets {
         // Expone el directorio schemas/ como assets del APK de tests instrumentados,
         // necesario para que MigrationTestHelper encuentre los JSON de esquema.
-        getByName("androidTest").assets.srcDirs += files("$projectDir/schemas")
+        getByName("androidTest").assets.srcDirs("$projectDir/schemas")
     }
 }
 
