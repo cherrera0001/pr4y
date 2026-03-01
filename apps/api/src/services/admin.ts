@@ -1,5 +1,6 @@
 import { prisma } from '../lib/db';
 import { isAllowedAdminEmail } from '../lib/admin-allowlist';
+import { stripHtmlAndControlChars, LIMITS } from '../lib/sanitize';
 
 /** Lista de usuarios para backoffice: sin contenido sensible, solo metadatos para soporte. */
 export interface AdminUserRow {
@@ -13,30 +14,43 @@ export interface AdminUserRow {
   recordCount: number;
 }
 
-export async function listUsers(): Promise<AdminUserRow[]> {
-  const users = await prisma.user.findMany({
-    orderBy: { createdAt: 'desc' },
-    select: {
-      id: true,
-      email: true,
-      role: true,
-      status: true,
-      createdAt: true,
-      lastLoginAt: true,
-      wrappedDek: { select: { id: true } },
-      _count: { select: { records: true } },
-    },
-  });
-  return users.map((u) => ({
-    id: u.id,
-    email: u.email,
-    role: u.role,
-    status: u.status,
-    createdAt: u.createdAt.toISOString(),
-    lastLoginAt: u.lastLoginAt?.toISOString() ?? null,
-    hasDek: !!u.wrappedDek,
-    recordCount: u._count.records,
-  }));
+export interface ListUsersResult {
+  users: AdminUserRow[];
+  total: number;
+}
+
+export async function listUsers(limit = 50, offset = 0): Promise<ListUsersResult> {
+  const [users, total] = await Promise.all([
+    prisma.user.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: Math.min(limit, 200),
+      skip: offset,
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        status: true,
+        createdAt: true,
+        lastLoginAt: true,
+        wrappedDek: { select: { id: true } },
+        _count: { select: { records: true } },
+      },
+    }),
+    prisma.user.count(),
+  ]);
+  return {
+    users: users.map((u) => ({
+      id: u.id,
+      email: u.email,
+      role: u.role,
+      status: u.status,
+      createdAt: u.createdAt.toISOString(),
+      lastLoginAt: u.lastLoginAt?.toISOString() ?? null,
+      hasDek: !!u.wrappedDek,
+      recordCount: u._count.records,
+    })),
+    total,
+  };
 }
 
 export async function updateUser(
@@ -115,6 +129,24 @@ export async function listContent(type?: string): Promise<GlobalContentRow[]> {
   }));
 }
 
+/** Lista solo contenido publicado (para clientes: web/mobile). Llega a todos los usuarios. */
+export async function listPublishedContent(type?: string): Promise<GlobalContentRow[]> {
+  const items = await prisma.globalContent.findMany({
+    where: { published: true, ...(type ? { type } : {}) },
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'desc' }],
+  });
+  return items.map((c) => ({
+    id: c.id,
+    type: c.type,
+    title: c.title,
+    body: c.body,
+    published: c.published,
+    sortOrder: c.sortOrder,
+    createdAt: c.createdAt.toISOString(),
+    updatedAt: c.updatedAt.toISOString(),
+  }));
+}
+
 export async function createContent(data: {
   type: string;
   title: string;
@@ -122,11 +154,14 @@ export async function createContent(data: {
   published?: boolean;
   sortOrder?: number;
 }): Promise<GlobalContentRow> {
+  const type = stripHtmlAndControlChars(String(data.type ?? '')).slice(0, LIMITS.recordType);
+  const title = stripHtmlAndControlChars(String(data.title ?? '')).slice(0, LIMITS.adminContentTitle);
+  const body = stripHtmlAndControlChars(String(data.body ?? '')).slice(0, LIMITS.adminContentBody);
   const c = await prisma.globalContent.create({
     data: {
-      type: data.type,
-      title: data.title,
-      body: data.body,
+      type,
+      title,
+      body,
       published: data.published ?? false,
       sortOrder: data.sortOrder ?? 0,
     },
@@ -147,15 +182,15 @@ export async function updateContent(
   id: string,
   data: { type?: string; title?: string; body?: string; published?: boolean; sortOrder?: number }
 ): Promise<GlobalContentRow | null> {
+  const update: { type?: string; title?: string; body?: string; published?: boolean; sortOrder?: number } = {};
+  if (data.type != null) update.type = stripHtmlAndControlChars(data.type).slice(0, LIMITS.recordType);
+  if (data.title != null) update.title = stripHtmlAndControlChars(data.title).slice(0, LIMITS.adminContentTitle);
+  if (data.body != null) update.body = stripHtmlAndControlChars(data.body).slice(0, LIMITS.adminContentBody);
+  if (data.published != null) update.published = data.published;
+  if (data.sortOrder != null) update.sortOrder = data.sortOrder;
   const c = await prisma.globalContent.update({
     where: { id },
-    data: {
-      ...(data.type != null && { type: data.type }),
-      ...(data.title != null && { title: data.title }),
-      ...(data.body != null && { body: data.body }),
-      ...(data.published != null && { published: data.published }),
-      ...(data.sortOrder != null && { sortOrder: data.sortOrder }),
-    },
+    data: update,
   });
   return {
     id: c.id,

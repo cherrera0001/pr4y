@@ -18,6 +18,9 @@ Este documento define las competencias técnicas, de producto y seguridad necesa
 - Etiquetas y búsqueda.
 - Recordatorios suaves (local notifications en móvil; web con limitaciones).
 - Backup/restore (archivo cifrado del lado cliente).
+- **Generación de Módulos Android**: Capacidad para estructurar capas de datos (Room/Retrofit), UI (Compose Material 3) y lógica de negocio (Hilt/Coroutines).
+- **Implementación de Cifrado E2EE en Ledger**: Capacidad para persistir datos con cifrado AES-GCM local y derivación de llaves Zero-Knowledge.
+- **Intercesión Anónima (Roulette)**: Implementación de flujos de red con stripping de identidad (X-Anonymous) y telemetría de impacto MCP.
 
 ## 3) Competencias técnicas necesarias
 Frontend (Web):
@@ -64,8 +67,9 @@ MVP (fase 1):
 - Sin app móvil nativa todavía (la web debe funcionar excelente en móvil).
 
 Fase 2:
-- App Android (Flutter o Kotlin) reutilizando contrato API y modelo E2EE.
+- App Android (Kotlin + Compose) reutilizando contrato API y modelo E2EE.
 - Notificaciones locales robustas (Android).
 
 Fase 3:
 - Sync avanzado multi-device con resolución de conflictos mejorada.
+- **Módulo de Comunidad Anónima (Roulette)**: Intercesión sin huella digital.

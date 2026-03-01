@@ -11,12 +11,13 @@ import com.pr4y.app.data.sync.SyncRepository
  */
 class HomeViewModelFactory(
     private val db: AppDatabase,
-    private val syncRepository: SyncRepository
+    private val syncRepository: SyncRepository,
+    private val userId: String,
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel(db, syncRepository) as T
+            return HomeViewModel(db, syncRepository, userId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

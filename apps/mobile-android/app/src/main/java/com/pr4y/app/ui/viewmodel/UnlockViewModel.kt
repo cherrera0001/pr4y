@@ -121,7 +121,9 @@ class UnlockViewModel(
                                 val kek = DekManager.deriveKek(passphrase.toCharArray(), body.kdf.saltB64)
                                 val dek = DekManager.unwrapDek(body.wrappedDekB64, kek)
                                 DekManager.setDek(dek)
-                                if (useBiometrics && canUseBiometrics) {
+                                // Ofrecer biométrica si: el usuario la activó explícitamente, o
+                                // si el dispositivo la soporta y aún no está configurada (Locked state).
+                                if (canUseBiometrics && (useBiometrics || !DekManager.hasPersistedDekForBiometric())) {
                                     pendingOfferPersistWithBiometric = true
                                 }
                                 finalizeUnlock(context)

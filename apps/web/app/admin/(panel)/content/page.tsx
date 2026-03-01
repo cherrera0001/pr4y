@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { toast } from 'sonner';
 import { Loader2, Pencil, Trash2, Plus } from 'lucide-react';
@@ -97,10 +98,15 @@ export default function AdminContentPage() {
   const [formPublished, setFormPublished] = useState(false);
   const [formSortOrder, setFormSortOrder] = useState(0);
 
+  const router = useRouter();
   const load = () => {
     const q = filterType ? `?type=${encodeURIComponent(filterType)}` : '';
     fetch(`/api/admin/content${q}`)
       .then((res) => {
+        if (res.status === 403) {
+          router.replace('/admin/login?error=admin_required');
+          return null;
+        }
         if (!res.ok) throw new Error(res.statusText);
         return res.json();
       })
@@ -248,7 +254,7 @@ export default function AdminContentPage() {
             Gestor de contenido global
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Palabras de Aliento y Avisos que se publican en el búnker del usuario. Crear, editar, publicar o eliminar.
+            Palabras de Aliento y Avisos que se publican en el búnker del usuario. Al marcar como «Publicado», el contenido llega a todos los usuarios (web y app) vía GET /v1/public/content.
           </p>
         </div>
         <div className="flex items-center gap-4">

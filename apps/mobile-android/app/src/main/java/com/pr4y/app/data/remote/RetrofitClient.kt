@@ -49,7 +49,7 @@ object RetrofitClient {
         val logging = HttpLoggingInterceptor { message ->
             Pr4yLog.net(message)
         }.apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.HEADERS else HttpLoggingInterceptor.Level.NONE
         }
 
         val client = OkHttpClient.Builder()

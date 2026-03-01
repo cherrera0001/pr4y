@@ -1,5 +1,19 @@
 # Despliegue en dispositivo (Android Studio)
 
+## Instalar APK en el móvil (manual, la opción más fiable)
+
+1. **Abre esta carpeta en el PC** (el APK ya está generado):
+   ```
+   c:\Users\herre\OneDrive\Documentos\Code\pr4y\pr4y\apps\mobile-android\app\build\outputs\apk\dev\debug\
+   ```
+2. **Copia el archivo** `app-dev-debug.apk` al móvil:
+   - Con el cable: arrastra el APK a la carpeta **Download** o **Documentos** del teléfono.
+   - O sube el APK a Google Drive / correo y descárgalo en el móvil.
+3. **En el móvil**: abre el archivo (desde Descargas o el gestor de archivos). Si pide “Permitir instalar desde esta fuente”, actívalo en Ajustes y vuelve a tocar el APK.
+4. Sigue los pasos de la instalación. La app quedará como **PR4Y (dev)**.
+
+---
+
 ## Estado del build
 
 - **Compilación**: correcta. La tarea `assembleDevDebug` genera el APK sin errores.

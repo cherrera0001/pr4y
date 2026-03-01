@@ -12,6 +12,9 @@ interface JournalDao {
     @Query("SELECT * FROM journal WHERE userId = :userId ORDER BY updatedAt DESC")
     fun getAll(userId: String): Flow<List<JournalEntity>>
 
+    @Query("SELECT * FROM journal WHERE userId = :userId ORDER BY updatedAt DESC LIMIT :limit")
+    fun getRecent(userId: String, limit: Int = 200): Flow<List<JournalEntity>>
+
     @Query("SELECT * FROM journal WHERE id = :id AND userId = :userId")
     suspend fun getById(id: String, userId: String): JournalEntity?
 

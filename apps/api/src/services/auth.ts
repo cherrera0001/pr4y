@@ -221,6 +221,15 @@ export async function logout(refreshToken: string) {
   return { ok: true as const };
 }
 
+/** Devuelve el usuario actual (role, status) desde la BD. Usado en /auth/me para que el rol siempre refleje la BD, no el JWT. */
+export async function getUserRole(userId: string): Promise<{ role: string; status: string } | null> {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { role: true, status: true },
+  });
+  return user;
+}
+
 export function getAccessTokenTtl(): string {
   return ACCESS_TOKEN_TTL;
 }

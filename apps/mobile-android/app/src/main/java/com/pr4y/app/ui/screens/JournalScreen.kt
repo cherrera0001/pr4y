@@ -26,9 +26,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.pr4y.app.crypto.DekManager
+import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.crypto.LocalCrypto
 import com.pr4y.app.di.AppContainer
 import com.pr4y.app.ui.Routes
@@ -45,7 +47,9 @@ private data class JournalDisplay(val id: String, val content: String, val updat
 
 @Composable
 fun JournalScreen(navController: NavController) {
-    val entities by AppContainer.db.journalDao().getAll().collectAsState(initial = emptyList())
+    val context = LocalContext.current
+    val userId = remember(context) { AuthTokenStore(context.applicationContext).getUserId() ?: "" }
+    val entities by AppContainer.db.journalDao().getRecent(userId).collectAsState(initial = emptyList())
     var entries by remember { mutableStateOf<List<JournalDisplay>>(emptyList()) }
 
     LaunchedEffect(entities) {

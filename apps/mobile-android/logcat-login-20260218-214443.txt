@@ -1,0 +1,649 @@
+﻿--------- beginning of main
+02-18 21:45:44.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:44.391 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:44.691 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:44.709 E/PreStartUtils( 3966): preLaunchProcess success infoPackage: com.pr4y.app.dev
+02-18 21:45:44.759 E/Launcher.application( 3966): setClickAppWaitForCallback = true
+02-18 21:45:44.759 E/Launcher.application( 3966): setClickAppWaitForCallback = true
+02-18 21:45:44.759 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 21:45:44.760 E/Launcher( 3966): superStartActivity   type=13
+--------- beginning of system
+02-18 21:45:44.767 E/WindowManager( 2702): setClientVisible ActivityRecord{976697d u0 com.pr4y.app.dev/com.pr4y.app.MainActivity true
+02-18 21:45:44.771 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 21:45:44.771 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 21:45:44.772 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 21:45:44.772 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 21:45:44.772 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 21:45:44.772 E/ANDR-PERF-JNI( 2702): com_qualcomm_qtiperformance_native_perf_io_prefetch_start
+02-18 21:45:44.772 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 21:45:44.773 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 21:45:44.776 E/ANDR-IOP( 1457): io prefetch is disabled
+02-18 21:45:44.777 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 21:45:44.779 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 21:45:44.784 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 21:45:44.788 E/WindowManager( 2702): setClientVisible ActivityRecord{976697d u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t447} true
+02-18 21:45:44.791 E/WindowManager( 2702): setClientVisible ActivityRecord{976697d u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t447} true
+02-18 21:45:44.791 E/ANDR-PERF-LM( 1468): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-18 21:45:44.823 E/WindowManager( 2702): setClientVisible ActivityRecord{976697d u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t447} true
+02-18 21:45:44.838 E/KeyguardTransitionHandlerImpl( 4462): activityCount = 0
+02-18 21:45:44.842 E/onWindowDecorRectChanged( 4462): start size:1
+02-18 21:45:44.842 E/onWindowDecorRectChanged( 4462): windowDecorRect: Rect(535, 10 - 684, 128)
+02-18 21:45:44.863 E/WindowTransitionCompat( 3966): startAnimation isFastLaunch = false
+02-18 21:45:44.869 E/WindowTransitionCompat( 3966): printLeash::index = 0, root = Surface(name=Transition Root #3634: Task=447#46072)/@0xf07691b
+02-18 21:45:44.870 E/WindowTransitionCompat( 3966): 0, check isClosingType type = 1, mode = 1
+02-18 21:45:44.870 E/WindowTransitionCompat( 3966): 1, check isClosingType type = 2, mode = 4
+02-18 21:45:44.872 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 21:45:44.886 E/WindowAnimParamsProvider( 3966): getWindowTargetBounds    bounds=Rect(0, 0 - 1220, 2712)
+02-18 21:45:44.886 E/ClipAnimationHelper( 3966): updateSourceStack  mSourceInsets=Rect(0, 0 - 0, 0), mSourceStackBounds=Rect(0, 0 - 1220, 2712)
+02-18 21:45:44.887 E/ClipAnimationHelper( 3966): updateHomeStack  mSourceInsets=Rect(0, 0 - 0, 0), mHomeStackBounds=Rect(0, 0 - 1220, 2712)
+02-18 21:45:44.887 E/ClipAnimationHelper( 3966): updateTargetRect  mSourceRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mTargetRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mSourceWindowClipInsets=RectF(0.0, 0.0, 0.0, 0.0)   mHomeStackBounds=Rect(0, 0 - 1220, 2712)   targetRect=Rect(0, 0 - 1220, 2712)
+02-18 21:45:44.903 E/NativeTurboSchedManagerJni( 2702): ioctl 8 failed!
+02-18 21:45:44.903 E/MultiSpringDynamicAnimation8b22d52( 3966): ERROR Not Found Bundle scaleY
+02-18 21:45:44.904 E/Launcher.application( 3966): setClickAppWaitForCallback = false
+02-18 21:45:44.918 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 21:45:44.920 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 21:45:44.920 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-18 21:45:44.933 E/BluetoothAdapterService( 4271): getActiveDevices: LeAudioService is null
+02-18 21:45:44.947 E/ActivityManagerWrapper( 3966): get all recent tasks force including 447
+02-18 21:45:44.953 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-18 21:45:44.953 E/ActivityManagerWrapper( 3966):  mainTaskId=447   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-18 21:45:44.953 E/ActivityManagerWrapper( 3966):  mainTaskId=444   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=269221888 cmp=ComponentInfo{com.google.android.dialer/com.android.dialer.incall.activity.ui.InCallActivity} }
+02-18 21:45:44.969 E/ActivityManagerWrapper( 3966): get all recent tasks force including 447
+02-18 21:45:44.974 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-18 21:45:44.974 E/ActivityManagerWrapper( 3966):  mainTaskId=447   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-18 21:45:44.974 E/ActivityManagerWrapper( 3966):  mainTaskId=444   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=269221888 cmp=ComponentInfo{com.google.android.dialer/com.android.dialer.incall.activity.ui.InCallActivity} }
+02-18 21:45:44.991 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:45.136 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 21:45:45.137 E/HyperSentinel( 2702): Event_ResidentSize
+02-18 21:45:45.138 E/HyperSentinel( 2702): -> audit event by proc 1927 "usap64": RSS increasement, peak 164512kb -> 246772kb
+02-18 21:45:45.151 E/FramePredict( 1927): registerContentObserver fail
+02-18 21:45:45.292 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:45.463 E/sensors-hal( 1370): handle_sns_client_event:57, har-sensor-hal: time=172438266337248 data 1.000000
+02-18 21:45:45.540 E/ANDR-PERF-MPCTL( 1468): Perflock Submit request limit reached.
+02-18 21:45:45.566 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 21:45:45.566 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 21:45:45.567 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 21:45:45.567 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-18 21:45:45.591 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:45.670 E/WindowTransitionCompat( 3966): com.android.systemui.shared.recents.system.WindowTransitionCompat@da441d7 finishTransition toHome = false
+02-18 21:45:45.680 E/MI-SF   ( 1606): surfaceflinger setAffinity failed, error=22
+02-18 21:45:45.680 E/MI-SF   ( 1606): surfaceflinger resetAffinity failed.
+02-18 21:45:45.682 E/WindowManager( 2702): setClientVisible ActivityRecord{7e2ed68 u0 com.miui.home/.launcher.Launcher t2} false
+02-18 21:45:45.683 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{6516dda token=android.os.Binder@8bc8bc9} false
+02-18 21:45:45.684 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{bf25d92 token=android.os.Binder@97d971d} false
+02-18 21:45:45.700 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{6516dda token=android.os.Binder@8bc8bc9} false
+02-18 21:45:45.700 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{bf25d92 token=android.os.Binder@97d971d} false
+02-18 21:45:45.700 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{6516dda token=android.os.Binder@8bc8bc9} false
+02-18 21:45:45.700 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{bf25d92 token=android.os.Binder@97d971d} false
+02-18 21:45:45.707 E/NativeTurboSchedManagerJni( 2702): ioctl 8 failed!
+02-18 21:45:45.710 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{6516dda token=android.os.Binder@8bc8bc9} false
+02-18 21:45:45.711 E/WindowManager( 2702): setClientVisible WallpaperWindowToken{bf25d92 token=android.os.Binder@97d971d} false
+02-18 21:45:45.712 E/ActivityManagerWrapper( 3966): get all recent tasks force including 447
+02-18 21:45:45.718 E/ActivityManagerWrapper( 3966): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-18 21:45:45.718 E/ActivityManagerWrapper( 3966):  mainTaskId=447   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-18 21:45:45.718 E/ActivityManagerWrapper( 3966):  mainTaskId=444   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=269221888 cmp=ComponentInfo{com.google.android.dialer/com.android.dialer.incall.activity.ui.InCallActivity} }
+02-18 21:45:45.758 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.804 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.819 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.838 E/Launcher.application( 3966): setClickAppWaitForCallback = false
+02-18 21:45:45.848 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.864 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.883 E/ANDR-PERF-LM( 1468): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-18 21:45:45.883 E/ANDR-PERF-LM( 1468): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-18 21:45:45.889 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:45.891 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.904 E/ANDR-PERF-LM( 1468): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-18 21:45:45.909 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.912 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 21:45:45.922 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.942 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.958 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.964 E/Zygote  ( 5043): process_name_ptr:5043 com.alibaba.aliexpresshd:channel
+02-18 21:45:45.965 E/Zygote  ( 5043): SetMemoryProtected process_name_ptr:5043 com.alibaba.aliexpresshd:channel
+02-18 21:45:45.972 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:45.993 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.009 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.021 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.035 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.047 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.066 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.083 I/PR4Y_APP( 1927): --- Iniciando B├║nker PR4Y (Async) ---
+02-18 21:45:46.084 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.089 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 21:45:46.103 I/PR4Y_CRYPTO( 1927): Inicializando almac├⌐n de hardware (Intento 1)...
+02-18 21:45:46.104 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.118 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.138 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.161 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.183 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.191 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:46.201 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.230 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.245 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.259 E/MediaProvider( 6948): Creating or writing to a non-default top level directory is not allowed!
+02-18 21:45:46.264 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.280 E/MediaProvider( 6948): Creating or writing to a non-default top level directory is not allowed!
+02-18 21:45:46.282 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.300 E/DatabaseUtils( 2702): Writing exception to parcel
+02-18 21:45:46.300 E/DatabaseUtils( 2702): java.lang.SecurityException: com.alibaba.aliexpresshd was not granted  this permission: android.permission.WRITE_SETTINGS.
+02-18 21:45:46.300 E/DatabaseUtils( 2702): 	at android.provider.Settings.isCallingPackageAllowedToPerformAppOpsProtectedOperation(Settings.java:21426)
+02-18 21:45:46.300 E/DatabaseUtils( 2702): 	at android.provider.Settings.checkAndNoteWriteSettingsOperation(Settings.java:21314)
+02-18 21:45:46.300 E/DatabaseUtils( 2702): 	at com.android.providers.settings.SettingsProvider.mutateSystemSetting(SettingsProvider.java:2004)
+02-18 21:45:46.300 E/DatabaseUtils( 2702): 	at com.android.providers.settings.SettingsProvider.insertSystemSetting(SettingsProvider.java:1960)
+02-18 21:45:46.300 E/DatabaseUtils( 2702): 	at com.android.providers.settings.SettingsProvider.call(SettingsProvider.java:501)
+02-18 21:45:46.300 E/DatabaseUtils( 2702): 	at android.content.ContentProvider.call(ContentProvider.java:2736)
+02-18 21:45:46.300 E/DatabaseUtils( 2702): 	at android.content.ContentProvider$Transport.call(ContentProvider.java:639)
+02-18 21:45:46.300 E/DatabaseUtils( 2702): 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:310)
+02-18 21:45:46.300 E/DatabaseUtils( 2702): 	at android.os.Binder.execTransactInternal(Binder.java:1507)
+02-18 21:45:46.300 E/DatabaseUtils( 2702): 	at android.os.Binder.execTransact(Binder.java:1451)
+02-18 21:45:46.301 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.311 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.324 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.335 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.341 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.341 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.341 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.346 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.358 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.368 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.371 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.371 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.371 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.379 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.394 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.400 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.401 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.401 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.410 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.412 E/presshd:channel( 5043): Invalid resource ID 0x00000000.
+02-18 21:45:46.425 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.440 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.442 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.442 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.442 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.459 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.465 E/sensors-hal( 1370): handle_sns_client_event:57, har-sensor-hal: time=172439267788498 data 0.000000
+02-18 21:45:46.468 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.468 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.468 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.471 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.484 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.488 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.489 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.489 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.491 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:46.494 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.503 I/PR4Y_CRYPTO( 1927): Almac├⌐n cifrado listo.
+02-18 21:45:46.508 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.516 E/presshd:channel( 5043): Invalid resource ID 0x00000000.
+02-18 21:45:46.518 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.533 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.544 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.556 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.560 E/presshd:channel( 5043): No package ID 6a found for resource ID 0x6a0b0013.
+02-18 21:45:46.566 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.567 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.567 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.580 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.586 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.586 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.586 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.592 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.602 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.608 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.608 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.608 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.612 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.621 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.631 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.631 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.631 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.631 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.640 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.650 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.650 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.650 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.650 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.660 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.667 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.667 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.667 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.670 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.682 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.691 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.697 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.697 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.697 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.698 I/PR4Y_CRYPTO( 1927): Llave recuperada con ├⌐xito (Keystore+Cipher).
+02-18 21:45:46.701 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.713 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.723 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.740 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.760 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.761 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 21:45:46.778 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.789 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:46.791 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:46.800 E/presshd:channel( 5043): Invalid resource ID 0x00000000.
+02-18 21:45:46.847 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.847 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.847 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.867 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.867 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.867 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.886 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.886 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.886 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.910 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.910 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.910 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.930 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.930 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.930 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.952 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.952 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.952 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:46.994 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:46.994 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:46.994 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.013 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.013 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.013 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.034 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.034 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.034 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.056 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.056 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.056 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.075 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.075 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.075 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.090 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:47.094 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.094 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.094 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.491 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:47.515 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:47.564 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:47.575 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:47.582 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:47.603 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.603 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.603 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.621 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.621 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.621 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.642 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.642 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.642 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.663 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.663 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.663 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.683 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.683 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.683 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.700 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.700 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.700 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.748 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:47.748 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.748 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.748 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.751 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:47.766 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.766 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.766 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.785 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.785 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.785 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.792 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:47.804 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.804 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.804 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.833 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.834 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.834 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.842 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.842 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.842 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.906 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.906 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.906 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.915 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.915 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.915 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.937 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.937 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.937 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.962 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.962 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.963 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:47.994 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:47.994 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:47.994 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:48.002 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:48.002 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:48.002 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:48.005 I/PR4Y_APP( 1927): Iniciando proceso de sincronizaci├│n...
+02-18 21:45:48.007 D/PR4Y_APP( 1927): Sync: Ejecutando Pull inicial...
+02-18 21:45:48.039 I/PR4Y_NETWORK( 1927): --> GET https://pr4yapi-production.up.railway.app/v1/sync/pull?limit=100
+02-18 21:45:48.039 I/PR4Y_NETWORK( 1927): Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYWQ4OGFiYi1mYjQwLTQ1ZjAtOTI5MC1kNGZlODE4MDljMDciLCJlbWFpbCI6ImhlcnJlcmEuamFyYS5jcmlzdG9iYWxAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzE0NjE4OTYsImV4cCI6MTc3MTQ2Mjc5Nn0.kf_dE5THbeKTo9RB9RhvsNMjAVhNcrp9mXrSNBqjvVM
+02-18 21:45:48.039 I/PR4Y_NETWORK( 1927): --> END GET
+02-18 21:45:48.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:48.392 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:48.644 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 21:45:48.645 E/HyperSentinel( 2702): Event_ThreadAmount
+02-18 21:45:48.645 E/HyperSentinel( 2702): -> audit event by proc 1927 "usap64": running threads amount, 23 -> 45
+02-18 21:45:48.645 E/MiuiSentinelMemoryManager( 2702): getThreadinfo: usap64#1927
+02-18 21:45:48.692 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:48.992 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): <-- 200 https://pr4yapi-production.up.railway.app/v1/sync/pull?limit=100 (1064ms)
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): access-control-allow-credentials: true
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): content-type: application/json; charset=utf-8
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): cross-origin-opener-policy: same-origin
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): cross-origin-resource-policy: same-origin
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): date: Thu, 19 Feb 2026 00:45:49 GMT
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): origin-agent-cluster: ?1
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): referrer-policy: no-referrer
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): server: railway-edge
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): strict-transport-security: max-age=31536000; includeSubDomains
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): vary: Origin
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-content-type-options: nosniff
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-dns-prefetch-control: off
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-download-options: noopen
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-frame-options: SAMEORIGIN
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-permitted-cross-domain-policies: none
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-railway-edge: railway/us-east4-eqdc4a
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-railway-request-id: vDxkplLlRB-Yw0cpBhdwDg
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-ratelimit-limit: 300
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-ratelimit-remaining: 299
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-ratelimit-reset: 60
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): x-xss-protection: 0
+02-18 21:45:49.103 I/PR4Y_NETWORK( 1927): content-length: 925
+02-18 21:45:49.104 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 21:45:49.105 I/PR4Y_NETWORK( 1927): 
+02-18 21:45:49.105 I/PR4Y_NETWORK( 1927): {"nextCursor":"","records":[{"recordId":"bc7eab60-4a05-4c7b-92e9-5161a26f9fbd","type":"prayer_request","version":1,"encryptedPayloadB64":"FmuWYsTxxcg6CIm0P4F3wZmG3VUqv+PsL/Uj39Bf3bXlr00V9Kh2XcWuj/l1Tsk3HoWOpOT6mRBxOKUxq5R62HzW1QM7RireTfN9iGeM0tp36Dt5q6G2pMOVMOyIM2U9iTvFBfUoUj/tBkqFkJ3JlceCjbd1ev+ZdzzWQmtjjekcgRoipzkuxOLVaSaD9DT/kKnPK741uXQDAc7ivibDm/O5RYWfkQMbnXm75mYYUn+D","clientUpdatedAt":"2026-02-19T00:24:02.248Z","serverUpdatedAt":"2026-02-19T00:24:49.754Z","deleted":false,"status":"PENDING"},{"recordId":"b0fe21eb-0286-4401-8eab-920c5e7f3102","type":"prayer_request","version":1,"encryptedPayloadB64":"4lcIoY1Rbp8L4ODWvqHaWKYYX3jAl2eCSu4/tfaQ0tqmMbYKSs0ed2dnKgq8vC99zHUhb7yULs98sZGYTbxNnB6oI+IPrznvpHnG4hLLbLJGM18SRZAbEncrpK6OHwwAfRXZglnot8ttdefy6mbW8bByE5h0meOQbBVm/J90Cl7fwqzBsKeAtA==","clientUpdatedAt":"2026-02-19T00:24:44.561Z","serverUpdatedAt":"2026-02-19T00:24:49.763Z","deleted":false,"status":"PENDING"}]}
+02-18 21:45:49.105 I/PR4Y_NETWORK( 1927): <-- END HTTP (925-byte body)
+02-18 21:45:49.105 I/PR4Y_NETWORK( 1927): HTTP SUCCESS 200: https://pr4yapi-production.up.railway.app/v1/sync/pull?limit=100
+02-18 21:45:49.112 I/PR4Y_APP( 1927): Sync: Pull recibi├│ 2 registros nuevos.
+02-18 21:45:49.118 D/PR4Y_APP( 1927): Descifrando contenido (E2EE)...
+02-18 21:45:49.120 D/PR4Y_APP( 1927): Descifrando contenido (E2EE)...
+02-18 21:45:49.125 D/PR4Y_APP( 1927): Sync: Ejecutando Pull final...
+02-18 21:45:49.128 I/PR4Y_NETWORK( 1927): --> GET https://pr4yapi-production.up.railway.app/v1/sync/pull?limit=100
+02-18 21:45:49.129 I/PR4Y_NETWORK( 1927): Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYWQ4OGFiYi1mYjQwLTQ1ZjAtOTI5MC1kNGZlODE4MDljMDciLCJlbWFpbCI6ImhlcnJlcmEuamFyYS5jcmlzdG9iYWxAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzE0NjE4OTYsImV4cCI6MTc3MTQ2Mjc5Nn0.kf_dE5THbeKTo9RB9RhvsNMjAVhNcrp9mXrSNBqjvVM
+02-18 21:45:49.129 I/PR4Y_NETWORK( 1927): --> END GET
+02-18 21:45:49.166 E/MediaSyncManager_11940_11940(11940): NotifyService isNotificationListenersEnabled false
+02-18 21:45:49.291 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:49.414 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): <-- 200 https://pr4yapi-production.up.railway.app/v1/sync/pull?limit=100 (290ms)
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): access-control-allow-credentials: true
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): content-type: application/json; charset=utf-8
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): cross-origin-opener-policy: same-origin
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): cross-origin-resource-policy: same-origin
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): date: Thu, 19 Feb 2026 00:45:49 GMT
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): origin-agent-cluster: ?1
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): referrer-policy: no-referrer
+02-18 21:45:49.420 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): server: railway-edge
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): strict-transport-security: max-age=31536000; includeSubDomains
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): vary: Origin
+02-18 21:45:49.420 I/PR4Y_NETWORK( 1927): x-content-type-options: nosniff
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): x-dns-prefetch-control: off
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): x-download-options: noopen
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): x-frame-options: SAMEORIGIN
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): x-permitted-cross-domain-policies: none
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): x-railway-edge: railway/us-east4-eqdc4a
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): x-railway-request-id: _O_6w-TQRyWn9avJBhdwDg
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): x-ratelimit-limit: 300
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): x-ratelimit-remaining: 298
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): x-ratelimit-reset: 60
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): x-xss-protection: 0
+02-18 21:45:49.421 I/PR4Y_NETWORK( 1927): content-length: 925
+02-18 21:45:49.423 I/PR4Y_NETWORK( 1927): 
+02-18 21:45:49.424 I/PR4Y_NETWORK( 1927): {"nextCursor":"","records":[{"recordId":"bc7eab60-4a05-4c7b-92e9-5161a26f9fbd","type":"prayer_request","version":1,"encryptedPayloadB64":"FmuWYsTxxcg6CIm0P4F3wZmG3VUqv+PsL/Uj39Bf3bXlr00V9Kh2XcWuj/l1Tsk3HoWOpOT6mRBxOKUxq5R62HzW1QM7RireTfN9iGeM0tp36Dt5q6G2pMOVMOyIM2U9iTvFBfUoUj/tBkqFkJ3JlceCjbd1ev+ZdzzWQmtjjekcgRoipzkuxOLVaSaD9DT/kKnPK741uXQDAc7ivibDm/O5RYWfkQMbnXm75mYYUn+D","clientUpdatedAt":"2026-02-19T00:24:02.248Z","serverUpdatedAt":"2026-02-19T00:24:49.754Z","deleted":false,"status":"PENDING"},{"recordId":"b0fe21eb-0286-4401-8eab-920c5e7f3102","type":"prayer_request","version":1,"encryptedPayloadB64":"4lcIoY1Rbp8L4ODWvqHaWKYYX3jAl2eCSu4/tfaQ0tqmMbYKSs0ed2dnKgq8vC99zHUhb7yULs98sZGYTbxNnB6oI+IPrznvpHnG4hLLbLJGM18SRZAbEncrpK6OHwwAfRXZglnot8ttdefy6mbW8bByE5h0meOQbBVm/J90Cl7fwqzBsKeAtA==","clientUpdatedAt":"2026-02-19T00:24:44.561Z","serverUpdatedAt":"2026-02-19T00:24:49.763Z","deleted":false,"status":"PENDING"}]}
+02-18 21:45:49.424 I/PR4Y_NETWORK( 1927): <-- END HTTP (925-byte body)
+02-18 21:45:49.424 I/PR4Y_NETWORK( 1927): HTTP SUCCESS 200: https://pr4yapi-production.up.railway.app/v1/sync/pull?limit=100
+02-18 21:45:49.430 I/PR4Y_APP( 1927): Sync: Pull recibi├│ 2 registros nuevos.
+02-18 21:45:49.431 D/PR4Y_APP( 1927): Descifrando contenido (E2EE)...
+02-18 21:45:49.432 D/PR4Y_APP( 1927): Descifrando contenido (E2EE)...
+02-18 21:45:49.446 I/PR4Y_APP( 1927): Sync: Sincronizaci├│n finalizada correctamente.
+02-18 21:45:49.481 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:49.591 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:49.662 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 21:45:49.662 E/HyperSentinel( 2702): Event_ResidentSize
+02-18 21:45:49.662 E/HyperSentinel( 2702): -> audit event by proc 5043 "com.alibaba.aliexpresshd:channel": RSS increasement, peak 0kb -> 241752kb
+02-18 21:45:49.818 E/ActivityThread( 3966): Failed to find provider info for com.miui.personalassistant.servicedeliver.system.provider
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): isSupportServiceDelivery
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): java.lang.IllegalArgumentException: Unknown authority com.miui.personalassistant.servicedeliver.system.provider
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at android.content.ContentResolver.call(ContentResolver.java:2466)
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at android.content.ContentResolver.call(ContentResolver.java:2449)
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryUtils.isSupportServiceDelivery(ServiceDeliveryUtils.kt:28)
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper.lambda$tryReplaceToServiceDelivery$1(ServiceDeliveryReplaceHelper.java:67)
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper.$r8$lambda$WUWmthv-UjITX40FJ8ag1YKl6O8(Unknown Source:0)
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper$$ExternalSyntheticLambda1.run(Unknown Source:2)
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:520)
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at java.util.concurrent.FutureTask.run(FutureTask.java:317)
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1154)
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:652)
+02-18 21:45:49.819 E/ServiceDeliveryCompat( 3966): 	at java.lang.Thread.run(Thread.java:1563)
+02-18 21:45:49.891 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:50.030 E/PhoneAdapter( 4437): get ntnphones failed, exception: java.lang.IllegalStateException: Default phones haven't been made yet!
+02-18 21:45:50.192 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:50.491 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:50.790 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:51.091 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:51.391 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:51.558 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:45:51.691 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:51.706 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:51.710 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:51.719 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:51.726 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:51.735 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:51.802 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:51.802 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:51.802 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:51.820 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:51.821 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:51.821 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:51.839 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:51.839 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:51.839 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:51.864 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:51.864 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:51.864 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:51.887 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:51.887 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:51.887 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:51.912 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 21:45:51.912 E/KeyMasterHalDevice(  870): abort_operation
+02-18 21:45:51.912 E/KeyMasterHalDevice(  870): ret: -28
+02-18 21:45:51.991 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:52.120 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 21:45:52.180 E/MediaSyncManager_11940_11940(11940): NotifyService isNotificationListenersEnabled false
+02-18 21:45:52.291 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:52.307 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.312 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.326 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.329 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.335 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.344 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.352 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.360 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.369 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.377 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.385 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.394 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.402 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.411 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.419 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.427 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.435 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.444 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.474 E/sensors-hal( 1370): handle_sns_client_event:57, har-sensor-hal: time=172445276756258 data 1.000000
+02-18 21:45:52.482 E/LB      ( 1927): fail to open node: No such file or directory
+02-18 21:45:52.591 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:52.892 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:53.192 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:53.492 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:53.736 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:45:53.791 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:54.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:54.392 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:54.678 E/Zygote  ( 5536): process_name_ptr:5536 com.alibaba.aliexpresshd:support
+02-18 21:45:54.678 E/Zygote  ( 5536): SetMemoryProtected process_name_ptr:5536 com.alibaba.aliexpresshd:support
+02-18 21:45:54.691 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:54.944 E/Zygote  ( 5594): process_name_ptr:5594 com.alibaba.aliexpresshd:tool
+02-18 21:45:54.944 E/Zygote  ( 5594): SetMemoryProtected process_name_ptr:5594 com.alibaba.aliexpresshd:tool
+02-18 21:45:54.993 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:55.146 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 21:45:55.207 E/MediaSyncManager_11940_11940(11940): NotifyService isNotificationListenersEnabled false
+02-18 21:45:55.291 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:55.567 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 21:45:55.567 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 21:45:55.568 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 21:45:55.568 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-18 21:45:55.591 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:55.607 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:45:55.736 E/app_process64( 5638): Error reading named image component header for /system/framework/boot.art, error: Image header from "/system/framework/arm64/boot.art" is invalid
+02-18 21:45:55.736 E/app_process64( 5638): Could not create image space with image file '/system/framework/boot.art!/apex/com.android.art/etc/boot-image.prof!/system/etc/boot-image.prof:/system/framework/boot-framework-adservices.art'. Attempting to fall back to imageless running. Error was: Image header from "/system/framework/arm64/boot.art" is invalid
+02-18 21:45:55.990 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:56.290 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:56.591 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:56.852 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:45:56.862 E/VibratorManagerServiceImpl( 2702): vibrationThreadSetParameters
+02-18 21:45:56.892 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:57.190 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:57.490 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:57.790 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:58.090 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:58.144 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:45:58.163 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 21:45:58.221 E/MediaSyncManager_11940_11940(11940): NotifyService isNotificationListenersEnabled false
+02-18 21:45:58.390 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:58.692 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:58.991 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:59.012 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:45:59.024 E/VibratorManagerServiceImpl( 2702): vibrationThreadSetParameters
+02-18 21:45:59.291 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:59.591 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:45:59.891 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:00.012 E/AnimationHelper( 4462): updateTime mToAod:false mHasNotification: true, mClockType: classic
+02-18 21:46:00.016 E/StackScroller( 4462): updateSidePadding: viewWidth is zero
+02-18 21:46:00.190 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:00.494 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:00.793 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:01.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:01.181 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 21:46:01.249 E/MediaSyncManager_11940_11940(11940): NotifyService isNotificationListenersEnabled false
+02-18 21:46:01.393 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:01.442 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 21:46:01.442 E/HyperSentinel( 2702): Event_ThreadAmount
+02-18 21:46:01.443 E/HyperSentinel( 2702): -> audit event by proc 5536 "com.alibaba.aliexpresshd:support": running threads amount, 0 -> 25
+02-18 21:46:01.443 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 21:46:01.443 E/HyperSentinel( 2702): Event_ThreadAmount
+02-18 21:46:01.443 E/HyperSentinel( 2702): -> audit event by proc 5594 "com.alibaba.aliexpresshd:tool": running threads amount, 0 -> 25
+02-18 21:46:01.694 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:01.993 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:02.292 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:02.594 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:02.891 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:03.191 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:03.305 E/app_process64( 5681): Error reading named image component header for /system/framework/boot.art, error: Image header from "/system/framework/arm64/boot.art" is invalid
+02-18 21:46:03.305 E/app_process64( 5681): Could not create image space with image file '/system/framework/boot.art!/apex/com.android.art/etc/boot-image.prof!/system/etc/boot-image.prof:/system/framework/boot-framework-adservices.art'. Attempting to fall back to imageless running. Error was: Image header from "/system/framework/arm64/boot.art" is invalid
+02-18 21:46:03.490 E/sensors-hal( 1370): handle_sns_client_event:57, har-sensor-hal: time=172456292970060 data 0.000000
+02-18 21:46:03.490 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:03.567 E/app_process64( 5687): Error reading named image component header for /system/framework/boot.art, error: Image header from "/system/framework/arm64/boot.art" is invalid
+02-18 21:46:03.567 E/app_process64( 5687): Could not create image space with image file '/system/framework/boot.art!/apex/com.android.art/etc/boot-image.prof!/system/etc/boot-image.prof:/system/framework/boot-framework-adservices.art'. Attempting to fall back to imageless running. Error was: Image header from "/system/framework/arm64/boot.art" is invalid
+02-18 21:46:03.790 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:04.190 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:04.202 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 21:46:04.263 E/MediaSyncManager_11940_11940(11940): NotifyService isNotificationListenersEnabled false
+02-18 21:46:04.490 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:04.544 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:04.791 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:05.090 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:05.390 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:05.533 E/sensors-hal( 1370): handle_sns_client_event:57, har-sensor-hal: time=172458336029227 data 1.000000
+02-18 21:46:05.690 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:05.991 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:06.292 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:06.302 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:06.591 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:06.721 E/BluetoothUtils( 4271): isDeepDozeMode? false
+02-18 21:46:06.891 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:07.192 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:07.229 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 21:46:07.492 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:07.792 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:08.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:08.393 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:08.693 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:08.792 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.797 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.809 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.813 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.816 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.820 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.825 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.828 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.832 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.837 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.841 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.846 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.849 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.853 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.857 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.861 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.865 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.869 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:08.991 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:09.291 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:09.591 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:09.891 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:10.192 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:10.254 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 21:46:10.492 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:10.792 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:10.813 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:11.244 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.391 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:11.474 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.692 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:11.720 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.733 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.738 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.741 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.745 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.749 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.753 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.757 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.761 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.770 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.774 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.778 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:11.990 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:12.046 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:12.182 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:12.257 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:12.261 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:12.265 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:12.291 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:12.460 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:12.590 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:12.594 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:12.730 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:12.991 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:13.170 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:13.271 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 21:46:13.291 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:13.592 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:13.830 E/vendor.xiaomi.hardware.micharge@1.0-service( 1520): Failed to open node /sys/class/qcom-battery/reverse_chg_mode
+02-18 21:46:13.883 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:13.890 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 21:46:13.930 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:13.934 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:13.938 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:13.942 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission
+02-18 21:46:13.946 E/RTMode  ( 2702): pkgName: com.pr4y.app.dev has no permission

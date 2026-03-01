@@ -7,12 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.AutoAwesome
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Security
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.data.local.entity.RequestEntity
+import com.pr4y.app.data.remote.ApiService
+import com.pr4y.app.data.remote.GlobalContentItemDto
 import com.pr4y.app.di.AppContainer
 import com.pr4y.app.ui.Routes
 import kotlinx.coroutines.Dispatchers
@@ -38,14 +35,11 @@ import com.pr4y.app.ui.components.Pr4yTopAppBar
 import com.pr4y.app.ui.viewmodel.HomeUiState
 import com.pr4y.app.ui.viewmodel.HomeViewModel
 
-/**
- * Tech Lead Review: HomeScreen Final Design.
- * Standards: Coherent Dark Theme (#0A0A0A), 48dp targets, ViewModel architecture.
- */
 @Composable
 fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel,
+    api: ApiService,
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val syncMessage by viewModel.syncMessage.collectAsState()
@@ -87,6 +81,7 @@ fun HomeScreen(
                     SyncStatusHeader(state, onRetry = { viewModel.runSync() })
                     FidelidadCard()
                     QuickActionsRow(navController)
+                    GlobalContentSection(api = api)
 
                     if (state.requests.isEmpty()) {
                         EmptyRequestsState { navController.navigate(Routes.NEW_EDIT) }
@@ -257,10 +252,72 @@ private fun FidelidadCard() {
     }
 }
 
+private val GLOBAL_CONTENT_TYPE_LABELS = mapOf(
+    "encouragement" to "Palabras de Aliento",
+    "announcement" to "Avisos",
+)
+
+@Composable
+private fun GlobalContentSection(api: ApiService) {
+    var items by remember { mutableStateOf<List<GlobalContentItemDto>>(emptyList()) }
+    LaunchedEffect(api) {
+        withContext(Dispatchers.IO) {
+            val res = api.getGlobalContent()
+            if (res.isSuccessful) {
+                items = res.body()?.items.orEmpty()
+            }
+        }
+    }
+    if (items.isEmpty()) return
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Text(
+            "Para ti",
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(bottom = 4.dp),
+        )
+        items.forEach { item ->
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                ),
+            ) {
+                Column(Modifier.padding(12.dp)) {
+                    Text(
+                        GLOBAL_CONTENT_TYPE_LABELS[item.type] ?: item.type,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Text(
+                        item.title,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                    if (item.body.isNotBlank()) {
+                        Text(
+                            item.body,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(top = 4.dp),
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
 @Composable
 private fun QuickActionsRow(navController: NavController) {
     Row(
-        Modifier.fillMaxWidth().padding(8.dp),
+        Modifier.fillMaxWidth().padding(horizontal = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         AssistChip(
@@ -269,13 +326,13 @@ private fun QuickActionsRow(navController: NavController) {
             leadingIcon = { Icon(Icons.AutoMirrored.Filled.MenuBook, null, Modifier.size(18.dp)) }
         )
         AssistChip(
-            onClick = { navController.navigate(Routes.SEARCH) },
-            label = { Text("Buscar") },
-            leadingIcon = { Icon(Icons.Default.Search, null, Modifier.size(18.dp)) }
+            onClick = { navController.navigate(Routes.ROULETTE) },
+            label = { Text("Ruleta") },
+            leadingIcon = { Icon(Icons.Default.Casino, null, Modifier.size(18.dp)) }
         )
         AssistChip(
             onClick = { navController.navigate(Routes.VICTORIAS) },
-            label = { Text("Mis Victorias") },
+            label = { Text("Victorias") },
             leadingIcon = { Icon(Icons.Default.Star, null, Modifier.size(18.dp)) }
         )
     }
@@ -285,7 +342,7 @@ private fun QuickActionsRow(navController: NavController) {
 private fun RequestsList(requests: List<RequestEntity>, navController: NavController) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(bottom = 88.dp) // Espacio para el FAB
+        contentPadding = PaddingValues(bottom = 88.dp) 
     ) {
         items(items = requests, key = { it.id }) { req ->
             RequestItem(
@@ -306,7 +363,7 @@ private fun RequestItem(request: RequestEntity, onClick: () -> Unit) {
     Surface(
         onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
-        color = Color.Transparent // Mantiene el fondo del búnker
+        color = Color.Transparent
     ) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {

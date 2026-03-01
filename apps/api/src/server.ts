@@ -8,7 +8,7 @@ import rateLimit from '@fastify/rate-limit';
 import jwt from '@fastify/jwt';
 import { prisma } from './lib/db';
 import { safeDetailsFromError } from './lib/errors';
-import { isAllowedAdminEmail } from './lib/admin-allowlist';
+import { isAllowedAdminEmail, validateAdminAllowlistAtStartup } from './lib/admin-allowlist';
 import authRoutes from './routes/auth';
 import syncRoutes from './routes/sync';
 import cryptoRoutes from './routes/crypto';
@@ -19,6 +19,8 @@ import remindersRoutes from './routes/reminders';
 import answersRoutes from './routes/answers';
 import recordsRoutes from './routes/records';
 import userRoutes from './routes/user';
+import publicRequestsRoutes from './routes/public-requests';
+import publicContentRoutes from './routes/public-content';
 
 const BODY_LIMIT = 2 * 1024 * 1024; // 2MB global
 
@@ -49,11 +51,16 @@ server.register(cors, {
   credentials: true,
 });
 
-// Rate limiting: global: false para que los límites por ruta en auth (login/register) se apliquen
+// Rate limiting: global: false para que los límites por ruta se apliquen.
+// keyGenerator: por usuario autenticado (userId) para mitigar DoS por cuenta; por IP si no hay JWT.
 server.register(rateLimit, {
   global: false,
   max: 300,
   timeWindow: '1 minute',
+  keyGenerator: (request: FastifyRequest) => {
+    const user = (request as FastifyRequest & { user?: { sub?: string } }).user;
+    return (user?.sub ?? request.ip) as string;
+  },
 });
 
 // JWT: obligatorio desde env; sin valor por defecto en producción
@@ -81,15 +88,18 @@ server.decorate('authenticate', async function (request: FastifyRequest, reply: 
   }
 });
 
+// Mensaje único para quien no es admin: amigable y claro (API y web).
+const MSG_NOT_ADMIN = 'No eres administrador. Gracias, pero puedes usar la app prontamente.';
+
 // Decorador requireAdmin: solo role admin/super_admin Y email en allowlist pueden acceder a /admin/*.
 server.decorate('requireAdmin', async function (request: FastifyRequest, reply: FastifyReply) {
   const user = request.user as { sub?: string; email?: string; role?: string };
   const role = user?.role;
   if (role !== 'admin' && role !== 'super_admin') {
-    return reply.code(403).send({ error: { code: 'forbidden', message: 'Admin role required', details: {} } });
+    return reply.code(403).send({ error: { code: 'forbidden', message: MSG_NOT_ADMIN, details: {} } });
   }
   if (!isAllowedAdminEmail(user?.email)) {
-    return reply.code(403).send({ error: { code: 'forbidden', message: 'Admin access restricted to allowed accounts only', details: {} } });
+    return reply.code(403).send({ error: { code: 'forbidden', message: MSG_NOT_ADMIN, details: {} } });
   }
 });
 
@@ -116,15 +126,12 @@ server.setErrorHandler((error: Error & { validation?: unknown }, request, reply)
   });
 });
 
-// Límite por defecto para rutas que no definen el suyo (auth tiene límites más estrictos)
-const defaultRateLimit = { max: 300, timeWindow: '1 minute' as const };
-
 // Listener de rutas: al arranque se imprimen en logs (Railway) como "Mapped {/v1/auth/login, POST}"
 const routesLog: Array<{ path: string; method: string }> = [];
-server.addHook('onRoute', (routeOptions: { url?: string; path?: string; method?: string }) => {
+server.addHook('onRoute', (routeOptions) => {
   const path = (routeOptions.url ?? routeOptions.path ?? '').trim() || '/';
-  const method = (routeOptions.method ?? 'GET').toUpperCase();
-  routesLog.push({ path, method });
+  const method = Array.isArray(routeOptions.method) ? routeOptions.method[0] : routeOptions.method ?? 'GET';
+  routesLog.push({ path, method: String(method).toUpperCase() });
 });
 
 // Prefijo global /v1: cada módulo se registra con prefix '/v1' (rutas finales: /v1/health, /v1/auth/register, etc.).
@@ -137,6 +144,8 @@ server.register(remindersRoutes, { prefix: '/v1' });
 server.register(answersRoutes, { prefix: '/v1' });
 server.register(recordsRoutes, { prefix: '/v1' });
 server.register(userRoutes, { prefix: '/v1' });
+server.register(publicRequestsRoutes, { prefix: '/v1' });
+server.register(publicContentRoutes, { prefix: '/v1' });
 server.register(adminRoutes, { prefix: '/v1' });
 
 // Arranque: Railway espera escucha en puerto 8080. Binding 0.0.0.0 obligatorio para que el proxy enrute.
@@ -170,6 +179,7 @@ const start = async () => {
   }
   try {
     await server.ready();
+    validateAdminAllowlistAtStartup(server.log);
     console.log('=== Rutas registradas (onRoute) ===');
     for (const r of routesLog) {
       console.log(`Mapped {${r.path}, ${r.method}}`);

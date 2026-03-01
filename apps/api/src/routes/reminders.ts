@@ -52,6 +52,7 @@ export default async function remindersRoutes(server: FastifyInstance) {
     '/reminders/:id',
     {
       config: { rateLimit: defaultRateLimit },
+      schema: { params: { type: 'object', properties: { id: { type: 'string' } }, required: ['id'], additionalProperties: false } },
       preHandler: [server.authenticate],
     },
     async (request, reply) => {
@@ -94,7 +95,10 @@ export default async function remindersRoutes(server: FastifyInstance) {
     '/reminders/:id',
     {
       config: { rateLimit: defaultRateLimit },
-      schema: { body: reminderPatchSchema },
+      schema: {
+        params: { type: 'object', properties: { id: { type: 'string' } }, required: ['id'], additionalProperties: false },
+        body: reminderPatchSchema,
+      },
       preHandler: [server.authenticate],
     },
     async (request, reply) => {
@@ -114,6 +118,7 @@ export default async function remindersRoutes(server: FastifyInstance) {
     '/reminders/:id',
     {
       config: { rateLimit: defaultRateLimit },
+      schema: { params: { type: 'object', properties: { id: { type: 'string' } }, required: ['id'], additionalProperties: false } },
       preHandler: [server.authenticate],
     },
     async (request, reply) => {

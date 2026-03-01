@@ -3,14 +3,21 @@ package com.pr4y.app.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -32,6 +39,15 @@ import java.util.Locale
 
 private val HopeGreen = Color(0xFF81C784)
 private val SoftGold = Color(0xFFD4A574)
+
+private val dateFormat = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.getDefault())
+
+private fun formatIsoDate(iso: String): String = try {
+    val instant = Instant.parse(iso)
+    dateFormat.format(instant.atZone(java.time.ZoneId.systemDefault()))
+} catch (_: Exception) {
+    iso.take(10)
+}
 
 @Composable
 fun VictoriasScreen(navController: NavController, viewModel: com.pr4y.app.ui.viewmodel.VictoriasViewModel) {
@@ -89,10 +105,11 @@ fun VictoriasScreen(navController: NavController, viewModel: com.pr4y.app.ui.vie
                             )
                         }
                     } else {
+                        val sortedAnswers = state.answers.sortedByDescending { it.answeredAt }
                         LazyColumn(
                             verticalArrangement = Arrangement.spacedBy(12.dp),
                         ) {
-                            items(state.answers, key = { it.id }) { answer ->
+                            items(sortedAnswers, key = { it.id }) { answer ->
                                 VictoriaCard(answer = answer)
                             }
                         }
@@ -105,12 +122,8 @@ fun VictoriasScreen(navController: NavController, viewModel: com.pr4y.app.ui.vie
 
 @Composable
 private fun VictoriaCard(answer: AnswerDto) {
-    val dateStr = try {
-        val instant = Instant.parse(answer.answeredAt)
-        DateTimeFormatter.ofPattern("d MMM yyyy", Locale.getDefault()).format(instant.atZone(java.time.ZoneId.systemDefault()))
-    } catch (_: Exception) {
-        answer.answeredAt
-    }
+    val requestedStr = answer.record?.clientUpdatedAt?.let { formatIsoDate(it) } ?: "—"
+    val answeredStr = formatIsoDate(answer.answeredAt)
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors().copy(
@@ -119,17 +132,34 @@ private fun VictoriaCard(answer: AnswerDto) {
         shape = CardDefaults.outlinedShape,
     ) {
         Column(Modifier.padding(16.dp)) {
-            Text(
-                text = dateStr,
-                style = MaterialTheme.typography.labelMedium,
-                color = SoftGold,
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(
+                    text = "Pedido $requestedStr",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.9f),
+                )
+                Icon(
+                    Icons.Default.ArrowForward,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp),
+                    tint = HopeGreen,
+                )
+                Text(
+                    text = "Respondido $answeredStr",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = SoftGold,
+                )
+            }
             if (!answer.testimony.isNullOrBlank()) {
+                Spacer(Modifier.height(8.dp))
                 Text(
                     text = answer.testimony,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.padding(top = 8.dp),
                 )
             }
         }

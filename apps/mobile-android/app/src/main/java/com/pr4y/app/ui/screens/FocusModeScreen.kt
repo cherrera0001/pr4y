@@ -10,9 +10,17 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
+import com.pr4y.app.data.auth.AuthTokenStore
+import com.pr4y.app.ui.theme.ElectricCyan
+import com.pr4y.app.ui.theme.MidnightBlue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,7 +36,9 @@ import org.json.JSONObject
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FocusModeScreen(navController: NavController) {
-    val entities by AppContainer.db.requestDao().getAll().collectAsState(initial = emptyList())
+    val context = LocalContext.current
+    val userId = remember(context) { AuthTokenStore(context.applicationContext).getUserId() ?: "" }
+    val entities by AppContainer.db.requestDao().getAll(userId).collectAsState(initial = emptyList())
     var requests by remember { mutableStateOf<List<RequestEntity>>(emptyList()) }
 
     LaunchedEffect(entities) {
@@ -157,11 +167,23 @@ fun FocusModeScreen(navController: NavController) {
 
                 LinearProgressIndicator(
                     progress = { (pagerState.currentPage + 1).toFloat() / requests.size },
-                    modifier = Modifier.fillMaxWidth().height(4.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(4.dp)
+                        .clip(RoundedCornerShape(2.dp)),
                     color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant
+                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
                 )
-                
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(2.dp)
+                        .background(
+                            Brush.horizontalGradient(
+                                listOf(MidnightBlue, ElectricCyan.copy(alpha = 0.2f), MidnightBlue),
+                            )
+                        ),
+                )
                 Box(
                     Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 16.dp),
                     contentAlignment = Alignment.Center

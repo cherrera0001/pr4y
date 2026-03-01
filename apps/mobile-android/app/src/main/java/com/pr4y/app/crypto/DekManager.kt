@@ -2,34 +2,29 @@ package com.pr4y.app.crypto
 
 import android.content.Context
 import android.security.keystore.KeyGenParameterSpec
-import android.security.keystore.KeyPermanentlyInvalidatedException
 import android.security.keystore.KeyProperties
 import android.util.Base64
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import java.security.KeyStore
-import java.security.SecureRandom
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
-import javax.crypto.spec.PBEKeySpec
-import javax.crypto.spec.SecretKeySpec
-import java.security.InvalidAlgorithmParameterException
 import android.content.SharedPreferences
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.edit
 import com.pr4y.app.util.Pr4yLog
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import java.security.SecureRandom
 import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.PBEKeySpec
+import javax.crypto.spec.SecretKeySpec
 
 /**
  * Tech Lead Note: Gestiona la DEK con anclaje al hardware (TEE/StrongBox).
- * Refactorizado para "Seguridad Infranqueable":
- * 1. La Master Key ahora requiere setUserAuthenticationRequired(true).
- * 2. La DEK solo se puede recuperar si el chip de seguridad recibe una huella válida.
+ * Refactorizado para "Seguridad Infranqueable" y resiliencia ante corrupción profunda del Keystore.
  */
 object DekManager {
     private const val GCM_TAG_LENGTH = 128
@@ -37,7 +32,7 @@ object DekManager {
     private const val PBKDF2_KEY_LENGTH = 256
     private const val SALT_LENGTH = 16
 
-    private const val KEYSTORE_ALIAS = "pr4y_dek_master_v2" // Nueva versión para forzar auth
+    private const val KEYSTORE_ALIAS = "pr4y_dek_master_v2"
     private const val DEK_PREFS_NAME = "pr4y_dek_store"
     private const val PREFS_KEY_WRAPPED_DEK = "wrapped_dek"
     private const val PREFS_KEY_DEK_STORAGE_MODE = "dek_storage_mode"
@@ -53,21 +48,46 @@ object DekManager {
         
         try {
             ensureMasterKeyExists()
-            // El MasterKey de security-crypto se usa para las preferencias, 
-            // pero la DEK se envuelve con nuestra propia llave del Keystore con auth biométrica.
-            val masterKey = MasterKey.Builder(app)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .build()
-            dekPrefs = EncryptedSharedPreferences.create(
-                app,
-                DEK_PREFS_NAME,
-                masterKey,
-                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
-            )
+            dekPrefs = createEncryptedPrefs(app)
             Pr4yLog.crypto("Búnker persistente inicializado.")
         } catch (e: Exception) {
-            Pr4yLog.e("Error inicializando DekManager", e)
+            Pr4yLog.e("DekManager: Error crítico en inicialización. Iniciando limpieza profunda...", e)
+            nukeSecurityState(app)
+            try {
+                dekPrefs = createEncryptedPrefs(app)
+            } catch (e2: Exception) {
+                Pr4yLog.e("DekManager: Fallo total en recuperación de búnker tras nuke", e2)
+            }
+        }
+    }
+
+    private fun createEncryptedPrefs(context: Context): SharedPreferences {
+        val masterKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+        return EncryptedSharedPreferences.create(
+            context,
+            DEK_PREFS_NAME,
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
+        )
+    }
+
+    private fun nukeSecurityState(context: Context) {
+        try {
+            // 1. Borrar archivo físico de DEK
+            context.deleteSharedPreferences(DEK_PREFS_NAME)
+            
+            // 2. Borrar llaves del Keystore
+            val keyStore = KeyStore.getInstance("AndroidKeyStore")
+            keyStore.load(null)
+            keyStore.deleteEntry(MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+            keyStore.deleteEntry(KEYSTORE_ALIAS) // Borrar también nuestra llave maestra custom
+            
+            Pr4yLog.i("DekManager: Llaves y preferencias purgadas satisfactoriamente.")
+        } catch (e: Exception) {
+            Pr4yLog.e("DekManager: Error durante purga de seguridad", e)
         }
     }
 
@@ -83,10 +103,10 @@ object DekManager {
             .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
             .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
             .setKeySize(256)
-            .setUserAuthenticationRequired(true) // REQUERIDO: Huella para cada uso
-            .setUserAuthenticationValidityDurationSeconds(-1) // Cada uso requiere auth (cero rastro)
-            .setInvalidatedByBiometricEnrollment(true) // Seguridad extra si cambian huellas
-            .setRandomizedEncryptionRequired(true) // IV generado por el sistema (Xiaomi/OEM)
+            .setUserAuthenticationRequired(true)
+            .setUserAuthenticationValidityDurationSeconds(-1)
+            .setInvalidatedByBiometricEnrollment(true)
+            .setRandomizedEncryptionRequired(true)
             .build()
         
         val keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore")
@@ -99,10 +119,6 @@ object DekManager {
         return keyStore.getKey(KEYSTORE_ALIAS, null) as? SecretKey
     }
 
-    /**
-     * Devuelve un CryptoObject para ser usado con BiometricPrompt.
-     * Esto es necesario porque la llave está protegida por hardware.
-     */
     fun getInitializedCipherForRecovery(): BiometricPrompt.CryptoObject? {
         val wrappedB64 = dekPrefs?.getString(PREFS_KEY_WRAPPED_DEK, null) ?: return null
         val master = getMasterKey() ?: return null
@@ -122,9 +138,6 @@ object DekManager {
         }
     }
 
-    /**
-     * Completa la recuperación de la DEK tras una autenticación exitosa.
-     */
     fun recoverDekWithCipher(cipher: Cipher): Boolean {
         val wrappedB64 = dekPrefs?.getString(PREFS_KEY_WRAPPED_DEK, null) ?: return false
         return try {
@@ -144,34 +157,18 @@ object DekManager {
 
     fun getDek(): SecretKey? = dek
 
-    /**
-     * Indica si hay DEK persistida en TEE (solo desbloqueable con huella).
-     * Usado por la UI para mostrar "Usar Biometría" cuando aplica.
-     */
     fun hasPersistedDekForBiometric(): Boolean {
         val prefs = dekPrefs ?: return false
         return prefs.getString(PREFS_KEY_WRAPPED_DEK, null) != null &&
             prefs.getString(PREFS_KEY_DEK_STORAGE_MODE, null) == "tee_v2"
     }
 
-    /**
-     * Intento de recuperación silenciosa. Con clave TEE que exige biometría, la DEK solo existe
-     * en memoria; tras muerte del proceso siempre se requiere desbloqueo (huella o passphrase).
-     */
     fun tryRecoverDekSilently(): Boolean = (dek != null)
 
-    /**
-     * Coloca la DEK en memoria. No persiste en dispositivo; para persistir y permitir
-     * desbloqueo con huella hay que llamar a persistDekWithCipher tras autenticación biométrica.
-     */
     suspend fun setDek(key: SecretKey) = withContext(Dispatchers.Default) {
         dek = key
     }
 
-    /**
-     * Devuelve un CryptoObject para persistir la DEK tras autenticación biométrica.
-     * La llave TEE solo se usa dentro del chip; sin huella no se puede escribir.
-     */
     fun getInitializedCipherForEncrypt(): BiometricPrompt.CryptoObject? {
         val master = getMasterKey() ?: return null
         return try {
@@ -184,10 +181,6 @@ object DekManager {
         }
     }
 
-    /**
-     * Persiste la DEK usando el Cipher ya desbloqueado por BiometricPrompt.
-     * Llamar solo tras autenticación biométrica exitosa (guardado infranqueable).
-     */
     fun persistDekWithCipher(key: SecretKey, cipher: Cipher): Boolean {
         val prefs = dekPrefs ?: return false
         return try {
@@ -208,22 +201,29 @@ object DekManager {
 
     private var dekClearedListener: (() -> Unit)? = null
 
-    /** Registra un callback que se invoca cuando la DEK se borra (cero rastro o logout). */
     fun setDekClearedListener(listener: (() -> Unit)?) {
         dekClearedListener = listener
     }
 
     fun clearDek() {
         dek = null
-        dekPrefs?.edit { 
-            remove(PREFS_KEY_WRAPPED_DEK) 
+        dekPrefs?.edit {
+            remove(PREFS_KEY_WRAPPED_DEK)
             remove(PREFS_KEY_DEK_STORAGE_MODE)
         }
         dekClearedListener?.invoke()
         Pr4yLog.crypto("Memoria criptográfica limpia.")
     }
 
-    // Métodos auxiliares permanecen en Dispatchers.Default
+    /** Desactiva el acceso por huella sin limpiar la DEK en memoria. */
+    fun disableBiometric() {
+        dekPrefs?.edit {
+            remove(PREFS_KEY_WRAPPED_DEK)
+            remove(PREFS_KEY_DEK_STORAGE_MODE)
+        }
+        Pr4yLog.crypto("Acceso por huella desactivado.")
+    }
+
     suspend fun generateDek(): SecretKey = withContext(Dispatchers.Default) { LocalCrypto.generateKey() }
     
     suspend fun deriveKek(passphrase: CharArray, saltB64: String): SecretKey = withContext(Dispatchers.Default) {

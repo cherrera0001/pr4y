@@ -1,4 +1,4 @@
-import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyInstance } from 'fastify';
 import * as recordsService from '../services/records';
 import { sendError } from '../lib/errors';
 
@@ -18,7 +18,10 @@ export default async function recordsRoutes(server: FastifyInstance) {
     '/records/:recordId/status',
     {
       config: { rateLimit: defaultRateLimit },
-      schema: { body: statusBodySchema },
+      schema: {
+        params: { type: 'object', properties: { recordId: { type: 'string' } }, required: ['recordId'], additionalProperties: false },
+        body: statusBodySchema,
+      },
       preHandler: [server.authenticate],
     },
     async (request, reply) => {

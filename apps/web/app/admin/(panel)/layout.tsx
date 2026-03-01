@@ -8,6 +8,7 @@ import {
   FileText,
   LogOut,
 } from 'lucide-react';
+import { DisplayPrefsPanel } from '@/components/display-prefs-panel';
 import {
   Sidebar,
   SidebarContent,
@@ -75,6 +76,12 @@ export default function AdminPanelLayout({
         <SidebarFooter className="border-t border-sidebar-border">
           <SidebarMenu>
             <SidebarMenuItem>
+              <div className="flex items-center justify-between px-2 py-1">
+                <span className="text-xs text-muted-foreground">Apariencia</span>
+                <DisplayPrefsPanel />
+              </div>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
               <SidebarMenuButton onClick={handleLogout}>
                 <LogOut className="size-4" />
                 <span>Cerrar sesión</span>
@@ -84,7 +91,7 @@ export default function AdminPanelLayout({
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <main className="flex-1 p-6 md:p-8 min-h-screen bg-slate-950/50">{children}</main>
+        <main className="flex-1 p-6 md:p-8 min-h-screen bg-background/50">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );
