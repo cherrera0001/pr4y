@@ -207,12 +207,21 @@ object DekManager {
 
     fun clearDek() {
         dek = null
-        dekPrefs?.edit { 
-            remove(PREFS_KEY_WRAPPED_DEK) 
+        dekPrefs?.edit {
+            remove(PREFS_KEY_WRAPPED_DEK)
             remove(PREFS_KEY_DEK_STORAGE_MODE)
         }
         dekClearedListener?.invoke()
         Pr4yLog.crypto("Memoria criptográfica limpia.")
+    }
+
+    /** Desactiva el acceso por huella sin limpiar la DEK en memoria. */
+    fun disableBiometric() {
+        dekPrefs?.edit {
+            remove(PREFS_KEY_WRAPPED_DEK)
+            remove(PREFS_KEY_DEK_STORAGE_MODE)
+        }
+        Pr4yLog.crypto("Acceso por huella desactivado.")
     }
 
     suspend fun generateDek(): SecretKey = withContext(Dispatchers.Default) { LocalCrypto.generateKey() }

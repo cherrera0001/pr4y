@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +22,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Fingerprint
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.FilterChip
@@ -47,8 +50,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import com.pr4y.app.BuildConfig
+import com.pr4y.app.crypto.DekManager
 import com.pr4y.app.data.auth.AuthRepository
 import com.pr4y.app.data.prefs.DisplayPrefs
 import com.pr4y.app.data.remote.ApiService
@@ -239,6 +244,8 @@ fun SettingsScreen(
             Spacer(Modifier.height(16.dp))
             HorizontalDivider(Modifier.padding(vertical = 4.dp))
             AppearanceSection(prefs = displayPrefs, onUpdate = onUpdateDisplayPrefs, navController = navController)
+            HorizontalDivider(Modifier.padding(vertical = 4.dp))
+            SecuritySection(snackbar = snackbar)
             HorizontalDivider(Modifier.padding(vertical = 4.dp))
             Spacer(Modifier.height(8.dp))
             Text("Cuenta", style = MaterialTheme.typography.titleMedium)
@@ -516,5 +523,114 @@ private fun ScheduleRow(
                 )
             }
         }
+    }
+}
+
+// ─── Sección Seguridad — Acceso con huella ────────────────────────────────────
+
+/**
+ * Toggle para activar/desactivar el acceso biométrico (huella dactilar).
+ * Requiere que la DEK esté en memoria (usuario desbloqueado).
+ * - Activar: BiometricPrompt (encrypt mode) → DekManager.persistDekWithCipher()
+ * - Desactivar: DekManager.disableBiometric() (borra blob TEE, no la DEK en memoria)
+ */
+@Composable
+private fun SecuritySection(snackbar: SnackbarHostState) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
+    val biometricManager = remember { BiometricManager.from(context) }
+    val canAuthenticate = remember {
+        biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) ==
+            BiometricManager.BIOMETRIC_SUCCESS
+    }
+
+    // No mostrar la sección si el hardware biométrico no está disponible
+    if (!canAuthenticate) return
+
+    var biometricEnabled by remember { mutableStateOf(DekManager.hasPersistedDekForBiometric()) }
+
+    fun enableBiometric() {
+        val crypto = DekManager.getInitializedCipherForEncrypt() ?: run {
+            scope.launch { snackbar.showSnackbar("No se pudo preparar el sensor. Inténtalo de nuevo.") }
+            return
+        }
+        val executor = ContextCompat.getMainExecutor(context)
+        val prompt = BiometricPrompt(
+            context as FragmentActivity,
+            executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    val cipher = result.cryptoObject?.cipher ?: return
+                    val dek = DekManager.getDek() ?: run {
+                        scope.launch { snackbar.showSnackbar("El búnker no está desbloqueado.") }
+                        return
+                    }
+                    if (DekManager.persistDekWithCipher(dek, cipher)) {
+                        biometricEnabled = true
+                        scope.launch { snackbar.showSnackbar("Acceso con huella activado.") }
+                    } else {
+                        scope.launch { snackbar.showSnackbar("No se pudo guardar. Inténtalo de nuevo.") }
+                    }
+                }
+
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    if (errorCode != BiometricPrompt.ERROR_NEGATIVE_BUTTON &&
+                        errorCode != BiometricPrompt.ERROR_USER_CANCELED
+                    ) {
+                        scope.launch { snackbar.showSnackbar("Error del sensor: $errString") }
+                    }
+                }
+            }
+        )
+        val info = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Activar acceso con huella")
+            .setSubtitle("Toca el sensor para proteger la llave en el chip de seguridad")
+            .setNegativeButtonText("Cancelar")
+            .build()
+        prompt.authenticate(info, crypto)
+    }
+
+    Spacer(Modifier.height(8.dp))
+    Text("Seguridad", style = MaterialTheme.typography.titleMedium)
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Icon(
+                Icons.Default.Fingerprint,
+                contentDescription = null,
+                modifier = Modifier.size(20.dp),
+                tint = MaterialTheme.colorScheme.primary,
+            )
+            Column {
+                Text("Acceso con huella", style = MaterialTheme.typography.bodyMedium)
+                Text(
+                    if (biometricEnabled) "Activo — entra sin escribir tu clave"
+                    else "Inactivo — activa para entrar con huella",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+        Switch(
+            checked = biometricEnabled,
+            onCheckedChange = { enabled ->
+                if (enabled) {
+                    enableBiometric()
+                } else {
+                    DekManager.disableBiometric()
+                    biometricEnabled = false
+                    scope.launch { snackbar.showSnackbar("Acceso con huella desactivado.") }
+                }
+            },
+        )
     }
 }
