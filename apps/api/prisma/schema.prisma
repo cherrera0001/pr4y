@@ -21,6 +21,7 @@ model User {
   reminderTime         String?       @map("reminder_time") // "HH:mm" recordatorio diario de oración
   reminderDaysOfWeek   Json?         @map("reminder_days_of_week") // [0..6]
   reminderEnabled      Boolean       @default(false) @map("reminder_enabled")
+  displayPreferences   Json?         @map("display_preferences") // theme, fontSize, fontFamily, lineSpacing, contemplativeMode
   refreshTokens        RefreshToken[]
   wrappedDek           WrappedDek?
   records              Record[]

@@ -22,6 +22,27 @@ const purgeResponseSchema = {
   additionalProperties: false,
 };
 
+const displayPrefsSchema = {
+  type: 'object',
+  properties: {
+    theme: { type: 'string', enum: ['light', 'dark', 'system'] },
+    fontSize: { type: 'string', enum: ['sm', 'md', 'lg', 'xl'] },
+    fontFamily: { type: 'string', enum: ['system', 'serif', 'mono'] },
+    lineSpacing: { type: 'string', enum: ['compact', 'normal', 'relaxed'] },
+    contemplativeMode: { type: 'boolean' },
+  },
+  required: ['theme', 'fontSize', 'fontFamily', 'lineSpacing', 'contemplativeMode'],
+  additionalProperties: false,
+};
+
+const displayPrefsBodySchema = z.object({
+  theme: z.enum(['light', 'dark', 'system']).optional(),
+  fontSize: z.enum(['sm', 'md', 'lg', 'xl']).optional(),
+  fontFamily: z.enum(['system', 'serif', 'mono']).optional(),
+  lineSpacing: z.enum(['compact', 'normal', 'relaxed']).optional(),
+  contemplativeMode: z.boolean().optional(),
+}).refine((d) => Object.keys(d).length > 0, { message: 'Al menos un campo es requerido' });
+
 const faithStatsResponseSchema = {
   type: 'object',
   properties: {
@@ -60,6 +81,53 @@ const reminderPrefsSchema = {
 const defaultRateLimit = { max: 300, timeWindow: '1 minute' as const };
 
 export default async function userRoutes(server: FastifyInstance) {
+  server.get(
+    '/user/display-preferences',
+    {
+      config: { rateLimit: defaultRateLimit },
+      schema: { response: { 200: displayPrefsSchema } },
+      preHandler: [server.authenticate],
+    },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const userId = (request.user as { sub: string }).sub;
+      const prefs = await userService.getDisplayPreferences(userId);
+      reply.code(200).send(prefs);
+    }
+  );
+
+  server.put(
+    '/user/display-preferences',
+    {
+      config: { rateLimit: defaultRateLimit },
+      schema: {
+        body: {
+          type: 'object',
+          properties: {
+            theme: { type: 'string', enum: ['light', 'dark', 'system'] },
+            fontSize: { type: 'string', enum: ['sm', 'md', 'lg', 'xl'] },
+            fontFamily: { type: 'string', enum: ['system', 'serif', 'mono'] },
+            lineSpacing: { type: 'string', enum: ['compact', 'normal', 'relaxed'] },
+            contemplativeMode: { type: 'boolean' },
+          },
+          additionalProperties: false,
+        },
+        response: { 200: displayPrefsSchema },
+      },
+      preHandler: [server.authenticate],
+    },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const userId = (request.user as { sub: string }).sub;
+      const parsed = displayPrefsBodySchema.safeParse(request.body);
+      if (!parsed.success) {
+        const msg = parsed.error.errors.map((e) => e.message).join('; ');
+        sendError(reply, 400, 'validation_error', msg, {});
+        return;
+      }
+      const prefs = await userService.updateDisplayPreferences(userId, parsed.data);
+      reply.code(200).send(prefs);
+    }
+  );
+
   server.get(
     '/user/faith-stats',
     {

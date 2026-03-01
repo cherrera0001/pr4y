@@ -2,6 +2,74 @@ import { prisma } from '../lib/db';
 
 const TIME_PATTERN = /^([01]?\d|2[0-3]):([0-5]\d)$/;
 
+// ---------------------------------------------------------------------------
+// Display Preferences
+// ---------------------------------------------------------------------------
+
+export type DisplayPreferences = {
+  theme: 'light' | 'dark' | 'system';
+  fontSize: 'sm' | 'md' | 'lg' | 'xl';
+  fontFamily: 'system' | 'serif' | 'mono';
+  lineSpacing: 'compact' | 'normal' | 'relaxed';
+  contemplativeMode: boolean;
+};
+
+const DISPLAY_DEFAULTS: DisplayPreferences = {
+  theme: 'system',
+  fontSize: 'md',
+  fontFamily: 'system',
+  lineSpacing: 'normal',
+  contemplativeMode: false,
+};
+
+const VALID_THEMES = ['light', 'dark', 'system'] as const;
+const VALID_FONT_SIZES = ['sm', 'md', 'lg', 'xl'] as const;
+const VALID_FONT_FAMILIES = ['system', 'serif', 'mono'] as const;
+const VALID_LINE_SPACINGS = ['compact', 'normal', 'relaxed'] as const;
+
+function parseDisplayPrefs(raw: unknown): DisplayPreferences {
+  if (!raw || typeof raw !== 'object') return { ...DISPLAY_DEFAULTS };
+  const r = raw as Record<string, unknown>;
+  return {
+    theme: VALID_THEMES.includes(r.theme as DisplayPreferences['theme'])
+      ? (r.theme as DisplayPreferences['theme'])
+      : DISPLAY_DEFAULTS.theme,
+    fontSize: VALID_FONT_SIZES.includes(r.fontSize as DisplayPreferences['fontSize'])
+      ? (r.fontSize as DisplayPreferences['fontSize'])
+      : DISPLAY_DEFAULTS.fontSize,
+    fontFamily: VALID_FONT_FAMILIES.includes(r.fontFamily as DisplayPreferences['fontFamily'])
+      ? (r.fontFamily as DisplayPreferences['fontFamily'])
+      : DISPLAY_DEFAULTS.fontFamily,
+    lineSpacing: VALID_LINE_SPACINGS.includes(r.lineSpacing as DisplayPreferences['lineSpacing'])
+      ? (r.lineSpacing as DisplayPreferences['lineSpacing'])
+      : DISPLAY_DEFAULTS.lineSpacing,
+    contemplativeMode: typeof r.contemplativeMode === 'boolean'
+      ? r.contemplativeMode
+      : DISPLAY_DEFAULTS.contemplativeMode,
+  };
+}
+
+export async function getDisplayPreferences(userId: string): Promise<DisplayPreferences> {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { displayPreferences: true },
+  });
+  return parseDisplayPrefs(user?.displayPreferences);
+}
+
+export async function updateDisplayPreferences(
+  userId: string,
+  data: Partial<DisplayPreferences>
+): Promise<DisplayPreferences> {
+  const current = await getDisplayPreferences(userId);
+  const merged: DisplayPreferences = { ...current, ...data };
+  await prisma.user.update({
+    where: { id: userId },
+    data: { displayPreferences: merged },
+  });
+  return merged;
+}
+
 export type ReminderPreferences = {
   time: string;
   daysOfWeek: number[];
