@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { toast } from 'sonner';
 import { Loader2, Pencil, Trash2, Plus } from 'lucide-react';
@@ -97,10 +98,15 @@ export default function AdminContentPage() {
   const [formPublished, setFormPublished] = useState(false);
   const [formSortOrder, setFormSortOrder] = useState(0);
 
+  const router = useRouter();
   const load = () => {
     const q = filterType ? `?type=${encodeURIComponent(filterType)}` : '';
     fetch(`/api/admin/content${q}`)
       .then((res) => {
+        if (res.status === 403) {
+          router.replace('/admin/login?error=admin_required');
+          return null;
+        }
         if (!res.ok) throw new Error(res.statusText);
         return res.json();
       })

@@ -65,6 +65,10 @@ export default function AdminDashboardPage() {
           router.replace('/admin/login');
           return { stats: null, detail: null };
         }
+        if (statsRes.status === 403 || detailRes.status === 403) {
+          router.replace('/admin/login?error=admin_required');
+          return { stats: null, detail: null };
+        }
         if (!statsRes.ok) throw new Error(statsRes.status === 503 ? 'API no configurada' : statsRes.statusText);
         return Promise.all([statsRes.json(), detailRes.ok ? detailRes.json() : Promise.resolve(null)]).then(
           ([statsData, detailData]) => ({ stats: statsData, detail: detailData })

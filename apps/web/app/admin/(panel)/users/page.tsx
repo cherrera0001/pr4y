@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { Search, UserX, UserCheck, ChevronLeft, ChevronRight, KeyRound } from 'lucide-react';
 import { toast } from 'sonner';
 import {
@@ -59,10 +60,15 @@ export default function AdminUsersPage() {
   const [page, setPage] = useState(0);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 
+  const router = useRouter();
   useEffect(() => {
     let cancelled = false;
     fetch('/api/admin/users?limit=200&offset=0')
       .then((res) => {
+        if (res.status === 403) {
+          router.replace('/admin/login?error=admin_required');
+          return null;
+        }
         if (!res.ok) throw new Error(res.statusText);
         const count = parseInt(res.headers.get('X-Total-Count') ?? '0', 10);
         if (!cancelled) setTotal(count);
