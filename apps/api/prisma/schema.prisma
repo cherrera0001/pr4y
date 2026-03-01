@@ -18,9 +18,10 @@ model User {
   status               String        @default("active") // "active" | "banned"
   lastLoginAt          DateTime?     @map("last_login_at")
   createdAt            DateTime      @default(now()) @map("created_at")
-  reminderTime         String?       @map("reminder_time") // "HH:mm" recordatorio diario de oración
-  reminderDaysOfWeek   Json?         @map("reminder_days_of_week") // [0..6]
-  reminderEnabled      Boolean       @default(false) @map("reminder_enabled")
+  reminderTime         String?       @map("reminder_time") // "HH:mm" recordatorio diario de oración (legado)
+  reminderDaysOfWeek   Json?         @map("reminder_days_of_week") // [0..6] (legado)
+  reminderEnabled      Boolean       @default(false) @map("reminder_enabled") // (legado)
+  reminderSchedules    Json?         @map("reminder_schedules") // [{time, daysOfWeek, enabled}] — multi-schedule
   displayPreferences   Json?         @map("display_preferences") // theme, fontSize, fontFamily, lineSpacing, contemplativeMode
   refreshTokens        RefreshToken[]
   wrappedDek           WrappedDek?

@@ -85,11 +85,23 @@ data class PublicConfigResponse(
     val googleAndroidClientId: String = "",
 )
 
-/** Preferencias de recordatorio diario. */
+/** Preferencias de recordatorio diario (sistema legado — un único horario). */
 data class ReminderPreferencesResponse(
     val time: String,
     val daysOfWeek: List<Int>,
     val enabled: Boolean,
+)
+
+/** Un recordatorio programado: hora libre + días + toggle. */
+data class ReminderScheduleDto(
+    val time: String,       // "HH:mm"
+    val daysOfWeek: List<Int>, // [0..6] 0=domingo
+    val enabled: Boolean,
+)
+
+/** Lista de hasta 5 recordatorios configurables por el usuario. */
+data class ReminderSchedulesResponse(
+    val schedules: List<ReminderScheduleDto>,
 )
 
 /** DTO para Roulette (Intercesión Anónima). */
@@ -189,6 +201,15 @@ interface ApiService {
         @Header("Authorization") bearer: String,
         @Body body: ReminderPreferencesResponse,
     ): Response<ReminderPreferencesResponse>
+
+    @GET("user/reminder-schedules")
+    suspend fun getReminderSchedules(@Header("Authorization") bearer: String): Response<ReminderSchedulesResponse>
+
+    @PUT("user/reminder-schedules")
+    suspend fun putReminderSchedules(
+        @Header("Authorization") bearer: String,
+        @Body body: ReminderSchedulesResponse,
+    ): Response<ReminderSchedulesResponse>
 
     @GET("user/display-preferences")
     suspend fun getDisplayPreferences(@Header("Authorization") bearer: String): Response<DisplayPreferencesDto>

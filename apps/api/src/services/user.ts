@@ -119,6 +119,47 @@ export async function updateReminderPreferences(
   };
 }
 
+// ---------------------------------------------------------------------------
+// Reminder Schedules (multi-schedule, replaces single reminderTime)
+// ---------------------------------------------------------------------------
+
+export type ReminderSchedule = {
+  time: string;       // "HH:mm"
+  daysOfWeek: number[]; // [0..6] 0=domingo
+  enabled: boolean;
+};
+
+function parseReminderSchedules(raw: unknown): ReminderSchedule[] {
+  if (!Array.isArray(raw)) return [];
+  return raw.filter((s): s is ReminderSchedule => {
+    return (
+      typeof s === 'object' && s !== null &&
+      typeof (s as Record<string, unknown>).time === 'string' &&
+      Array.isArray((s as Record<string, unknown>).daysOfWeek) &&
+      typeof (s as Record<string, unknown>).enabled === 'boolean'
+    );
+  });
+}
+
+export async function getUserReminderSchedules(userId: string): Promise<ReminderSchedule[]> {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { reminderSchedules: true },
+  });
+  return parseReminderSchedules(user?.reminderSchedules);
+}
+
+export async function updateUserReminderSchedules(
+  userId: string,
+  schedules: ReminderSchedule[]
+): Promise<ReminderSchedule[]> {
+  await prisma.user.update({
+    where: { id: userId },
+    data: { reminderSchedules: schedules },
+  });
+  return schedules;
+}
+
 export type FaithStats = {
   totalRecords: number;
   totalAnswered: number;

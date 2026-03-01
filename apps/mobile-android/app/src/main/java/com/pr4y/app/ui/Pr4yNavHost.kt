@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.pr4y.app.data.auth.AuthRepository
 import com.pr4y.app.data.prefs.DisplayPrefs
+import com.pr4y.app.data.remote.ReminderScheduleDto
 import com.pr4y.app.data.remote.RetrofitClient
 import com.pr4y.app.data.sync.SyncRepository
 import com.pr4y.app.di.AppContainer
@@ -30,6 +31,8 @@ fun Pr4yNavHost(
     onSetHasSeenWelcome: () -> Unit,
     displayPrefs: DisplayPrefs,
     onUpdateDisplayPrefs: (DisplayPrefs) -> Unit,
+    reminderSchedules: List<ReminderScheduleDto>,
+    onUpdateReminderSchedules: (List<ReminderScheduleDto>) -> Unit,
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
     val api = remember { RetrofitClient.create(context) }
@@ -100,13 +103,15 @@ fun Pr4yNavHost(
                 com.pr4y.app.data.auth.AuthTokenStore(mainContext.applicationContext).getUserId() ?: ""
             }
             InnerNavHost(
-                authRepository       = authRepository,
-                syncRepository       = syncRepository,
-                api                  = api,
-                onLogout             = onLogout,
-                userId               = mainUserId,
-                displayPrefs         = displayPrefs,
-                onUpdateDisplayPrefs = onUpdateDisplayPrefs,
+                authRepository             = authRepository,
+                syncRepository             = syncRepository,
+                api                        = api,
+                onLogout                   = onLogout,
+                userId                     = mainUserId,
+                displayPrefs               = displayPrefs,
+                onUpdateDisplayPrefs       = onUpdateDisplayPrefs,
+                reminderSchedules          = reminderSchedules,
+                onUpdateReminderSchedules  = onUpdateReminderSchedules,
             )
         }
     }
@@ -121,6 +126,8 @@ private fun InnerNavHost(
     userId: String = "",
     displayPrefs: DisplayPrefs,
     onUpdateDisplayPrefs: (DisplayPrefs) -> Unit,
+    reminderSchedules: List<ReminderScheduleDto>,
+    onUpdateReminderSchedules: (List<ReminderScheduleDto>) -> Unit,
 ) {
     val navController = rememberNavController()
 
@@ -157,12 +164,14 @@ private fun InnerNavHost(
         }
         composable(Routes.SETTINGS) {
             SettingsScreen(
-                navController        = navController,
-                authRepository       = authRepository,
-                api                  = api,
-                onLogout             = onLogout,
-                displayPrefs         = displayPrefs,
-                onUpdateDisplayPrefs = onUpdateDisplayPrefs,
+                navController             = navController,
+                authRepository            = authRepository,
+                api                       = api,
+                onLogout                  = onLogout,
+                displayPrefs              = displayPrefs,
+                onUpdateDisplayPrefs      = onUpdateDisplayPrefs,
+                reminderSchedules         = reminderSchedules,
+                onUpdateReminderSchedules = onUpdateReminderSchedules,
             )
         }
         composable(Routes.ROULETTE) {

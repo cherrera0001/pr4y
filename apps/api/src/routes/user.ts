@@ -78,6 +78,36 @@ const reminderPrefsSchema = {
   additionalProperties: false,
 };
 
+const scheduleItemSchema = {
+  type: 'object',
+  properties: {
+    time: { type: 'string', pattern: '^([01]?\\d|2[0-3]):[0-5]\\d$' },
+    daysOfWeek: { type: 'array', items: { type: 'integer', minimum: 0, maximum: 6 }, maxItems: 7 },
+    enabled: { type: 'boolean' },
+  },
+  required: ['time', 'daysOfWeek', 'enabled'],
+  additionalProperties: false,
+};
+
+const reminderSchedulesSchema = {
+  type: 'object',
+  properties: {
+    schedules: { type: 'array', items: scheduleItemSchema, maxItems: 5 },
+  },
+  required: ['schedules'],
+  additionalProperties: false,
+};
+
+const reminderSchedulesBodySchema = z.object({
+  schedules: z.array(
+    z.object({
+      time: z.string().regex(TIME_PATTERN, 'time debe ser HH:mm'),
+      daysOfWeek: z.array(z.number().int().min(0).max(6)).max(7),
+      enabled: z.boolean(),
+    })
+  ).max(5),
+});
+
 const defaultRateLimit = { max: 300, timeWindow: '1 minute' as const };
 
 export default async function userRoutes(server: FastifyInstance) {
@@ -191,6 +221,43 @@ export default async function userRoutes(server: FastifyInstance) {
         const details = safeDetailsFromError(e);
         sendError(reply, 400, 'validation_error', 'Invalid request', details);
       }
+    }
+  );
+
+  server.get(
+    '/user/reminder-schedules',
+    {
+      config: { rateLimit: defaultRateLimit },
+      schema: { response: { 200: reminderSchedulesSchema } },
+      preHandler: [server.authenticate],
+    },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const userId = (request.user as { sub: string }).sub;
+      const schedules = await userService.getUserReminderSchedules(userId);
+      reply.code(200).send({ schedules });
+    }
+  );
+
+  server.put(
+    '/user/reminder-schedules',
+    {
+      config: { rateLimit: defaultRateLimit },
+      schema: {
+        body: reminderSchedulesSchema,
+        response: { 200: reminderSchedulesSchema },
+      },
+      preHandler: [server.authenticate],
+    },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const userId = (request.user as { sub: string }).sub;
+      const parsed = reminderSchedulesBodySchema.safeParse(request.body);
+      if (!parsed.success) {
+        const msg = parsed.error.errors.map((e) => e.message).join('; ');
+        sendError(reply, 400, 'validation_error', msg, {});
+        return;
+      }
+      const schedules = await userService.updateUserReminderSchedules(userId, parsed.data.schedules);
+      reply.code(200).send({ schedules });
     }
   );
 

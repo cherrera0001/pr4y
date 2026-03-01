@@ -5,12 +5,14 @@ import android.os.Build
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.pr4y.app.data.remote.ReminderScheduleDto
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
 object ReminderScheduler {
 
     private const val WORK_NAME = "pr4y_daily_reminder"
+    private const val MAX_SCHEDULES = 5
 
     /** Programa el recordatorio con hora y días configurables (sincronizado con API). */
     fun scheduleFromPreferences(context: Context, time: String, daysOfWeek: List<Int>, enabled: Boolean) {
@@ -34,6 +36,32 @@ object ReminderScheduler {
     /** Mantiene compatibilidad: programa a las 9:00. */
     fun scheduleDaily(context: Context) {
         scheduleFromPreferences(context, "09:00", listOf(1, 2, 3, 4, 5, 6), true)
+    }
+
+    /**
+     * Programa hasta [MAX_SCHEDULES] trabajos periódicos, uno por horario.
+     * Cancela todos los jobs previos del sistema multi-schedule antes de reprogramar.
+     */
+    fun scheduleAll(context: Context, schedules: List<ReminderScheduleDto>) {
+        createNotificationChannelIfNeeded(context)
+        val wm = WorkManager.getInstance(context)
+        // Cancelar todos los slots previos
+        for (i in 0 until MAX_SCHEDULES) {
+            wm.cancelUniqueWork("${WORK_NAME}_$i")
+        }
+        schedules.take(MAX_SCHEDULES).forEachIndexed { index, schedule ->
+            if (!schedule.enabled || schedule.daysOfWeek.isEmpty()) return@forEachIndexed
+            val (hour, minute) = parseTime(schedule.time)
+            val delay = delayUntilNext(context, hour, minute, schedule.daysOfWeek)
+            val request = PeriodicWorkRequestBuilder<ReminderWorker>(24, TimeUnit.HOURS)
+                .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+                .build()
+            wm.enqueueUniquePeriodicWork(
+                "${WORK_NAME}_$index",
+                ExistingPeriodicWorkPolicy.REPLACE,
+                request,
+            )
+        }
     }
 
     private fun parseTime(time: String): Pair<Int, Int> {

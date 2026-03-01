@@ -23,12 +23,16 @@ import com.pr4y.app.data.prefs.DisplayPrefs
 import com.pr4y.app.data.prefs.DisplayPrefsStore
 import com.pr4y.app.data.remote.DisplayPreferencesDto
 import com.pr4y.app.data.remote.ApiService
+import com.pr4y.app.data.remote.ReminderScheduleDto
+import com.pr4y.app.data.remote.ReminderSchedulesResponse
 import com.pr4y.app.data.remote.RetrofitClient
 import com.pr4y.app.ui.Pr4yNavHost
 import com.pr4y.app.ui.components.ShimmerLoading
 import com.pr4y.app.ui.theme.Pr4yTheme
 import com.pr4y.app.util.Pr4yLog
+import com.pr4y.app.work.ReminderScheduler
 import com.pr4y.app.work.SyncScheduler
+import java.util.Calendar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -43,6 +47,7 @@ class MainViewModel : ViewModel() {
     var hasSeenWelcome by mutableStateOf(false)
     var initError by mutableStateOf<String?>(null)
     var displayPrefs by mutableStateOf(DisplayPrefs())
+    var reminderSchedules by mutableStateOf<List<ReminderScheduleDto>>(emptyList())
 
     private var tokenStore: AuthTokenStore? = null
     private var api: ApiService? = null
@@ -82,20 +87,28 @@ class MainViewModel : ViewModel() {
                     authRepository = AuthRepository(retrofitApi, store)
                     hasSeenWelcome = store.hasSeenWelcome()
 
-                    // Fetch display prefs del servidor una vez autenticado
+                    // Fetch display prefs y reminder schedules del servidor una vez autenticado
                     if (loggedIn) {
-                        try {
-                            val bearer = store.getAccessToken()?.let { "Bearer $it" }
-                            if (bearer != null) {
+                        val bearer = store.getAccessToken()?.let { "Bearer $it" }
+                        if (bearer != null) {
+                            try {
                                 val res = retrofitApi.getDisplayPreferences(bearer)
                                 if (res.isSuccessful) {
                                     res.body()?.let { dto ->
                                         DisplayPrefsStore.save(context, dto.toDisplayPrefs())
                                     }
                                 }
+                            } catch (e: Exception) {
+                                Pr4yLog.w("initBunker: display prefs fetch failed (offline?): ${e.message}")
                             }
-                        } catch (e: Exception) {
-                            Pr4yLog.w("initBunker: display prefs fetch failed (offline?): ${e.message}")
+                            try {
+                                val res = retrofitApi.getReminderSchedules(bearer)
+                                if (res.isSuccessful) {
+                                    reminderSchedules = res.body()?.schedules ?: emptyList()
+                                }
+                            } catch (e: Exception) {
+                                Pr4yLog.w("initBunker: reminder schedules fetch failed (offline?): ${e.message}")
+                            }
                         }
                     }
                 }
@@ -120,9 +133,42 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun updateReminderSchedules(context: android.content.Context, schedules: List<ReminderScheduleDto>) {
+        reminderSchedules = schedules
+        ReminderScheduler.scheduleAll(context, schedules)
+        viewModelScope.launch {
+            try {
+                val bearer = tokenStore?.getAccessToken()?.let { "Bearer $it" } ?: return@launch
+                api?.putReminderSchedules(bearer, ReminderSchedulesResponse(schedules))
+            } catch (e: Exception) {
+                Pr4yLog.w("updateReminderSchedules: remote PUT failed: ${e.message}")
+            }
+        }
+    }
+
     fun setHasSeenWelcome() {
         tokenStore?.setHasSeenWelcome(true)
         hasSeenWelcome = true
+    }
+}
+
+/**
+ * Retorna true si algún recordatorio habilitado está dentro de ±30min de la hora actual
+ * en un día de la semana activo. Usado para el auto-dark cuando theme == "system".
+ */
+private fun checkPrayerWindow(schedules: List<ReminderScheduleDto>): Boolean {
+    if (schedules.isEmpty()) return false
+    val cal = Calendar.getInstance()
+    // Calendar.DAY_OF_WEEK: 1=Dom..7=Sáb → convertimos a 0=Dom..6=Sáb
+    val todayDow = cal.get(Calendar.DAY_OF_WEEK) - 1
+    val nowMin = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE)
+    return schedules.any { s ->
+        if (!s.enabled || !s.daysOfWeek.contains(todayDow)) return@any false
+        val parts = s.time.split(":")
+        val h = parts.getOrNull(0)?.toIntOrNull() ?: return@any false
+        val m = parts.getOrNull(1)?.toIntOrNull() ?: return@any false
+        val schedMin = h * 60 + m
+        nowMin in (schedMin - 30)..(schedMin + 30)
     }
 }
 
@@ -185,7 +231,22 @@ class MainActivity : AppCompatActivity() {
                 vm.initBunker(applicationContext)
             }
 
-            Pr4yTheme(prefs = vm.displayPrefs) {
+            // Auto-tema: si hay un recordatorio activo en ventana ±30min, oscurecer en modo "system"
+            var prayerWindowActive by remember { mutableStateOf(false) }
+            LaunchedEffect(vm.reminderSchedules) {
+                while (true) {
+                    prayerWindowActive = checkPrayerWindow(vm.reminderSchedules)
+                    delay(60_000L)
+                }
+            }
+            val effectivePrefs = remember(vm.displayPrefs, prayerWindowActive) {
+                if (prayerWindowActive && vm.displayPrefs.theme == "system")
+                    vm.displayPrefs.copy(theme = "dark")
+                else
+                    vm.displayPrefs
+            }
+
+            Pr4yTheme(prefs = effectivePrefs) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
@@ -193,23 +254,27 @@ class MainActivity : AppCompatActivity() {
                     when {
                         !vm.isReady || vm.authRepository == null -> ShimmerLoading()
                         else -> Pr4yNavHost(
-                            authRepository        = vm.authRepository!!,
-                            loggedIn              = vm.loggedIn,
-                            onLoginSuccess        = { vm.loggedIn = true },
-                            onLogout              = {
+                            authRepository             = vm.authRepository!!,
+                            loggedIn                   = vm.loggedIn,
+                            onLoginSuccess             = { vm.loggedIn = true },
+                            onLogout                   = {
                                 scope.launch {
                                     vm.authRepository?.logout()
                                     vm.loggedIn   = false
                                     vm.isUnlocked = false
                                 }
                             },
-                            unlocked              = vm.isUnlocked,
-                            onUnlocked            = { vm.isUnlocked = true },
-                            hasSeenWelcome        = vm.hasSeenWelcome,
-                            onSetHasSeenWelcome   = { vm.setHasSeenWelcome() },
-                            displayPrefs          = vm.displayPrefs,
-                            onUpdateDisplayPrefs  = { prefs ->
+                            unlocked                   = vm.isUnlocked,
+                            onUnlocked                 = { vm.isUnlocked = true },
+                            hasSeenWelcome             = vm.hasSeenWelcome,
+                            onSetHasSeenWelcome        = { vm.setHasSeenWelcome() },
+                            displayPrefs               = vm.displayPrefs,
+                            onUpdateDisplayPrefs       = { prefs ->
                                 vm.updateDisplayPrefs(applicationContext, prefs)
+                            },
+                            reminderSchedules          = vm.reminderSchedules,
+                            onUpdateReminderSchedules  = { schedules ->
+                                vm.updateReminderSchedules(applicationContext, schedules)
                             },
                         )
                     }
