@@ -123,12 +123,12 @@ export default function AdminDashboardPage() {
   const chartData = stats.byDay.map((d) => ({
     fecha: d.day.slice(5),
     'Usuarios activos (DAU)': d.usersActive,
-    'Bytes subidos': Number(d.bytesPushed),
-    'Bytes bajados': Number(d.bytesPulled),
+    'Volumen subido': Number(d.bytesPushed),
+    'Volumen bajado': Number(d.bytesPulled),
   }));
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8" data-testid="admin-dashboard" aria-label="Panel de administración - Dashboard de salud">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
           <h1 className="text-2xl font-bold text-foreground">Dashboard de salud</h1>
@@ -156,7 +156,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {detail?.lastSyncActivity && (
-        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
+        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10" data-testid="admin-card-last-sync" aria-label="Última actividad de sincronización">
           <CardHeader className="pb-2">
             <CardDescription>Última actividad de sincronización</CardDescription>
             <CardTitle className="text-xl">{detail.lastSyncActivity}</CardTitle>
@@ -165,25 +165,25 @@ export default function AdminDashboardPage() {
       )}
 
       <Grid numItemsSm={2} numItemsLg={4} className="gap-4">
-        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
+        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10" data-testid="admin-card-total-records" aria-label="Registros totales">
           <CardHeader className="pb-2">
             <CardDescription>Registros totales</CardDescription>
             <CardTitle className="text-2xl">{stats.totalRecords.toLocaleString()}</CardTitle>
           </CardHeader>
         </Card>
-        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
+        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10" data-testid="admin-card-total-users" aria-label="Usuarios totales">
           <CardHeader className="pb-2">
             <CardDescription>Usuarios totales</CardDescription>
             <CardTitle className="text-2xl">{stats.totalUsers.toLocaleString()}</CardTitle>
           </CardHeader>
         </Card>
-        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
+        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10" data-testid="admin-card-syncs-today" aria-label="Sincronizaciones hoy">
           <CardHeader className="pb-2">
             <CardDescription>Sincronizaciones hoy</CardDescription>
             <CardTitle className="text-2xl">{stats.syncsToday.toLocaleString()}</CardTitle>
           </CardHeader>
         </Card>
-        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
+        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10" data-testid="admin-card-blob-storage" aria-label="Almacenamiento de blobs cifrados">
           <CardHeader className="pb-2">
             <CardDescription>Almacenamiento blobs (E2EE)</CardDescription>
             <CardTitle className="text-2xl">{formatBytes(stats.totalBlobBytes)}</CardTitle>
@@ -191,7 +191,7 @@ export default function AdminDashboardPage() {
         </Card>
       </Grid>
 
-      <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
+      <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10" data-testid="admin-card-dau-chart" aria-label="Gráfico de usuarios activos diarios">
         <CardHeader>
           <CardTitle>Usuarios activos diarios (DAU)</CardTitle>
           <CardDescription>Últimos {days} días</CardDescription>
@@ -209,17 +209,22 @@ export default function AdminDashboardPage() {
         </CardContent>
       </Card>
 
-      <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
+      <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10" data-testid="admin-card-sync-traffic" aria-label="Tráfico de sincronización por día">
         <CardHeader>
           <CardTitle>Tráfico de sincronización por día</CardTitle>
-          <CardDescription>Últimos {days} días — bytes subidos y bajados</CardDescription>
+          <CardDescription>
+            Volumen de datos subidos y bajados (formato legible). Útil para coste de ancho de banda y detección de picos. Últimos {days} días.
+          </CardDescription>
         </CardHeader>
         <CardContent>
+          <p className="text-sm text-muted-foreground mb-2">
+            Hoy: {formatBytes(stats.bytesPushedToday)} subidos · {formatBytes(stats.bytesPulledToday)} bajados
+          </p>
           <BarChart
             className="mt-4 h-72"
             data={chartData}
             index="fecha"
-            categories={['Bytes subidos', 'Bytes bajados']}
+            categories={['Volumen subido', 'Volumen bajado']}
             colors={['emerald', 'sky']}
             valueFormatter={(v) => formatBytes(v)}
             stack
@@ -228,14 +233,14 @@ export default function AdminDashboardPage() {
       </Card>
 
       {detail?.recordsByTypeByDay && detail.recordsByTypeByDay.length > 0 && (
-        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10">
+        <Card className="glass-card border-slate-700/50 shadow-xl shadow-black/10" data-testid="admin-card-records-by-type" aria-label="Registros por tipo y día">
           <CardHeader>
             <CardTitle>Registros por tipo y día</CardTitle>
             <CardDescription>Volumen agregado por tipo (oración, diario, etc.) en los últimos {days} días</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="mt-2 overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full text-sm" data-testid="admin-table-records-by-type" aria-label="Tabla de registros por tipo y día">
                 <thead>
                   <tr className="border-b border-border">
                     <th className="text-left py-2 font-medium">Día</th>
@@ -245,7 +250,14 @@ export default function AdminDashboardPage() {
                 </thead>
                 <tbody>
                   {detail.recordsByTypeByDay.slice(-30).reverse().map((r, i) => (
-                    <tr key={`${r.day}-${r.type}-${i}`} className="border-b border-border/50">
+                    <tr
+                      key={`${r.day}-${r.type}-${i}`}
+                      className="border-b border-border/50"
+                      data-testid={`admin-row-record-type-${r.type}`}
+                      data-record-type={r.type}
+                      data-record-day={r.day}
+                      aria-label={`Fila ${i + 1}: día ${r.day.slice(5)}, tipo ${r.type}, cantidad ${r.count}`}
+                    >
                       <td className="py-1.5">{r.day.slice(5)}</td>
                       <td className="py-1.5">{r.type}</td>
                       <td className="text-right py-1.5">{r.count.toLocaleString()}</td>

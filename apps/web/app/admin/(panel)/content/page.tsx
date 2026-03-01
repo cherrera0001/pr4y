@@ -254,7 +254,7 @@ export default function AdminContentPage() {
             Gestor de contenido global
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Palabras de Aliento y Avisos que se publican en el búnker del usuario. Crear, editar, publicar o eliminar.
+            Palabras de Aliento y Avisos que se publican en el búnker del usuario. Al marcar como «Publicado», el contenido llega a todos los usuarios (web y app) vía GET /v1/public/content.
           </p>
         </div>
         <div className="flex items-center gap-4">
