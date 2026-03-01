@@ -129,6 +129,24 @@ export async function listContent(type?: string): Promise<GlobalContentRow[]> {
   }));
 }
 
+/** Lista solo contenido publicado (para clientes: web/mobile). Llega a todos los usuarios. */
+export async function listPublishedContent(type?: string): Promise<GlobalContentRow[]> {
+  const items = await prisma.globalContent.findMany({
+    where: { published: true, ...(type ? { type } : {}) },
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'desc' }],
+  });
+  return items.map((c) => ({
+    id: c.id,
+    type: c.type,
+    title: c.title,
+    body: c.body,
+    published: c.published,
+    sortOrder: c.sortOrder,
+    createdAt: c.createdAt.toISOString(),
+    updatedAt: c.updatedAt.toISOString(),
+  }));
+}
+
 export async function createContent(data: {
   type: string;
   title: string;
