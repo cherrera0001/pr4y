@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-12">
+    <main className="min-h-screen bg-background px-6 py-12">
       <div className="mx-auto max-w-3xl">
-        <Button variant="ghost" size="sm" asChild className="text-slate-400 hover:text-slate-200 mb-8">
+        <Button variant="ghost" size="sm" asChild className="text-muted-foreground hover:text-foreground mb-8">
           <Link href="/">
             <ArrowLeft className="size-4" />
             Volver al inicio

@@ -10,6 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Heart, Loader2 } from 'lucide-react';
 import { submitPublicRequest } from '@/lib/api';
 
@@ -59,7 +61,7 @@ export default function PedirOracionPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-12">
+    <main className="min-h-screen bg-background px-6 py-12">
       <div className="mx-auto max-w-2xl">
         <Button variant="ghost" size="sm" asChild className="text-slate-400 hover:text-slate-200 mb-8">
           <Link href="/">
@@ -93,14 +95,13 @@ export default function PedirOracionPage() {
                 <label htmlFor="title" className="block text-sm font-medium text-slate-300 mb-1">
                   Título (opcional)
                 </label>
-                <input
+                <Input
                   id="title"
                   type="text"
                   maxLength={TITLE_MAX}
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Ej: Por mi familia"
-                  className="w-full rounded-lg border border-slate-600 bg-slate-800/50 px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
                 />
                 <p className="mt-1 text-xs text-slate-500">{title.length}/{TITLE_MAX}</p>
               </div>
@@ -108,7 +109,7 @@ export default function PedirOracionPage() {
                 <label htmlFor="body" className="block text-sm font-medium text-slate-300 mb-1">
                   Tu pedido de oración *
                 </label>
-                <textarea
+                <Textarea
                   id="body"
                   required
                   minLength={BODY_MIN}
@@ -117,7 +118,7 @@ export default function PedirOracionPage() {
                   value={body}
                   onChange={(e) => setBody(e.target.value)}
                   placeholder="Escribe aquí tu petición para que otros oren por ti..."
-                  className="w-full rounded-lg border border-slate-600 bg-slate-800/50 px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 resize-y"
+                  className="resize-y"
                 />
                 <p className="mt-1 text-xs text-slate-500">{body.length}/{BODY_MAX} (mín. {BODY_MIN})</p>
               </div>

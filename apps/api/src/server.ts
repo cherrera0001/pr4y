@@ -21,6 +21,8 @@ import recordsRoutes from './routes/records';
 import userRoutes from './routes/user';
 import publicRequestsRoutes from './routes/public-requests';
 import publicContentRoutes from './routes/public-content';
+import rouletteRoutes from './routes/roulette';
+import { initSocketIO } from './lib/socket';
 
 const BODY_LIMIT = 2 * 1024 * 1024; // 2MB global
 
@@ -106,11 +108,13 @@ server.decorate('requireAdmin', async function (request: FastifyRequest, reply: 
 // Error handler global: no exponer stack ni mensajes internos al cliente; solo logger Fastify
 server.setErrorHandler((error: Error & { validation?: unknown }, request, reply) => {
   if (error.validation) {
+    // Log detallado server-side; al cliente solo un mensaje genérico (VULN-003/006)
+    request.log.warn({ validation: error.validation }, 'AJV validation failed');
     return reply.code(400).send({
       error: {
         code: 'validation_error',
-        message: 'Invalid input',
-        details: error.validation,
+        message: 'Invalid request format.',
+        details: {},
       },
     });
   }
@@ -147,6 +151,7 @@ server.register(userRoutes, { prefix: '/v1' });
 server.register(publicRequestsRoutes, { prefix: '/v1' });
 server.register(publicContentRoutes, { prefix: '/v1' });
 server.register(adminRoutes, { prefix: '/v1' });
+server.register(rouletteRoutes, { prefix: '/v1' });
 
 // Arranque: Railway espera escucha en puerto 8080. Binding 0.0.0.0 obligatorio para que el proxy enrute.
 const port = Number(process.env.PORT) || 8080;
@@ -191,6 +196,9 @@ const start = async () => {
       { path: '/v1/public/content', method: 'GET' },
       { path: '/v1/user/display-preferences', method: 'GET' },
       { path: '/v1/user/reminder-schedules', method: 'GET' },
+      { path: '/v1/roulette/join', method: 'POST' },
+      { path: '/v1/roulette/status', method: 'GET' },
+      { path: '/v1/partners', method: 'GET' },
     ];
     const missing = requiredRoutes.filter(
       (req) => !routesLog.some((r) => r.path === req.path && r.method === req.method)
@@ -203,6 +211,11 @@ const start = async () => {
     console.log(server.printRoutes());
     await server.listen({ port: Number(process.env.PORT) || 8080, host: '0.0.0.0' });
     console.log(`API PR4Y activa en puerto ${port} y host 0.0.0.0`);
+
+    // Socket.io: montar sobre el HTTP server de Fastify
+    const httpServer = server.server;
+    initSocketIO(httpServer, jwtSecret, allowedOrigins);
+    console.log('[PR4Y] Socket.io inicializado en /ws');
   } catch (err) {
     server.log.error(err);
     process.exit(1);

@@ -9,6 +9,7 @@ import { sendError, safeDetailsFromError } from '../lib/errors';
 type JwtUser = { sub: string; email: string; role?: string };
 
 const defaultRateLimit = { max: 60, timeWindow: '1 minute' as const };
+const NOT_FOUND_RESPONSE = { error: { code: 'not_found', message: 'Route not found', details: {} } } as const;
 
 const updateUserBodySchema = z.object({
   role: z.enum(['user', 'admin', 'super_admin']).optional(),
@@ -80,6 +81,18 @@ const statsDetailResponseSchema = {
 };
 
 export default async function adminRoutes(server: FastifyInstance) {
+  // VULN-004: Sin JWT válido → 404 genérico (impide enumeración de rutas admin).
+  server.addHook('onRequest', async (request, reply) => {
+    try {
+      await request.jwtVerify();
+    } catch {
+      return reply.code(404).send(NOT_FOUND_RESPONSE);
+    }
+    const user = request.user as JwtUser | undefined;
+    if (user?.role !== 'admin' && user?.role !== 'super_admin') {
+      return reply.code(404).send(NOT_FOUND_RESPONSE);
+    }
+  });
   server.get(
     '/admin/stats',
     {

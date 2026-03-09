@@ -54,6 +54,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import com.pr4y.app.BuildConfig
 import com.pr4y.app.crypto.DekManager
+import com.pr4y.app.ui.components.Pr4yLogo
 import com.pr4y.app.data.auth.AuthRepository
 import com.pr4y.app.data.prefs.DisplayPrefs
 import com.pr4y.app.data.remote.ApiService
@@ -169,12 +170,7 @@ fun SettingsScreen(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    Icon(
-                        Icons.Default.Security,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colorScheme.primary,
-                    )
+                    Pr4yLogo(size = 18.dp, contentDescription = null)
                     Text(
                         text = "Protegido y sincronizado",
                         style = MaterialTheme.typography.labelMedium,

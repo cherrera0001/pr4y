@@ -2,6 +2,11 @@ package com.pr4y.app.ui
 
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,6 +51,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.pr4y.app.ui.components.Pr4yLogo
 import com.pr4y.app.crypto.DekManager
 import com.pr4y.app.data.auth.AuthRepository
 import com.pr4y.app.data.prefs.DisplayPrefs
@@ -106,8 +112,18 @@ fun Pr4yNavHost(
 
     val showReauthOverlay = loggedIn && !unlocked && wasEverUnlocked
 
+    val navEnter = fadeIn(tween(300)) + slideInVertically(tween(300)) { it / 8 }
+    val navExit = fadeOut(tween(200))
+
     Box(Modifier.fillMaxSize()) {
-        NavHost(navController = navController, startDestination = startDestination) {
+        NavHost(
+            navController = navController,
+            startDestination = startDestination,
+            enterTransition = { navEnter },
+            exitTransition = { navExit },
+            popEnterTransition = { fadeIn(tween(250)) },
+            popExitTransition = { fadeOut(tween(200)) + slideOutVertically(tween(200)) { it / 8 } },
+        ) {
             composable(Routes.LOGIN) {
                 val loginViewModel: LoginViewModel = viewModel(
                     factory = LoginViewModelFactory(authRepository)
@@ -294,12 +310,7 @@ private fun ReauthOverlay(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Lock,
-                        contentDescription = null,
-                        modifier = Modifier.size(72.dp),
-                        tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
-                    )
+                    Pr4yLogo(size = 72.dp, contentDescription = null)
                     Spacer(Modifier.height(24.dp))
                     Text(
                         text = "Sesión protegida",
@@ -353,7 +364,17 @@ private fun InnerNavHost(
 ) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Routes.HOME) {
+    val innerEnter = fadeIn(tween(300)) + slideInVertically(tween(300)) { it / 8 }
+    val innerExit = fadeOut(tween(200))
+
+    NavHost(
+        navController = navController,
+        startDestination = Routes.HOME,
+        enterTransition = { innerEnter },
+        exitTransition = { innerExit },
+        popEnterTransition = { fadeIn(tween(250)) },
+        popExitTransition = { fadeOut(tween(200)) + slideOutVertically(tween(200)) { it / 8 } },
+    ) {
         composable(Routes.HOME) {
             val homeViewModel: HomeViewModel = viewModel(
                 factory = HomeViewModelFactory(AppContainer.db, syncRepository, userId)

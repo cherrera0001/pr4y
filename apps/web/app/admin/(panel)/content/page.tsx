@@ -34,6 +34,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 /** Tipos de contenido global que se muestran en el búnker del usuario. */
 const CONTENT_TYPES = [
@@ -90,6 +100,7 @@ export default function AdminContentPage() {
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<ContentItem | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const [formType, setFormType] = useState('prayer');
@@ -213,7 +224,6 @@ export default function AdminContentPage() {
   };
 
   const deleteItem = async (id: string) => {
-    if (!confirm('¿Eliminar este contenido? No se puede deshacer.')) return;
     setDeletingId(id);
     try {
       const res = await fetch(`/api/admin/content/${id}`, { method: 'DELETE' });
@@ -315,7 +325,7 @@ export default function AdminContentPage() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => deleteItem(item.id)}
+                    onClick={() => setConfirmDeleteId(item.id)}
                     disabled={deletingId === item.id}
                     className="text-destructive hover:text-destructive"
                   >
@@ -337,6 +347,31 @@ export default function AdminContentPage() {
           No hay contenidos. Crea uno con «Nuevo contenido».
         </p>
       )}
+
+      <AlertDialog open={!!confirmDeleteId} onOpenChange={(open) => !open && setConfirmDeleteId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Eliminar este contenido?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Esta acción no se puede deshacer. El contenido será eliminado permanentemente.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              onClick={() => {
+                if (confirmDeleteId) {
+                  deleteItem(confirmDeleteId);
+                  setConfirmDeleteId(null);
+                }
+              }}
+            >
+              Eliminar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       <Dialog open={showForm} onOpenChange={(open) => !open && closeForm()}>
         <DialogContent className="sm:max-w-lg">

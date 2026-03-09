@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.pr4y.app.crypto.DekManager
-import com.pr4y.app.ui.theme.ElectricCyan
 import com.pr4y.app.crypto.LocalCrypto
 import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.data.local.JournalDraftStore
@@ -51,7 +50,6 @@ import com.pr4y.app.data.local.entity.JournalEntity
 import com.pr4y.app.data.local.entity.OutboxEntity
 import com.pr4y.app.data.sync.SyncRepository
 import com.pr4y.app.di.AppContainer
-import com.pr4y.app.ui.theme.MidnightBlue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -77,9 +75,9 @@ fun NewJournalScreen(navController: NavController) {
 
     Scaffold(
         snackbarHost = { SnackbarHost(snackbar) },
-        containerColor = MidnightBlue,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            Surface(color = MidnightBlue) {
+            Surface(color = MaterialTheme.colorScheme.background) {
                 IconButton(
                     onClick = { navController.navigateUp() },
                     modifier = Modifier.statusBarsPadding()
@@ -96,7 +94,7 @@ fun NewJournalScreen(navController: NavController) {
         Column(
             Modifier
                 .fillMaxSize()
-                .background(MidnightBlue)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
                 .padding(horizontal = 20.dp),
         ) {
@@ -151,8 +149,8 @@ fun NewJournalScreen(navController: NavController) {
                     .background(
                         Brush.verticalGradient(
                             listOf(
-                                MidnightBlue,
-                                ElectricCyan.copy(alpha = 0.1f),
+                                MaterialTheme.colorScheme.background,
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
                             )
                         )
                     )

@@ -40,6 +40,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(canonical, 308);
   }
 
+  // /app routes: client-side auth (no middleware blocking — auth state is in localStorage)
+  // /api/v1 routes: pass through (proxy handles auth via Authorization header)
   if (!pathname.startsWith('/admin')) {
     return NextResponse.next();
   }

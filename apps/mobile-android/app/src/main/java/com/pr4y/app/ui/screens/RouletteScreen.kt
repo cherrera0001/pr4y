@@ -41,7 +41,7 @@ fun RouletteScreen(
         topBar = {
             Pr4yTopAppBar(
                 title = "Orar por un extraño",
-                onNavIconClick = { navController.popBackStack() }
+                onBackClick = { navController.popBackStack() }
             )
         }
     ) { padding ->

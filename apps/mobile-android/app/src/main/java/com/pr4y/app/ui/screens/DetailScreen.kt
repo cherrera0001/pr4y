@@ -45,12 +45,11 @@ import com.pr4y.app.data.remote.ApiService
 import com.pr4y.app.di.AppContainer
 import com.pr4y.app.ui.Routes
 import com.pr4y.app.ui.components.Pr4yTopAppBar
+import com.pr4y.app.ui.theme.LocalPr4yColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-
-private val HopeGreen = Color(0xFF81C784)
 
 @Composable
 fun DetailScreen(
@@ -150,7 +149,7 @@ fun DetailScreen(
                         }
                     },
                     enabled = !markingAnswered,
-                    colors = ButtonDefaults.buttonColors(containerColor = HopeGreen),
+                    colors = ButtonDefaults.buttonColors(containerColor = LocalPr4yColors.current.hopeGreen),
                 ) {
                     if (markingAnswered) {
                         CircularProgressIndicator(
@@ -216,7 +215,7 @@ fun DetailScreen(
                     enabled = !alreadyAnswered,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = if (alreadyAnswered) MaterialTheme.colorScheme.surfaceVariant
-                        else HopeGreen,
+                        else LocalPr4yColors.current.hopeGreen,
                     ),
                 ) {
                     Icon(Icons.Default.Check, contentDescription = null)

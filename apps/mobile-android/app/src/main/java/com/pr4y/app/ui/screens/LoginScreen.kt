@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.platform.LocalContext
@@ -23,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.pr4y.app.ui.components.Pr4yLogo
 import com.pr4y.app.ui.viewmodel.LoginUiState
 import com.pr4y.app.ui.viewmodel.LoginViewModel
 
@@ -96,12 +96,7 @@ fun LoginScreen(
                         .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Security,
-                        contentDescription = "Logo PR4Y",
-                        modifier = Modifier.size(60.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
+                    Pr4yLogo(size = 60.dp, contentDescription = "Logo PR4Y")
                 }
 
                 Spacer(Modifier.height(32.dp))
@@ -112,7 +107,7 @@ fun LoginScreen(
                         fontWeight = FontWeight.ExtraBold,
                         letterSpacing = 4.sp
                     ),
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onBackground
                 )
 
                 Text(
@@ -139,8 +134,8 @@ fun LoginScreen(
                                 modifier = Modifier.fillMaxWidth().height(56.dp),
                                 shape = RoundedCornerShape(28.dp),
                                 colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color.White,
-                                    contentColor = Color.Black
+                                    containerColor = MaterialTheme.colorScheme.surface,
+                                    contentColor = MaterialTheme.colorScheme.onSurface
                                 )
                             ) {
                                 Text("Continuar con Google", fontWeight = FontWeight.Bold)

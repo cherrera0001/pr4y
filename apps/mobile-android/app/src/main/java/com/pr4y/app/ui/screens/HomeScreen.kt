@@ -31,6 +31,7 @@ import com.pr4y.app.ui.Routes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
+import com.pr4y.app.ui.components.Pr4yLogo
 import com.pr4y.app.ui.components.Pr4yTopAppBar
 import com.pr4y.app.ui.viewmodel.HomeUiState
 import com.pr4y.app.ui.viewmodel.HomeViewModel
@@ -111,7 +112,7 @@ private fun HomeFABs(uiState: HomeUiState, navController: NavController) {
             onClick = { navController.navigate(Routes.NEW_EDIT) },
             modifier = Modifier.sizeIn(minWidth = 56.dp, minHeight = 56.dp),
             containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = Color.Black
+            contentColor = MaterialTheme.colorScheme.onPrimary
         ) {
             Icon(Icons.Default.Add, contentDescription = "Nuevo Pedido")
         }
@@ -187,7 +188,7 @@ private fun FidelidadCard() {
         }
     }
     if (weekCounts.isEmpty() || weekCounts.all { it == 0 }) return
-    val labels = listOf("Esta semana", "Semana anterior", "Hace 2 sem.", "Hace 3 sem.")
+    val labels = listOf("Hace 3 sem.", "Hace 2 sem.", "Semana anterior", "Esta semana")
     val maxCount = (weekCounts.maxOrNull() ?: 1).coerceAtLeast(1)
     val barColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     Card(
@@ -347,7 +348,8 @@ private fun RequestsList(requests: List<RequestEntity>, navController: NavContro
         items(items = requests, key = { it.id }) { req ->
             RequestItem(
                 request = req,
-                onClick = { navController.navigate(Routes.detail(req.id)) }
+                onClick = { navController.navigate(Routes.detail(req.id)) },
+                modifier = Modifier.animateItem(),
             )
             HorizontalDivider(
                 modifier = Modifier.padding(horizontal = 16.dp),
@@ -359,10 +361,10 @@ private fun RequestsList(requests: List<RequestEntity>, navController: NavContro
 }
 
 @Composable
-private fun RequestItem(request: RequestEntity, onClick: () -> Unit) {
+private fun RequestItem(request: RequestEntity, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Surface(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         color = Color.Transparent
     ) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -370,7 +372,7 @@ private fun RequestItem(request: RequestEntity, onClick: () -> Unit) {
                 Text(
                     text = request.title.ifBlank { "Sin título" },
                     style = MaterialTheme.typography.titleMedium,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 if (!request.body.isNullOrBlank()) {
                     Text(
@@ -387,31 +389,11 @@ private fun RequestItem(request: RequestEntity, onClick: () -> Unit) {
 
 @Composable
 private fun EmptyRequestsState(onCreateClick: () -> Unit) {
-    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(32.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Icon(
-                Icons.Default.Security,
-                contentDescription = null,
-                modifier = Modifier.size(64.dp),
-                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
-            )
-            Text(
-                "Tu búnker está listo",
-                style = MaterialTheme.typography.headlineSmall,
-                color = Color.White
-            )
-            Text(
-                "Aún no tienes pedidos de oración registrados.",
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Button(onClick = onCreateClick) {
-                Text("Crear mi primer pedido")
-            }
-        }
-    }
+    com.pr4y.app.ui.components.EmptyStatePlaceholder(
+        icon = Icons.Default.Add,
+        title = "Tu búnker está listo",
+        description = "Aún no tienes pedidos de oración registrados.",
+        actionText = "Crear mi primer pedido",
+        onAction = onCreateClick,
+    )
 }

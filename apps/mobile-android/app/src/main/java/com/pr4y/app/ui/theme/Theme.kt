@@ -1,14 +1,18 @@
 package com.pr4y.app.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pr4y.app.data.prefs.DisplayPrefs
 
@@ -16,6 +20,26 @@ import com.pr4y.app.data.prefs.DisplayPrefs
 val MidnightBlue = Color(0xFF0A0A0A)
 val SurfaceDark  = Color(0xFF1E1E1E)
 val ElectricCyan = Color(0xFF0EA5E9)
+
+// ─── Colores semánticos (accesibles via Pr4ySemanticColors) ─────────────────
+val HopeGreen = Color(0xFF81C784)
+val SoftGold  = Color(0xFFD4A574)
+
+data class Pr4ySemanticColors(
+    val hopeGreen: Color = HopeGreen,
+    val softGold: Color = SoftGold,
+)
+
+val LocalPr4yColors = staticCompositionLocalOf { Pr4ySemanticColors() }
+
+// ─── Shapes ─────────────────────────────────────────────────────────────────
+val Pr4yShapes = Shapes(
+    extraSmall = RoundedCornerShape(4.dp),
+    small      = RoundedCornerShape(8.dp),
+    medium     = RoundedCornerShape(16.dp),
+    large      = RoundedCornerShape(24.dp),
+    extraLarge = RoundedCornerShape(32.dp),
+)
 
 private val DarkColorScheme = darkColorScheme(
     primary          = ElectricCyan,
@@ -143,9 +167,14 @@ fun Pr4yTheme(
         isDark                             -> DarkColorScheme
         else                               -> LightColorScheme
     }
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography  = buildTypography(prefs),
-        content     = content,
-    )
+    androidx.compose.runtime.CompositionLocalProvider(
+        LocalPr4yColors provides Pr4ySemanticColors()
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography  = buildTypography(prefs),
+            shapes      = Pr4yShapes,
+            content     = content,
+        )
+    }
 }

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.pr4y.app.ui.components.Pr4yLogo
 import com.pr4y.app.work.ReminderScheduler
 
 @Composable
@@ -43,12 +44,7 @@ fun WelcomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Icon(
-                imageVector = Icons.Default.Security,
-                contentDescription = null,
-                modifier = Modifier.size(64.dp),
-                tint = MaterialTheme.colorScheme.primary
-            )
+            Pr4yLogo(size = 64.dp, contentDescription = "PR4Y")
             
             Spacer(modifier = Modifier.height(32.dp))
             

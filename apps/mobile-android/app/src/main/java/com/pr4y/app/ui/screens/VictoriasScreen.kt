@@ -31,14 +31,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.pr4y.app.data.remote.AnswerDto
+import com.pr4y.app.ui.components.EmptyStatePlaceholder
 import com.pr4y.app.ui.components.Pr4yTopAppBar
+import androidx.compose.material.icons.filled.Star
+import com.pr4y.app.ui.theme.LocalPr4yColors
 import com.pr4y.app.ui.viewmodel.VictoriasUiState
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 import java.util.Locale
-
-private val HopeGreen = Color(0xFF81C784)
-private val SoftGold = Color(0xFFD4A574)
 
 private val dateFormat = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.getDefault())
 
@@ -88,22 +88,15 @@ fun VictoriasScreen(navController: NavController, viewModel: com.pr4y.app.ui.vie
                     Text(
                         text = "${state.answeredCount} oración(es) respondida(s)",
                         style = MaterialTheme.typography.titleMedium,
-                        color = HopeGreen,
+                        color = LocalPr4yColors.current.hopeGreen,
                         modifier = Modifier.padding(bottom = 16.dp),
                     )
                     if (state.answers.isEmpty()) {
-                        Box(
-                            Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Text(
-                                text = "Cuando marques un pedido como respondido, aparecerá aquí.",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(24.dp),
-                            )
-                        }
+                        EmptyStatePlaceholder(
+                            icon = Icons.Default.Star,
+                            title = "Aún sin victorias",
+                            description = "Cuando marques un pedido como respondido, aparecerá aquí.",
+                        )
                     } else {
                         val sortedAnswers = state.answers.sortedByDescending { it.answeredAt }
                         LazyColumn(
@@ -127,7 +120,7 @@ private fun VictoriaCard(answer: AnswerDto) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors().copy(
-            containerColor = SoftGold.copy(alpha = 0.15f),
+            containerColor = LocalPr4yColors.current.softGold.copy(alpha = 0.15f),
         ),
         shape = CardDefaults.outlinedShape,
     ) {
@@ -146,12 +139,12 @@ private fun VictoriaCard(answer: AnswerDto) {
                     Icons.Default.ArrowForward,
                     contentDescription = null,
                     modifier = Modifier.size(16.dp),
-                    tint = HopeGreen,
+                    tint = LocalPr4yColors.current.hopeGreen,
                 )
                 Text(
                     text = "Respondido $answeredStr",
                     style = MaterialTheme.typography.labelMedium,
-                    color = SoftGold,
+                    color = LocalPr4yColors.current.softGold,
                 )
             }
             if (!answer.testimony.isNullOrBlank()) {

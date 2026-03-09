@@ -1,5 +1,6 @@
 package com.pr4y.app.ui.screens
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -39,13 +40,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.Brush
-import com.pr4y.app.ui.theme.ElectricCyan
-import com.pr4y.app.ui.theme.MidnightBlue
 import androidx.navigation.NavController
 import com.pr4y.app.crypto.DekManager
 import com.pr4y.app.crypto.LocalCrypto
@@ -197,8 +197,8 @@ fun NewEditScreen(
                             .background(
                                 Brush.verticalGradient(
                                     listOf(
-                                        MidnightBlue,
-                                        ElectricCyan.copy(alpha = 0.12f),
+                                        MaterialTheme.colorScheme.background,
+                                        MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
                                     )
                                 )
                             )
@@ -227,14 +227,33 @@ private fun SwipeToDeliver(
     onTrigger: () -> Unit,
     enabled: Boolean,
 ) {
+    val view = LocalView.current
     var maxWidthPx by remember { mutableFloatStateOf(0f) }
     var dragOffset by remember { mutableFloatStateOf(0f) }
     var hasTriggered by remember { mutableStateOf(false) }
     val animatedOffset by animateFloatAsState(targetValue = dragOffset, label = "swipe")
     val thresholdPx = maxWidthPx * SWIPE_THRESHOLD_FRACTION
+    val progress = if (maxWidthPx > 0f) (dragOffset / maxWidthPx).coerceIn(0f, 1f) else 0f
+
+    // Haptic feedback al cruzar el threshold
+    var crossedThreshold by remember { mutableStateOf(false) }
+    if (progress >= SWIPE_THRESHOLD_FRACTION && !crossedThreshold && !hasTriggered) {
+        crossedThreshold = true
+        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+    } else if (progress < SWIPE_THRESHOLD_FRACTION) {
+        crossedThreshold = false
+    }
+
     if (thresholdPx > 0f && dragOffset >= thresholdPx && enabled && !hasTriggered) {
         hasTriggered = true
+        view.performHapticFeedback(HapticFeedbackConstants.CONFIRM)
         LaunchedEffect(Unit) { onTrigger() }
+    }
+
+    val swipeText = when {
+        hasTriggered -> "Entregado"
+        progress >= SWIPE_THRESHOLD_FRACTION -> "Suelta para entregar"
+        else -> "Desliza para entregar"
     }
 
     Box(
@@ -255,17 +274,29 @@ private fun SwipeToDeliver(
             .onGloballyPositioned { maxWidthPx = it.size.width.toFloat() },
         contentAlignment = Alignment.CenterStart,
     ) {
+        // Progress bar de fondo
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(progress)
+                .height(56.dp)
+                .background(
+                    MaterialTheme.colorScheme.primaryContainer.copy(
+                        alpha = (progress * 0.4f).coerceAtMost(0.4f)
+                    )
+                ),
+        )
         Text(
-            text = "Desliza para entregar",
+            text = swipeText,
             modifier = Modifier.padding(horizontal = 20.dp),
+            style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
         )
         Box(
             modifier = Modifier
                 .offset { IntOffset(animatedOffset.roundToInt(), 0) }
-                .size(48.dp)
+                .size(52.dp)
                 .padding(4.dp)
-                .clip(RoundedCornerShape(24.dp))
+                .clip(RoundedCornerShape(26.dp))
                 .background(MaterialTheme.colorScheme.primaryContainer),
             contentAlignment = Alignment.Center,
         ) {

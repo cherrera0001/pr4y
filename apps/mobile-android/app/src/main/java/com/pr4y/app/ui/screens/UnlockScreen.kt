@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -30,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.pr4y.app.crypto.DekManager
+import com.pr4y.app.ui.components.Pr4yLogo
 import com.pr4y.app.ui.viewmodel.UnlockUiState
 import com.pr4y.app.ui.viewmodel.UnlockViewModel
 import kotlinx.coroutines.delay
@@ -249,12 +249,7 @@ fun UnlockScreen(
                     modifier = Modifier.size(100.dp).clip(CircleShape).background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Lock,
-                        contentDescription = null,
-                        modifier = Modifier.size(48.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
+                    Pr4yLogo(size = 48.dp, contentDescription = "PR4Y")
                 }
 
                 Spacer(Modifier.height(32.dp))
@@ -265,7 +260,7 @@ fun UnlockScreen(
                         else -> "Acceso Privado"
                     },
                     style = MaterialTheme.typography.headlineMedium,
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.Bold
                 )
 
@@ -327,7 +322,7 @@ fun UnlockScreen(
                                     modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
                                 ) {
                                     Checkbox(checked = rememberWithBiometrics, onCheckedChange = { rememberWithBiometrics = it })
-                                    Text("Activar acceso rápido con huella", style = MaterialTheme.typography.labelMedium, color = Color.Gray)
+                                    Text("Activar acceso rápido con huella", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 }
                             }
 
@@ -337,7 +332,7 @@ fun UnlockScreen(
                                 onClick = { viewModel.unlockWithPassphrase(passphrase, rememberWithBiometrics, context, canUseBiometrics = canAuthenticate) },
                                 modifier = Modifier.fillMaxWidth().height(56.dp),
                                 shape = RoundedCornerShape(28.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black)
+                                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary, contentColor = MaterialTheme.colorScheme.onPrimary)
                             ) {
                                 Text(if (isSetup) "Configurar y Entrar" else "Desbloquear", fontWeight = FontWeight.Bold)
                             }

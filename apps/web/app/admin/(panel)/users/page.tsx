@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { Search, UserX, UserCheck, ChevronLeft, ChevronRight, KeyRound } from 'lucide-react';
+import { Search, UserX, UserCheck, ChevronLeft, ChevronRight, KeyRound, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import {
   Table,
@@ -141,7 +141,7 @@ export default function AdminUsersPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12 text-muted-foreground">
-        Cargando usuarios…
+        <Loader2 className="size-6 animate-spin" />
       </div>
     );
   }

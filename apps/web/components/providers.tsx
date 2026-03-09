@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/sonner';
 import { DisplayPrefsProvider } from '@/components/display-prefs-provider';
+import { AuthProvider } from '@/components/auth-provider';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -12,12 +13,14 @@ export function Providers({ children }: { children: React.ReactNode }) {
       defaultTheme="system"
       enableSystem
     >
-      <DisplayPrefsProvider>
-        <TooltipProvider delayDuration={0}>
-          {children}
-          <Toaster theme="system" position="top-center" richColors closeButton />
-        </TooltipProvider>
-      </DisplayPrefsProvider>
+      <AuthProvider>
+        <DisplayPrefsProvider>
+          <TooltipProvider delayDuration={0}>
+            {children}
+            <Toaster theme="system" position="top-center" richColors closeButton />
+          </TooltipProvider>
+        </DisplayPrefsProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
