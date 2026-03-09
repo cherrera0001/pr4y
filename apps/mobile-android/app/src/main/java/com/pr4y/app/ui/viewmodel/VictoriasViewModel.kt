@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.pr4y.app.data.auth.AuthRepository
 import com.pr4y.app.data.remote.AnswerDto
 import com.pr4y.app.data.remote.ApiService
+import com.pr4y.app.data.remote.parseApiErrorMessage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -43,7 +44,12 @@ class VictoriasViewModel(
                     val list = listRes.body()?.answers ?: emptyList()
                     _uiState.value = VictoriasUiState.Success(answeredCount = count, answers = list)
                 } else {
-                    _uiState.value = VictoriasUiState.Error("No se pudo cargar Mis Victorias")
+                    val msg = when {
+                        !statsRes.isSuccessful -> parseApiErrorMessage(statsRes.errorBody()?.string())
+                        !listRes.isSuccessful -> parseApiErrorMessage(listRes.errorBody()?.string())
+                        else -> null
+                    }
+                    _uiState.value = VictoriasUiState.Error(msg ?: "No se pudo cargar Mis Victorias")
                 }
             } catch (e: Exception) {
                 _uiState.value = VictoriasUiState.Error("Error: ${e.message}")

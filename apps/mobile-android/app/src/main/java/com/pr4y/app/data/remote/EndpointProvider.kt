@@ -8,7 +8,6 @@ import com.pr4y.app.BuildConfig
 import com.pr4y.app.util.Pr4yLog
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.runBlocking
 
 private val Context.dataStore by preferencesDataStore(name = "api_settings")
 
@@ -16,20 +15,19 @@ object EndpointProvider {
     private val API_ENDPOINT_KEY = stringPreferencesKey("api_endpoint")
     private const val TARGET_DOMAIN = "pr4yapi-production.up.railway.app"
 
-    fun getBaseUrl(context: Context): String {
-        return runBlocking {
-            val current = context.dataStore.data.map { it[API_ENDPOINT_KEY] }.first()
-            
-            // Si el endpoint guardado no es el actual (Railway), lo limpiamos para forzar la migración
-            if (current != null && !current.contains(TARGET_DOMAIN)) {
-                Pr4yLog.w("Endpoint antiguo detectado ($current). Limpiando para usar el actual.")
-                context.dataStore.edit { it.remove(API_ENDPOINT_KEY) }
-                BuildConfig.API_BASE_URL.ensureTrailingSlash()
-            } else if (!current.isNullOrBlank()) {
-                current.ensureTrailingSlash()
-            } else {
-                BuildConfig.API_BASE_URL.ensureTrailingSlash()
-            }
+    suspend fun getBaseUrl(context: Context): String {
+        val current = context.dataStore.data.map { it[API_ENDPOINT_KEY] }.first()
+
+        // Si el endpoint guardado no es el actual (Railway), lo limpiamos para forzar la migración
+        if (current != null && !current.contains(TARGET_DOMAIN)) {
+            Pr4yLog.w("Endpoint antiguo detectado ($current). Limpiando para usar el actual.")
+            context.dataStore.edit { it.remove(API_ENDPOINT_KEY) }
+            return BuildConfig.API_BASE_URL.ensureTrailingSlash()
+        }
+        return if (!current.isNullOrBlank()) {
+            current.ensureTrailingSlash()
+        } else {
+            BuildConfig.API_BASE_URL.ensureTrailingSlash()
         }
     }
 

@@ -17,4 +17,6 @@ data class RequestEntity(
     val updatedAt: Long,
     val synced: Boolean = false,
     val encryptedPayloadB64: String? = null,
+    /** Estado autoritativo del servidor: PENDING | IN_PROCESS | ANSWERED. */
+    val status: String = "PENDING",
 )

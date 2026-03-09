@@ -36,14 +36,15 @@ sealed interface HomeUiState {
 
 class HomeViewModel(
     private val db: AppDatabase,
-    private val syncRepository: SyncRepository
+    private val syncRepository: SyncRepository,
+    private val userId: String,
 ) : ViewModel() {
 
     private val _syncMessage = MutableStateFlow<String?>(null)
     val syncMessage = _syncMessage.asStateFlow()
 
     val uiState: StateFlow<HomeUiState> = combine(
-        db.requestDao().getAll(),
+        db.requestDao().getAll(userId),
         db.outboxDao().getAllFlow()
     ) { entities, outbox ->
         val decryptedRequests = withContext(Dispatchers.Default) {

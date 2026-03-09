@@ -6,7 +6,7 @@ param(
     [string]$Serial = ""
 )
 
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Continue"
 $adb = $env:ANDROID_HOME
 if (-not $adb) { $adb = "$env:LOCALAPPDATA\Android\Sdk" }
 $adbExe = Join-Path $adb "platform-tools\adb.exe"

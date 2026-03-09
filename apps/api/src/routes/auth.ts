@@ -203,7 +203,10 @@ export default async function authRoutes(server: FastifyInstance) {
     },
     async (request: FastifyRequest, reply: FastifyReply) => {
       const user = request.user as { sub: string; email: string; role?: string };
-      reply.code(200).send({ id: user.sub, email: user.email, role: user.role ?? 'user' });
+      // Rol siempre desde la BD: si un admin actualizó el rol, no hace falta volver a loguearse
+      const dbUser = await authService.getUserRole(user.sub);
+      const role = dbUser?.status === 'banned' ? 'user' : (dbUser?.role ?? user.role ?? 'user');
+      reply.code(200).send({ id: user.sub, email: user.email, role });
     }
   );
 

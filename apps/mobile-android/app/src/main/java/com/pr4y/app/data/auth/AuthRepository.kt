@@ -2,6 +2,7 @@ package com.pr4y.app.data.auth
 
 import com.pr4y.app.data.remote.ApiService
 import com.pr4y.app.data.remote.AuthResponse
+import com.pr4y.app.data.remote.parseApiErrorMessage
 import com.pr4y.app.data.remote.GoogleLoginBody
 import com.pr4y.app.data.remote.PublicConfigResponse
 import com.pr4y.app.data.remote.RefreshBody
@@ -49,9 +50,9 @@ class AuthRepository(
             val res = api.register(com.pr4y.app.data.remote.RegisterBody(email, password))
             if (!res.isSuccessful) {
                 val body = res.errorBody()?.string() ?: ""
-                throw AuthError(res.code(), body)
+                throw AuthError(res.code(), parseApiErrorMessage(body) ?: body)
             }
-            val auth = res.body()!!
+            val auth = res.body() ?: throw AuthError(res.code(), "Respuesta vacía del servidor")
             tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
             auth
         }
@@ -62,9 +63,9 @@ class AuthRepository(
             val res = api.login(com.pr4y.app.data.remote.LoginBody(email, password))
             if (!res.isSuccessful) {
                 val body = res.errorBody()?.string() ?: ""
-                throw AuthError(res.code(), body)
+                throw AuthError(res.code(), parseApiErrorMessage(body) ?: body)
             }
-            val auth = res.body()!!
+            val auth = res.body() ?: throw AuthError(res.code(), "Respuesta vacía del servidor")
             tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
             auth
         }
@@ -76,9 +77,9 @@ class AuthRepository(
             val res = api.googleLogin(GoogleLoginBody(idToken))
             if (!res.isSuccessful) {
                 val body = res.errorBody()?.string() ?: ""
-                throw AuthError(res.code(), body)
+                throw AuthError(res.code(), parseApiErrorMessage(body) ?: body)
             }
-            val auth = res.body()!!
+            val auth = res.body() ?: throw AuthError(res.code(), "Respuesta vacía del servidor")
             tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
             auth
         }.recoverCatching { e ->
@@ -94,13 +95,13 @@ class AuthRepository(
 
     suspend fun logout() {
         withContext(Dispatchers.IO) {
-            Pr4yLog.i("AuthRepository: Performing full logout and búnker cleanup")
+            Pr4yLog.i("AuthRepository: Limpiando sesión y bóveda local")
+            // 1. Limpiar tokens — el usuario queda desautenticado
             tokenStore.clear()
-            try {
-                AppContainer.db.clearAllTables()
-            } catch (e: Exception) {
-                Pr4yLog.e("AuthRepository: Error clearing tables on logout", e)
-            }
+            // 2. Limpiar tablas en memoria (seguro con flows activos)
+            //    La eliminación física del archivo la gestiona AppContainer.init() al cambiar de usuario,
+            //    garantizando privacidad absoluta incluso ante cambio de cuenta sin logout explícito.
+            AppContainer.clearForLogout()
         }
     }
 
@@ -122,7 +123,10 @@ class AuthRepository(
         val refresh = tokenStore.getRefreshToken() ?: return false
         val res = api.refresh(RefreshBody(refresh))
         if (!res.isSuccessful) return false
-        val auth = res.body()!!
+        val auth = res.body() ?: run {
+            Pr4yLog.e("AuthRepository: refreshToken body null con código ${res.code()}")
+            return false
+        }
         tokenStore.setTokens(auth.accessToken, auth.refreshToken, auth.user.id)
         return true
     }

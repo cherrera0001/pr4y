@@ -14,26 +14,28 @@ object Pr4yLog {
     }
 
     fun i(message: String, throwable: Throwable? = null) {
-        Log.i(TAG, message, throwable)
+        if (BuildConfig.DEBUG) Log.i(TAG, message, throwable)
     }
 
     fun w(message: String, throwable: Throwable? = null) {
-        Log.w(TAG, message, throwable)
+        if (BuildConfig.DEBUG) Log.w(TAG, message, throwable)
     }
 
+    /** Solo en release: errores críticos (sin datos sensibles). En DEBUG se ve todo. */
     fun e(message: String, throwable: Throwable? = null) {
-        Log.e(ERROR_TAG, message, throwable)
+        if (BuildConfig.DEBUG) Log.e(ERROR_TAG, message, throwable)
+        else Log.e(ERROR_TAG, message.take(200), throwable)
     }
-    
+
     fun net(message: String) {
-        Log.i(NETWORK_TAG, message)
+        if (BuildConfig.DEBUG) Log.i(NETWORK_TAG, message)
     }
 
     fun crypto(message: String) {
-        Log.i(CRYPTO_TAG, message)
+        if (BuildConfig.DEBUG) Log.i(CRYPTO_TAG, message)
     }
 
     fun sync(message: String) {
-        Log.i(TAG, "[SYNC] $message")
+        if (BuildConfig.DEBUG) Log.i(TAG, "[SYNC] $message")
     }
 }

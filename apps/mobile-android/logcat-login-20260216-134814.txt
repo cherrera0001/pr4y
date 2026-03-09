@@ -1,0 +1,669 @@
+﻿--------- beginning of main
+02-16 13:49:18.741 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.742 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.742 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.743 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.743 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.843 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.844 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.846 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.847 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.849 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.942 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.942 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.943 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:18.944 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.041 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.042 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.043 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.044 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.044 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.065 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 13:49:19.142 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.143 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.145 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.146 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.242 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.244 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.246 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.249 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.341 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.343 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.345 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.443 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.444 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.446 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.543 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.545 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.547 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.642 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.645 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.648 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.650 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.743 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.744 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.746 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.747 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.751 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.843 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.845 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.846 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:19.943 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:20.346 E/PhoneAdapter( 4394): get ntnphones failed, exception: java.lang.IllegalStateException: Default phones haven't been made yet!
+02-16 13:49:20.617 E/PreStartUtils( 4043): preLaunchProcess success infoPackage: com.pr4y.app.dev
+02-16 13:49:20.681 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.miui.home params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 13:49:20.683 E/Launcher.application( 4043): setClickAppWaitForCallback = true
+02-16 13:49:20.684 E/Launcher.application( 4043): setClickAppWaitForCallback = true
+02-16 13:49:20.684 E/Launcher( 4043): superStartActivity   type=13
+--------- beginning of system
+02-16 13:49:20.690 E/WindowManager( 2645): setClientVisible ActivityRecord{bc7b910 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity true
+02-16 13:49:20.693 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4225 hinttype=1 prio=3, clientpid=2645 packagename=com.pr4y.app.dev params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 13:49:20.694 E/ANDR-PERF-JNI( 2645): com_qualcomm_qtiperformance_native_perf_io_prefetch_start
+02-16 13:49:20.694 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:20.695 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:20.698 E/Zygote  ( 1647): process_name_ptr:1647 com.pr4y.app.dev
+02-16 13:49:20.698 E/Zygote  ( 1647): SetMemoryProtected process_name_ptr:1647 com.pr4y.app.dev
+02-16 13:49:20.699 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:20.701 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:20.706 E/ANDR-IOP( 1444): io prefetch is disabled
+02-16 13:49:20.708 E/WindowManager( 2645): setClientVisible ActivityRecord{bc7b910 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t142} true
+02-16 13:49:20.735 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 13:49:20.740 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:20.746 E/WindowManager( 2645): setClientVisible ActivityRecord{bc7b910 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t142} true
+02-16 13:49:20.754 E/ActivityManagerWrapper( 4043): get all recent tasks force including 142
+02-16 13:49:20.761 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 0
+02-16 13:49:20.769 E/onWindowDecorRectChanged( 4422): start size:1
+02-16 13:49:20.769 E/onWindowDecorRectChanged( 4422): windowDecorRect: Rect(535, 10 - 684, 128)
+02-16 13:49:20.770 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 13:49:20.770 E/ActivityManagerWrapper( 4043):  mainTaskId=142   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 13:49:20.770 E/ActivityManagerWrapper( 4043):  mainTaskId=140   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.android.settings/com.android.settings.MainSettings} }
+02-16 13:49:20.771 E/WindowTransitionCompat( 4043): startAnimation isFastLaunch = false
+02-16 13:49:20.772 E/WindowTransitionCompat( 4043): printLeash::index = 0, root = Surface(name=Transition Root #1055: Task=142#14147)/@0x57be04f
+02-16 13:49:20.772 E/WindowTransitionCompat( 4043): 0, check isClosingType type = 1, mode = 1
+02-16 13:49:20.772 E/WindowTransitionCompat( 4043): 1, check isClosingType type = 2, mode = 4
+02-16 13:49:20.786 E/WindowAnimParamsProvider( 4043): getWindowTargetBounds    bounds=Rect(0, 0 - 1220, 2712)
+02-16 13:49:20.786 E/ClipAnimationHelper( 4043): updateSourceStack  mSourceInsets=Rect(0, 0 - 0, 0), mSourceStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 13:49:20.786 E/ClipAnimationHelper( 4043): updateHomeStack  mSourceInsets=Rect(0, 0 - 0, 0), mHomeStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 13:49:20.786 E/ClipAnimationHelper( 4043): updateTargetRect  mSourceRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mTargetRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mSourceWindowClipInsets=RectF(0.0, 0.0, 0.0, 0.0)   mHomeStackBounds=Rect(0, 0 - 1220, 2712)   targetRect=Rect(0, 0 - 1220, 2712)
+02-16 13:49:20.792 E/MultiSpringDynamicAnimationbfa9660( 4043): ERROR Not Found Bundle scaleY
+02-16 13:49:20.792 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 13:49:20.806 E/ANDR-PERF-RESOURCEQS( 1460): Failed to apply optimization [11, 8]
+02-16 13:49:20.808 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:20.808 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:20.816 E/ActivityManagerWrapper( 4043): get all recent tasks force including 142
+02-16 13:49:20.820 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 13:49:20.820 E/ActivityManagerWrapper( 4043):  mainTaskId=142   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 13:49:20.820 E/ActivityManagerWrapper( 4043):  mainTaskId=140   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.android.settings/com.android.settings.MainSettings} }
+02-16 13:49:20.936 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:20.944 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 13:49:20.944 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 13:49:20.944 E/HyperSentinel( 2645): -> audit event by proc 1647 "usap64": RSS increasement, peak 69532kb -> 104612kb
+02-16 13:49:20.944 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 13:49:20.944 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 13:49:20.944 E/HyperSentinel( 2645): -> audit event by proc 1647 "usap64": running threads amount, 0 -> 12
+02-16 13:49:20.965 E/JobScheduler( 2645): ResourceBudgetManagerInternal is null
+02-16 13:49:21.040 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:21.147 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 13:49:21.147 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 13:49:21.147 E/HyperSentinel( 2645): -> audit event by proc 1647 "usap64": RSS increasement, peak 104612kb -> 157372kb
+02-16 13:49:21.339 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:21.553 E/WindowTransitionCompat( 4043): com.android.systemui.shared.recents.system.WindowTransitionCompat@d7a71c5 finishTransition toHome = false
+02-16 13:49:21.559 E/WindowManager( 2645): setClientVisible ActivityRecord{659c16e u0 com.miui.home/.launcher.Launcher t2} false
+02-16 13:49:21.560 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 13:49:21.562 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 13:49:21.566 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:21.570 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 13:49:21.570 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 13:49:21.573 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 13:49:21.579 E/ActivityManagerWrapper( 4043): get all recent tasks force including 142
+02-16 13:49:21.583 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 13:49:21.583 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 13:49:21.585 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 13:49:21.585 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 13:49:21.590 I/PR4Y_DEBUG( 1647): Pr4yApp.onCreate|pkg=com.pr4y.app.dev|pid=1647|uid=10319|userId=0|hypothesisId=H1,H5
+02-16 13:49:21.590 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 13:49:21.590 E/ActivityManagerWrapper( 4043):  mainTaskId=142   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 13:49:21.590 E/ActivityManagerWrapper( 4043):  mainTaskId=140   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.android.settings/com.android.settings.MainSettings} }
+02-16 13:49:21.612 E/BluetoothAdapterService( 5593): getActiveDevices: LeAudioService is null
+02-16 13:49:21.639 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:21.641 I/PR4Y_DEBUG( 1647): MainActivity.onCreate start|pkg=com.pr4y.app.dev
+02-16 13:49:21.694 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 13:49:21.694 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 13:49:21.694 E/HyperSentinel( 2645): -> audit event by proc 1647 "usap64": RSS increasement, peak 157372kb -> 236768kb
+02-16 13:49:21.710 E/FramePredict( 1647): registerContentObserver fail
+02-16 13:49:21.745 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 13:49:21.745 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 13:49:21.745 E/HyperSentinel( 2645): -> audit event by proc 1647 "usap64": running threads amount, 12 -> 23
+02-16 13:49:21.776 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:21.777 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 13:49:21.791 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:21.848 E/u4native(14764): [InfoLevelMessage] [INFO:not_a_file.cc(0)] BrowserIOThread heartbeat, pid/tid: 14764/15227, interval/index: 30s/73, ucCoreSoImplVersion: 5.12.11.0_250212150536
+02-16 13:49:21.901 E/u4native(14764): [InfoLevelMessage] [INFO:not_a_file.cc(0)] NetworkServiceThread heartbeat, pid/tid: 14764/15232, interval/index: 30s/73
+02-16 13:49:21.938 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:21.980 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.021 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.024 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.030 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 13:49:22.037 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.043 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.051 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.060 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.067 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.074 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.081 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 13:49:22.086 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.092 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.098 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.105 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.114 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.122 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.130 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.139 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.149 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.156 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.164 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.172 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.181 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.188 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.198 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.206 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.214 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.222 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.231 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.240 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.240 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:22.248 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.256 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.265 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.273 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.281 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.289 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.290 I/PR4Y_APP( 1647): --- Iniciando B├║nker PR4Y (Async) ---
+02-16 13:49:22.294 I/PR4Y_CRYPTO( 1647): Inicializando almac├⌐n de hardware (Intento 1)...
+02-16 13:49:22.300 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.306 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.315 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.324 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.336 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.342 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.351 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.359 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.368 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.376 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.384 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.393 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.398 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.409 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.414 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.423 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.428 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.428 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.428 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.432 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.440 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.446 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.446 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.446 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.449 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.458 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.464 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.471 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.471 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.471 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.473 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.481 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.490 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.491 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.491 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.491 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.497 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.504 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.504 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.504 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.505 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.513 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.519 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.519 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.519 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.522 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.523 I/PR4Y_CRYPTO( 1647): Almac├⌐n cifrado listo.
+02-16 13:49:22.530 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.538 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.539 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:22.547 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.549 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.549 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.549 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.555 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.564 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.564 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.564 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.565 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.572 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.579 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.579 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.579 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.581 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.589 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.597 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.605 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.606 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.606 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.606 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.611 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.611 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.611 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.615 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.622 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.627 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:22.627 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:22.627 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:22.629 I/PR4Y_APP( 1647): Login status: false
+02-16 13:49:22.631 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.639 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.647 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.657 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.664 I/PR4Y_DEBUG( 1647): initBunker finalized|isReady=true|repo=true
+02-16 13:49:22.664 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.744 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.745 I/PR4Y_APP( 1647): LoginScreen: Iniciando flujo con ID: ...
+02-16 13:49:22.757 I/PR4Y_NETWORK( 1647): --> GET https://pr4yapi-production.up.railway.app/v1/config
+02-16 13:49:22.757 I/PR4Y_NETWORK( 1647): --> END GET
+02-16 13:49:22.840 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:22.841 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.850 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.854 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.858 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.888 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.889 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.894 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.899 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.908 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.916 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.925 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.933 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.942 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.949 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.957 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.966 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.974 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.983 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:22.991 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:23.000 E/LB      ( 1647): fail to open node: No such file or directory
+02-16 13:49:23.003 E/SLM-HAL-SladSocketClient( 1491): connect failed:-1, socket:35, error:No such file or directory
+02-16 13:49:23.140 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:23.441 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:23.740 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:23.919 E/com.whatsapp(31842): hiddenapi: Accessing hidden field Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification; (runtime_flags=0, domain=platform, api=blocked) from LX/9o5; (domain=app, TargetSdkVersion=35) using reflection: denied
+02-16 13:49:23.938 E/com.whatsapp(31842): hiddenapi: Accessing hidden field Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification; (runtime_flags=0, domain=platform, api=blocked) from LX/9o5; (domain=app, TargetSdkVersion=35) using reflection: denied
+02-16 13:49:23.949 E/com.whatsapp(31842): hiddenapi: Accessing hidden method Landroid/app/MiuiNotification;-><init>()V (runtime_flags=0, domain=platform, api=blocked) from LX/9o5; (domain=app, TargetSdkVersion=35) using reflection: denied
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): <-- 200 https://pr4yapi-production.up.railway.app/v1/config (1194ms)
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): access-control-allow-credentials: true
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): content-type: application/json; charset=utf-8
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): cross-origin-opener-policy: same-origin
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): cross-origin-resource-policy: same-origin
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): date: Mon, 16 Feb 2026 16:49:23 GMT
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): origin-agent-cluster: ?1
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): referrer-policy: no-referrer
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): server: railway-edge
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): strict-transport-security: max-age=31536000; includeSubDomains
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): vary: Origin
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-content-type-options: nosniff
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-dns-prefetch-control: off
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-download-options: noopen
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-frame-options: SAMEORIGIN
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-permitted-cross-domain-policies: none
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-railway-edge: railway/us-east4-eqdc4a
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-railway-request-id: wWr1fO4kT7-Pp2huBT7zVQ
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-ratelimit-limit: 300
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-ratelimit-remaining: 299
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-ratelimit-reset: 60
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): x-xss-protection: 0
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): content-length: 195
+02-16 13:49:23.952 I/PR4Y_NETWORK( 1647): 
+02-16 13:49:23.953 I/PR4Y_NETWORK( 1647): {"googleWebClientId":"583962207001-j7j7agjv8d2fb7iojgc840duhd1u7kni.apps.googleusercontent.com","googleAndroidClientId":"583962207001-qbtk7g0cujt6q4euvfoa4g9n32p8na7i.apps.googleusercontent.com"}
+02-16 13:49:23.953 I/PR4Y_NETWORK( 1647): <-- END HTTP (195-byte body)
+02-16 13:49:23.953 I/PR4Y_NETWORK( 1647): HTTP SUCCESS 200: https://pr4yapi-production.up.railway.app/v1/config
+02-16 13:49:23.959 I/PR4Y_APP( 1647): getPublicConfig: googleAndroidClientId (cliente Android) desde API para login
+02-16 13:49:23.960 I/PR4Y_APP( 1647): Login: Web ID actualizado desde API.
+02-16 13:49:24.040 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:24.172 E/StackScroller( 4422): updateSidePadding: viewWidth is zero
+02-16 13:49:24.241 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:24.391 E/StackScroller( 4422): updateSidePadding: viewWidth is zero
+02-16 13:49:24.426 E/StackScroller( 4422): updateSidePadding: viewWidth is zero
+02-16 13:49:24.439 E/StackScroller( 4422): updateSidePadding: viewWidth is zero
+02-16 13:49:24.441 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:24.611 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 13:49:24.669 I/PR4Y_APP( 1647): Login: Solicitando credencial a Google...
+02-16 13:49:24.841 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:24.868 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:24.868 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:24.868 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:24.886 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:24.886 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:24.886 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:25.091 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 13:49:25.141 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:25.242 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 673d went down
+02-16 13:49:25.288 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 13:49:25.288 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 13:49:25.288 E/HyperSentinel( 2645): -> audit event by proc 6953 "/apex/com.android.art/bin/artd": RSS increasement, peak 14480kb -> 21976kb
+02-16 13:49:25.371 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 13:49:25.371 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 13:49:25.372 E/HyperSentinel( 2645): -> audit event by proc 6953 "/apex/com.android.art/bin/artd": RSS increasement, peak 21976kb -> 33040kb
+02-16 13:49:25.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:25.588 E/WindowManager( 2645): setClientVisible ActivityRecord{e189bf3 u0 com.google.android.gms/.identitycredentials.ui.CredentialChooserActivity true
+02-16 13:49:25.593 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:25.598 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.google.android.gms params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 13:49:25.609 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.google.android.gms params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 13:49:25.610 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:25.610 E/WindowManager( 2645): setClientVisible ActivityRecord{e189bf3 u0 com.google.android.gms/.identitycredentials.ui.CredentialChooserActivity t142} true
+02-16 13:49:25.611 E/WindowManager( 2645): setClientVisible ActivityRecord{e189bf3 u0 com.google.android.gms/.identitycredentials.ui.CredentialChooserActivity t142} true
+02-16 13:49:25.651 E/BluetoothAdapterService( 5593): getActiveDevices: LeAudioService is null
+02-16 13:49:25.724 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 13:49:25.725 E/ActivityManagerWrapper( 4043): get all recent tasks force including 142
+02-16 13:49:25.729 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 13:49:25.729 E/ActivityManagerWrapper( 4043):  mainTaskId=142   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 13:49:25.729 E/ActivityManagerWrapper( 4043):  mainTaskId=140   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.android.settings/com.android.settings.MainSettings} }
+02-16 13:49:25.731 E/NativeTurboSchedManagerJni(17138): open /dev/metis failed!
+02-16 13:49:25.731 E/NativeTurboSchedManagerJni(17138): open /dev/metis failed!
+02-16 13:49:25.731 E/ActivityThread( 4043): Failed to find provider info for com.miui.personalassistant.servicedeliver.system.provider
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): isSupportServiceDelivery
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): java.lang.IllegalArgumentException: Unknown authority com.miui.personalassistant.servicedeliver.system.provider
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at android.content.ContentResolver.call(ContentResolver.java:2466)
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at android.content.ContentResolver.call(ContentResolver.java:2449)
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryUtils.isSupportServiceDelivery(ServiceDeliveryUtils.kt:28)
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper.lambda$tryReplaceToServiceDelivery$1(ServiceDeliveryReplaceHelper.java:67)
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper.$r8$lambda$WUWmthv-UjITX40FJ8ag1YKl6O8(Unknown Source:0)
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper$$ExternalSyntheticLambda1.run(Unknown Source:2)
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:520)
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.FutureTask.run(FutureTask.java:317)
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1154)
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:652)
+02-16 13:49:25.737 E/ServiceDeliveryCompat( 4043): 	at java.lang.Thread.run(Thread.java:1563)
+02-16 13:49:25.741 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:25.764 E/NativeTurboSchedManagerJni(17138): open /dev/metis failed!
+02-16 13:49:25.764 E/NativeTurboSchedManagerJni(17138): open /dev/metis failed!
+02-16 13:49:25.767 E/WindowManager( 2645): setClientVisible ActivityRecord{e189bf3 u0 com.google.android.gms/.identitycredentials.ui.CredentialChooserActivity t142} true
+02-16 13:49:25.777 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:25.777 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:25.931 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:25.931 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:25.936 E/artd    ( 6953): Unable to resolve path '/data/app/~~2OUUJ2ogdPuCedRSMeTh7w==/com.mi.globalbrowser-9y6RwhW2ASAiX1p3iriTvA==/base.apk': No such file or directory
+02-16 13:49:25.945 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.042 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:26.230 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.230 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.236 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.341 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:26.531 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.531 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.537 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.616 E/RTMode  ( 2645): pkgName: com.google.android.gms has no permission
+02-16 13:49:26.640 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:26.641 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:26.648 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:26.648 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 13:49:26.691 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=57987525880271 data 0.000000
+02-16 13:49:26.709 E/WindowManager( 2645): setClientVisible ActivityRecord{ebc1d22 u0 com.google.android.gms/.auth.api.credentials.assistedsignin.ui.AssistedSignInActivity true
+02-16 13:49:26.713 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:26.728 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:26.728 E/WindowManager( 2645): setClientVisible ActivityRecord{ebc1d22 u0 com.google.android.gms/.auth.api.credentials.assistedsignin.ui.AssistedSignInActivity t142} true
+02-16 13:49:26.730 E/WindowManager( 2645): setClientVisible ActivityRecord{ebc1d22 u0 com.google.android.gms/.auth.api.credentials.assistedsignin.ui.AssistedSignInActivity t142} true
+02-16 13:49:26.831 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.831 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.842 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.849 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 13:49:26.851 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:26.852 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:26.861 E/ActivityManagerWrapper( 4043): get all recent tasks force including 142
+02-16 13:49:26.864 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 13:49:26.864 E/ActivityManagerWrapper( 4043):  mainTaskId=142   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 13:49:26.864 E/ActivityManagerWrapper( 4043):  mainTaskId=140   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.android.settings/com.android.settings.MainSettings} }
+02-16 13:49:26.880 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:26.882 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:26.884 E/WindowManager( 2645): setClientVisible ActivityRecord{ebc1d22 u0 com.google.android.gms/.auth.api.credentials.assistedsignin.ui.AssistedSignInActivity t142} true
+02-16 13:49:26.893 E/lowmemorykiller(  757): process_mrelease 3190 failed: No such process
+02-16 13:49:26.896 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:26.896 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:26.898 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:26.898 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:26.916 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.916 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.922 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.932 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.932 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:26.940 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:26.985 E/om.pr4y.app.dev( 1647): FrameInsert open fail: No such file or directory
+02-16 13:49:27.241 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:27.309 E/Zygote  ( 7410): process_name_ptr:7410 com.milink.service
+02-16 13:49:27.309 E/Zygote  ( 7410): SetMemoryProtected process_name_ptr:7410 com.milink.service
+02-16 13:49:27.347 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:27.441 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:27.441 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:27.456 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:27.543 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:27.626 E/.milink.service( 7410): No package ID 6a found for resource ID 0x6a0b0013.
+02-16 13:49:27.742 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:27.742 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:27.751 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:27.753 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:27.753 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 13:49:27.773 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:27.841 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:28.044 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:28.044 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:28.053 W/PR4Y_APP( 1647): Tipo de credencial no soportado: com.google.android.libraries.identity.googleid.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
+02-16 13:49:28.056 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:28.056 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:28.069 E/WindowManager( 2645): setClientVisible ActivityRecord{ebc1d22 u0 com.google.android.gms/.auth.api.credentials.assistedsignin.ui.AssistedSignInActivity t142 f}} false
+02-16 13:49:28.070 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:28.109 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 13:49:28.119 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.pr4y.app.dev params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 13:49:28.137 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:28.137 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:28.140 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:28.141 E/WindowManager( 2645): setClientVisible ActivityRecord{e189bf3 u0 com.google.android.gms/.identitycredentials.ui.CredentialChooserActivity t142 f}} false
+02-16 13:49:28.146 E/BluetoothAdapterService( 5593): getActiveDevices: LeAudioService is null
+02-16 13:49:28.232 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 13:49:28.234 E/ActivityManagerWrapper( 4043): get all recent tasks force including 142
+02-16 13:49:28.237 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 13:49:28.237 E/ActivityManagerWrapper( 4043):  mainTaskId=142   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 13:49:28.237 E/ActivityManagerWrapper( 4043):  mainTaskId=140   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.android.settings/com.android.settings.MainSettings} }
+02-16 13:49:28.301 E/ExtM    ( 2645): can_flush_idle_pages:24115 flush_number_adjust: 12000
+02-16 13:49:28.352 E/vold    ( 7530): maxCpuFreq=2400000
+02-16 13:49:28.352 E/vold    ( 7530): maxCpuFreq=2400000
+02-16 13:49:28.439 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:28.739 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:29.039 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:29.048 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:29.048 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 13:49:29.054 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:29.341 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:30.342 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:30.578 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 13:49:30.578 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 13:49:30.578 E/HyperSentinel( 2645): -> audit event by proc 7410 "com.milink.service": running threads amount, 0 -> 41
+02-16 13:49:31.095 E/ExtM    ( 2645): can_flush_idle_pages:24055 flush_number_adjust: 12000
+02-16 13:49:31.125 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 13:49:31.149 E/vold    ( 7557): maxCpuFreq=2400000
+02-16 13:49:31.150 E/vold    ( 7557): maxCpuFreq=2400000
+02-16 13:49:31.341 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.342 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.343 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.344 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.443 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.444 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.541 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.543 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.641 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.643 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.741 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.742 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.743 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.841 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.842 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.843 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:31.943 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:32.905 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 13:49:32.906 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 13:49:32.906 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 13:49:32.907 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-16 13:49:32.942 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:33.024 E/vendor.xiaomi.hardware.micharge@1.0-service( 1507): Failed to open node /sys/class/qcom-battery/reverse_chg_mode
+02-16 13:49:33.039 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:33.039 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:33.040 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:33.142 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:33.792 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 13:49:33.897 I/PR4Y_APP( 1647): Login: Solicitando credencial a Google...
+02-16 13:49:33.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:34.080 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:34.080 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:34.080 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:34.097 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:34.097 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:34.097 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:34.139 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 13:49:34.241 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:34.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:34.706 E/WindowManager( 2645): setClientVisible ActivityRecord{9a5fc84 u0 com.google.android.gms/.identitycredentials.ui.CredentialChooserActivity true
+02-16 13:49:34.716 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:34.722 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.google.android.gms params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 13:49:34.730 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.google.android.gms params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 13:49:34.731 E/WindowManager( 2645): setClientVisible ActivityRecord{9a5fc84 u0 com.google.android.gms/.identitycredentials.ui.CredentialChooserActivity t142} true
+02-16 13:49:34.731 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:34.732 E/WindowManager( 2645): setClientVisible ActivityRecord{9a5fc84 u0 com.google.android.gms/.identitycredentials.ui.CredentialChooserActivity t142} true
+02-16 13:49:34.750 E/BluetoothAdapterService( 5593): getActiveDevices: LeAudioService is null
+02-16 13:49:34.795 E/NativeTurboSchedManagerJni(17138): open /dev/metis failed!
+02-16 13:49:34.795 E/NativeTurboSchedManagerJni(17138): open /dev/metis failed!
+02-16 13:49:34.819 E/NativeTurboSchedManagerJni(17138): open /dev/metis failed!
+02-16 13:49:34.819 E/NativeTurboSchedManagerJni(17138): open /dev/metis failed!
+02-16 13:49:34.821 E/WindowManager( 2645): setClientVisible ActivityRecord{9a5fc84 u0 com.google.android.gms/.identitycredentials.ui.CredentialChooserActivity t142} true
+02-16 13:49:34.828 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:34.828 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:34.842 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 13:49:34.843 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:34.845 E/ActivityManagerWrapper( 4043): get all recent tasks force including 142
+02-16 13:49:34.851 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 13:49:34.851 E/ActivityManagerWrapper( 4043):  mainTaskId=142   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 13:49:34.851 E/ActivityManagerWrapper( 4043):  mainTaskId=140   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.android.settings/com.android.settings.MainSettings} }
+02-16 13:49:35.022 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.022 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.028 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.140 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:35.323 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.323 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.329 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.441 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:35.625 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.625 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.630 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.740 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:35.755 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:35.755 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 13:49:35.756 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:35.926 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.926 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:35.931 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:36.042 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:36.227 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:36.227 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:36.232 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:36.342 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:36.527 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:36.527 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:36.532 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:36.640 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:36.828 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:36.828 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:36.833 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:36.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:37.021 E/RTMode  ( 2645): pkgName: com.google.android.gms has no permission
+02-16 13:49:37.122 E/WindowManager( 2645): setClientVisible ActivityRecord{2682f62 u0 com.google.android.gms/.auth.api.credentials.assistedsignin.ui.AssistedSignInActivity true
+02-16 13:49:37.126 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:37.128 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:37.128 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:37.132 E/ANDR-PERF-TP( 1460): placeTask() 379: Failed to offload task all threads are busy.
+02-16 13:49:37.133 E/vendor.qti.hardware.perf-hal-service( 1460): Failed to Offload sendPerfCallbackOffload task
+02-16 13:49:37.134 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:37.141 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 13:49:37.142 E/WindowManager( 2645): setClientVisible ActivityRecord{2682f62 u0 com.google.android.gms/.auth.api.credentials.assistedsignin.ui.AssistedSignInActivity t142} true
+02-16 13:49:37.144 E/WindowManager( 2645): setClientVisible ActivityRecord{2682f62 u0 com.google.android.gms/.auth.api.credentials.assistedsignin.ui.AssistedSignInActivity t142} true
+02-16 13:49:37.158 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 13:49:37.158 E/HyperSentinel( 2645): Event_OpenFileFDSize
+02-16 13:49:37.158 E/HyperSentinel( 2645): -> audit event by proc 1606 "/system/bin/surfaceflinger": Fd increasement, peak, 905 -> 740
+02-16 13:49:37.158 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 13:49:37.206 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:37.206 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:37.219 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:37.220 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:37.223 E/WindowManager( 2645): setClientVisible ActivityRecord{2682f62 u0 com.google.android.gms/.auth.api.credentials.assistedsignin.ui.AssistedSignInActivity t142} true
+02-16 13:49:37.233 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:37.233 E/NativeTurboSchedManagerJni(11412): open /dev/metis failed!
+02-16 13:49:37.236 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:37.236 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:37.240 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:37.246 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:37.246 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:37.252 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 13:49:37.253 E/ActivityManagerWrapper( 4043): get all recent tasks force including 142
+02-16 13:49:37.256 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 13:49:37.256 E/ActivityManagerWrapper( 4043):  mainTaskId=142   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 13:49:37.256 E/ActivityManagerWrapper( 4043):  mainTaskId=140   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.android.settings/com.android.settings.MainSettings} }
+02-16 13:49:37.340 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 13:49:37.340 E/KeyMasterHalDevice(  866): abort_operation
+02-16 13:49:37.340 E/KeyMasterHalDevice(  866): ret: -28
+02-16 13:49:37.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:37.677 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:37.741 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:37.741 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:37.757 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:37.841 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:38.043 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.043 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.057 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.142 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:38.162 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:38.166 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.166 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.167 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 13:49:38.167 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 13:49:38.181 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.344 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.344 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.357 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:38.560 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.560 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.575 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.609 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.609 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.613 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:38.613 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:38.618 W/PR4Y_APP( 1647): Tipo de credencial no soportado: com.google.android.libraries.identity.googleid.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
+02-16 13:49:38.621 E/WindowManager( 2645): setClientVisible ActivityRecord{2682f62 u0 com.google.android.gms/.auth.api.credentials.assistedsignin.ui.AssistedSignInActivity t142 f}} false
+02-16 13:49:38.625 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.643 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.pr4y.app.dev params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 13:49:38.643 E/ANDR-PERF-TP( 1460): placeTask() 379: Failed to offload task all threads are busy.
+02-16 13:49:38.643 E/vendor.qti.hardware.perf-hal-service( 1460): Failed to Offload sendPerfCallbackOffload task
+02-16 13:49:38.652 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.652 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.658 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 13:49:38.660 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:38.660 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 1
+02-16 13:49:38.664 E/WindowManager( 2645): setClientVisible ActivityRecord{9a5fc84 u0 com.google.android.gms/.identitycredentials.ui.CredentialChooserActivity t142 f}} false
+02-16 13:49:38.683 E/BluetoothAdapterService( 5593): getActiveDevices: LeAudioService is null
+02-16 13:49:38.740 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 13:49:38.753 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 13:49:38.755 E/ActivityManagerWrapper( 4043): get all recent tasks force including 142
+02-16 13:49:38.757 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=2
+02-16 13:49:38.757 E/ActivityManagerWrapper( 4043):  mainTaskId=142   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 13:49:38.757 E/ActivityManagerWrapper( 4043):  mainTaskId=140   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.android.settings/com.android.settings.MainSettings} }
+02-16 13:49:39.041 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101

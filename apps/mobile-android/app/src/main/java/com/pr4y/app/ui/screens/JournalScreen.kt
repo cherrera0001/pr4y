@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.Button
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -26,13 +27,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.pr4y.app.crypto.DekManager
+import com.pr4y.app.data.auth.AuthTokenStore
 import com.pr4y.app.crypto.LocalCrypto
 import com.pr4y.app.di.AppContainer
 import com.pr4y.app.ui.Routes
+import com.pr4y.app.ui.components.EmptyStatePlaceholder
 import com.pr4y.app.ui.components.Pr4yTopAppBar
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -45,7 +50,9 @@ private data class JournalDisplay(val id: String, val content: String, val updat
 
 @Composable
 fun JournalScreen(navController: NavController) {
-    val entities by AppContainer.db.journalDao().getAll().collectAsState(initial = emptyList())
+    val context = LocalContext.current
+    val userId = remember(context) { AuthTokenStore(context.applicationContext).getUserId() ?: "" }
+    val entities by AppContainer.db.journalDao().getRecent(userId).collectAsState(initial = emptyList())
     var entries by remember { mutableStateOf<List<JournalDisplay>>(emptyList()) }
 
     LaunchedEffect(entities) {
@@ -80,32 +87,14 @@ fun JournalScreen(navController: NavController) {
         },
     ) { padding ->
         if (entries.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding)
-                    .padding(24.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    Text(
-                        text = "Tu diario está vacío",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Text(
-                        text = "Escribe tu primera reflexión o gratitud.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Button(onClick = { navController.navigate(Routes.NEW_JOURNAL) }) {
-                        Text("Nueva entrada")
-                    }
-                }
-            }
+            EmptyStatePlaceholder(
+                icon = Icons.AutoMirrored.Filled.MenuBook,
+                title = "Tu diario está vacío",
+                description = "Escribe tu primera reflexión o gratitud.",
+                actionText = "Nueva entrada",
+                onAction = { navController.navigate(Routes.NEW_JOURNAL) },
+                modifier = Modifier.padding(padding),
+            )
         } else {
             LazyColumn(
                 modifier = Modifier
@@ -139,8 +128,9 @@ private fun JournalItem(
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .sizeIn(minHeight = 48.dp)
             .clickable(onClick = onClick)
-            .padding(12.dp),
+            .padding(horizontal = 16.dp, vertical = 12.dp),
     ) {
         Text(
             text = dateStr,

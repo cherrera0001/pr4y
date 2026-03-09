@@ -33,9 +33,12 @@ class ReminderWorker(
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
-        try {
-            NotificationManagerCompat.from(applicationContext).notify(NOTIFICATION_ID, notification)
-        } catch (_: Exception) { }
+        val nm = NotificationManagerCompat.from(applicationContext)
+        if (nm.areNotificationsEnabled()) {
+            try {
+                nm.notify(NOTIFICATION_ID, notification)
+            } catch (_: SecurityException) { }
+        }
         return Result.success()
     }
 

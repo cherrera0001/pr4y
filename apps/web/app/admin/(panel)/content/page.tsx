@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { toast } from 'sonner';
 import { Loader2, Pencil, Trash2, Plus } from 'lucide-react';
@@ -33,6 +34,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 /** Tipos de contenido global que se muestran en el búnker del usuario. */
 const CONTENT_TYPES = [
@@ -89,6 +100,7 @@ export default function AdminContentPage() {
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<ContentItem | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const [formType, setFormType] = useState('prayer');
@@ -97,10 +109,15 @@ export default function AdminContentPage() {
   const [formPublished, setFormPublished] = useState(false);
   const [formSortOrder, setFormSortOrder] = useState(0);
 
+  const router = useRouter();
   const load = () => {
     const q = filterType ? `?type=${encodeURIComponent(filterType)}` : '';
     fetch(`/api/admin/content${q}`)
       .then((res) => {
+        if (res.status === 403) {
+          router.replace('/admin/login?error=admin_required');
+          return null;
+        }
         if (!res.ok) throw new Error(res.statusText);
         return res.json();
       })
@@ -207,7 +224,6 @@ export default function AdminContentPage() {
   };
 
   const deleteItem = async (id: string) => {
-    if (!confirm('¿Eliminar este contenido? No se puede deshacer.')) return;
     setDeletingId(id);
     try {
       const res = await fetch(`/api/admin/content/${id}`, { method: 'DELETE' });
@@ -248,7 +264,7 @@ export default function AdminContentPage() {
             Gestor de contenido global
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Palabras de Aliento y Avisos que se publican en el búnker del usuario. Crear, editar, publicar o eliminar.
+            Palabras de Aliento y Avisos que se publican en el búnker del usuario. Al marcar como «Publicado», el contenido llega a todos los usuarios (web y app) vía GET /v1/public/content.
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -309,7 +325,7 @@ export default function AdminContentPage() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => deleteItem(item.id)}
+                    onClick={() => setConfirmDeleteId(item.id)}
                     disabled={deletingId === item.id}
                     className="text-destructive hover:text-destructive"
                   >
@@ -331,6 +347,31 @@ export default function AdminContentPage() {
           No hay contenidos. Crea uno con «Nuevo contenido».
         </p>
       )}
+
+      <AlertDialog open={!!confirmDeleteId} onOpenChange={(open) => !open && setConfirmDeleteId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Eliminar este contenido?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Esta acción no se puede deshacer. El contenido será eliminado permanentemente.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              onClick={() => {
+                if (confirmDeleteId) {
+                  deleteItem(confirmDeleteId);
+                  setConfirmDeleteId(null);
+                }
+              }}
+            >
+              Eliminar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       <Dialog open={showForm} onOpenChange={(open) => !open && closeForm()}>
         <DialogContent className="sm:max-w-lg">

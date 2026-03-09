@@ -10,18 +10,29 @@ datasource db {
 }
 
 model User {
-  id           String        @id @default(uuid())
-  email        String        @unique
-  passwordHash String?       @map("password_hash") // null para usuarios OAuth (Google)
-  googleId     String?       @unique @map("google_id")
-  role         String        @default("user") // "user" | "admin" | "super_admin"
-  status       String        @default("active") // "active" | "banned"
-  lastLoginAt  DateTime?     @map("last_login_at")
-  createdAt    DateTime      @default(now()) @map("created_at")
-  refreshTokens RefreshToken[]
-  wrappedDek   WrappedDek?
-  records      Record[]
-  usageLogs    UsageLog[]
+  id                   String        @id @default(uuid())
+  email                String        @unique
+  passwordHash         String?       @map("password_hash") // null para usuarios OAuth (Google)
+  googleId             String?       @unique @map("google_id")
+  role                 String        @default("user") // "user" | "admin" | "super_admin"
+  status               String        @default("active") // "active" | "banned"
+  lastLoginAt          DateTime?     @map("last_login_at")
+  createdAt            DateTime      @default(now()) @map("created_at")
+  reminderTime         String?       @map("reminder_time") // "HH:mm" recordatorio diario de oración (legado)
+  reminderDaysOfWeek   Json?         @map("reminder_days_of_week") // [0..6] (legado)
+  reminderEnabled      Boolean       @default(false) @map("reminder_enabled") // (legado)
+  reminderSchedules    Json?         @map("reminder_schedules") // [{time, daysOfWeek, enabled}] — multi-schedule
+  displayPreferences   Json?         @map("display_preferences") // theme, fontSize, fontFamily, lineSpacing, contemplativeMode
+  refreshTokens        RefreshToken[]
+  wrappedDek           WrappedDek?
+  records              Record[]
+  usageLogs            UsageLog[]
+  prayerRoomsAsA       PrayerRoom[]    @relation("roomUserA")
+  prayerRoomsAsB       PrayerRoom[]    @relation("roomUserB")
+  partnersInitiated    PrayerPartner[] @relation("userPartners")
+  partnersReceived     PrayerPartner[] @relation("partnerOf")
+  prayerReports        PrayerReport[]
+  matchingQueue        MatchingQueue?
   @@map("users")
 }
 
@@ -122,4 +133,83 @@ model Answer {
   testimony  String?  @db.Text // notas/testimonio sanitizado
   @@index([recordId])
   @@map("answers")
+}
+
+// Pedidos de oración públicos (anonimos). Alimentan la Ruleta en la app. Solo se listan los aprobados.
+model PublicRequest {
+  id          String   @id @default(uuid())
+  title       String   @default("Pedido de oración") // opcional; si no se envía se usa este valor
+  body        String   @db.Text
+  prayerCount Int      @default(0) @map("prayer_count")
+  status      String   @default("approved") // "approved" | "rejected" (moderación por listas/reglas)
+  createdAt   DateTime @default(now()) @map("created_at")
+  @@index([status])
+  @@index([createdAt])
+  @@map("public_requests")
+}
+
+// ──────────────── Prayer Roulette ────────────────
+
+// Sala de oración 1:1 creada tras matching.
+model PrayerRoom {
+  id        String    @id @default(uuid())
+  status    String    @default("active") // active | ended | reported
+  startedAt DateTime  @default(now()) @map("started_at")
+  endedAt   DateTime? @map("ended_at")
+  duration  Int?      // duración en segundos
+  userAId   String    @map("user_a_id")
+  userBId   String    @map("user_b_id")
+  userA     User      @relation("roomUserA", fields: [userAId], references: [id], onDelete: Cascade)
+  userB     User      @relation("roomUserB", fields: [userBId], references: [id], onDelete: Cascade)
+  language  String?
+  reports   PrayerReport[]
+  @@index([status])
+  @@index([userAId])
+  @@index([userBId])
+  @@map("prayer_rooms")
+}
+
+// Prayer partners: relación recurrente post-sesión.
+model PrayerPartner {
+  id          String    @id @default(uuid())
+  userId      String    @map("user_id")
+  partnerId   String    @map("partner_id")
+  user        User      @relation("userPartners", fields: [userId], references: [id], onDelete: Cascade)
+  partner     User      @relation("partnerOf", fields: [partnerId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  lastPrayed  DateTime? @map("last_prayed")
+  prayerCount Int       @default(0) @map("prayer_count")
+  @@unique([userId, partnerId])
+  @@index([userId])
+  @@index([partnerId])
+  @@map("prayer_partners")
+}
+
+// Reportes de sesión (moderación).
+model PrayerReport {
+  id         String    @id @default(uuid())
+  roomId     String    @map("room_id")
+  room       PrayerRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  reporterId String    @map("reporter_id")
+  reporter   User      @relation(fields: [reporterId], references: [id], onDelete: Cascade)
+  reason     String    // inappropriate | spam | harassment
+  details    String?   @db.Text
+  status     String    @default("pending") // pending | reviewed | actioned
+  createdAt  DateTime  @default(now()) @map("created_at")
+  @@index([roomId])
+  @@index([reporterId])
+  @@index([status])
+  @@map("prayer_reports")
+}
+
+// Cola de matching: un usuario a la vez en espera.
+model MatchingQueue {
+  id       String   @id @default(uuid())
+  userId   String   @unique @map("user_id")
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt DateTime @default(now()) @map("joined_at")
+  filters  Json?    // {language?, denomination?, topic?}
+  status   String   @default("waiting") // waiting | matched | expired
+  @@index([status, joinedAt])
+  @@map("matching_queue")
 }

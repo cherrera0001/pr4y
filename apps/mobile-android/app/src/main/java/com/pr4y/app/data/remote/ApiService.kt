@@ -1,11 +1,13 @@
 package com.pr4y.app.data.remote
 
+import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 data class RegisterBody(val email: String, val password: String)
@@ -36,6 +38,7 @@ data class SyncRecordDto(
     val clientUpdatedAt: String,
     val serverUpdatedAt: String,
     val deleted: Boolean,
+    val status: String = "PENDING",
 )
 
 data class PushBody(val records: List<PushRecordDto>)
@@ -59,10 +62,8 @@ data class RejectedDto(
     val serverUpdatedAt: String? = null,
 )
 
-/** Respuesta de GET /v1/answers/stats (conteo para dashboard). */
 data class AnswersStatsResponse(val answeredCount: Int)
 
-/** Elemento de GET /v1/answers (Muro de Fe). */
 data class AnswerDto(
     val id: String,
     val recordId: String,
@@ -73,11 +74,59 @@ data class AnswerDto(
 data class AnswerRecordDto(val id: String, val type: String, val clientUpdatedAt: String)
 data class AnswersListResponse(val answers: List<AnswerDto>)
 
-/** Configuración pública desde el backend. La app Android usa solo googleAndroidClientId para login. La web usa googleWebClientId. */
+data class AnswerBody(val recordId: String, val testimony: String? = null)
+
 data class PublicConfigResponse(
     val googleWebClientId: String,
     val googleAndroidClientId: String = "",
 )
+
+data class ReminderPreferencesResponse(
+    val time: String,
+    val daysOfWeek: List<Int>,
+    val enabled: Boolean,
+)
+
+data class ReminderScheduleDto(
+    val id: String? = null,
+    val time: String,
+    val daysOfWeek: List<Int>,
+    val enabled: Boolean,
+)
+
+data class ReminderSchedulesResponse(
+    val schedules: List<ReminderScheduleDto>,
+)
+
+data class PublicRequestDto(
+    val id: String,
+    val title: String,
+    val body: String?,
+    val prayerCount: Int,
+    val createdAt: String
+)
+
+data class PublicRequestsResponse(val requests: List<PublicRequestDto>)
+
+data class DisplayPreferencesDto(
+    val theme: String,
+    val fontSize: String,
+    val fontFamily: String,
+    val lineSpacing: String,
+    val contemplativeMode: Boolean,
+)
+
+data class GlobalContentItemDto(
+    val id: String,
+    val type: String,
+    val title: String,
+    val body: String,
+    val published: Boolean,
+    val sortOrder: Int,
+    val createdAt: String,
+    val updatedAt: String,
+)
+data class GlobalContentResponse(val items: List<GlobalContentItemDto>)
 
 interface ApiService {
     @GET("health")
@@ -128,4 +177,56 @@ interface ApiService {
 
     @GET("answers")
     suspend fun getAnswers(@Header("Authorization") bearer: String): Response<AnswersListResponse>
+
+    @POST("answers")
+    suspend fun createAnswer(
+        @Header("Authorization") bearer: String,
+        @Body body: AnswerBody,
+    ): Response<Map<String, Any>>
+
+    // --- Preferencias de Usuario (rutas deben coincidir con API: user/display-preferences, user/reminder-schedules) ---
+
+    @GET("user/reminder-schedules")
+    suspend fun getReminderSchedules(@Header("Authorization") bearer: String): Response<ReminderSchedulesResponse>
+
+    @PUT("user/reminder-schedules")
+    suspend fun putReminderSchedules(
+        @Header("Authorization") bearer: String,
+        @Body body: ReminderSchedulesResponse,
+    ): Response<ReminderSchedulesResponse>
+
+    @GET("user/display-preferences")
+    suspend fun getDisplayPreferences(@Header("Authorization") bearer: String): Response<DisplayPreferencesDto>
+
+    @PUT("user/display-preferences")
+    suspend fun putDisplayPreferences(
+        @Header("Authorization") bearer: String,
+        @Body body: DisplayPreferencesDto,
+    ): Response<DisplayPreferencesDto>
+
+    // --- Roulette (Anonymous) ---
+    
+    @GET("public/requests")
+    suspend fun getPublicRequests(@Header("X-Anonymous") anon: String = "true"): Response<PublicRequestsResponse>
+
+    @POST("public/requests/{id}/pray")
+    suspend fun prayForPublicRequest(
+        @Path("id") id: String,
+        @Header("X-Anonymous") anon: String = "true"
+    ): Response<Map<String, Any>>
+
+    /** GET /v1/public/content?type=... — contenido global publicado por admin. */
+    @GET("public/content")
+    suspend fun getGlobalContent(@Query("type") type: String? = null): Response<GlobalContentResponse>
+}
+
+fun parseApiErrorMessage(jsonBody: String?): String? {
+    if (jsonBody.isNullOrBlank()) return null
+    return try {
+        val obj = JSONObject(jsonBody)
+        val err = obj.optJSONObject("error") ?: return null
+        err.optString("message").takeIf { it.isNotEmpty() }
+    } catch (_: Exception) {
+        null
+    }
 }

@@ -8,7 +8,7 @@ import rateLimit from '@fastify/rate-limit';
 import jwt from '@fastify/jwt';
 import { prisma } from './lib/db';
 import { safeDetailsFromError } from './lib/errors';
-import { isAllowedAdminEmail } from './lib/admin-allowlist';
+import { isAllowedAdminEmail, validateAdminAllowlistAtStartup } from './lib/admin-allowlist';
 import authRoutes from './routes/auth';
 import syncRoutes from './routes/sync';
 import cryptoRoutes from './routes/crypto';
@@ -19,6 +19,10 @@ import remindersRoutes from './routes/reminders';
 import answersRoutes from './routes/answers';
 import recordsRoutes from './routes/records';
 import userRoutes from './routes/user';
+import publicRequestsRoutes from './routes/public-requests';
+import publicContentRoutes from './routes/public-content';
+import rouletteRoutes from './routes/roulette';
+import { initSocketIO } from './lib/socket';
 
 const BODY_LIMIT = 2 * 1024 * 1024; // 2MB global
 
@@ -49,11 +53,16 @@ server.register(cors, {
   credentials: true,
 });
 
-// Rate limiting: global: false para que los límites por ruta en auth (login/register) se apliquen
+// Rate limiting: global: false para que los límites por ruta se apliquen.
+// keyGenerator: por usuario autenticado (userId) para mitigar DoS por cuenta; por IP si no hay JWT.
 server.register(rateLimit, {
   global: false,
   max: 300,
   timeWindow: '1 minute',
+  keyGenerator: (request: FastifyRequest) => {
+    const user = (request as FastifyRequest & { user?: { sub?: string } }).user;
+    return (user?.sub ?? request.ip) as string;
+  },
 });
 
 // JWT: obligatorio desde env; sin valor por defecto en producción
@@ -81,26 +90,31 @@ server.decorate('authenticate', async function (request: FastifyRequest, reply: 
   }
 });
 
+// Mensaje único para quien no es admin: amigable y claro (API y web).
+const MSG_NOT_ADMIN = 'No eres administrador. Gracias, pero puedes usar la app prontamente.';
+
 // Decorador requireAdmin: solo role admin/super_admin Y email en allowlist pueden acceder a /admin/*.
 server.decorate('requireAdmin', async function (request: FastifyRequest, reply: FastifyReply) {
   const user = request.user as { sub?: string; email?: string; role?: string };
   const role = user?.role;
   if (role !== 'admin' && role !== 'super_admin') {
-    return reply.code(403).send({ error: { code: 'forbidden', message: 'Admin role required', details: {} } });
+    return reply.code(403).send({ error: { code: 'forbidden', message: MSG_NOT_ADMIN, details: {} } });
   }
   if (!isAllowedAdminEmail(user?.email)) {
-    return reply.code(403).send({ error: { code: 'forbidden', message: 'Admin access restricted to allowed accounts only', details: {} } });
+    return reply.code(403).send({ error: { code: 'forbidden', message: MSG_NOT_ADMIN, details: {} } });
   }
 });
 
 // Error handler global: no exponer stack ni mensajes internos al cliente; solo logger Fastify
 server.setErrorHandler((error: Error & { validation?: unknown }, request, reply) => {
   if (error.validation) {
+    // Log detallado server-side; al cliente solo un mensaje genérico (VULN-003/006)
+    request.log.warn({ validation: error.validation }, 'AJV validation failed');
     return reply.code(400).send({
       error: {
         code: 'validation_error',
-        message: 'Invalid input',
-        details: error.validation,
+        message: 'Invalid request format.',
+        details: {},
       },
     });
   }
@@ -116,15 +130,12 @@ server.setErrorHandler((error: Error & { validation?: unknown }, request, reply)
   });
 });
 
-// Límite por defecto para rutas que no definen el suyo (auth tiene límites más estrictos)
-const defaultRateLimit = { max: 300, timeWindow: '1 minute' as const };
-
 // Listener de rutas: al arranque se imprimen en logs (Railway) como "Mapped {/v1/auth/login, POST}"
 const routesLog: Array<{ path: string; method: string }> = [];
-server.addHook('onRoute', (routeOptions: { url?: string; path?: string; method?: string }) => {
+server.addHook('onRoute', (routeOptions) => {
   const path = (routeOptions.url ?? routeOptions.path ?? '').trim() || '/';
-  const method = (routeOptions.method ?? 'GET').toUpperCase();
-  routesLog.push({ path, method });
+  const method = Array.isArray(routeOptions.method) ? routeOptions.method[0] : routeOptions.method ?? 'GET';
+  routesLog.push({ path, method: String(method).toUpperCase() });
 });
 
 // Prefijo global /v1: cada módulo se registra con prefix '/v1' (rutas finales: /v1/health, /v1/auth/register, etc.).
@@ -137,7 +148,10 @@ server.register(remindersRoutes, { prefix: '/v1' });
 server.register(answersRoutes, { prefix: '/v1' });
 server.register(recordsRoutes, { prefix: '/v1' });
 server.register(userRoutes, { prefix: '/v1' });
+server.register(publicRequestsRoutes, { prefix: '/v1' });
+server.register(publicContentRoutes, { prefix: '/v1' });
 server.register(adminRoutes, { prefix: '/v1' });
+server.register(rouletteRoutes, { prefix: '/v1' });
 
 // Arranque: Railway espera escucha en puerto 8080. Binding 0.0.0.0 obligatorio para que el proxy enrute.
 const port = Number(process.env.PORT) || 8080;
@@ -170,14 +184,38 @@ const start = async () => {
   }
   try {
     await server.ready();
+    validateAdminAllowlistAtStartup(server.log);
     console.log('=== Rutas registradas (onRoute) ===');
     for (const r of routesLog) {
       console.log(`Mapped {${r.path}, ${r.method}}`);
     }
     console.log('=== Fin rutas (onRoute) ===');
+    // Validación: rutas que deben existir para app y admin (evitar 404 por despliegue antiguo o build incompleto)
+    const requiredRoutes = [
+      { path: '/v1/public/requests', method: 'GET' },
+      { path: '/v1/public/content', method: 'GET' },
+      { path: '/v1/user/display-preferences', method: 'GET' },
+      { path: '/v1/user/reminder-schedules', method: 'GET' },
+      { path: '/v1/roulette/join', method: 'POST' },
+      { path: '/v1/roulette/status', method: 'GET' },
+      { path: '/v1/partners', method: 'GET' },
+    ];
+    const missing = requiredRoutes.filter(
+      (req) => !routesLog.some((r) => r.path === req.path && r.method === req.method)
+    );
+    if (missing.length > 0) {
+      server.log.error({ missing }, 'Rutas requeridas no registradas. ¿Build o despliegue incompleto?');
+      throw new Error(`Rutas faltantes: ${missing.map((m) => `${m.method} ${m.path}`).join(', ')}. Revisa que el despliegue use el código actual.`);
+    }
+    console.log('[PR4Y] Validación de rutas: OK (public/requests, public/content, user/display-preferences, user/reminder-schedules)');
     console.log(server.printRoutes());
     await server.listen({ port: Number(process.env.PORT) || 8080, host: '0.0.0.0' });
     console.log(`API PR4Y activa en puerto ${port} y host 0.0.0.0`);
+
+    // Socket.io: montar sobre el HTTP server de Fastify
+    const httpServer = server.server;
+    initSocketIO(httpServer, jwtSecret, allowedOrigins);
+    console.log('[PR4Y] Socket.io inicializado en /ws');
   } catch (err) {
     server.log.error(err);
     process.exit(1);

@@ -31,11 +31,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'invalid token' }, { status: 401 });
     }
     const user = await me.json();
+    const notAdminMessage = 'No eres administrador. Gracias, pero puedes usar la app prontamente.';
     if (!isAdmin(user?.role)) {
-      return NextResponse.json({ error: 'admin required' }, { status: 403 });
+      return NextResponse.json({ error: 'admin_required', message: notAdminMessage }, { status: 403 });
     }
     if (!isAllowedAdminEmail(user?.email)) {
-      return NextResponse.json({ error: 'admin access restricted to allowed accounts only' }, { status: 403 });
+      return NextResponse.json({ error: 'admin_required', message: notAdminMessage }, { status: 403 });
     }
     const res = NextResponse.json({ ok: true });
     res.cookies.set(ADMIN_COOKIE, token, {

@@ -1,0 +1,72 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 3,
+    "identityHash": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+    "entities": [
+      {
+        "tableName": "requests",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `body` TEXT, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `synced` INTEGER NOT NULL, `encryptedPayloadB64` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {"fieldPath": "id", "columnName": "id", "affinity": "TEXT", "notNull": true},
+          {"fieldPath": "title", "columnName": "title", "affinity": "TEXT", "notNull": true},
+          {"fieldPath": "body", "columnName": "body", "affinity": "TEXT", "notNull": false},
+          {"fieldPath": "createdAt", "columnName": "createdAt", "affinity": "INTEGER", "notNull": true},
+          {"fieldPath": "updatedAt", "columnName": "updatedAt", "affinity": "INTEGER", "notNull": true},
+          {"fieldPath": "synced", "columnName": "synced", "affinity": "INTEGER", "notNull": true},
+          {"fieldPath": "encryptedPayloadB64", "columnName": "encryptedPayloadB64", "affinity": "TEXT", "notNull": false}
+        ],
+        "primaryKey": {"columnNames": ["id"], "autoGenerate": false},
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "journal",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `content` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `synced` INTEGER NOT NULL, `encryptedPayloadB64` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {"fieldPath": "id", "columnName": "id", "affinity": "TEXT", "notNull": true},
+          {"fieldPath": "content", "columnName": "content", "affinity": "TEXT", "notNull": true},
+          {"fieldPath": "createdAt", "columnName": "createdAt", "affinity": "INTEGER", "notNull": true},
+          {"fieldPath": "updatedAt", "columnName": "updatedAt", "affinity": "INTEGER", "notNull": true},
+          {"fieldPath": "synced", "columnName": "synced", "affinity": "INTEGER", "notNull": true},
+          {"fieldPath": "encryptedPayloadB64", "columnName": "encryptedPayloadB64", "affinity": "TEXT", "notNull": false}
+        ],
+        "primaryKey": {"columnNames": ["id"], "autoGenerate": false},
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "outbox",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`recordId` TEXT NOT NULL, `type` TEXT NOT NULL, `version` INTEGER NOT NULL, `encryptedPayloadB64` TEXT NOT NULL, `clientUpdatedAt` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`recordId`))",
+        "fields": [
+          {"fieldPath": "recordId", "columnName": "recordId", "affinity": "TEXT", "notNull": true},
+          {"fieldPath": "type", "columnName": "type", "affinity": "TEXT", "notNull": true},
+          {"fieldPath": "version", "columnName": "version", "affinity": "INTEGER", "notNull": true},
+          {"fieldPath": "encryptedPayloadB64", "columnName": "encryptedPayloadB64", "affinity": "TEXT", "notNull": true},
+          {"fieldPath": "clientUpdatedAt", "columnName": "clientUpdatedAt", "affinity": "INTEGER", "notNull": true},
+          {"fieldPath": "createdAt", "columnName": "createdAt", "affinity": "INTEGER", "notNull": true}
+        ],
+        "primaryKey": {"columnNames": ["recordId"], "autoGenerate": false},
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "sync_state",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `value` TEXT NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`key`))",
+        "fields": [
+          {"fieldPath": "key", "columnName": "key", "affinity": "TEXT", "notNull": true},
+          {"fieldPath": "value", "columnName": "value", "affinity": "TEXT", "notNull": true},
+          {"fieldPath": "updatedAt", "columnName": "updatedAt", "affinity": "INTEGER", "notNull": true}
+        ],
+        "primaryKey": {"columnNames": ["key"], "autoGenerate": false},
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4')"
+    ]
+  }
+}

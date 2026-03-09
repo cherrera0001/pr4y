@@ -1,8 +1,6 @@
 import { prisma } from '../lib/db';
 
-const VALID_STATUSES = ['PENDING', 'IN_PROCESS', 'ANSWERED'] as const;
 const TIME_PATTERN = /^([01]?\d|2[0-3]):([0-5]\d)$/;
-const DAYS_OF_WEEK = [0, 1, 2, 3, 4, 5, 6]; // 0 = domingo
 
 export type ReminderCreate = {
   recordId: string;

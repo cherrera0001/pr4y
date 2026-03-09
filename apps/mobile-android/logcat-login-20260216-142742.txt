@@ -1,0 +1,929 @@
+﻿--------- beginning of main
+02-16 14:28:47.242 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.243 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.245 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.344 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.346 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.432 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 14:28:47.432 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 14:28:47.432 E/HyperSentinel( 2645): -> audit event by proc 19032 "com.whatsapp": running threads amount, 0 -> 97
+02-16 14:28:47.441 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.442 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.445 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.446 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.543 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.544 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.546 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.547 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.548 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.644 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.645 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.648 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.708 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 14:28:47.743 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.744 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.746 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.747 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.841 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.842 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.843 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.844 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+--------- beginning of system
+02-16 14:28:47.863 E/ExtM    ( 2645): ExtM flush exist thrashing
+02-16 14:28:47.924 E/ExtM    ( 2645): can_flush_idle_pages:17823 flush_number_adjust: 17823
+02-16 14:28:47.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.942 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.944 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:47.988 E/vold    (19164): maxCpuFreq=2400000
+02-16 14:28:47.989 E/vold    (19164): maxCpuFreq=2400000
+02-16 14:28:48.143 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.146 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.146 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.148 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.244 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.249 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.250 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.251 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.343 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.343 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.344 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.345 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.345 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.443 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.444 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.445 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.446 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.447 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.544 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.544 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.546 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.644 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.648 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.650 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.651 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.745 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.751 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.766 E/msys    (12725): E[N MQTT]onConnectError(562)=>Connect Error: folly::AsyncSocketException: AsyncSocketException: connect failed, type = Socket not open, errno = 110 (Connection timed out)
+02-16 14:28:48.818 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=60349652221286 data 0.000000
+02-16 14:28:48.843 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.844 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.845 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.846 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.848 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.946 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.947 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.948 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:48.951 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.042 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.044 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.047 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.144 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.145 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.146 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.147 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.243 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.244 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.246 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.247 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.249 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.344 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.345 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.346 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.445 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.446 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.448 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.449 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.450 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.541 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.541 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.643 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.648 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.649 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.651 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.743 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.745 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.747 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.748 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.750 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.779 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=60350613884619 data 2.000000
+02-16 14:28:49.791 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:28:49.822 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:28:49.827 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:28:49.831 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:28:49.835 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:28:49.841 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:28:49.845 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:28:49.845 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:49.873 I/PR4Y_NETWORK(12341): --> GET https://pr4yapi-production.up.railway.app/v1/crypto/wrapped-dek
+02-16 14:28:49.873 I/PR4Y_NETWORK(12341): Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYWQ4OGFiYi1mYjQwLTQ1ZjAtOTI5MC1kNGZlODE4MDljMDciLCJlbWFpbCI6ImhlcnJlcmEuamFyYS5jcmlzdG9iYWxAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzEyNjI4NTYsImV4cCI6MTc3MTI2Mzc1Nn0.2U-tjoSfzOBJWXTK3tudzH6TOlkjPXidr47I1PMHom8
+02-16 14:28:49.873 I/PR4Y_NETWORK(12341): --> END GET
+02-16 14:28:49.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:50.142 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:50.214 E/sensors-hal( 1397): handle_sns_client_event:52, sar_algo_event: ts=60351048258786, event=4.000000
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): <-- 200 https://pr4yapi-production.up.railway.app/v1/crypto/wrapped-dek (353ms)
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): access-control-allow-credentials: true
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): content-type: application/json; charset=utf-8
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): cross-origin-opener-policy: same-origin
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): cross-origin-resource-policy: same-origin
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): date: Mon, 16 Feb 2026 17:28:50 GMT
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): origin-agent-cluster: ?1
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): referrer-policy: no-referrer
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): server: railway-edge
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): strict-transport-security: max-age=31536000; includeSubDomains
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): vary: Origin
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-content-type-options: nosniff
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-dns-prefetch-control: off
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-download-options: noopen
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-frame-options: SAMEORIGIN
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-permitted-cross-domain-policies: none
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-railway-edge: railway/us-east4-eqdc4a
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-railway-request-id: 8BsROgx1T7qNRxTQwoOzXw
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-ratelimit-limit: 300
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-ratelimit-remaining: 299
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-ratelimit-reset: 60
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): x-xss-protection: 0
+02-16 14:28:50.227 I/PR4Y_NETWORK(12341): content-length: 173
+02-16 14:28:50.230 I/PR4Y_NETWORK(12341): 
+02-16 14:28:50.230 I/PR4Y_NETWORK(12341): {"kdf":{"name":"pbkdf2","params":{},"saltB64":"H+5tnRsZxllcKf31/RCSzQ=="},"wrappedDekB64":"M96me2KtcxcpfFNeTuIAUgG0bc0Iqe6fT9O5FHQVPCUqdJ5Ot7R4f1dLyNP+xCdaebaVt6rZ0r8oaK32"}
+02-16 14:28:50.231 I/PR4Y_NETWORK(12341): <-- END HTTP (173-byte body)
+02-16 14:28:50.232 I/PR4Y_NETWORK(12341): HTTP SUCCESS 200: https://pr4yapi-production.up.railway.app/v1/crypto/wrapped-dek
+02-16 14:28:50.541 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:50.731 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 14:28:50.781 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=60351615308994 data 1.000000
+02-16 14:28:50.884 D/PR4Y_APP(12341): Descifrando contenido (E2EE)...
+02-16 14:28:51.042 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:51.343 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:51.594 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:28:51.601 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:28:51.601 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:28:51.603 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:28:51.642 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:51.943 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:52.243 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:52.269 E/PhoneAdapter( 4394): get ntnphones failed, exception: java.lang.IllegalStateException: Default phones haven't been made yet!
+02-16 14:28:52.518 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:28:52.528 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:28:52.540 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:52.595 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:28:52.607 E/VibratorManagerServiceImpl( 2645): vibrationThreadSetParameters
+02-16 14:28:52.720 E/WindowManager( 2645): setClientVisible ActivityRecord{659c16e u0 com.miui.home/.launcher.Launcher t2} true
+02-16 14:28:52.724 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 14:28:52.724 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 14:28:52.727 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.miui.home params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 14:28:52.732 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 14:28:52.755 E/BluetoothAdapterService( 5593): getActiveDevices: LeAudioService is null
+02-16 14:28:52.758 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} true
+02-16 14:28:52.758 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} true
+02-16 14:28:52.783 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 14:28:52.788 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:52.792 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:52.792 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:52.826 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 14:28:52.826 E/WindowManager( 2645): setClientVisible ActivityRecord{659c16e u0 com.miui.home/.launcher.Launcher t2} true
+02-16 14:28:52.832 E/WindowManager( 2645):  source = Task{9a9f644 #189 type=standard A=10319:com.pr4y.app.dev} excludeMiuiNavBar = true excludeMiuiStatusBar = true excludeIme = false excludeNavBar = true miuiNavSurfaceControl = Surface(name=Miui Fake NavBar#51)/@0xa93b015 miuiStatusSurfaceControl = Surface(name=Miui Fake StatusBar#50)/@0xc839f1e
+02-16 14:28:52.834 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 0
+02-16 14:28:52.834 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 0
+02-16 14:28:52.840 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:52.848 E/onWindowDecorRectChanged( 4422): start size:0
+02-16 14:28:52.853 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:52.855 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:52.855 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:52.855 E/WindowTransitionCompat( 4043): TransitionTest wrapRemoteTransition
+02-16 14:28:52.856 E/WindowTransitionCompat( 4043): startAnimation isFastLaunch = false
+02-16 14:28:52.856 E/WindowTransitionCompat( 4043): printLeash::index = 0, root = Surface(name=Transition Root #1242: Task=1#16556)/@0x4928669
+02-16 14:28:52.856 E/WindowTransitionCompat( 4043): 0, check isClosingType type = 2, mode = 3
+02-16 14:28:52.856 E/WindowTransitionCompat( 4043): 1, check isClosingType type = 1, mode = 4
+02-16 14:28:52.869 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:52.870 E/WindowAnimParamsProvider( 4043): getWindowTargetBounds    bounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:52.871 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:52.871 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:52.871 E/ClipAnimationHelper( 4043): updateSourceStack  mSourceInsets=Rect(0, 0 - 0, 0), mSourceStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:52.871 E/ClipAnimationHelper( 4043): updateHomeStack  mSourceInsets=Rect(0, 0 - 0, 0), mHomeStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:52.871 E/ClipAnimationHelper( 4043): updateTargetRect  mSourceRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mTargetRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mSourceWindowClipInsets=RectF(0.0, 0.0, 0.0, 0.0)   mHomeStackBounds=Rect(0, 0 - 1220, 2712)   targetRect=Rect(0, 0 - 1220, 2712)
+02-16 14:28:52.872 E/StateNotifyUtils( 4043): sendFsStateBroadCast state=closeWindow   channel=navigation_bar   packageName=
+02-16 14:28:52.876 E/MultiSpringDynamicAnimationbfa9660( 4043): ERROR Not Found Bundle scaleY
+02-16 14:28:52.885 E/ANDR-PERF-RESOURCEQS( 1460): Failed to apply optimization [11, 8]
+02-16 14:28:52.885 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:52.885 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:53.118 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.126 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.136 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.140 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:53.144 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.152 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.160 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.169 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.177 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.181 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:28:53.186 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.188 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:28:53.194 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.202 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.210 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.218 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.227 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.235 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.244 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.252 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.260 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.270 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.277 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.287 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.294 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.303 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.312 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.320 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.328 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.336 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.344 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.352 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.360 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.369 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.379 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.387 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.395 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.403 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.411 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.420 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.428 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.436 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.441 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:53.444 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.454 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.461 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.471 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.478 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.486 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.496 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.503 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.511 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.520 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.527 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.533 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:28:53.536 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.540 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:28:53.545 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.553 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.562 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.571 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.578 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.586 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.594 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.603 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.611 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.621 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.629 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.637 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.645 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.654 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.662 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.667 E/WindowTransitionCompat( 4043): com.android.systemui.shared.recents.system.WindowTransitionCompat@10287f1 finishTransition toHome = true
+02-16 14:28:53.670 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.676 E/WindowManager( 2645): setClientVisible ActivityRecord{c22e898 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t189} false
+02-16 14:28:53.677 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:53.677 E/FrameEvents(12341): addRelease: Did not find frame.
+02-16 14:28:53.679 E/RotationHelper( 4043): setCurrentTransitionRequest: request=0
+02-16 14:28:53.694 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 14:28:53.699 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:53.701 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:53.701 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:53.742 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:53.745 E/PreStartUtils( 4043): preLaunchProcess success infoPackage: com.pr4y.app.dev
+02-16 14:28:53.753 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 14:28:53.760 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 14:28:53.780 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 14:28:53.780 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 14:28:53.822 E/Launcher.application( 4043): setClickAppWaitForCallback = true
+02-16 14:28:53.822 E/Launcher.application( 4043): setClickAppWaitForCallback = true
+02-16 14:28:53.822 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.miui.home params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 14:28:53.822 E/Launcher( 4043): superStartActivity   type=13
+02-16 14:28:53.826 E/WindowManager( 2645): setClientVisible ActivityRecord{dcb7c32 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity true
+02-16 14:28:53.831 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.pr4y.app.dev params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 14:28:53.835 E/WindowManager( 2645): setClientVisible ActivityRecord{c22e898 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t189} true
+02-16 14:28:53.848 E/WindowManager( 2645): setClientVisible ActivityRecord{c22e898 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t189} true
+02-16 14:28:53.853 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 0
+02-16 14:28:53.857 E/onWindowDecorRectChanged( 4422): start size:1
+02-16 14:28:53.858 E/onWindowDecorRectChanged( 4422): windowDecorRect: Rect(535, 10 - 684, 128)
+02-16 14:28:53.860 E/WindowTransitionCompat( 4043): startAnimation isFastLaunch = false
+02-16 14:28:53.860 E/WindowTransitionCompat( 4043): printLeash::index = 0, root = Surface(name=Transition Root #1243: Task=189#16567)/@0x93b8a86
+02-16 14:28:53.861 E/WindowTransitionCompat( 4043): 0, check isClosingType type = 1, mode = 3
+02-16 14:28:53.861 E/WindowTransitionCompat( 4043): 1, check isClosingType type = 2, mode = 4
+02-16 14:28:53.869 E/WindowAnimParamsProvider( 4043): getWindowTargetBounds    bounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:53.869 E/ClipAnimationHelper( 4043): updateSourceStack  mSourceInsets=Rect(0, 0 - 0, 0), mSourceStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:53.869 E/ClipAnimationHelper( 4043): updateHomeStack  mSourceInsets=Rect(0, 0 - 0, 0), mHomeStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:53.870 E/ClipAnimationHelper( 4043): updateTargetRect  mSourceRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mTargetRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mSourceWindowClipInsets=RectF(0.0, 0.0, 0.0, 0.0)   mHomeStackBounds=Rect(0, 0 - 1220, 2712)   targetRect=Rect(0, 0 - 1220, 2712)
+02-16 14:28:53.874 E/MultiSpringDynamicAnimationbfa9660( 4043): ERROR Not Found Bundle scaleY
+02-16 14:28:53.874 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 14:28:53.880 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:53.880 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:53.881 E/BluetoothAdapterService( 5593): getActiveDevices: LeAudioService is null
+02-16 14:28:53.886 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:53.890 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:53.890 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:53.895 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:53.903 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:53.903 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:53.938 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:53.943 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:53.943 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:54.039 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:54.340 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:54.637 E/WindowTransitionCompat( 4043): com.android.systemui.shared.recents.system.WindowTransitionCompat@d2cc879 finishTransition toHome = false
+02-16 14:28:54.642 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:54.647 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:54.651 E/WindowManager( 2645): setClientVisible ActivityRecord{659c16e u0 com.miui.home/.launcher.Launcher t2} false
+02-16 14:28:54.651 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 14:28:54.652 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 14:28:54.664 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 14:28:54.664 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 14:28:54.664 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 14:28:54.664 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 14:28:54.670 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 14:28:54.671 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 14:28:54.676 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 14:28:54.680 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 14:28:54.687 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:54.689 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:54.689 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:54.867 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 14:28:54.867 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 14:28:54.867 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 14:28:54.926 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:28:54.938 E/VibratorManagerServiceImpl( 2645): vibrationThreadSetParameters
+02-16 14:28:54.942 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:55.014 E/RotationHelper( 4043): setCurrentStateRequest: request=1
+02-16 14:28:55.014 E/RotationHelper( 4043): notifyChange activityFlags=1, mMultiWindowRotationRequest=3, mCurrentTransitionRequest=0, mCurrentStateRequest=1
+02-16 14:28:55.016 E/ANDR-PERF-RESOURCEQS( 1460): Failed to apply optimization [11, 8]
+02-16 14:28:55.019 E/NormalState( 4043): onExitState
+02-16 14:28:55.019 E/OverviewState( 4043): onStateEnabled
+02-16 14:28:55.021 E/RecentsContainer( 4043): setIsExitRecentsAnimating animating=false
+02-16 14:28:55.022 E/RotationHelper( 4043): setCurrentStateRequest: request=1
+02-16 14:28:55.022 E/StateManager( 4043): setWorkspaceProperty  state=OverviewState
+02-16 14:28:55.022 E/StateManager( 4043): setShortcutMenuLayerProperty  state=OverviewState   alpha=0.0   duration=0   scale=0.95   isInState=false
+02-16 14:28:55.022 E/RecentsViewStateController( 4043): setState: state=OverviewState
+02-16 14:28:55.023 E/OverviewState( 4043): onStateTransitionEnd
+02-16 14:28:55.023 E/RotationHelper( 4043): setCurrentStateRequest: request=1
+02-16 14:28:55.023 E/Launcher.application( 4043): setClickAppWaitForCallback = true
+02-16 14:28:55.028 E/WindowManager( 2645): setClientVisible ActivityRecord{d4e17cb u0 com.miui.home/.launcher.Launcher true
+02-16 14:28:55.033 E/StateNotifyUtils( 4043): sendFsStateBroadCast state=toRecents   channel=navigation_bar   packageName=
+02-16 14:28:55.034 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.miui.home params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 14:28:55.037 E/WindowManager( 2645): setClientVisible ActivityRecord{659c16e u0 com.miui.home/.launcher.Launcher t2} true
+02-16 14:28:55.041 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 14:28:55.041 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 14:28:55.049 E/RecentsContainer( 4043): setIsExitRecentsAnimating animating=false
+02-16 14:28:55.054 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 14:28:55.055 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:55.057 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:55.057 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:55.072 E/BluetoothAdapterService( 5593): getActiveDevices: LeAudioService is null
+02-16 14:28:55.072 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} true
+02-16 14:28:55.072 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} true
+02-16 14:28:55.093 E/Launcher( 4043): mFsGestureStatusRefreshRunnable:run usingFsGesture=false   show=true   focus=false   pause=false
+02-16 14:28:55.115 E/WindowManager( 2645): setClientVisible ActivityRecord{659c16e u0 com.miui.home/.launcher.Launcher t2} true
+02-16 14:28:55.121 E/WindowManager( 2645):  source = Task{9a9f644 #189 type=standard A=10319:com.pr4y.app.dev} excludeMiuiNavBar = true excludeMiuiStatusBar = true excludeIme = false excludeNavBar = true miuiNavSurfaceControl = Surface(name=Miui Fake NavBar#51)/@0xa93b015 miuiStatusSurfaceControl = Surface(name=Miui Fake StatusBar#50)/@0xc839f1e
+02-16 14:28:55.133 E/WindowTransitionCompat( 4043): startAnimation isFastLaunch = false
+02-16 14:28:55.134 E/WindowTransitionCompat( 4043): printLeash::index = 0, root = Surface(name=Transition Root #1244: Task=1#16581)/@0xffa264
+02-16 14:28:55.134 E/WindowTransitionCompat( 4043): 0, check isClosingType type = 2, mode = 3
+02-16 14:28:55.134 E/WindowTransitionCompat( 4043): 1, check isClosingType type = 1, mode = 4
+02-16 14:28:55.143 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:55.143 E/onWindowDecorRectChanged( 4422): start size:0
+02-16 14:28:55.146 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:55.146 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:55.155 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:55.157 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:55.157 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:55.159 E/WindowAnimParamsProvider( 4043): getWindowTargetBounds    bounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:55.159 E/ClipAnimationHelper( 4043): updateSourceStack  mSourceInsets=Rect(0, 0 - 0, 0), mSourceStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:55.159 E/ClipAnimationHelper( 4043): updateHomeStack  mSourceInsets=Rect(0, 0 - 0, 0), mHomeStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:55.159 E/ClipAnimationHelper( 4043): updateTargetRect  mSourceRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mTargetRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mSourceWindowClipInsets=RectF(0.0, 0.0, 0.0, 0.0)   mHomeStackBounds=Rect(0, 0 - 1220, 2712)   targetRect=Rect(0, 0 - 1220, 2712)
+02-16 14:28:55.162 E/MultiSpringDynamicAnimationc72537a( 4043): ERROR Not Found Bundle Radius
+02-16 14:28:55.162 E/MultiSpringDynamicAnimationc72537a( 4043): ERROR Not Found Bundle SurfaceExtAlpha
+02-16 14:28:55.162 E/MultiSpringDynamicAnimationc72537a( 4043): ERROR Not Found Bundle SurfaceExtAlpha
+02-16 14:28:55.162 E/MultiSpringDynamicAnimationc72537a( 4043): ERROR Not Found Bundle SurfaceExtAlpha
+02-16 14:28:55.163 E/TaskViewsElement( 4043): animTo,mode=16
+02-16 14:28:55.174 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:55.174 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:55.241 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:55.323 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 14:28:55.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:55.833 E/PowerKeeper.Thermal( 9694): ProcessInfo java.lang.NumberFormatException: For input string: "CPU usage from 100662ms to 82708ms ago (2026-02-16 14"
+02-16 14:28:55.842 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:56.032 E/WindowTransitionCompat( 4043): com.android.systemui.shared.recents.system.WindowTransitionCompat@3a82c48 finishTransition toHome = true
+02-16 14:28:56.038 E/WindowManager( 2645): setClientVisible ActivityRecord{c22e898 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t189} false
+02-16 14:28:56.038 E/RotationHelper( 4043): setCurrentTransitionRequest: request=0
+02-16 14:28:56.042 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:56.045 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:56.052 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 14:28:56.052 E/ActivityManagerWrapper( 4043): get all recent tasks force including 189
+02-16 14:28:56.054 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:56.054 E/ActivityManagerWrapper( 4043):  mainTaskId=189   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:56.077 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 14:28:56.083 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 14:28:56.083 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 14:28:56.093 E/ANDR-PERF-OPTSHANDLER( 1460): Perflock resource /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/min_freq not supported
+02-16 14:28:56.093 E/ANDR-PERF-RESOURCEQS( 1460): Failed to apply optimization [12, 4]
+02-16 14:28:56.140 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:56.342 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:56.450 E/ANDR-PERF-OPTSHANDLER( 1460): Perflock resource /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/min_freq not supported
+02-16 14:28:56.450 E/ANDR-PERF-RESOURCEQS( 1460): Failed to apply optimization [12, 4]
+02-16 14:28:56.451 E/VibratorManagerServiceImpl( 2645): vibrationThreadSetParameters
+02-16 14:28:56.540 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:56.754 E/StateManager( 4043): setWorkspaceProperty  state=NormalState
+02-16 14:28:56.754 E/StateManager( 4043): setShortcutMenuLayerProperty  state=NormalState   alpha=1.0   duration=500   scale=1.0   isInState=false
+02-16 14:28:56.755 E/RecentsViewStateController( 4043): setState: state=NormalState   mIsIgnoreOverviewAnim=false
+02-16 14:28:56.755 E/RecentsContainer( 4043): setIsExitRecentsAnimating animating=true
+02-16 14:28:56.755 E/RecentsContainer( 4043): setIsExitRecentsAnimating animating=false
+02-16 14:28:56.755 E/RecentsViewStateController( 4043): set RecentsContainer GONE when setState with animation,  need:true
+02-16 14:28:56.758 E/OverviewState( 4043): onExitState
+02-16 14:28:56.761 E/RotationHelper( 4043): setCurrentStateRequest: request=0
+02-16 14:28:56.761 E/RotationHelper( 4043): notifyChange activityFlags=1, mMultiWindowRotationRequest=3, mCurrentTransitionRequest=0, mCurrentStateRequest=0
+02-16 14:28:56.761 E/NormalState( 4043): onStateEnabled
+02-16 14:28:56.767 E/ActivityManagerWrapper( 4043): get all recent tasks force including -1
+02-16 14:28:56.767 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 14:28:56.771 E/Launcher( 4043): mFsGestureStatusRefreshRunnable:run usingFsGesture=false   show=true   focus=true   pause=false
+02-16 14:28:56.773 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 14:28:56.840 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:56.862 E/ActivityManagerWrapper( 4043): get all recent tasks force including -1
+02-16 14:28:56.864 E/ActivityManagerWrapper( 4043): get all recent tasks force including -1
+02-16 14:28:56.903 E/PowerKeeper.Thermal( 9694): ProcessInfo java.lang.NumberFormatException: For input string: "CPU usage from 101741ms to 83787ms ago (2026-02-16 14"
+02-16 14:28:57.240 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:57.261 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4225 hinttype=1 prio=3, clientpid=2645 packagename=com.pr4y.app.dev params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 14:28:57.262 E/PreStartUtils( 4043): preLaunchProcess success infoPackage: com.pr4y.app.dev
+02-16 14:28:57.263 E/RotationHelper( 4043): setCurrentStateRequest: request=0
+02-16 14:28:57.267 E/Zygote  (16000): process_name_ptr:16000 com.pr4y.app.dev
+02-16 14:28:57.267 E/Zygote  (16000): SetMemoryProtected process_name_ptr:16000 com.pr4y.app.dev
+02-16 14:28:57.327 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 14:28:57.327 E/Launcher.application( 4043): setClickAppWaitForCallback = true
+02-16 14:28:57.328 E/Launcher.application( 4043): setClickAppWaitForCallback = true
+02-16 14:28:57.328 E/Launcher( 4043): superStartActivity   type=13
+02-16 14:28:57.329 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4226 hinttype=1 prio=2, clientpid=2645 packagename=com.miui.home params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 14:28:57.331 E/WindowManager( 2645): setClientVisible ActivityRecord{c32d362 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity true
+02-16 14:28:57.333 E/vendor.qti.hardware.perf-hal-service( 1460): ExtendedPerfBoost: extended_perfboost_verification() 738: Ok, set boost params. hintid=4225 hinttype=1 prio=3, clientpid=2645 packagename=com.pr4y.app.dev params=boost:1 cpu0:1958400 cpu4:2400000 cpumask:ff
+02-16 14:28:57.334 E/ANDR-PERF-MPCTL( 1460): Perflock Submit request limit reached.
+02-16 14:28:57.334 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 14:28:57.334 E/ANDR-PERF-MPCTL( 1460): Perflock Submit request limit reached.
+02-16 14:28:57.334 E/ANDR-PERF-JNI( 2645): com_qualcomm_qtiperformance_native_perf_io_prefetch_start
+02-16 14:28:57.336 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 14:28:57.336 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 14:28:57.340 E/ANDR-PERF-MPCTL( 1460): Perflock Submit request limit reached.
+02-16 14:28:57.340 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 14:28:57.344 E/ANDR-IOP( 1444): io prefetch is disabled
+02-16 14:28:57.345 E/ANDR-PERF-MPCTL( 1460): Perflock Submit request limit reached.
+02-16 14:28:57.348 E/WindowManager( 2645): setClientVisible ActivityRecord{c32d362 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t190} true
+02-16 14:28:57.353 E/ANDR-PERF-LM( 1460): MetaMeter: handleAsync() 166: AdaptLaunch Invalid Async
+02-16 14:28:57.353 E/WindowManager( 2645): setClientVisible ActivityRecord{c32d362 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t190} true
+02-16 14:28:57.365 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 14:28:57.365 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 14:28:57.365 E/HyperSentinel( 2645): -> audit event by proc 16000 "com.pr4y.app.dev": running threads amount, 0 -> 12
+02-16 14:28:57.365 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 14:28:57.365 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 14:28:57.365 E/HyperSentinel( 2645): -> audit event by proc 16000 "com.pr4y.app.dev": RSS increasement, peak 72440kb -> 108808kb
+02-16 14:28:57.376 E/WindowManager( 2645): setClientVisible ActivityRecord{c32d362 u0 com.pr4y.app.dev/com.pr4y.app.MainActivity t190} true
+02-16 14:28:57.384 E/KeyguardTransitionHandlerImpl( 4422): activityCount = 0
+02-16 14:28:57.389 E/ANDR-PERF-MPCTL( 1460): Perflock Submit request limit reached.
+02-16 14:28:57.390 E/WindowTransitionCompat( 4043): startAnimation isFastLaunch = false
+02-16 14:28:57.391 E/WindowTransitionCompat( 4043): printLeash::index = 0, root = Surface(name=Transition Root #1245: Task=190#16594)/@0x9ca86cb
+02-16 14:28:57.391 E/WindowTransitionCompat( 4043): 0, check isClosingType type = 1, mode = 1
+02-16 14:28:57.391 E/WindowTransitionCompat( 4043): 1, check isClosingType type = 2, mode = 4
+02-16 14:28:57.396 E/onWindowDecorRectChanged( 4422): start size:1
+02-16 14:28:57.396 E/onWindowDecorRectChanged( 4422): windowDecorRect: Rect(535, 10 - 684, 128)
+02-16 14:28:57.403 E/WindowAnimParamsProvider( 4043): getWindowTargetBounds    bounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:57.403 E/ClipAnimationHelper( 4043): updateSourceStack  mSourceInsets=Rect(0, 0 - 0, 0), mSourceStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:57.403 E/ClipAnimationHelper( 4043): updateHomeStack  mSourceInsets=Rect(0, 0 - 0, 0), mHomeStackBounds=Rect(0, 0 - 1220, 2712)
+02-16 14:28:57.403 E/ClipAnimationHelper( 4043): updateTargetRect  mSourceRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mTargetRect=RectF(0.0, 0.0, 1220.0, 2712.0)   mSourceWindowClipInsets=RectF(0.0, 0.0, 0.0, 0.0)   mHomeStackBounds=Rect(0, 0 - 1220, 2712)   targetRect=Rect(0, 0 - 1220, 2712)
+02-16 14:28:57.409 E/MultiSpringDynamicAnimationbfa9660( 4043): ERROR Not Found Bundle scaleY
+02-16 14:28:57.409 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 14:28:57.422 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:57.422 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:57.424 E/ActivityManagerWrapper( 4043): get all recent tasks force including 190
+02-16 14:28:57.427 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:57.427 E/ActivityManagerWrapper( 4043):  mainTaskId=190   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:57.429 E/BluetoothAdapterService( 5593): getActiveDevices: LeAudioService is null
+02-16 14:28:57.436 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 14:28:57.454 E/ActivityManagerWrapper( 4043): get all recent tasks force including 190
+02-16 14:28:57.457 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:57.457 E/ActivityManagerWrapper( 4043):  mainTaskId=190   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:57.540 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:57.607 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 14:28:57.607 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 14:28:57.607 E/HyperSentinel( 2645): -> audit event by proc 16000 "com.pr4y.app.dev": RSS increasement, peak 108808kb -> 163528kb
+02-16 14:28:57.840 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:57.957 I/PR4Y_DEBUG(16000): Pr4yApp.onCreate|pkg=com.pr4y.app.dev|pid=16000|uid=10319|userId=0|hypothesisId=H1,H5
+02-16 14:28:57.992 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 14:28:57.993 E/HyperSentinel( 2645): Event_ThreadAmount
+02-16 14:28:57.993 E/HyperSentinel( 2645): -> audit event by proc 16000 "com.pr4y.app.dev": running threads amount, 12 -> 23
+02-16 14:28:58.031 I/PR4Y_DEBUG(16000): MainActivity.onCreate start|pkg=com.pr4y.app.dev
+02-16 14:28:58.094 E/HyperSentinel( 2645): -------------------------------------------------------
+02-16 14:28:58.094 E/HyperSentinel( 2645): Event_ResidentSize
+02-16 14:28:58.094 E/HyperSentinel( 2645): -> audit event by proc 16000 "com.pr4y.app.dev": RSS increasement, peak 163528kb -> 245668kb
+02-16 14:28:58.102 E/FramePredict(16000): registerContentObserver fail
+02-16 14:28:58.116 E/PowerKeeper.Thermal( 9694): ProcessInfo java.lang.NumberFormatException: For input string: "CPU usage from 102952ms to 84998ms ago (2026-02-16 14"
+02-16 14:28:58.140 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:58.169 E/WindowTransitionCompat( 4043): com.android.systemui.shared.recents.system.WindowTransitionCompat@b65a287 finishTransition toHome = false
+02-16 14:28:58.178 E/WindowManager( 2645): setClientVisible ActivityRecord{659c16e u0 com.miui.home/.launcher.Launcher t2} false
+02-16 14:28:58.179 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 14:28:58.179 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 14:28:58.180 E/MI-SF   ( 1606): surfaceflinger setAffinity success
+02-16 14:28:58.193 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 14:28:58.193 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 14:28:58.193 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 14:28:58.193 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 14:28:58.197 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{cf9eac9 token=android.os.Binder@fc09382} false
+02-16 14:28:58.197 E/WindowManager( 2645): setClientVisible WallpaperWindowToken{986b648 token=android.os.Binder@1f9a8eb} false
+02-16 14:28:58.204 E/NativeTurboSchedManagerJni( 2645): ioctl 8 failed!
+02-16 14:28:58.214 E/ActivityManagerWrapper( 4043): get all recent tasks force including 190
+02-16 14:28:58.216 E/ActivityManagerWrapper( 4043): getRecentTasksForceIncludingTaskIdIfValid: getRecentTasks: size=1
+02-16 14:28:58.216 E/ActivityManagerWrapper( 4043):  mainTaskId=190   userId=0   windowMode=1   baseIntent=Intent { act=android.intent.action.MAIN flag=270532608 cmp=ComponentInfo{com.pr4y.app.dev/com.pr4y.app.MainActivity} }
+02-16 14:28:58.380 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 14:28:58.381 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.383 E/ANDR-PERF-LM( 1460): VmRssMeter:: start() 358: Could not find pid, can not collect vmrss data
+02-16 14:28:58.383 E/ANDR-PERF-LM( 1460): AdaptiveLaunch: writeToDataBase() 64: Meter aborted or could not get meter data for this run
+02-16 14:28:58.416 E/Launcher.application( 4043): setClickAppWaitForCallback = false
+02-16 14:28:58.425 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.434 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.440 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:58.444 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.450 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.458 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.464 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.476 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.481 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.488 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.496 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.505 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.513 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.522 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.530 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.539 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.547 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.554 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.564 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.572 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.580 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.590 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.597 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.599 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 701e went down
+02-16 14:28:58.605 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.618 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.623 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.630 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.638 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.647 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.655 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.663 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.672 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.680 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.689 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.691 I/PR4Y_APP(16000): --- Iniciando B├║nker PR4Y (Async) ---
+02-16 14:28:58.693 I/PR4Y_CRYPTO(16000): Inicializando almac├⌐n de hardware (Intento 1)...
+02-16 14:28:58.700 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.708 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.714 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.722 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.732 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.740 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:58.742 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.750 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.760 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.768 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.776 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.784 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.790 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.798 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.806 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.810 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:28:58.815 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:28:58.815 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:28:58.817 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.819 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.819 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.819 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.819 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:28:58.825 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.830 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.835 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.835 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.835 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.838 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.846 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.855 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.855 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.855 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.855 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.862 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.871 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.872 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.872 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.872 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.879 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.884 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.884 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.884 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.888 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.896 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.898 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.898 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.898 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.904 I/PR4Y_CRYPTO(16000): Almac├⌐n cifrado listo.
+02-16 14:28:58.905 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.913 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.921 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.926 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.926 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.926 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.930 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.938 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.940 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.940 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.940 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.946 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.954 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.955 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.955 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.955 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.963 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.970 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.971 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.971 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.971 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.979 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.985 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.985 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.985 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:58.988 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.996 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:58.999 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:58.999 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:58.999 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.002 I/PR4Y_APP(16000): Login status: true
+02-16 14:28:59.006 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.015 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.022 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.031 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.039 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:59.039 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.040 I/PR4Y_DEBUG(16000): initBunker finalized|isReady=true|repo=true
+02-16 14:28:59.095 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.095 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.095 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.110 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.110 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.110 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.124 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.124 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.124 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.143 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.143 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.143 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.160 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.160 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.160 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.182 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.182 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.182 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.207 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.207 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.207 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.226 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.226 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.226 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.239 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:59.244 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.244 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.244 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.263 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.264 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.264 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.292 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.292 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.292 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.298 E/KeymasterUtils(  866): rsp_header->status: -28
+02-16 14:28:59.298 E/KeyMasterHalDevice(  866): abort_operation
+02-16 14:28:59.298 E/KeyMasterHalDevice(  866): ret: -28
+02-16 14:28:59.348 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.361 I/PR4Y_NETWORK(16000): --> GET https://pr4yapi-production.up.railway.app/v1/crypto/wrapped-dek
+02-16 14:28:59.361 I/PR4Y_NETWORK(16000): Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYWQ4OGFiYi1mYjQwLTQ1ZjAtOTI5MC1kNGZlODE4MDljMDciLCJlbWFpbCI6ImhlcnJlcmEuamFyYS5jcmlzdG9iYWxAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzEyNjI4NTYsImV4cCI6MTc3MTI2Mzc1Nn0.2U-tjoSfzOBJWXTK3tudzH6TOlkjPXidr47I1PMHom8
+02-16 14:28:59.361 I/PR4Y_NETWORK(16000): --> END GET
+02-16 14:28:59.372 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.379 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.388 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.396 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.406 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.413 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.422 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.430 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.439 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.441 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:59.447 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.455 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.463 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.472 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.480 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.488 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.497 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.505 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.514 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.524 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.532 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.539 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.548 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.556 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.563 E/LB      (16000): fail to open node: No such file or directory
+02-16 14:28:59.649 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:28:59.655 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:28:59.719 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:28:59.728 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:28:59.740 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:28:59.785 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 14:29:00.029 E/AnimationHelper( 4422): updateTime mToAod:false mHasNotification: true, mClockType: classic
+02-16 14:29:00.040 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): <-- 200 https://pr4yapi-production.up.railway.app/v1/crypto/wrapped-dek (859ms)
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): access-control-allow-credentials: true
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): content-type: application/json; charset=utf-8
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): cross-origin-opener-policy: same-origin
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): cross-origin-resource-policy: same-origin
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): date: Mon, 16 Feb 2026 17:29:00 GMT
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): origin-agent-cluster: ?1
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): referrer-policy: no-referrer
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): server: railway-edge
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): strict-transport-security: max-age=31536000; includeSubDomains
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): vary: Origin
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-content-type-options: nosniff
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-dns-prefetch-control: off
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-download-options: noopen
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-frame-options: SAMEORIGIN
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-permitted-cross-domain-policies: none
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-railway-edge: railway/us-east4-eqdc4a
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-railway-request-id: B9a-R_ozRFiI6RGlezItjw
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-ratelimit-limit: 300
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-ratelimit-remaining: 298
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-ratelimit-reset: 50
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): x-xss-protection: 0
+02-16 14:29:00.220 I/PR4Y_NETWORK(16000): content-length: 173
+02-16 14:29:00.221 I/PR4Y_NETWORK(16000): 
+02-16 14:29:00.222 I/PR4Y_NETWORK(16000): {"kdf":{"name":"pbkdf2","params":{},"saltB64":"H+5tnRsZxllcKf31/RCSzQ=="},"wrappedDekB64":"M96me2KtcxcpfFNeTuIAUgG0bc0Iqe6fT9O5FHQVPCUqdJ5Ot7R4f1dLyNP+xCdaebaVt6rZ0r8oaK32"}
+02-16 14:29:00.222 I/PR4Y_NETWORK(16000): <-- END HTTP (173-byte body)
+02-16 14:29:00.222 I/PR4Y_NETWORK(16000): HTTP SUCCESS 200: https://pr4yapi-production.up.railway.app/v1/crypto/wrapped-dek
+02-16 14:29:00.288 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:29:00.300 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:29:00.444 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:00.479 E/PowerKeeper.Thermal( 9694): ProcessInfo java.lang.NumberFormatException: For input string: "CPU usage from 105309ms to 87355ms ago (2026-02-16 14"
+02-16 14:29:01.443 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:01.541 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:01.542 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:01.544 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:01.643 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:01.798 E/sensors-hal( 1397): handle_sns_client_event:57, har-sensor-hal: time=60362632598994 data 0.000000
+02-16 14:29:01.887 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.890 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.892 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.895 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.899 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.903 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.907 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.911 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.915 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.919 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.923 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.928 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.932 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.936 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.942 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.945 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.948 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.952 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.958 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.960 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.964 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.968 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.973 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.974 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 705c went down
+02-16 14:29:01.977 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 705d went down
+02-16 14:29:01.977 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 705e went down
+02-16 14:29:01.978 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.980 E/minksocket( 1308): MinkIPC_QRTR_Service: client with node 1 port 705f went down
+02-16 14:29:01.981 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.984 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:01.989 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:02.001 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:02.043 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:02.243 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:02.372 E/ActivityThread( 4043): Failed to find provider info for com.miui.personalassistant.servicedeliver.system.provider
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): isSupportServiceDelivery
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): java.lang.IllegalArgumentException: Unknown authority com.miui.personalassistant.servicedeliver.system.provider
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at android.content.ContentResolver.call(ContentResolver.java:2466)
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at android.content.ContentResolver.call(ContentResolver.java:2449)
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryUtils.isSupportServiceDelivery(ServiceDeliveryUtils.kt:28)
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper.lambda$tryReplaceToServiceDelivery$1(ServiceDeliveryReplaceHelper.java:67)
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper.$r8$lambda$WUWmthv-UjITX40FJ8ag1YKl6O8(Unknown Source:0)
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at com.miui.home.launcher.servicedeliver.ServiceDeliveryReplaceHelper$$ExternalSyntheticLambda1.run(Unknown Source:2)
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:520)
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.FutureTask.run(FutureTask.java:317)
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1154)
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:652)
+02-16 14:29:02.373 E/ServiceDeliveryCompat( 4043): 	at java.lang.Thread.run(Thread.java:1563)
+02-16 14:29:02.562 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:02.641 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:02.742 E/com.whatsapp(19032): hiddenapi: Accessing hidden field Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification; (runtime_flags=0, domain=platform, api=blocked) from LX/9o5; (domain=app, TargetSdkVersion=35) using reflection: denied
+02-16 14:29:02.771 E/com.whatsapp(19032): hiddenapi: Accessing hidden field Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification; (runtime_flags=0, domain=platform, api=blocked) from LX/9o5; (domain=app, TargetSdkVersion=35) using reflection: denied
+02-16 14:29:02.796 E/com.whatsapp(19032): hiddenapi: Accessing hidden method Landroid/app/MiuiNotification;-><init>()V (runtime_flags=0, domain=platform, api=blocked) from LX/9o5; (domain=app, TargetSdkVersion=35) using reflection: denied
+02-16 14:29:02.812 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 14:29:02.941 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:03.241 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:03.251 E/backgroundBlur( 4422): setMiViewBlurMode disable com.android.systemui.statusbar.notification.row.NotificationBackgroundView
+02-16 14:29:03.324 E/backgroundBlur( 4422): setMiViewBlurMode disable com.android.systemui.statusbar.notification.row.NotificationBackgroundView
+02-16 14:29:03.333 E/StackScroller( 4422): updateSidePadding: viewWidth is zero
+02-16 14:29:03.383 E/om.pr4y.app.dev(16000): FrameInsert open fail: No such file or directory
+02-16 14:29:03.541 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:03.740 E/VibratorManagerServiceImpl( 2645): Vibrate ignored, not vibrating for ringtones or notify for MIUI
+02-16 14:29:03.841 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:03.873 E/Codec2-ComponentInterface( 2162): We have a failed config
+02-16 14:29:03.950 E/DlbEffectContext( 1319): setParam() received unknown parameter 21
+02-16 14:29:03.953 E/PAL: Device( 1319): getInstance: 219: Unsupported device id 0
+02-16 14:29:03.953 E/PAL: Device( 1319): getInstance: 219: Unsupported device id 0
+02-16 14:29:03.954 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 0
+02-16 14:29:03.956 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:03.959 E/PLUGIN: mixer( 1319): amp_pcm_set_param_put: 1359 be idx 40, pcm idx 117, pcm_control 24
+02-16 14:29:03.960 E/PAL: StreamPCM( 1319): start: 412: Rx device id is 3 (PAL_DEVICE_OUT_SPEAKER)
+02-16 14:29:03.963 E/agm_client_wrapper( 1319): agm_session_open: agm_server_died 0
+02-16 14:29:03.967 E/ACDB    ( 1436): AcdbCmdGetGraphAlias:4153 Error[19]: Graph Alias chunk data does not exist. Is it enabled?.
+02-16 14:29:03.967 E/gsl     ( 1436): gsl_get_graph_alias:2262 acdb get graph alias failed 19, len 255
+02-16 14:29:03.969 E/ACDB    ( 1436): AcdbCmdGetProcSubgraphCalDataPersist:8416 Error[19]: No calibration found
+02-16 14:29:03.973 E/PAL: ResourceManager( 1319): voteSleepMonitor: 1494: ioctl device is not open
+02-16 14:29:03.974 E/agm_client_wrapper( 1319): agm_session_open: agm_server_died 0
+02-16 14:29:03.975 E/ACDB    ( 1436): AcdbCmdGetGraphAlias:4153 Error[19]: Graph Alias chunk data does not exist. Is it enabled?.
+02-16 14:29:03.975 E/gsl     ( 1436): gsl_get_graph_alias:2262 acdb get graph alias failed 19, len 255
+02-16 14:29:03.983 E/ACDB    ( 1436): AcdbCmdGetProcSubgraphCalDataPersist:8416 Error[19]: No calibration found
+02-16 14:29:03.983 E/ACDB    ( 1436): AcdbCmdGetProcSubgraphCalDataPersist:8416 Error[19]: No calibration found
+02-16 14:29:03.983 E/ACDB    ( 1436): AcdbCmdGetProcSubgraphCalDataPersist:8416 Error[19]: No calibration found
+02-16 14:29:03.983 E/ACDB    ( 1436): AcdbCmdGetProcSubgraphCalDataPersist:8416 Error[19]: No calibration found
+02-16 14:29:03.984 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:03.984 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:03.984 E/PLUGIN: mixer( 1319): amp_pcm_set_param_put: 1359 be idx 40, pcm idx 117, pcm_control 24
+02-16 14:29:03.985 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:03.985 E/PLUGIN: mixer( 1319): amp_pcm_set_param_put: 1359 be idx 40, pcm idx 117, pcm_control 24
+02-16 14:29:03.986 E/PAL: SpeakerProtection( 1319): setParameter: 2353: aw enter
+02-16 14:29:03.986 E/PLUGIN: mixer( 1319): amp_pcm_set_param_put: 1359 be idx 40, pcm idx 117, pcm_control 24
+02-16 14:29:03.987 E/PLUGIN: mixer( 1319): amp_pcm_set_param_put: 1359 be idx 40, pcm idx 117, pcm_control 24
+02-16 14:29:03.989 E/AGM: graph( 1436): configure_buffer_params: 302 Unsupported buffer mode : 0, Default to Blocking
+02-16 14:29:04.073 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:04.075 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:04.101 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:04.102 E/ACDB    ( 1436): AcdbCmdGetSubgraphCalDataNonPersist:6151 Error[19]: No calibration found
+02-16 14:29:04.104 E/PAL: API( 1319): pal_gef_rw_param: 1148: Failed to set global parameter 4, status -22
+02-16 14:29:04.104 E/generic_effect_ar( 1319): gef_set_ar_param: please use gef_store_ar_cacheparam.
+02-16 14:29:04.104 E/PAL: API( 1319): pal_gef_rw_param: 1148: Failed to set global parameter 4, status -22
+02-16 14:29:04.104 E/generic_effect_ar( 1319): gef_set_ar_param: please use gef_store_ar_cacheparam.
+02-16 14:29:04.104 E/PAL: API( 1319): pal_gef_rw_param: 1148: Failed to set global parameter 4, status -22
+02-16 14:29:04.104 E/generic_effect_ar( 1319): gef_set_ar_param: please use gef_store_ar_cacheparam.
+02-16 14:29:04.105 E/PAL: PayloadBuilder( 1319): payloadACDBTunnelParam: 1140: ALSA payload 0xb400007c49fb1730K size 100
+02-16 14:29:04.106 E/ACDB    ( 1436): ConvertSetCalDataReqToMap:607 <iid, pid, param size>[0x4297, 0x10728, 0x4]
+02-16 14:29:04.106 E/ACDB    ( 1436): ConvertSetCalDataReqToMap:607 <iid, pid, param size>[0x4297, 0x10904, 0x4]
+02-16 14:29:04.639 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:04.647 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 14:29:04.647 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 14:29:04.647 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 14:29:04.648 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-16 14:29:04.786 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:04.787 E/ACDB    ( 1436): AcdbCmdGetSubgraphCalDataNonPersist:6151 Error[19]: No calibration found
+02-16 14:29:04.789 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:04.790 E/ACDB    ( 1436): AcdbComputeDeltaCKV:5762 Error[19]: No calibration data can be found. There is no difference between CKV[new] and CKV[old].
+02-16 14:29:04.790 E/ACDB    ( 1436): AcdbCmdGetSubgraphCalDataNonPersist:5964 Error[19]: Failed to get the delta CKV
+02-16 14:29:05.042 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:05.139 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:05.440 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:05.739 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:05.834 E/WifiClientModeImpl[6737054:wlan0]( 2645): Failed to get mlo info
+02-16 14:29:05.921 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:06.020 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:29:06.027 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:29:06.028 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:29:06.029 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:29:06.039 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:06.047 E/ExtM    ( 2645): can_flush_idle_pages:22977 flush_number_adjust: 12000
+02-16 14:29:06.113 E/vold    (19341): maxCpuFreq=2400000
+02-16 14:29:06.114 E/vold    (19341): maxCpuFreq=2400000
+02-16 14:29:06.339 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:06.448 E/vendor.xiaomi.hardware.micharge@1.0-service( 1507): Failed to open node /sys/class/qcom-battery/reverse_chg_mode
+02-16 14:29:06.559 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:06.639 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:06.774 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:06.775 E/PAL: ResourceManager( 1319): voteSleepMonitor: 1494: ioctl device is not open
+02-16 14:29:06.783 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 24
+02-16 14:29:06.784 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 0
+02-16 14:29:06.784 E/PLUGIN: mixer( 1319): amp_pcm_mtd_control_put: 1098 pcm id 117, idx 8, value 0
+02-16 14:29:06.790 E/PAL: ResourceManager( 1319): checkAndUpdateGroupDevConfig: 5682: group config for -1 is missing
+02-16 14:29:06.790 E/PAL: ResourceManager( 1319): restoreDevice: 11595: no valid group device config found
+02-16 14:29:06.792 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:06.796 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 14:29:06.796 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 14:29:06.796 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-16 14:29:06.796 E/JobScheduler.Background( 2645): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-16 14:29:06.925 E/msys    (12725): E[N mns]_OnDiskCacheGetData(632)=>Start post callback cache refresh DNS resolution
+02-16 14:29:06.935 E/msys    (12725): E[N mns]_LogError(228)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+02-16 14:29:06.942 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-16 14:29:06.989 E/RTMode  ( 2645): pkgName: com.pr4y.app.dev has no permission
+02-16 14:29:07.244 E/libsensor-displayalgo( 2260): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101

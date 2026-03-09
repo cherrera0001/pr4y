@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Política de Privacidad — PR4Y',
@@ -8,6 +11,14 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main className="min-h-screen bg-background px-6 py-12">
+      <div className="mx-auto max-w-3xl">
+        <Button variant="ghost" size="sm" asChild className="text-muted-foreground hover:text-foreground mb-8">
+          <Link href="/">
+            <ArrowLeft className="size-4" />
+            Volver al inicio
+          </Link>
+        </Button>
+      </div>
       <article className="mx-auto max-w-3xl prose prose-slate dark:prose-invert">
         <h1>Política de Privacidad</h1>
         <p className="lead">
@@ -108,3 +119,4 @@ export default function PrivacyPage() {
     </main>
   );
 }
+

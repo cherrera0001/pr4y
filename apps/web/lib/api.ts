@@ -103,3 +103,26 @@ export const admin = {
   statsDetail: (token: string, days = 7) =>
     apiRequest<AdminStatsDetail>(`/admin/stats/detail?days=${days}`, { token }),
 };
+
+// Pedidos públicos de oración (anonimos, sin token). Alimentan la Ruleta en la app.
+export interface PublicRequestSubmitResult {
+  id: string;
+  message: string;
+}
+export async function submitPublicRequest(body: {
+  title?: string;
+  body: string;
+}): Promise<PublicRequestSubmitResult> {
+  const url = `${apiBaseUrl}/public/requests`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const msg = data?.error?.message ?? res.statusText ?? 'Error al enviar';
+    throw new Error(msg);
+  }
+  return data as PublicRequestSubmitResult;
+}

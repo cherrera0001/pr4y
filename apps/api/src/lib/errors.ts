@@ -7,7 +7,8 @@ export type ErrorCode =
   | 'not_found'
   | 'conflict'
   | 'validation_error'
-  | 'internal_error';
+  | 'internal_error'
+  | 'service_unavailable';
 
 export interface ApiErrorBody {
   error: {

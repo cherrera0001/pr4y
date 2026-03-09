@@ -1,0 +1,132 @@
+﻿--------- beginning of main
+02-18 20:52:46.595 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:46.895 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:47.072 E/PhoneAdapter( 4437): get ntnphones failed, exception: java.lang.IllegalStateException: Default phones haven't been made yet!
+02-18 20:52:47.197 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:47.495 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:47.795 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:47.900 E/gatt_api( 4271): packages/modules/MiuiBluetooth/system/stack/gatt/gatt_api.cc:349 is_active_service: Active Service Found: 3e1d50cd-7e3e-427d-8e1c-b78aa87fe624
+02-18 20:52:47.906 E/bluetooth( 4271): packages/modules/MiuiBluetooth/system/bta/gatt/bta_gatts_main.cc:93 bta_gatts_hdl_event: can't delete service - no srvc_cb found
+02-18 20:52:47.930 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:52:47.930 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:52:47.930 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:52:48.034 E/Cello   (32612): [3666:NonCelloThread] authenticated_transport.cc:183:DumpToLog Request 0xb4000070e081af58: 0 transport: drive::ds::Status::CANCELLED reader: drive::ds::Status::SUCCESS url: https://drivefrontend-pa.googleapis.com/v1/account
+02-18 20:52:48.034 E/Cello   (32612): [3666:NonCelloThread] authenticated_transport.cc:183:DumpToLog req.hdr 0xb4000070e081af58: Accept-Language=es-US
+02-18 20:52:48.034 E/Cello   (32612): [3666:NonCelloThread] authenticated_transport.cc:183:DumpToLog req.hdr 0xb4000070e081af58: Content-Type=application/x-protobuf
+02-18 20:52:48.034 E/Cello   (32612): [3666:NonCelloThread] authenticated_transport.cc:183:DumpToLog req.hdr 0xb4000070e081af58: X-Goog-FieldMask=account.metadata.root_folder_id
+02-18 20:52:48.034 E/Cello   (32612): [3666:NonCelloThread] authenticated_transport.cc:183:DumpToLog req.hdr 0xb4000070e081af58: x-goog-ext-472780938-bin=CghCAEgBYgIIAw==
+02-18 20:52:48.034 E/Cello   (32612): [3666:NonCelloThread] authenticated_transport.cc:183:DumpToLog Response body 0xb4000070e081af58: (no response body)
+02-18 20:52:48.097 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+--------- beginning of system
+02-18 20:52:48.277 E/ShortcutService( 2702): Invalid icon type in shortcut 115109519216752@lid. Bitmaps are not allowed in long-lived shortcuts. Use Resource icons, or Uri-based icons instead.
+02-18 20:52:48.394 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:48.711 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:48.720 E/minksocket( 1305): MinkIPC_QRTR_Service: client with node 1 port 52b5 went down
+02-18 20:52:48.722 E/minksocket( 1305): MinkIPC_QRTR_Service: client with node 1 port 52b6 went down
+02-18 20:52:48.723 E/minksocket( 1305): MinkIPC_QRTR_Service: client with node 1 port 52b7 went down
+02-18 20:52:48.724 E/minksocket( 1305): MinkIPC_QRTR_Service: client with node 1 port 52b8 went down
+02-18 20:52:48.927 E/jccc    (21313): *~*~*~ Previous channel {0} was garbage collected without being shut down! ~*~*~*
+02-18 20:52:48.927 E/jccc    (21313):     Make sure to call shutdown()/shutdownNow()
+02-18 20:52:48.927 E/jccc    (21313): java.lang.RuntimeException: ManagedChannel allocation site
+02-18 20:52:48.927 E/jccc    (21313): 	at jccb.<init>(:com.google.android.gms@260438035@26.04.38 (260400-867839860):21)
+02-18 20:52:48.927 E/jccc    (21313): 	at jccc.<init>(:com.google.android.gms@260438035@26.04.38 (260400-867839860):10)
+02-18 20:52:48.927 E/jccc    (21313): 	at jcca.a(:com.google.android.gms@260438035@26.04.38 (260400-867839860):300)
+02-18 20:52:48.927 E/jccc    (21313): 	at jbma.a(:com.google.android.gms@260438035@26.04.38 (260400-867839860):5)
+02-18 20:52:48.927 E/jccc    (21313): 	at ctzp.h(:com.google.android.gms@260438035@26.04.38 (260400-867839860):150)
+02-18 20:52:48.927 E/jccc    (21313): 	at hbhw.a(:com.google.android.gms@260438035@26.04.38 (260400-867839860):154)
+02-18 20:52:48.927 E/jccc    (21313): 	at gpan.a(:com.google.android.gms@260438035@26.04.38 (260400-867839860):13)
+02-18 20:52:48.927 E/jccc    (21313): 	at gxwr.a(:com.google.android.gms@260438035@26.04.38 (260400-867839860):3)
+02-18 20:52:48.927 E/jccc    (21313): 	at gxvs.run(:com.google.android.gms@260438035@26.04.38 (260400-867839860):19)
+02-18 20:52:48.927 E/jccc    (21313): 	at gxwt.run(:com.google.android.gms@260438035@26.04.38 (260400-867839860):5)
+02-18 20:52:48.927 E/jccc    (21313): 	at bfin.c(:com.google.android.gms@260438035@26.04.38 (260400-867839860):50)
+02-18 20:52:48.927 E/jccc    (21313): 	at bfin.run(:com.google.android.gms@260438035@26.04.38 (260400-867839860):73)
+02-18 20:52:48.927 E/jccc    (21313): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1154)
+02-18 20:52:48.927 E/jccc    (21313): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:652)
+02-18 20:52:48.927 E/jccc    (21313): 	at bfoe.run(:com.google.android.gms@260438035@26.04.38 (260400-867839860):8)
+02-18 20:52:48.927 E/jccc    (21313): 	at java.lang.Thread.run(Thread.java:1563)
+02-18 20:52:48.994 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:49.028 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:52:49.296 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:49.599 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:49.893 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:50.193 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:50.492 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:50.793 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:51.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:51.392 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:51.692 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:51.993 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:52.054 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:52:52.293 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:52.593 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:52.612 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:52:52.612 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:52:52.612 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.google.android.apps.turbo
+02-18 20:52:52.614 E/JobScheduler.Background( 2702): Couldn't determine stopped state for unknown package: com.aura.oobe.deutsche
+02-18 20:52:52.894 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:53.194 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:53.495 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:53.795 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:54.194 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:54.396 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:54.496 E/JobScheduler( 2702): ResourceBudgetManagerInternal is null
+02-18 20:52:54.695 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:54.755 E/KeymasterUtils(  870): rsp_header->status: -28
+02-18 20:52:54.755 E/KeyMasterHalDevice(  870): abort_operation
+02-18 20:52:54.755 E/KeyMasterHalDevice(  870): ret: -28
+02-18 20:52:54.877 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:52:54.878 E/HyperSentinel( 2702): Event_OpenFileFDSize
+02-18 20:52:54.878 E/HyperSentinel( 2702): -> audit event by proc 4462 "com.android.systemui": Fd increasement, peak, 916 -> 833
+02-18 20:52:54.993 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:55.081 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:52:55.294 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:55.596 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:55.894 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:56.195 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:56.494 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:56.793 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:57.093 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:57.392 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:57.692 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:58.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:58.114 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:52:58.392 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:58.397 E/StackScroller( 4462): updateSidePadding: viewWidth is zero
+02-18 20:52:58.692 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:58.923 E/minksocket( 1305): MinkIPC_QRTR_Service: client with node 1 port 52b9 went down
+02-18 20:52:58.993 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:59.292 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:59.593 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:52:59.893 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:00.025 E/AnimationHelper( 4462): updateTime mToAod:false mHasNotification: true, mClockType: classic
+02-18 20:53:00.037 E/StackScroller( 4462): updateSidePadding: viewWidth is zero
+02-18 20:53:00.194 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:00.394 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:00.696 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:01.095 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:01.136 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:53:01.169 E/HyperSentinel( 2702): -------------------------------------------------------
+02-18 20:53:01.170 E/HyperSentinel( 2702): Event_OpenFileFDSize
+02-18 20:53:01.170 E/HyperSentinel( 2702): -> audit event by proc 4462 "com.android.systemui": Fd increasement, peak, 833 -> 944
+02-18 20:53:01.396 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:01.695 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:01.995 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:02.293 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:02.593 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:02.892 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:03.192 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:03.493 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:03.792 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:04.092 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:04.163 E/WifiClientModeImpl[19599:wlan0]( 2702): Failed to get mlo info
+02-18 20:53:04.403 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:04.693 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:04.811 E/BluetoothUtils( 4271): isDeepDozeMode? false
+02-18 20:53:04.993 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:05.294 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:05.499 E/MI-SF   ( 1606): Force skip idle timer[true]
+02-18 20:53:05.593 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:05.902 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:06.195 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:06.496 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101
+02-18 20:53:06.797 E/libsensor-displayalgo( 2261): value of coefs 5,850.073000,4.965174,-2.685090,1.640057,-4.685160, line 101

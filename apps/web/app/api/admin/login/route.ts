@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
     }
     const user = await meRes.json();
     if (!isAdmin(user?.role)) {
-      console.warn('[admin/login] role not allowed', { email: user?.email, role: user?.role });
+      console.warn('[admin/login] role not allowed (API /auth/me devolvió role distinto de admin/super_admin). Asigna role en BD y vuelve a intentar.', { email: user?.email, role: user?.role });
       return redirectToLogin(request, 'admin_required');
     }
     if (!isAllowedAdminEmail(user?.email)) {

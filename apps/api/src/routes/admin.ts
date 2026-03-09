@@ -2,11 +2,14 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import * as usageService from '../services/usage';
 import * as adminService from '../services/admin';
+import { adminContentSanitizeSchema } from '../lib/sanitize';
+import { sendError, safeDetailsFromError } from '../lib/errors';
 
 /** Payload JWT con role para restringir métricas a admin. */
 type JwtUser = { sub: string; email: string; role?: string };
 
 const defaultRateLimit = { max: 60, timeWindow: '1 minute' as const };
+const NOT_FOUND_RESPONSE = { error: { code: 'not_found', message: 'Route not found', details: {} } } as const;
 
 const updateUserBodySchema = z.object({
   role: z.enum(['user', 'admin', 'super_admin']).optional(),
@@ -14,20 +17,24 @@ const updateUserBodySchema = z.object({
 }).refine((d) => Object.keys(d).length > 0, { message: 'Al menos un campo (role o status) es requerido' });
 
 const createContentBodySchema = z.object({
-  type: z.string().min(1).max(64),
-  title: z.string().min(1).max(512),
-  body: z.string(),
+  type: adminContentSanitizeSchema.type,
+  title: adminContentSanitizeSchema.title,
+  body: adminContentSanitizeSchema.body,
   published: z.boolean().optional(),
-  sortOrder: z.number().int().optional(),
+  sortOrder: z.coerce.number().int().optional(),
 });
 
-const updateContentBodySchema = z.object({
-  type: z.string().min(1).max(64).optional(),
-  title: z.string().min(1).max(512).optional(),
-  body: z.string().optional(),
-  published: z.boolean().optional(),
-  sortOrder: z.number().int().optional(),
-}).refine((d) => Object.keys(d).length > 0, { message: 'Al menos un campo es requerido' });
+const updateContentBodySchema = z
+  .object({
+    type: adminContentSanitizeSchema.type.optional(),
+    title: adminContentSanitizeSchema.title.optional(),
+    body: adminContentSanitizeSchema.body.optional(),
+    published: z.boolean().optional(),
+    sortOrder: z.coerce.number().int().optional(),
+  })
+  .refine((d) => Object.keys(d).filter((k) => d[k as keyof typeof d] !== undefined).length > 0, {
+    message: 'Al menos un campo es requerido',
+  });
 
 const statsResponseSchema = {
   type: 'object' as const,
@@ -74,6 +81,18 @@ const statsDetailResponseSchema = {
 };
 
 export default async function adminRoutes(server: FastifyInstance) {
+  // VULN-004: Sin JWT válido → 404 genérico (impide enumeración de rutas admin).
+  server.addHook('onRequest', async (request, reply) => {
+    try {
+      await request.jwtVerify();
+    } catch {
+      return reply.code(404).send(NOT_FOUND_RESPONSE);
+    }
+    const user = request.user as JwtUser | undefined;
+    if (user?.role !== 'admin' && user?.role !== 'super_admin') {
+      return reply.code(404).send(NOT_FOUND_RESPONSE);
+    }
+  });
   server.get(
     '/admin/stats',
     {
@@ -88,8 +107,8 @@ export default async function adminRoutes(server: FastifyInstance) {
         response: { 200: statsResponseSchema },
       },
     },
-    async (request: FastifyRequest<{ Querystring: { days?: number } }>, reply: FastifyReply) => {
-      const days = Math.min(31, Math.max(1, request.query?.days ?? 7));
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const days = Math.min(31, Math.max(1, (request.query as { days?: number })?.days ?? 7));
       const stats = await usageService.getUsageStats(days);
       reply.code(200).send({
         totalUsers: stats.totalUsers,
@@ -122,8 +141,8 @@ export default async function adminRoutes(server: FastifyInstance) {
         response: { 200: statsDetailResponseSchema },
       },
     },
-    async (request: FastifyRequest<{ Querystring: { days?: number } }>, reply: FastifyReply) => {
-      const days = Math.min(31, Math.max(1, request.query?.days ?? 7));
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const days = Math.min(31, Math.max(1, (request.query as { days?: number })?.days ?? 7));
       const detail = await usageService.getStatsDetail(days);
       reply.code(200).send(detail);
     }
@@ -135,6 +154,14 @@ export default async function adminRoutes(server: FastifyInstance) {
       config: { rateLimit: defaultRateLimit },
       preHandler: [server.authenticate, server.requireAdmin],
       schema: {
+        querystring: {
+          type: 'object',
+          properties: {
+            limit: { type: 'number', default: 50 },
+            offset: { type: 'number', default: 0 },
+          },
+          additionalProperties: false,
+        },
         response: {
           200: {
             type: 'array',
@@ -157,9 +184,10 @@ export default async function adminRoutes(server: FastifyInstance) {
         },
       },
     },
-    async (_request: FastifyRequest, reply: FastifyReply) => {
-      const users = await adminService.listUsers();
-      reply.code(200).send(users);
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const { limit = 50, offset = 0 } = request.query as { limit?: number; offset?: number };
+      const { users, total } = await adminService.listUsers(limit, offset);
+      reply.header('X-Total-Count', String(total)).code(200).send(users);
     }
   );
 
@@ -173,13 +201,14 @@ export default async function adminRoutes(server: FastifyInstance) {
         response: { 200: { type: 'object', additionalProperties: true } },
       },
     },
-    async (request: FastifyRequest<{ Params: { id: string }; Body: unknown }>, reply: FastifyReply) => {
+    async (request: FastifyRequest, reply: FastifyReply) => {
       const parsed = updateUserBodySchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.code(400).send({ error: { code: 'validation_error', message: 'Invalid input', details: parsed.error.flatten() } });
+        sendError(reply, 400, 'validation_error', 'Invalid input', {});
+        return;
       }
       try {
-        const updated = await adminService.updateUser(request.params.id, parsed.data);
+        const updated = await adminService.updateUser((request.params as { id: string }).id, parsed.data);
         if (!updated) {
           return reply.code(400).send({ error: { code: 'validation_error', message: 'Nada que actualizar' } });
         }
@@ -204,8 +233,8 @@ export default async function adminRoutes(server: FastifyInstance) {
         response: { 200: { type: 'array', items: { type: 'object', additionalProperties: true } } },
       },
     },
-    async (request: FastifyRequest<{ Querystring: { type?: string } }>, reply: FastifyReply) => {
-      const list = await adminService.listContent(request.query?.type);
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const list = await adminService.listContent((request.query as { type?: string })?.type);
       reply.code(200).send(list);
     }
   );
@@ -219,13 +248,20 @@ export default async function adminRoutes(server: FastifyInstance) {
         response: { 201: { type: 'object', additionalProperties: true } },
       },
     },
-    async (request: FastifyRequest<{ Body: unknown }>, reply: FastifyReply) => {
+    async (request: FastifyRequest, reply: FastifyReply) => {
       const parsed = createContentBodySchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.code(400).send({ error: { code: 'validation_error', message: 'Invalid input', details: parsed.error.flatten() } });
+        const details = parsed.error.flatten().fieldErrors as Record<string, unknown>;
+        sendError(reply, 400, 'validation_error', 'Invalid input', details);
+        return;
       }
-      const created = await adminService.createContent(parsed.data);
-      reply.code(201).send(created);
+      try {
+        const created = await adminService.createContent(parsed.data);
+        reply.code(201).send(created);
+      } catch (e) {
+        request.log.error(e, 'POST /admin/content failed');
+        sendError(reply, 500, 'internal_error', 'Error al crear contenido', safeDetailsFromError(e));
+      }
     }
   );
 
@@ -239,12 +275,13 @@ export default async function adminRoutes(server: FastifyInstance) {
         response: { 200: { type: 'object', additionalProperties: true } },
       },
     },
-    async (request: FastifyRequest<{ Params: { id: string }; Body: unknown }>, reply: FastifyReply) => {
+    async (request: FastifyRequest, reply: FastifyReply) => {
       const parsed = updateContentBodySchema.safeParse(request.body);
       if (!parsed.success) {
-        return reply.code(400).send({ error: { code: 'validation_error', message: 'Invalid input', details: parsed.error.flatten() } });
+        sendError(reply, 400, 'validation_error', 'Invalid input', {});
+        return;
       }
-      const updated = await adminService.updateContent(request.params.id, parsed.data);
+      const updated = await adminService.updateContent((request.params as { id: string }).id, parsed.data);
       if (!updated) {
         return reply.code(404).send({ error: { code: 'not_found', message: 'Contenido no encontrado' } });
       }
@@ -262,8 +299,8 @@ export default async function adminRoutes(server: FastifyInstance) {
         response: { 204: { type: 'null' } },
       },
     },
-    async (request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) => {
-      await adminService.deleteContent(request.params.id);
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      await adminService.deleteContent((request.params as { id: string }).id);
       reply.code(204).send();
     }
   );

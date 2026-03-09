@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Script from 'next/script';
 import { toast } from 'sonner';
-import { Loader2, ArrowLeft } from 'lucide-react';
+import { Loader2, ArrowLeft, Heart } from 'lucide-react';
 import { getApiBaseUrl, getGoogleWebClientId } from '@/lib/env';
 import {
   Card,
@@ -83,7 +83,8 @@ function AdminLoginForm() {
       return;
     }
     if (err === 'admin_required') {
-      toast.error('No tienes rol de administrador');
+      // Mensaje amigable; el aviso principal se muestra en la card debajo
+      toast.info('No eres administrador');
       return;
     }
     if (err === 'invalid_token' || err === 'invalid_response') {
@@ -100,6 +101,8 @@ function AdminLoginForm() {
   const showConfigError = !clientId || !apiBase;
   const missingApi = !apiBase;
   const missingClientId = !clientId;
+  const isNotAdmin = searchParams.get('error') === 'admin_required';
+  const notAdminMessage = 'No eres administrador. Gracias, pero puedes usar la app prontamente.';
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
@@ -111,6 +114,17 @@ function AdminLoginForm() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
+          {isNotAdmin && (
+            <div className="rounded-lg border border-amber-500/50 bg-amber-500/10 p-4 text-center space-y-2">
+              <p className="text-sm font-medium text-amber-700 dark:text-amber-400 flex items-center justify-center gap-2">
+                <Heart className="size-4" aria-hidden />
+                {notAdminMessage}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                El panel está reservado para administradores. La app PR4Y estará disponible para ti pronto.
+              </p>
+            </div>
+          )}
           {showConfigError && (
             <div className="space-y-2 rounded-md border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
               <p className="font-medium">Falta configuración en Vercel</p>
